@@ -64,6 +64,7 @@ export function openDb(path = join(DATA_DIR, "reviews.db")) {
   db.run("create table if not exists reviews (id text primary key, review text not null, council_version integer not null, created_at integer not null)")
   db.run("create table if not exists events (seq integer primary key autoincrement, job_id text not null, at integer not null, message text not null)")
   db.run("create table if not exists quota (day text primary key, used integer not null)")
+  db.run("create table if not exists member_tries (id text not null, member text not null, tries integer not null, primary key (id, member))")
   db.run("create index if not exists jobs_pick on jobs (status, next_run_at)")
   db.run("create index if not exists submissions_repo on submissions (repo, task)")
   return db

@@ -2,6 +2,7 @@
 // OPENROUTER_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock bun server/index.ts
 const PORT = Number(process.env.MOCK_PORT ?? 4790)
 const FLAKY = process.env.MOCK_FLAKY === "1"
+const BLOCKED = process.env.MOCK_BLOCK_MODEL ?? ""
 let calls = 0
 
 function criteria(system: string) {
@@ -44,6 +45,7 @@ Bun.serve({
     calls++
     if (FLAKY && calls === 2) return new Response("busy", { status: 429, headers: { "retry-after": "2" } })
     const body = (await req.json()) as { model: string; messages: { role: string; content: string }[] }
+    if (body.model === BLOCKED) return new Response("rate-limited upstream", { status: 429 })
     const system = body.messages.find(m => m.role === "system")?.content ?? ""
     const user = body.messages.find(m => m.role === "user")?.content ?? ""
     const reply = system ? memberReply(body.model, criteria(system)) : judgeReply(user)

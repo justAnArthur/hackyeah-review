@@ -2,7 +2,7 @@ import { join } from "node:path"
 import { ROOT, type Rubric, type Score, decode, extractJson, loadRubric, normalizeScores, weightedTotal } from "../scripts/lib"
 import { type Db, type Submission, logEvent } from "./db"
 import { type Facts, builtDuringEvent, liveDemo } from "./evidence"
-import { FatalError, type Message, chat } from "./openrouter"
+import { FatalError, type Message, RateLimited, chat } from "./openrouter"
 
 export type Council = {
   version: number
@@ -57,6 +57,25 @@ export type CouncilReview = {
 }
 
 class InvalidReply extends Error {}
+
+class Unavailable extends Error {}
+
+const MEMBER_MAX_TRIES = Number(process.env.MEMBER_MAX_TRIES ?? 6)
+
+// free models are often rate-limited upstream for long stretches. the panel stays fixed,
+// so after enough tries a member is skipped for this review instead of blocking the queue
+async function withRateLimit<T>(db: Db, id: string, member: string, call: () => Promise<T>) {
+  try {
+    return await call()
+  } catch (e) {
+    if (!(e instanceof RateLimited)) throw e
+    db.query("insert into member_tries (id, member, tries) values (?, ?, 1) on conflict (id, member) do update set tries = tries + 1")
+      .run(id, member)
+    const tries = db.query<{ tries: number }, [string, string]>("select tries from member_tries where id = ? and member = ?").get(id, member)!.tries
+    if (tries >= MEMBER_MAX_TRIES) throw new Unavailable(`rate-limited by the provider ${tries} times`)
+    throw new RateLimited(Math.min(Math.max(e.retryAfterMs, 60_000 * 2 ** (tries - 1)), 30 * 60_000))
+  }
+}
 
 const LETTERS = "ABCDEFGH"
 
@@ -179,15 +198,17 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
     if (done.has(letter)) continue
     logEvent(db, sub.id, `Member ${letter} is reviewing`)
     try {
-      const review = await askJson(db, council, model, [{ role: "system", content: system }, { role: "user", content: pack }], text =>
-        parseMember(rubric, text, `member ${letter}`),
+      const review = await withRateLimit(db, sub.id, letter, () =>
+        askJson(db, council, model, [{ role: "system", content: system }, { role: "user", content: pack }], text =>
+          parseMember(rubric, text, `member ${letter}`),
+        ),
       )
       saveMember(db, sub.id, letter, model, true, review, null)
       logEvent(db, sub.id, `Member ${letter} scored ${weightedTotal(review.scores)}`)
     } catch (e) {
-      if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
+      if (!(e instanceof InvalidReply || e instanceof FatalError || e instanceof Unavailable)) throw e
       saveMember(db, sub.id, letter, model, false, null, (e as Error).message)
-      logEvent(db, sub.id, `Member ${letter} gave no usable review`)
+      logEvent(db, sub.id, e instanceof Unavailable ? `Member ${letter} is unavailable (${e.message}), continuing without it` : `Member ${letter} gave no usable review`)
     }
   }
 
@@ -224,7 +245,7 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
       AGREEMENT_KEYS: valid.map(v => `"${v.letter}": 0`).join(", "),
     })
     try {
-      judged = await askJson(db, council, council.judge, [{ role: "user", content: prompt }], text => {
+      judged = await withRateLimit(db, sub.id, "judge", () => askJson(db, council, council.judge, [{ role: "user", content: prompt }], text => {
         const j = extractJson(text)
         const byName = new Map<string, string>((Array.isArray(j.criteria) ? j.criteria : []).map((c: any) => [decode(String(c.criterion)).toLowerCase().trim(), decode(String(c.why ?? ""))]))
         const why = Object.fromEntries(Object.keys(rubric.weights).map(n => [n, byName.get(n.toLowerCase()) ?? ""]))
@@ -238,11 +259,11 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
           task_fit: decode(String(j.task_fit ?? "yes")),
           agreement: Object.fromEntries(Object.entries(j.agreement ?? {}).map(([k, v]) => [k, Math.round(clamp10(Number(v) * 10)) / 10])),
         }
-      })
+      }))
       saveMember(db, sub.id, "judge", council.judge, true, judged, null)
       judgeOk = true
     } catch (e) {
-      if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
+      if (!(e instanceof InvalidReply || e instanceof FatalError || e instanceof Unavailable)) throw e
       saveMember(db, sub.id, "judge", council.judge, false, null, (e as Error).message)
       logEvent(db, sub.id, "The judge gave no usable review, so the closest member's text is used")
       judged = judgeFallback(rubric, valid, scores)
