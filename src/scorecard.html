@@ -161,6 +161,10 @@ section.task { display: grid; gap: 10px; scroll-margin-top: 24px; }
 .r-2 { color: var(--silver); background: var(--silver-bg); }
 .r-3 { color: var(--bronze); background: var(--bronze-bg); }
 .r-fin { color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); }
+.r-self { color: var(--info); background: var(--info-bg); }
+.community { display: grid; gap: 8px; margin-top: 4px; }
+.comm-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding-inline: 4px; font-size: var(--fs-caption); color: var(--muted); }
+.comm-head b { color: var(--fg); font-weight: 500; font-size: var(--fs-subtitle); }
 .r-ours { color: var(--ours); background: var(--ours-bg); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ours) 35%, transparent); }
 
 .details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .32s cubic-bezier(.2, .8, .2, 1); }
@@ -248,7 +252,7 @@ footer p { margin: 0; }
 
 <script>
 const DATA = /*DATA*/;
-const RES = { best: "Winner", 1: "1st place", 2: "2nd place", 3: "3rd place", fin: "Finalist", ours: "Our entry" };
+const RES = { best: "Winner", 1: "1st place", 2: "2nd place", 3: "3rd place", fin: "Finalist", ours: "Our entry", self: "Self-submitted" };
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const fmt = n => (Math.round(n * 10) / 10).toFixed(1);
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -286,6 +290,7 @@ function itemHtml(p, i, open, tid) {
       </div>
       <div class="meta"><div><b>Built during the event:</b> ${esc(p.built_during_event)}</div><div><b>Live demo:</b> ${esc(p.live_demo)}</div></div>
       <div class="lists">${list("Strengths", p.strengths, "")}${list("Weaknesses", p.weaknesses, "")}${list("Red flags", p.red_flags, "red")}</div>
+      ${p.link ? `<a class="gh" href="${esc(p.link)}">Open the full council review →</a>` : ""}
       <a class="gh" href="https://github.com/${esc(p.repo)}" target="_blank" rel="noopener">Open repo on GitHub ↗</a>
     </div></div></div>
   </div>`;
@@ -385,8 +390,7 @@ function fluid(box, selector, target) {
   return { refresh() { if (current) sp.to(rect(target ? target(current) : current)); } };
 }
 
-render();
-document.querySelectorAll(".list").forEach(list => {
+function setupList(list) {
   const f = fluid(list, ".item", item => item.querySelector(".row"));
   list.addEventListener("click", e => {
     const btn = e.target.closest(".row");
@@ -397,8 +401,47 @@ document.querySelectorAll(".list").forEach(list => {
     btn.setAttribute("aria-expanded", String(open));
     setTimeout(() => f.refresh(), 340);
   });
-});
+}
+
+function councilItem(r) {
+  return {
+    repo: r.repo, project: r.project, team: r.team, result: "self", scores: r.scores, weighted_total: r.weighted_total,
+    verdict: r.verdict, build_reality: r.build_reality, source_loc: r.source_loc, has_tests: r.has_tests,
+    built_during_event: r.built_during_event, live_demo: r.live_demo, strengths: r.strengths, weaknesses: r.weaknesses,
+    red_flags: r.red_flags, result_note: `Self-declared result: ${r.result}. Reviewed by council v${r.council.version}.`,
+    link: `/r/${r.id}`,
+  };
+}
+
+async function loadCommunity() {
+  let byTask;
+  try {
+    const res = await fetch("/api/community");
+    if (!res.ok) return;
+    byTask = await res.json();
+  } catch {
+    return;
+  }
+  for (const t of DATA) {
+    const reviews = byTask[t.id];
+    const section = document.getElementById(t.id);
+    if (!reviews?.length || !section) continue;
+    const items = reviews.map(councilItem).sort((a, b) => b.weighted_total - a.weighted_total);
+    items.forEach(p => p._n = items.length);
+    const block = document.createElement("div");
+    block.className = "community";
+    block.innerHTML = `<div class="comm-head"><b>Community submissions</b><span>Self-submitted and unverified, scored by the AI council, a different reviewer from the scores above</span></div>
+      <div class="card"><div class="list">${items.map((p, i) => itemHtml(p, i, false, t.id + "--c")).join("")}</div></div>`;
+    section.appendChild(block);
+    setupList(block.querySelector(".list"));
+  }
+  openFromHash();
+}
+
+render();
+document.querySelectorAll(".list").forEach(setupList);
 fluid(document.getElementById("nav"), "a");
+loadCommunity();
 
 function openFromHash() {
   const id = decodeURIComponent(location.hash.slice(1));

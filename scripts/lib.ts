@@ -89,6 +89,51 @@ export function weightedTotal(scores: Score[]) {
   return Math.round(scores.reduce((sum, s) => sum + (s.score * s.weight) / 10, 0) * 100) / 100
 }
 
+export function decode(s: string) {
+  return s
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+}
+
+// model output often wraps json in prose or fences and leaves trailing commas
+export function extractJson(text: string) {
+  const blocks = [...text.matchAll(/```(?:json)?\s*([\s\S]*?)```/g)]
+  let raw = blocks.length ? blocks[blocks.length - 1][1] : text
+  const start = raw.indexOf("{")
+  const end = raw.lastIndexOf("}")
+  if (start === -1 || end <= start) throw new Error("no JSON object in the reply")
+  raw = decode(raw.slice(start, end + 1)).replace(/,\s*([}\]])/g, "$1")
+  return JSON.parse(raw)
+}
+
+type RawScore = { criterion: string; score: unknown; why?: string }
+
+export function normalizeScores(rubric: Rubric, raw: RawScore[], label: string): Score[] {
+  if (!Array.isArray(raw)) throw new Error(`${label}: "scores" must be a list`)
+  const key = (s: string) => decode(String(s)).toLowerCase().replace(/\s+/g, " ").trim()
+  const byKey = new Map(raw.map(s => [key(s.criterion), s]))
+
+  return Object.keys(rubric.weights).map(name => {
+    const s = byKey.get(key(name))
+    if (!s) throw new Error(`${label}: missing criterion "${name}" (got: ${raw.map(x => x.criterion).join(", ")})`)
+    const score = Number(s.score)
+    if (!Number.isFinite(score) || score < 0 || score > 10) throw new Error(`${label}: "${name}" score must be 0–10`)
+    return { criterion: name, weight: rubric.weights[name], score, why: decode(String(s.why ?? "")) }
+  })
+}
+
+export function normalize(rubric: Rubric, p: Review): Review {
+  const scores = normalizeScores(rubric, p.scores, p.repo)
+  const total = weightedTotal(scores)
+  if (Math.abs(total - p.weighted_total) > 0.5) {
+    console.warn(`  ${p.repo}: reviewer said ${p.weighted_total}, recomputed ${total}; using ${total}`)
+  }
+  return { ...p, scores, weighted_total: total }
+}
+
 export async function scorecardData() {
   const [rubrics, teams] = await Promise.all([loadRubrics(), loadTeams()])
   const tasks = []

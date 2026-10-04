@@ -8,13 +8,15 @@ import {
   ROOT,
   type Rubric,
   type TaskScores,
+  decode,
+  extractJson,
   loadRubric,
   loadRubrics,
   loadScores,
   loadTeams,
+  normalize,
   saveScores,
   saveTeams,
-  weightedTotal,
 } from "./lib"
 
 const USAGE = `usage:
@@ -125,35 +127,6 @@ async function buildPrompt(taskId: string, repos: string[]) {
     if (!(k in vars)) throw new Error(`prompts/reviewer.md: unknown placeholder {{${k}}}`)
     return vars[k]
   })
-}
-
-function decode(s: string) {
-  return s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'")
-}
-
-function extractJson(text: string) {
-  const blocks = [...text.matchAll(/```json\s*([\s\S]*?)```/g)]
-  const raw = blocks.length ? blocks[blocks.length - 1][1] : text
-  return JSON.parse(decode(raw))
-}
-
-function normalize(rubric: Rubric, p: Review): Review {
-  const expected = Object.keys(rubric.weights)
-  const key = (s: string) => decode(s).toLowerCase().replace(/\s+/g, " ").trim()
-  const byKey = new Map(p.scores.map(s => [key(s.criterion), s]))
-
-  const scores = expected.map(name => {
-    const s = byKey.get(key(name))
-    if (!s) throw new Error(`${p.repo}: missing criterion "${name}" (got: ${p.scores.map(x => x.criterion).join(", ")})`)
-    if (typeof s.score !== "number" || s.score < 0 || s.score > 10) throw new Error(`${p.repo}: "${name}" score must be 0–10`)
-    return { criterion: name, weight: rubric.weights[name], score: s.score, why: s.why }
-  })
-
-  const total = weightedTotal(scores)
-  if (Math.abs(total - p.weighted_total) > 0.5) {
-    console.warn(`  ${p.repo}: reviewer said ${p.weighted_total}, recomputed ${total}; using ${total}`)
-  }
-  return { ...p, scores, weighted_total: total }
 }
 
 async function add(taskId: string, file: string) {

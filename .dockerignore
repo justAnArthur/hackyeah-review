@@ -1,0 +1,8 @@
+node_modules
+public
+.cache
+.git
+.vercel
+.claude
+.DS_Store
+*.log
