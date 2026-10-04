@@ -1,3 +1,5 @@
+import { scorecardData } from "./scripts/lib"
+
 const ROOT = import.meta.dir
 const SRC = `${ROOT}/src`
 const OUT = `${ROOT}/public`
@@ -46,7 +48,7 @@ const PAGES = [
     out: "scorecard.html",
     href: "/scorecard",
     label: "Scorecard",
-    desc: "Blind repo reviews of 25 HackYeah 2026 entries against each task's official weights, next to the jury's results.",
+    desc: "Blind repo reviews of {reviewed} HackYeah 2026 entries against each task's official weights, next to the jury's results.",
   },
 ]
 
@@ -64,10 +66,13 @@ function scoresMap(data: Task[]) {
   return Object.fromEntries(data.flatMap(t => t.projects.map(p => [`${t.id}|${p.repo}`, p.weighted_total])))
 }
 
-const dataRaw = await Bun.file(`${SRC}/scorecard-data.json`).text()
-const scores = JSON.stringify(scoresMap(JSON.parse(dataRaw)))
+const data = await scorecardData()
+const dataRaw = JSON.stringify(data).replaceAll("</", "<\\/")
+const scores = JSON.stringify(scoresMap(data))
+const reviewed = data.reduce((n, t) => n + t.projects.length, 0)
 
-for (const p of PAGES) {
+for (const entry of PAGES) {
+  const p = { ...entry, desc: entry.desc.replace("{reviewed}", String(reviewed)) }
   const page = (await Bun.file(`${SRC}/${p.src}`).text())
     .replace("/*DATA*/", () => dataRaw)
     .replace("/*SCORES*/", () => scores)

@@ -1,0 +1,18 @@
+name = "Defence"
+kind = "Open task"
+order = 1
+deadline = "Sun 4 Oct 2026 11:00 CEST (open-task rules also mention 23:00)"
+brief = """
+Build something that strengthens security and resilience: prevent, detect earlier or reduce consequences. Example directions: weakness triage for small organisations, verifying suspicious messages or sources, coordination during emergencies, mapping service dependencies and single points of failure, making security procedures easier to follow. The scenario should be realistic and degraded (incomplete info, limited resources, services down), and the demo should show better preparedness, response or continuity.
+"""
+checks = [
+  "Does the demo show a realistic degraded scenario, or a staged happy path?",
+  "Are the core security claims (encryption, routing, detection) actually implemented in the repo, not only shown in a video or deck?",
+]
+
+[weights]
+"Idea & Innovation" = 30
+"Relation to Category" = 20
+"Practical Applicability / Usability" = 20
+"Design (visual/UI)" = 20
+"Completeness & Implementation Value" = 10

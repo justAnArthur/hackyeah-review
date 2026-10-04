@@ -1,1 +1,189 @@
-{"task":"Smart City","weights_used":{"Idea & Innovation":30,"Relation to Category":20,"Practical Applicability / Usability":20,"Design (visual/UI)":20,"Completeness & Implementation Value":10},"projects":[{"repo":"Moscuuu/will-to-wheel","project":"Will to Wheel","scores":[{"criterion":"Idea & Innovation","weight":30,"score":7.0,"why":"Accessibility maps exist, but here the verdict fits your own wheelchair, every fact has a weight that fades with age, conflicts are shown openly, and an A4 sheet acts as a scale for AI door measurement."},{"criterion":"Relation to Category","weight":20,"score":7.5,"why":"Quality of life and urban mobility with open OSM data and Kraków tram stop data; a licence model aimed at the city."},{"criterion":"Practical Applicability / Usability","weight":20,"score":7.5,"why":"Realistic 5-photo owner audit, embeddable badge, moderation; live API returns real stops. Cold start is a risk: most showcased venues are sample data."},{"criterion":"Design (visual/UI)","weight":20,"score":8.5,"why":"Clean, high-contrast, accessibility-first UI with text-size and contrast modes, verdicts by shape as well as colour, automated accessibility checks."},{"criterion":"Completeness & Implementation Value","weight":10,"score":8.5,"why":"About 10k lines of source plus 2.6k lines of tests across 40 files, database migrations, accounts, admin, disputes, real AI with a mock fallback, live demo."}],"weighted_total":76.5,"build_reality":8.5,"source_loc":10200,"has_tests":true,"live_demo":"will-to-wheel.vercel.app responds with real data","built_during_event":"yes: 73 commits from 3 Oct 13:43 to 4 Oct 09:52 CEST","strengths":["Evidence-based trust model: source weighting, decay, open conflicts","Polished accessibility-first UI","Strong tests including accessibility checks","Clear stakeholders and business model"],"weaknesses":["Mostly demo venues; coverage depends on uptake","Narrow slice of Smart City","Overlaps existing accessibility maps"],"red_flags":["About 15 feature commits in 30 minutes suggests agent-driven bulk generation (disclosed)"],"verdict":"A tight, well-executed and well-designed quality-of-life product with honest data handling; the most convincing all-round entry."},{"repo":"portugalskie-armatki-sniezne/eHackYeah2026","project":"pomożeMy","scores":[{"criterion":"Idea & Innovation","weight":30,"score":6.0,"why":"Reporting local problems is familiar (Kraków already has 19115); it stands out with automatic routing to the responsible institution from public registries, merging duplicates into one case, and AI 'after' images for proposals."},{"criterion":"Relation to Category","weight":20,"score":9.0,"why":"Squarely public services and urban data: parcel registry lookup, geocoded institution offices, a catalogue of proven social initiatives, emails to offices."},{"criterion":"Practical Applicability / Usability","weight":20,"score":8.0,"why":"Deployed production instance with sign-in, Polish and English, onboarding tour and email delivery; classifier evaluation honestly reports 80.8% accuracy."},{"criterion":"Design (visual/UI)","weight":20,"score":7.0,"why":"Distinctive bold outline style, map clusters, guided onboarding; no app screenshots in the repo."},{"criterion":"Completeness & Implementation Value","weight":10,"score":9.0,"why":"About 25k lines of source across several services plus 5.9k lines of tests with 226 test functions, 14 migrations, CI/CD with Docker images."}],"weighted_total":75.0,"build_reality":9.0,"source_loc":25000,"has_tests":true,"live_demo":"hackyeah.jakubowskii.pl responds; map with Kraków reports renders","built_during_event":"yes: 127 PR-based commits by about 5 contributors through 4 Oct 10:56 CEST","strengths":["Most complete, production-like system","Real public-registry data drives routing","Rigorous testing and honest model evaluation","Perfect category fit"],"weaknesses":["Common concept with existing municipal equivalents","Small classifier at about 81% on synthetic data","No UI screenshots or deck in the repo"],"red_flags":[],"verdict":"An engineering-heavy, very relevant civic platform; a moderate idea saved by excellent execution."},{"repo":"DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026","project":"GROUND ZERO","scores":[{"criterion":"Idea & Innovation","weight":30,"score":7.5,"why":"Ambitious drone search-and-rescue command centre for floods: fan-shaped sectors, wind-aware search routes, a probability map from rivers and buildings, live weather to ground unfit drones."},{"criterion":"Relation to Category","weight":20,"score":5.5,"why":"Crisis response is in the brief, but this is a defence and emergency-services command tool, not day-to-day city operations."},{"criterion":"Practical Applicability / Usability","weight":20,"score":5.0,"why":"Drones, sensors and image recognition are entirely simulated; only the planning part with real weather and map data is usable today."},{"criterion":"Design (visual/UI)","weight":20,"score":8.5,"why":"Very polished dark command-centre UI: drone camera over real satellite imagery, flight readouts, AI analysis panel, procedure overlays."},{"criterion":"Completeness & Implementation Value","weight":10,"score":6.5,"why":"About 18k lines of TypeScript, reports export and a working demo, but the 56 tests claimed in the documentation do not exist and about 5k lines are generic admin pages."}],"weighted_total":67.0,"build_reality":7.0,"source_loc":18100,"has_tests":false,"live_demo":"drone-app-pdzf.onrender.com responds","built_during_event":"unclear: one squashed commit on 4 Oct 10:07 CEST; repo created 4 Oct 02:10","strengths":["Deep, thoughtful domain modelling","Striking, demo-ready visuals","Real weather, terrain and map data in planning","Extensive 34-page documentation"],"weaknesses":["Core capability is simulated","Weak fit to day-to-day Smart City","Large generic admin scaffold"],"red_flags":["Documentation claims 56 passing tests; the repo has none","Single squashed commit hides the timeline","Repo name suggests it was built for a defence/drone task and resubmitted"],"verdict":"The most visually impressive and imaginative entry, but simulated and loosely tied to Smart City, with an unverifiable build history."}],"ranking":["Moscuuu/will-to-wheel","portugalskie-armatki-sniezne/eHackYeah2026","DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026"],"calibration_note":"The top two are within 1.5 points; the drone project's wow factor is held back by weak category fit and an unsupported test claim."}
+{
+  "task": "Smart City",
+  "weights_used": {
+    "Idea & Innovation": 30,
+    "Relation to Category": 20,
+    "Practical Applicability / Usability": 20,
+    "Design (visual/UI)": 20,
+    "Completeness & Implementation Value": 10
+  },
+  "projects": [
+    {
+      "repo": "Moscuuu/will-to-wheel",
+      "project": "Will to Wheel",
+      "scores": [
+        {
+          "criterion": "Idea & Innovation",
+          "weight": 30,
+          "score": 7,
+          "why": "Accessibility maps exist, but here the verdict fits your own wheelchair, every fact has a weight that fades with age, conflicts are shown openly, and an A4 sheet acts as a scale for AI door measurement."
+        },
+        {
+          "criterion": "Relation to Category",
+          "weight": 20,
+          "score": 7.5,
+          "why": "Quality of life and urban mobility with open OSM data and Kraków tram stop data; a licence model aimed at the city."
+        },
+        {
+          "criterion": "Practical Applicability / Usability",
+          "weight": 20,
+          "score": 7.5,
+          "why": "Realistic 5-photo owner audit, embeddable badge, moderation; live API returns real stops. Cold start is a risk: most showcased venues are sample data."
+        },
+        {
+          "criterion": "Design (visual/UI)",
+          "weight": 20,
+          "score": 8.5,
+          "why": "Clean, high-contrast, accessibility-first UI with text-size and contrast modes, verdicts by shape as well as colour, automated accessibility checks."
+        },
+        {
+          "criterion": "Completeness & Implementation Value",
+          "weight": 10,
+          "score": 8.5,
+          "why": "About 10k lines of source plus 2.6k lines of tests across 40 files, database migrations, accounts, admin, disputes, real AI with a mock fallback, live demo."
+        }
+      ],
+      "weighted_total": 76.5,
+      "build_reality": 8.5,
+      "source_loc": 10200,
+      "has_tests": true,
+      "live_demo": "will-to-wheel.vercel.app responds with real data",
+      "built_during_event": "yes: 73 commits from 3 Oct 13:43 to 4 Oct 09:52 CEST",
+      "strengths": [
+        "Evidence-based trust model: source weighting, decay, open conflicts",
+        "Polished accessibility-first UI",
+        "Strong tests including accessibility checks",
+        "Clear stakeholders and business model"
+      ],
+      "weaknesses": [
+        "Mostly demo venues; coverage depends on uptake",
+        "Narrow slice of Smart City",
+        "Overlaps existing accessibility maps"
+      ],
+      "red_flags": [
+        "About 15 feature commits in 30 minutes suggests agent-driven bulk generation (disclosed)"
+      ],
+      "verdict": "A tight, well-executed and well-designed quality-of-life product with honest data handling; the most convincing all-round entry."
+    },
+    {
+      "repo": "portugalskie-armatki-sniezne/eHackYeah2026",
+      "project": "pomożeMy",
+      "scores": [
+        {
+          "criterion": "Idea & Innovation",
+          "weight": 30,
+          "score": 6,
+          "why": "Reporting local problems is familiar (Kraków already has 19115); it stands out with automatic routing to the responsible institution from public registries, merging duplicates into one case, and AI 'after' images for proposals."
+        },
+        {
+          "criterion": "Relation to Category",
+          "weight": 20,
+          "score": 9,
+          "why": "Squarely public services and urban data: parcel registry lookup, geocoded institution offices, a catalogue of proven social initiatives, emails to offices."
+        },
+        {
+          "criterion": "Practical Applicability / Usability",
+          "weight": 20,
+          "score": 8,
+          "why": "Deployed production instance with sign-in, Polish and English, onboarding tour and email delivery; classifier evaluation honestly reports 80.8% accuracy."
+        },
+        {
+          "criterion": "Design (visual/UI)",
+          "weight": 20,
+          "score": 7,
+          "why": "Distinctive bold outline style, map clusters, guided onboarding; no app screenshots in the repo."
+        },
+        {
+          "criterion": "Completeness & Implementation Value",
+          "weight": 10,
+          "score": 9,
+          "why": "About 25k lines of source across several services plus 5.9k lines of tests with 226 test functions, 14 migrations, CI/CD with Docker images."
+        }
+      ],
+      "weighted_total": 75,
+      "build_reality": 9,
+      "source_loc": 25000,
+      "has_tests": true,
+      "live_demo": "hackyeah.jakubowskii.pl responds; map with Kraków reports renders",
+      "built_during_event": "yes: 127 PR-based commits by about 5 contributors through 4 Oct 10:56 CEST",
+      "strengths": [
+        "Most complete, production-like system",
+        "Real public-registry data drives routing",
+        "Rigorous testing and honest model evaluation",
+        "Perfect category fit"
+      ],
+      "weaknesses": [
+        "Common concept with existing municipal equivalents",
+        "Small classifier at about 81% on synthetic data",
+        "No UI screenshots or deck in the repo"
+      ],
+      "red_flags": [],
+      "verdict": "An engineering-heavy, very relevant civic platform; a moderate idea saved by excellent execution."
+    },
+    {
+      "repo": "DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026",
+      "project": "GROUND ZERO",
+      "scores": [
+        {
+          "criterion": "Idea & Innovation",
+          "weight": 30,
+          "score": 7.5,
+          "why": "Ambitious drone search-and-rescue command centre for floods: fan-shaped sectors, wind-aware search routes, a probability map from rivers and buildings, live weather to ground unfit drones."
+        },
+        {
+          "criterion": "Relation to Category",
+          "weight": 20,
+          "score": 5.5,
+          "why": "Crisis response is in the brief, but this is a defence and emergency-services command tool, not day-to-day city operations."
+        },
+        {
+          "criterion": "Practical Applicability / Usability",
+          "weight": 20,
+          "score": 5,
+          "why": "Drones, sensors and image recognition are entirely simulated; only the planning part with real weather and map data is usable today."
+        },
+        {
+          "criterion": "Design (visual/UI)",
+          "weight": 20,
+          "score": 8.5,
+          "why": "Very polished dark command-centre UI: drone camera over real satellite imagery, flight readouts, AI analysis panel, procedure overlays."
+        },
+        {
+          "criterion": "Completeness & Implementation Value",
+          "weight": 10,
+          "score": 6.5,
+          "why": "About 18k lines of TypeScript, reports export and a working demo, but the 56 tests claimed in the documentation do not exist and about 5k lines are generic admin pages."
+        }
+      ],
+      "weighted_total": 67,
+      "build_reality": 7,
+      "source_loc": 18100,
+      "has_tests": false,
+      "live_demo": "drone-app-pdzf.onrender.com responds",
+      "built_during_event": "unclear: one squashed commit on 4 Oct 10:07 CEST; repo created 4 Oct 02:10",
+      "strengths": [
+        "Deep, thoughtful domain modelling",
+        "Striking, demo-ready visuals",
+        "Real weather, terrain and map data in planning",
+        "Extensive 34-page documentation"
+      ],
+      "weaknesses": [
+        "Core capability is simulated",
+        "Weak fit to day-to-day Smart City",
+        "Large generic admin scaffold"
+      ],
+      "red_flags": [
+        "Documentation claims 56 passing tests; the repo has none",
+        "Single squashed commit hides the timeline",
+        "Repo name suggests it was built for a defence/drone task and resubmitted"
+      ],
+      "verdict": "The most visually impressive and imaginative entry, but simulated and loosely tied to Smart City, with an unverifiable build history."
+    }
+  ],
+  "ranking": [
+    "Moscuuu/will-to-wheel",
+    "portugalskie-armatki-sniezne/eHackYeah2026",
+    "DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026"
+  ],
+  "calibration_note": "The top two are within 1.5 points; the drone project's wow factor is held back by weak category fit and an unsupported test claim."
+}

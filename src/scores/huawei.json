@@ -1,1 +1,149 @@
-{"task":"Imagine what's next","weights_used":{"Originality":20,"Demonstrated usefulness":20,"Technical execution":20,"Platform capabilities":20,"Demo quality":10,"Reproducibility & transparency":10},"projects":[{"repo":"x2oreo/Celia.ai","project":"Celia.ai","scores":[{"criterion":"Originality","weight":20,"score":7.5,"why":"An agent-first companion for one condition: drug verdicts come from fixed data and the LLM only explains them, plus assistant intents, a watch heart monitor and a 13-language emergency card."},{"criterion":"Demonstrated usefulness","weight":20,"score":8.0,"why":"Concrete patient workflows: drug check by name, barcode (about 68k Polish packs bundled) or box photo, SOS countdown, doctor-visit brief; 74 real emulator screenshots."},{"criterion":"Technical execution","weight":20,"score":8.0,"why":"About 38k ArkTS lines on the phone, 7k on the watch, 4k in edge functions; safety gate, response validator and offline fallback; nearly 600 tests; no committed secrets."},{"criterion":"Platform capabilities","weight":20,"score":8.5,"why":"Intents, widgets, Live View, OCR, speech, Scan, NFC, user auth, push and a separate wearable app; phone and watch talk through the cloud rather than a native wearable channel."},{"criterion":"Demo quality","weight":10,"score":4.5,"why":"The demo video is a rebuilt animation of the screens, not a recording of the running emulator."},{"criterion":"Reproducibility & transparency","weight":10,"score":8.5,"why":"Thorough README with exact versions, release with phone and watch packages, 389 small commits by 3 authors, detailed AI workflow docs."}],"weighted_total":77.0,"build_reality":8,"source_loc":49000,"has_tests":true,"live_demo":"none for the app","built_during_event":"yes: 389 commits from 3 Oct 11:48 to 4 Oct 11:00 CEST","strengths":["Widest native platform usage in the field","Safety design: deterministic verdicts, validator, offline fallback","592 automated tests plus a live LLM evaluation","Complete flows on phone and watch for a clear patient group"],"weaknesses":["Demo video is an animation, not a recording","Heart rate, voice, NFC and push unverified on the emulator","Phone-watch link goes through the cloud","Very large scope makes depth hard to verify"],"red_flags":["Mockup demo video despite the real-emulator requirement","Drug-risk data derived from a source with licence restrictions","Name reuses Huawei's assistant brand 'Celia'"],"verdict":"An exceptionally broad, polished, platform-heavy health companion, held back by a mockup demo video and features unverified on hardware."},{"repo":"carrotly-technologies-2026/SafeMesh","project":"SafeMesh","scores":[{"criterion":"Originality","weight":20,"score":7.0,"why":"Offline mesh alerting is known (Briar, Bridgefy); signed authority alerts over NearLink plus an offline map of Kraków shelters is a fresh, platform-tied angle."},{"criterion":"Demonstrated usefulness","weight":20,"score":7.0,"why":"Real civil-protection need; the demo shows signing, two hops of relay and a forged copy rejected. Depends on official issuers and NearLink phones; relay only in the foreground."},{"criterion":"Technical execution","weight":20,"score":8.5,"why":"Clean layers, canonical ECDSA verification, delivery queue with acknowledgements and retries, 177 host tests running the real sources, only 5 permissions, no secrets."},{"criterion":"Platform capabilities","weight":20,"score":7.0,"why":"NearLink adapter, Crypto, Location, ArkData, Accessibility and a second OpenHarmony build; but the relay ran only over a laptop WebSocket hub, never NearLink hardware."},{"criterion":"Demo quality","weight":10,"score":8.5,"why":"Narrated 2:58 video with a synchronized live recording of three emulators, speed-ups marked, and a 68-screen gallery."},{"criterion":"Reproducibility & transparency","weight":10,"score":9.0,"why":"Excellent README and team guide, checksummed releases, detailed AI workflow, explicit lists of what is real and what is simulated."}],"weighted_total":76.5,"build_reality":8,"source_loc":4900,"has_tests":true,"live_demo":"YouTube demo responds","built_during_event":"yes: first commit 3 Oct 18:07 CEST (a 5.7k-line drop), 41 commits until 4 Oct 10:57","strengths":["Rigorous signed-alert protocol against replay, expiry and tampering","Very honest about what is simulated","Real three-emulator demo","Builds for HarmonyOS and OpenHarmony"],"weaknesses":["NearLink never ran on hardware","Relay only in the foreground","Small hand-written core compared with docs volume","Mostly one developer with heavy AI generation"],"red_flags":["5.7k-line first commit after about 7 hours hides early history","Demo mesh path is a laptop hub, not radio"],"verdict":"A carefully engineered, honest prototype whose key claim, phone-to-phone relay over NearLink, is unproven on devices."}],"ranking":["x2oreo/Celia.ai","carrotly-technologies-2026/SafeMesh"],"calibration_note":"Both well above a typical prototype and nearly tied: Celia leads on usefulness and platform breadth, SafeMesh on rigor and a real recorded demo."}
+{
+  "task": "Imagine what's next",
+  "weights_used": {
+    "Originality": 20,
+    "Demonstrated usefulness": 20,
+    "Technical execution": 20,
+    "Platform capabilities": 20,
+    "Demo quality": 10,
+    "Reproducibility & transparency": 10
+  },
+  "projects": [
+    {
+      "repo": "x2oreo/Celia.ai",
+      "project": "Celia.ai",
+      "scores": [
+        {
+          "criterion": "Originality",
+          "weight": 20,
+          "score": 7.5,
+          "why": "An agent-first companion for one condition: drug verdicts come from fixed data and the LLM only explains them, plus assistant intents, a watch heart monitor and a 13-language emergency card."
+        },
+        {
+          "criterion": "Demonstrated usefulness",
+          "weight": 20,
+          "score": 8,
+          "why": "Concrete patient workflows: drug check by name, barcode (about 68k Polish packs bundled) or box photo, SOS countdown, doctor-visit brief; 74 real emulator screenshots."
+        },
+        {
+          "criterion": "Technical execution",
+          "weight": 20,
+          "score": 8,
+          "why": "About 38k ArkTS lines on the phone, 7k on the watch, 4k in edge functions; safety gate, response validator and offline fallback; nearly 600 tests; no committed secrets."
+        },
+        {
+          "criterion": "Platform capabilities",
+          "weight": 20,
+          "score": 8.5,
+          "why": "Intents, widgets, Live View, OCR, speech, Scan, NFC, user auth, push and a separate wearable app; phone and watch talk through the cloud rather than a native wearable channel."
+        },
+        {
+          "criterion": "Demo quality",
+          "weight": 10,
+          "score": 4.5,
+          "why": "The demo video is a rebuilt animation of the screens, not a recording of the running emulator."
+        },
+        {
+          "criterion": "Reproducibility & transparency",
+          "weight": 10,
+          "score": 8.5,
+          "why": "Thorough README with exact versions, release with phone and watch packages, 389 small commits by 3 authors, detailed AI workflow docs."
+        }
+      ],
+      "weighted_total": 77,
+      "build_reality": 8,
+      "source_loc": 49000,
+      "has_tests": true,
+      "live_demo": "none for the app",
+      "built_during_event": "yes: 389 commits from 3 Oct 11:48 to 4 Oct 11:00 CEST",
+      "strengths": [
+        "Widest native platform usage in the field",
+        "Safety design: deterministic verdicts, validator, offline fallback",
+        "592 automated tests plus a live LLM evaluation",
+        "Complete flows on phone and watch for a clear patient group"
+      ],
+      "weaknesses": [
+        "Demo video is an animation, not a recording",
+        "Heart rate, voice, NFC and push unverified on the emulator",
+        "Phone-watch link goes through the cloud",
+        "Very large scope makes depth hard to verify"
+      ],
+      "red_flags": [
+        "Mockup demo video despite the real-emulator requirement",
+        "Drug-risk data derived from a source with licence restrictions",
+        "Name reuses Huawei's assistant brand 'Celia'"
+      ],
+      "verdict": "An exceptionally broad, polished, platform-heavy health companion, held back by a mockup demo video and features unverified on hardware."
+    },
+    {
+      "repo": "carrotly-technologies-2026/SafeMesh",
+      "project": "SafeMesh",
+      "scores": [
+        {
+          "criterion": "Originality",
+          "weight": 20,
+          "score": 7,
+          "why": "Offline mesh alerting is known (Briar, Bridgefy); signed authority alerts over NearLink plus an offline map of Kraków shelters is a fresh, platform-tied angle."
+        },
+        {
+          "criterion": "Demonstrated usefulness",
+          "weight": 20,
+          "score": 7,
+          "why": "Real civil-protection need; the demo shows signing, two hops of relay and a forged copy rejected. Depends on official issuers and NearLink phones; relay only in the foreground."
+        },
+        {
+          "criterion": "Technical execution",
+          "weight": 20,
+          "score": 8.5,
+          "why": "Clean layers, canonical ECDSA verification, delivery queue with acknowledgements and retries, 177 host tests running the real sources, only 5 permissions, no secrets."
+        },
+        {
+          "criterion": "Platform capabilities",
+          "weight": 20,
+          "score": 7,
+          "why": "NearLink adapter, Crypto, Location, ArkData, Accessibility and a second OpenHarmony build; but the relay ran only over a laptop WebSocket hub, never NearLink hardware."
+        },
+        {
+          "criterion": "Demo quality",
+          "weight": 10,
+          "score": 8.5,
+          "why": "Narrated 2:58 video with a synchronized live recording of three emulators, speed-ups marked, and a 68-screen gallery."
+        },
+        {
+          "criterion": "Reproducibility & transparency",
+          "weight": 10,
+          "score": 9,
+          "why": "Excellent README and team guide, checksummed releases, detailed AI workflow, explicit lists of what is real and what is simulated."
+        }
+      ],
+      "weighted_total": 76.5,
+      "build_reality": 8,
+      "source_loc": 4900,
+      "has_tests": true,
+      "live_demo": "YouTube demo responds",
+      "built_during_event": "yes: first commit 3 Oct 18:07 CEST (a 5.7k-line drop), 41 commits until 4 Oct 10:57",
+      "strengths": [
+        "Rigorous signed-alert protocol against replay, expiry and tampering",
+        "Very honest about what is simulated",
+        "Real three-emulator demo",
+        "Builds for HarmonyOS and OpenHarmony"
+      ],
+      "weaknesses": [
+        "NearLink never ran on hardware",
+        "Relay only in the foreground",
+        "Small hand-written core compared with docs volume",
+        "Mostly one developer with heavy AI generation"
+      ],
+      "red_flags": [
+        "5.7k-line first commit after about 7 hours hides early history",
+        "Demo mesh path is a laptop hub, not radio"
+      ],
+      "verdict": "A carefully engineered, honest prototype whose key claim, phone-to-phone relay over NearLink, is unproven on devices."
+    }
+  ],
+  "ranking": [
+    "x2oreo/Celia.ai",
+    "carrotly-technologies-2026/SafeMesh"
+  ],
+  "calibration_note": "Both well above a typical prototype and nearly tied: Celia leads on usefulness and platform breadth, SafeMesh on rigor and a real recorded demo."
+}

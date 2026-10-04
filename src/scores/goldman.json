@@ -1,1 +1,132 @@
-{"task":"AI Control Layer","weights_used":{"Robustness/guardrails":30,"Architecture & performance":20,"Security reporting":20,"Test suite":15,"Implementability & scalability":15},"projects":[{"repo":"00200200/HackYeah2026","project":"Control","scores":[{"criterion":"Robustness/guardrails","weight":30,"score":7.8,"why":"Layered pipeline: signed task warrants with scope narrowing, OPA access rules, a signature feed with escape decoding, checksum-validated PII and secret patterns, a real Ollama judge on input and output, fails closed. Live evaluation blocked 20 of 20 attacks with 1 false block."},{"criterion":"Architecture & performance","weight":20,"score":7.3,"why":"Clean shared core behind OpenAI and MCP adapters, one policy snapshot per request, budget reserved then settled, Prometheus metrics and a benchmark (8.7 ms p50 without the judge). Single process with SQLite; the judge adds about 4.8 s."},{"criterion":"Security reporting","weight":20,"score":7.5,"why":"Working React dashboard backed by the API; hash-chained, signed audit log with export and an offline verifier; metrics endpoint. No cost-in-money view."},{"criterion":"Test suite","weight":15,"score":8.3,"why":"193 test functions over 4.2k lines, 326 passed in recorded evidence, 8 policy tests in real OPA, plus a 48-case EN/PL live evaluation reported honestly."},{"criterion":"Implementability & scalability","weight":15,"score":6.8,"why":"Drop-in OpenAI base URL plus MCP endpoint, make targets, Docker compose with Ollama and OPA. Single node, budgets count tokens not money, local feed file."}],"weighted_total":75.7,"build_reality":8.5,"source_loc":11000,"has_tests":true,"live_demo":"none (local only; evidence in docs)","built_during_event":"yes: commits 3 Oct 12:30 to 4 Oct 10:29 CEST","strengths":["Real end-to-end gateway with a real local LLM judge, OPA and signed audit","Hot reload of policy and feed, keeping the last valid snapshot on a bad edit","Strong, honest test and evaluation evidence with latency numbers"],"weaknesses":["Judge latency of about 5 s per request","No money-based budgets or rate limits; single process","Signature feed is a local file; no model-file scanning"],"red_flags":["Detector extensions on 4 Oct were not re-run live (disclosed)","README test count (494) is above the recorded evidence (326)"],"verdict":"The strongest submission: a working, tested control layer covering most of the brief, held back by judge latency and single-node scope."},{"repo":"damianlech/HackYeah26","project":"Clearance","scores":[{"criterion":"Robustness/guardrails","weight":30,"score":4.3,"why":"The gateway prototype has auth, a model allowlist, an in-memory token budget, checksum PII and self-testing feed rules, but the semantic layer is a keyword-weight sum and a keyword simulation; no real model judge."},{"criterion":"Architecture & performance","weight":20,"score":4.8,"why":"Two separate prototypes with rich diagrams and a perf script, but the cache, replicas and classifier exist only in docs."},{"criterion":"Security reporting","weight":20,"score":4.0,"why":"JSONL audit and a metrics script; the dashboard is a browser-only mockup not wired to the gateway."},{"criterion":"Test suite","weight":15,"score":6.0,"why":"46 pytest functions (about 76 cases) starting real processes with allowed and blocked cases; 120 extra checks test the mockup, not the product."},{"criterion":"Implementability & scalability","weight":15,"score":4.8,"why":"Good integration guidance, but in-memory budgets, plaintext keys, no MCP, and the shown demo build lives in another repository."}],"weighted_total":46.7,"build_reality":4.0,"source_loc":2700,"has_tests":true,"live_demo":"none publicly checkable","built_during_event":"yes: 37 commits 3 Oct 13:09 to 4 Oct 10:15 CEST; most of day one was research and spec","strengths":["Feed rules ship their own positive and negative test vectors","3-layer proxy that isolates the real API key at egress","Clear, candid threat analysis"],"weaknesses":["AI controls simulated with keywords","Dashboard is a mockup","About 21k lines of docs against 2.7k lines of working code"],"red_flags":["The demo build shown in screenshots is not in the submitted repo","Repo describes itself as a brainstorm and vision repo","AI judge and paid-model pricing are simulated"],"verdict":"Thoughtful design and documentation with two small prototypes, but no real AI guardrail or working dashboard in the repo."}],"ranking":["00200200/HackYeah2026","damianlech/HackYeah26"],"calibration_note":"Scored on repo contents only; Clearance's out-of-repo demo might impress live, but judges cannot audit it from the submission."}
+{
+  "task": "AI Control Layer",
+  "weights_used": {
+    "Robustness/guardrails": 30,
+    "Architecture & performance": 20,
+    "Security reporting": 20,
+    "Test suite": 15,
+    "Implementability & scalability": 15
+  },
+  "projects": [
+    {
+      "repo": "00200200/HackYeah2026",
+      "project": "Control",
+      "scores": [
+        {
+          "criterion": "Robustness/guardrails",
+          "weight": 30,
+          "score": 7.8,
+          "why": "Layered pipeline: signed task warrants with scope narrowing, OPA access rules, a signature feed with escape decoding, checksum-validated PII and secret patterns, a real Ollama judge on input and output, fails closed. Live evaluation blocked 20 of 20 attacks with 1 false block."
+        },
+        {
+          "criterion": "Architecture & performance",
+          "weight": 20,
+          "score": 7.3,
+          "why": "Clean shared core behind OpenAI and MCP adapters, one policy snapshot per request, budget reserved then settled, Prometheus metrics and a benchmark (8.7 ms p50 without the judge). Single process with SQLite; the judge adds about 4.8 s."
+        },
+        {
+          "criterion": "Security reporting",
+          "weight": 20,
+          "score": 7.5,
+          "why": "Working React dashboard backed by the API; hash-chained, signed audit log with export and an offline verifier; metrics endpoint. No cost-in-money view."
+        },
+        {
+          "criterion": "Test suite",
+          "weight": 15,
+          "score": 8.3,
+          "why": "193 test functions over 4.2k lines, 326 passed in recorded evidence, 8 policy tests in real OPA, plus a 48-case EN/PL live evaluation reported honestly."
+        },
+        {
+          "criterion": "Implementability & scalability",
+          "weight": 15,
+          "score": 6.8,
+          "why": "Drop-in OpenAI base URL plus MCP endpoint, make targets, Docker compose with Ollama and OPA. Single node, budgets count tokens not money, local feed file."
+        }
+      ],
+      "weighted_total": 75.7,
+      "build_reality": 8.5,
+      "source_loc": 11000,
+      "has_tests": true,
+      "live_demo": "none (local only; evidence in docs)",
+      "built_during_event": "yes: commits 3 Oct 12:30 to 4 Oct 10:29 CEST",
+      "strengths": [
+        "Real end-to-end gateway with a real local LLM judge, OPA and signed audit",
+        "Hot reload of policy and feed, keeping the last valid snapshot on a bad edit",
+        "Strong, honest test and evaluation evidence with latency numbers"
+      ],
+      "weaknesses": [
+        "Judge latency of about 5 s per request",
+        "No money-based budgets or rate limits; single process",
+        "Signature feed is a local file; no model-file scanning"
+      ],
+      "red_flags": [
+        "Detector extensions on 4 Oct were not re-run live (disclosed)",
+        "README test count (494) is above the recorded evidence (326)"
+      ],
+      "verdict": "The strongest submission: a working, tested control layer covering most of the brief, held back by judge latency and single-node scope."
+    },
+    {
+      "repo": "damianlech/HackYeah26",
+      "project": "Clearance",
+      "scores": [
+        {
+          "criterion": "Robustness/guardrails",
+          "weight": 30,
+          "score": 4.3,
+          "why": "The gateway prototype has auth, a model allowlist, an in-memory token budget, checksum PII and self-testing feed rules, but the semantic layer is a keyword-weight sum and a keyword simulation; no real model judge."
+        },
+        {
+          "criterion": "Architecture & performance",
+          "weight": 20,
+          "score": 4.8,
+          "why": "Two separate prototypes with rich diagrams and a perf script, but the cache, replicas and classifier exist only in docs."
+        },
+        {
+          "criterion": "Security reporting",
+          "weight": 20,
+          "score": 4,
+          "why": "JSONL audit and a metrics script; the dashboard is a browser-only mockup not wired to the gateway."
+        },
+        {
+          "criterion": "Test suite",
+          "weight": 15,
+          "score": 6,
+          "why": "46 pytest functions (about 76 cases) starting real processes with allowed and blocked cases; 120 extra checks test the mockup, not the product."
+        },
+        {
+          "criterion": "Implementability & scalability",
+          "weight": 15,
+          "score": 4.8,
+          "why": "Good integration guidance, but in-memory budgets, plaintext keys, no MCP, and the shown demo build lives in another repository."
+        }
+      ],
+      "weighted_total": 46.7,
+      "build_reality": 4,
+      "source_loc": 2700,
+      "has_tests": true,
+      "live_demo": "none publicly checkable",
+      "built_during_event": "yes: 37 commits 3 Oct 13:09 to 4 Oct 10:15 CEST; most of day one was research and spec",
+      "strengths": [
+        "Feed rules ship their own positive and negative test vectors",
+        "3-layer proxy that isolates the real API key at egress",
+        "Clear, candid threat analysis"
+      ],
+      "weaknesses": [
+        "AI controls simulated with keywords",
+        "Dashboard is a mockup",
+        "About 21k lines of docs against 2.7k lines of working code"
+      ],
+      "red_flags": [
+        "The demo build shown in screenshots is not in the submitted repo",
+        "Repo describes itself as a brainstorm and vision repo",
+        "AI judge and paid-model pricing are simulated"
+      ],
+      "verdict": "Thoughtful design and documentation with two small prototypes, but no real AI guardrail or working dashboard in the repo."
+    }
+  ],
+  "ranking": [
+    "00200200/HackYeah2026",
+    "damianlech/HackYeah26"
+  ],
+  "calibration_note": "Scored on repo contents only; Clearance's out-of-repo demo might impress live, but judges cannot audit it from the submission."
+}

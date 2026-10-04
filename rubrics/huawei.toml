@@ -1,0 +1,21 @@
+name = "Imagine what's next"
+kind = "Partner task · Huawei"
+order = 7
+deadline = "Sun 4 Oct 2026 (official HackYeah deadline)"
+brief = """
+Build an innovative system feature or app for an OpenHarmony-based mobile device. Lead with one of: Intelligent Experiences, Spatial Experiences or Human-Centric Technology. Tech: ArkTS/ArkUI or C/C++, or cross-platform with an OHOS target; target HarmonyOS, OpenHarmony or Oniro, API 20 or higher declared as minimum; must run on an emulator or device with reproducible setup, build and launch, and use or improve at least one platform capability. Deliverables: public repo, setup/build/install/launch instructions, working .hap, short recorded demo, architecture description, AI_WORKFLOW.md, and AI integration docs if the product has AI features.
+"""
+checks = [
+  "Check minimum API level in build-profile.json5 and permissions in module.json5.",
+  "Is the demo a real emulator or device recording, or an animated mockup?",
+  "Is AI_WORKFLOW.md present? Any committed keystores or secrets?",
+  "Would the app run unchanged on another OS? That scores lower on platform capabilities.",
+]
+
+[weights]
+"Originality" = 20
+"Demonstrated usefulness" = 20
+"Technical execution" = 20
+"Platform capabilities" = 20
+"Demo quality" = 10
+"Reproducibility & transparency" = 10

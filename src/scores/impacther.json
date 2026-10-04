@@ -1,1 +1,191 @@
-{"task":"ImpactHer","weights_used":{"Idea & Innovation":30,"Relation to Category":20,"Practical Applicability / Usability":20,"Design (visual/UI)":20,"Completeness & Implementation Value":10},"projects":[{"repo":"Mikformatycy/sejf-place","project":"Sejf","scores":[{"criterion":"Idea & Innovation","weight":30,"score":8.7,"why":"The vault hides inside working decoy apps and opens with a user-chosen in-app action, with a hash chain, trusted timestamps and a verifier anyone can run without the app. Disguised-evidence apps exist, but not with this verifiability."},{"criterion":"Relation to Category","weight":20,"score":9.3,"why":"Targets domestic and economic violence against women, grounded in Polish law and the Blue Card procedure, with EU statistics and a measurable pilot plan."},{"criterion":"Practical Applicability / Usability","weight":20,"score":7.8,"why":"Offline, quick exit, auto-lock, helpline numbers and an explicit threat model; held back by a bundled AI key, screenshot blocking disabled for the demo, and the need for an NGO pilot."},{"criterion":"Design (visual/UI)","weight":20,"score":7.2,"why":"Six fully built decoy apps with their own palettes and icons plus a light/dark vault theme; no screenshots in the repo."},{"criterion":"Completeness & Implementation Value","weight":10,"score":8.8,"why":"About 11k lines of app code and 89 tests covering crypto, chain, timestamps and legal rules; encrypted capture, PDF/ZIP export and the verifier all exist."}],"weighted_total":83.4,"build_reality":8.5,"source_loc":12400,"has_tests":true,"live_demo":"none (Expo app; verifier runs locally)","built_during_event":"unclear: one 30k-line first commit at 20:21 CEST Saturday, then 10 commits until 08:33 Sunday","strengths":["Threat model built around an abuser with phone access","Evidence integrity verifiable without the app","Rule-based severity that AI cannot lower; names pseudonymised before AI calls","Strong legal research and honest limits"],"weaknesses":["No live demo or screenshots","AI called straight from the phone with a bundled key","Limited cover-icon switching on iOS"],"red_flags":["Monolithic first commit, event-time work unverifiable","Stale proxy code contradicts the README","Demo mode disables screenshot protection"],"verdict":"An exceptional, deeply considered and well-tested build that fits the brief closely."},{"repo":"StraykerPL/normandy","project":"TechBestie","scores":[{"criterion":"Idea & Innovation","weight":30,"score":4.5,"why":"Role-model stories and chat for girls considering tech studies is common; matching is a simple additive score over 3 profiles."},{"criterion":"Relation to Category","weight":20,"score":7.3,"why":"Aims directly at the gender gap in tech education; no need data or impact metrics."},{"criterion":"Practical Applicability / Usability","weight":20,"score":4.0,"why":"Three hardcoded students and a chat that never delivers messages; no mentor onboarding, moderation or safeguarding."},{"criterion":"Design (visual/UI)","weight":20,"score":7.2,"why":"Cohesive, polished mobile UI with good hierarchy; AI-looking portraits and a somewhat generic look."},{"criterion":"Completeness & Implementation Value","weight":10,"score":4.0,"why":"About 3.7k lines, half CSS; front-end-only PWA, no tests, no backend."}],"weighted_total":54.5,"build_reality":7.5,"source_loc":3700,"has_tests":false,"live_demo":"straykerpl.github.io/normandy responds","built_during_event":"unclear: 6k-line file dump at 00:44 CEST Sunday; agent notes describe an earlier app","strengths":["Polished, consistent mobile UI","Clear category fit","Honest README about limits"],"weaknesses":["Essentially a clickable mock","Chat does not deliver","No way to grow or verify mentors"],"red_flags":["Bulk code dump suggests an earlier codebase","Fictional testimonials with AI-looking portraits"],"verdict":"A pretty, on-theme front-end mock with thin functionality and a common idea."},{"repo":"Spiace-Wydry/Czeladniczka","project":"Czeladniczka","scores":[{"criterion":"Idea & Innovation","weight":30,"score":4.2,"why":"A standard two-sided marketplace matching apprentices with craft masters; the women angle is implied only by the feminine name."},{"criterion":"Relation to Category","weight":20,"score":2.8,"why":"No mention of women or gender barriers anywhere in the code, README or spec."},{"criterion":"Practical Applicability / Usability","weight":20,"score":5.3,"why":"Real auth, row-level security, distance search and request/review flows, deployed; no verification of masters or protection for young apprentices."},{"criterion":"Design (visual/UI)","weight":20,"score":7.0,"why":"Distinctive wood-plank craft theme ported from design boards; renders cleanly on mobile."},{"criterion":"Completeness & Implementation Value","weight":10,"score":6.0,"why":"About 1.6k lines; core flows work end to end; no tests, chat out of scope."}],"weighted_total":48.6,"build_reality":8.5,"source_loc":1600,"has_tests":false,"live_demo":"czeladniczka.vercel.app responds","built_during_event":"yes: 28 granular commits Saturday 21:31–23:21 CEST","strengths":["Working backend with security policies","Characterful visual design","Deployed and usable"],"weaknesses":["Category relation is nominal","No trust or safety layer","Small scope"],"red_flags":["No women-focused content despite the ImpactHer framing","No AI-use disclosure though commits show AI co-authorship"],"verdict":"A competent, nicely styled apprenticeship marketplace that does not address a problem specific to women. The team's other repo, PiszuPiszu, is unrelated to ImpactHer."}],"ranking":["Mikformatycy/sejf-place","StraykerPL/normandy","Spiace-Wydry/Czeladniczka"],"calibration_note":"Sejf's 83 reflects exceptional depth and category fit; the other two are typical-to-weak prototypes separated by category fit."}
+{
+  "task": "ImpactHer",
+  "weights_used": {
+    "Idea & Innovation": 30,
+    "Relation to Category": 20,
+    "Practical Applicability / Usability": 20,
+    "Design (visual/UI)": 20,
+    "Completeness & Implementation Value": 10
+  },
+  "projects": [
+    {
+      "repo": "Mikformatycy/sejf-place",
+      "project": "Sejf",
+      "scores": [
+        {
+          "criterion": "Idea & Innovation",
+          "weight": 30,
+          "score": 8.7,
+          "why": "The vault hides inside working decoy apps and opens with a user-chosen in-app action, with a hash chain, trusted timestamps and a verifier anyone can run without the app. Disguised-evidence apps exist, but not with this verifiability."
+        },
+        {
+          "criterion": "Relation to Category",
+          "weight": 20,
+          "score": 9.3,
+          "why": "Targets domestic and economic violence against women, grounded in Polish law and the Blue Card procedure, with EU statistics and a measurable pilot plan."
+        },
+        {
+          "criterion": "Practical Applicability / Usability",
+          "weight": 20,
+          "score": 7.8,
+          "why": "Offline, quick exit, auto-lock, helpline numbers and an explicit threat model; held back by a bundled AI key, screenshot blocking disabled for the demo, and the need for an NGO pilot."
+        },
+        {
+          "criterion": "Design (visual/UI)",
+          "weight": 20,
+          "score": 7.2,
+          "why": "Six fully built decoy apps with their own palettes and icons plus a light/dark vault theme; no screenshots in the repo."
+        },
+        {
+          "criterion": "Completeness & Implementation Value",
+          "weight": 10,
+          "score": 8.8,
+          "why": "About 11k lines of app code and 89 tests covering crypto, chain, timestamps and legal rules; encrypted capture, PDF/ZIP export and the verifier all exist."
+        }
+      ],
+      "weighted_total": 83.4,
+      "build_reality": 8.5,
+      "source_loc": 12400,
+      "has_tests": true,
+      "live_demo": "none (Expo app; verifier runs locally)",
+      "built_during_event": "unclear: one 30k-line first commit at 20:21 CEST Saturday, then 10 commits until 08:33 Sunday",
+      "strengths": [
+        "Threat model built around an abuser with phone access",
+        "Evidence integrity verifiable without the app",
+        "Rule-based severity that AI cannot lower; names pseudonymised before AI calls",
+        "Strong legal research and honest limits"
+      ],
+      "weaknesses": [
+        "No live demo or screenshots",
+        "AI called straight from the phone with a bundled key",
+        "Limited cover-icon switching on iOS"
+      ],
+      "red_flags": [
+        "Monolithic first commit, event-time work unverifiable",
+        "Stale proxy code contradicts the README",
+        "Demo mode disables screenshot protection"
+      ],
+      "verdict": "An exceptional, deeply considered and well-tested build that fits the brief closely."
+    },
+    {
+      "repo": "StraykerPL/normandy",
+      "project": "TechBestie",
+      "scores": [
+        {
+          "criterion": "Idea & Innovation",
+          "weight": 30,
+          "score": 4.5,
+          "why": "Role-model stories and chat for girls considering tech studies is common; matching is a simple additive score over 3 profiles."
+        },
+        {
+          "criterion": "Relation to Category",
+          "weight": 20,
+          "score": 7.3,
+          "why": "Aims directly at the gender gap in tech education; no need data or impact metrics."
+        },
+        {
+          "criterion": "Practical Applicability / Usability",
+          "weight": 20,
+          "score": 4,
+          "why": "Three hardcoded students and a chat that never delivers messages; no mentor onboarding, moderation or safeguarding."
+        },
+        {
+          "criterion": "Design (visual/UI)",
+          "weight": 20,
+          "score": 7.2,
+          "why": "Cohesive, polished mobile UI with good hierarchy; AI-looking portraits and a somewhat generic look."
+        },
+        {
+          "criterion": "Completeness & Implementation Value",
+          "weight": 10,
+          "score": 4,
+          "why": "About 3.7k lines, half CSS; front-end-only PWA, no tests, no backend."
+        }
+      ],
+      "weighted_total": 54.5,
+      "build_reality": 7.5,
+      "source_loc": 3700,
+      "has_tests": false,
+      "live_demo": "straykerpl.github.io/normandy responds",
+      "built_during_event": "unclear: 6k-line file dump at 00:44 CEST Sunday; agent notes describe an earlier app",
+      "strengths": [
+        "Polished, consistent mobile UI",
+        "Clear category fit",
+        "Honest README about limits"
+      ],
+      "weaknesses": [
+        "Essentially a clickable mock",
+        "Chat does not deliver",
+        "No way to grow or verify mentors"
+      ],
+      "red_flags": [
+        "Bulk code dump suggests an earlier codebase",
+        "Fictional testimonials with AI-looking portraits"
+      ],
+      "verdict": "A pretty, on-theme front-end mock with thin functionality and a common idea."
+    },
+    {
+      "repo": "Spiace-Wydry/Czeladniczka",
+      "project": "Czeladniczka",
+      "scores": [
+        {
+          "criterion": "Idea & Innovation",
+          "weight": 30,
+          "score": 4.2,
+          "why": "A standard two-sided marketplace matching apprentices with craft masters; the women angle is implied only by the feminine name."
+        },
+        {
+          "criterion": "Relation to Category",
+          "weight": 20,
+          "score": 2.8,
+          "why": "No mention of women or gender barriers anywhere in the code, README or spec."
+        },
+        {
+          "criterion": "Practical Applicability / Usability",
+          "weight": 20,
+          "score": 5.3,
+          "why": "Real auth, row-level security, distance search and request/review flows, deployed; no verification of masters or protection for young apprentices."
+        },
+        {
+          "criterion": "Design (visual/UI)",
+          "weight": 20,
+          "score": 7,
+          "why": "Distinctive wood-plank craft theme ported from design boards; renders cleanly on mobile."
+        },
+        {
+          "criterion": "Completeness & Implementation Value",
+          "weight": 10,
+          "score": 6,
+          "why": "About 1.6k lines; core flows work end to end; no tests, chat out of scope."
+        }
+      ],
+      "weighted_total": 48.6,
+      "build_reality": 8.5,
+      "source_loc": 1600,
+      "has_tests": false,
+      "live_demo": "czeladniczka.vercel.app responds",
+      "built_during_event": "yes: 28 granular commits Saturday 21:31–23:21 CEST",
+      "strengths": [
+        "Working backend with security policies",
+        "Characterful visual design",
+        "Deployed and usable"
+      ],
+      "weaknesses": [
+        "Category relation is nominal",
+        "No trust or safety layer",
+        "Small scope"
+      ],
+      "red_flags": [
+        "No women-focused content despite the ImpactHer framing",
+        "No AI-use disclosure though commits show AI co-authorship"
+      ],
+      "verdict": "A competent, nicely styled apprenticeship marketplace that does not address a problem specific to women. The team's other repo, PiszuPiszu, is unrelated to ImpactHer."
+    }
+  ],
+  "ranking": [
+    "Mikformatycy/sejf-place",
+    "StraykerPL/normandy",
+    "Spiace-Wydry/Czeladniczka"
+  ],
+  "calibration_note": "Sejf's 83 reflects exceptional depth and category fit; the other two are typical-to-weak prototypes separated by category fit."
+}

@@ -1,0 +1,223 @@
+{
+  "defence": {
+    "entries": {
+      "RodrigoGaluppo/HackYeah2026-LayerOne": {
+        "team": "LayerOne",
+        "result": "fin"
+      },
+      "Mikformatycy/SafeWall": {
+        "team": "Mikformatycy",
+        "result": "best",
+        "note": "Presumed Defence entry: the team's other repos map to other tasks."
+      }
+    },
+    "unscored": [],
+    "excluded": []
+  },
+  "sport": {
+    "ours": true,
+    "entries": {
+      "x2oreo/Celia.ai": {
+        "team": "DoubleOreo",
+        "result": "fin"
+      },
+      "uteg-labs/just-mate": {
+        "team": "uteg-labs",
+        "result": "ours",
+        "note": "Not a finalist. Scored blind alongside the finalists for comparison."
+      },
+      "kristin-lina-todorova/ViviOR_HackYeah26": {
+        "team": "Kristin-Lina Todorova",
+        "result": "best"
+      }
+    },
+    "unscored": [],
+    "excluded": []
+  },
+  "smartcity": {
+    "entries": {
+      "Moscuuu/will-to-wheel": {
+        "team": "WSP",
+        "result": "fin"
+      },
+      "portugalskie-armatki-sniezne/eHackYeah2026": {
+        "team": "Portugalskie Armatki Śnieżne",
+        "result": "fin"
+      },
+      "DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026": {
+        "team": "GROUND ZERO",
+        "result": "best"
+      }
+    },
+    "unscored": [],
+    "excluded": []
+  },
+  "ai": {
+    "entries": {
+      "killerk3emstar/rysio": {
+        "team": "Paired Interns",
+        "result": "fin"
+      }
+    },
+    "unscored": [
+      {
+        "result": "best",
+        "team": "Absolute Edge"
+      }
+    ],
+    "excluded": []
+  },
+  "impacther": {
+    "entries": {
+      "Mikformatycy/sejf-place": {
+        "team": "Mikformatycy",
+        "result": "fin"
+      },
+      "StraykerPL/normandy": {
+        "team": "Team Normandy",
+        "result": "fin"
+      },
+      "Spiace-Wydry/Czeladniczka": {
+        "team": "Śpiące Wydry",
+        "result": "fin"
+      }
+    },
+    "unscored": [
+      {
+        "result": "best",
+        "team": "RAPYGG"
+      }
+    ],
+    "excluded": []
+  },
+  "hubmi": {
+    "entries": {
+      "Drop-the-Base/malopolski-hub-2026": {
+        "team": "DropTheBase;",
+        "result": "fin"
+      }
+    },
+    "unscored": [
+      {
+        "result": 1,
+        "team": "Zaplątani"
+      },
+      {
+        "result": 2,
+        "team": "przewariaty"
+      },
+      {
+        "result": 3,
+        "team": "AGHolic"
+      }
+    ],
+    "excluded": [
+      {
+        "repo": "SiteQuestTeam/App",
+        "project": "SiteQuest",
+        "weighted_total": 26,
+        "reason": "Not a HubMI entry: the team's own context file says SiteQuest was built for the Smart City task after they dropped a HubMI plan on 3 Oct. It has no matchmaking or ROPS modules, so it is probably not the HubMI finalist 'SideQuest' entry."
+      }
+    ]
+  },
+  "huawei": {
+    "entries": {
+      "x2oreo/Celia.ai": {
+        "team": "Double Oreo",
+        "result": "fin"
+      },
+      "carrotly-technologies-2026/SafeMesh": {
+        "team": "Carrotly",
+        "result": 2
+      }
+    },
+    "unscored": [
+      {
+        "result": 1,
+        "team": "Pride of the UK v2"
+      },
+      {
+        "result": 3,
+        "team": "Dangling Pointers"
+      }
+    ],
+    "excluded": []
+  },
+  "superteam": {
+    "entries": {
+      "pszumanski/proofbond": {
+        "team": "pszumanski",
+        "result": 1
+      },
+      "Attention-link/HackYeah_Finance_Without_Intermediaries_2026": {
+        "team": "Attention-Link",
+        "result": "fin"
+      },
+      "corki1337/FairOdds": {
+        "team": "FairOdds",
+        "result": 2
+      }
+    },
+    "unscored": [
+      {
+        "result": 3,
+        "team": "ad::team"
+      }
+    ],
+    "excluded": []
+  },
+  "krakow": {
+    "entries": {
+      "HakerSII/Accessly": {
+        "team": "HackerSii",
+        "result": "fin"
+      },
+      "Mateuszl28/Krak-w-bez-barier": {
+        "team": "PL{Byte_Bandits}",
+        "result": "fin",
+        "note": "Repo shared by the team on Discord after the results."
+      },
+      "Moscuuu/will-to-wheel": {
+        "team": "WSP",
+        "result": "fin"
+      },
+      "AdamStajek/Jakobiany-HackYeah": {
+        "team": "Jakobiany",
+        "result": "best"
+      },
+      "mjble/bbx-hackyeah-2026": {
+        "team": "BBX",
+        "result": "fin"
+      }
+    },
+    "unscored": [],
+    "excluded": []
+  },
+  "goldman": {
+    "entries": {
+      "00200200/HackYeah2026": {
+        "team": "Under Controllers",
+        "result": "fin"
+      },
+      "damianlech/HackYeah26": {
+        "team": "Visdomers",
+        "result": "fin"
+      }
+    },
+    "unscored": [
+      {
+        "result": 1,
+        "team": "Solvro Londyn"
+      },
+      {
+        "result": 2,
+        "team": "Team MTG"
+      },
+      {
+        "result": 3,
+        "team": "SEVA"
+      }
+    ],
+    "excluded": []
+  }
+}

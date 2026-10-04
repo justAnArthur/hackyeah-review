@@ -1,0 +1,20 @@
+name = "Cracow without barriers"
+kind = "Partner task · City of Kraków"
+order = 9
+deadline = "Sun 4 Oct 2026 11:00 CEST"
+brief = """
+A tool for residents and tourists to assess the accessibility of places and routes for individual needs, scoped to one group (for example wheelchair users and parents with prams). Detailed barrier and facility info (steps, thresholds, ramps, lifts, door width, surface, toilet, rest spots), not just accessible or not. Every datum carries a source, date and reliability status. Unverified or user reports visually distinct. A gap in data must never be shown as "accessible". The demo must include a conflicting, incomplete or source-down case. Open data only (Kraków open data, MSIP WMS/WFS, dane.gov.pl, OSM with attribution). Separate ingestion from presentation. WCAG 2.2 AA (keyboard, screen reader, contrast, text alternative to the map). Don't require disability disclosure. Hosting and maintenance outside the city, privacy and security basics, how to add a new city. Deliverables in Polish: description, prototype or demo, target group, data sources with freshness and reliability, business model, PDF of at most 10 slides, video of at most 3 minutes.
+"""
+weights_note = "The task's two documents disagree; these are the DETAILS document weights."
+checks = [
+  "Is missing data ever shown as accessible?",
+  "Is the data real (city open data, OSM) or mostly invented demo venues?",
+  "Is the business model priced, with numbers, or one sentence?",
+]
+
+[weights]
+"Relation & usability" = 25
+"Prototype quality" = 20
+"Data reliability" = 15
+"Scalability" = 20
+"Business model" = 20

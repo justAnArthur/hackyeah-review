@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "bun ./build.ts",
+    "review": "bun scripts/review.ts",
     "deploy": "vercel deploy --prod --yes --scope justanarthurs-projects"
   }
 }
