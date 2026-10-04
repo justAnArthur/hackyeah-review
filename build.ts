@@ -46,7 +46,7 @@ const PAGES = [
     out: "scorecard.html",
     href: "/scorecard",
     label: "Scorecard",
-    desc: "Blind repo reviews of 24 HackYeah 2026 entries against each task's official weights, next to the jury's results.",
+    desc: "Blind repo reviews of 25 HackYeah 2026 entries against each task's official weights, next to the jury's results.",
   },
 ]
 
