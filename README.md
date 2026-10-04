@@ -14,11 +14,13 @@ Live: https://hackyeah-review.justadomainname.dev
 - `src/results.html`, `src/scorecard.html` — page sources
 - `src/scorecard-data.json` — merged review data used by the scorecard
 - `src/scores/` — raw review scores per task
-- `build.ts` — wraps the sources into full pages and writes `public/` (plus `robots.txt` and `sitemap.xml`)
+- `build.ts` — wraps the sources into full pages and writes `public/` (git-ignored, plus `robots.txt` and `sitemap.xml`)
 
 ## Build and deploy
 
+Pushes to `main` deploy to production on Vercel, which runs `bun ./build.ts` and serves `public/`. Pull requests get preview deployments.
+
 ```bash
-bun run build
-bun run deploy
+bun run build    # build locally into public/
+bun run deploy   # deploy from the working tree without pushing
 ```

@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://hackyeah-review.justadomainname.dev/sitemap.xml
