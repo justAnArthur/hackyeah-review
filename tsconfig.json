@@ -3,14 +3,30 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "jsx": "react-jsx",
-    "jsxImportSource": "preact",
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "types": ["bun"]
+    "types": [
+      "bun"
+    ],
+    "paths": {
+      "@/*": [
+        "./web/*"
+      ]
+    }
   },
-  "include": ["build.ts", "scripts", "server", "web", "test"]
+  "include": [
+    "build.ts",
+    "scripts",
+    "server",
+    "web",
+    "test"
+  ]
 }

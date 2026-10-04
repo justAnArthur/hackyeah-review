@@ -42,13 +42,19 @@ The `Dockerfile` builds the site and runs `bun server/index.ts` on port 3000, wi
 
 ## Structure
 
-- `src/results.html`, `src/scorecard.html` — page sources
+- `web/pages/` — the four pages (results, scorecard, form, review) as React components; `web/main.tsx` hydrates them in the browser
+- `web/components/ui/` — [Fluid Functionalism](https://www.fluidfunctionalism.com) components, Base UI flavor, added with the shadcn CLI (`components.json`). They are copied into the repo, so small fixes live here
+- `web/components/layout.tsx` — the shared column (760px wide on every page), site bar and small building blocks
+- `web/data/results.ts` — finalists, results and repo matches for the results page
+- `web/app.css` — Tailwind v4 entry with the theme tokens
 - `src/scores/<task>.json` — review scores per task
 - `src/teams.json` — team name and jury result for each reviewed repo, plus placed teams with no public repo
 - `rubrics/<task>.toml` — brief, official criteria and weights, and task-specific checks for each task
 - `prompts/reviewer.md` — the reviewer prompt template
 - `scripts/review.ts` — builds review prompts, runs reviews and merges the results
-- `build.ts` — builds the scorecard data from rubrics, scores and teams, wraps the page sources and writes `public/` (git-ignored, plus `robots.txt` and `sitemap.xml`)
+- `build.ts` — builds the scorecard data from rubrics, scores and teams, pre-renders every page to HTML (so search engines see the content), bundles the client and the Tailwind CSS, and writes `public/` (git-ignored, plus `robots.txt` and `sitemap.xml`)
+
+To add another Fluid component: `bunx shadcn@latest add https://www.fluidfunctionalism.com/r/base/<name>.json` (or `/r/<name>.json` for ones without a Base UI flavor), then move any file it writes to `src/components/` into `web/components/`.
 
 ## Reviewing projects
 
@@ -68,7 +74,7 @@ In Claude Code, `/review krakow owner/repo --team "owner/repo=Team Name"` does t
 - **One project later:** the prompt includes the task's existing scores as anonymous anchors, so the new score stays on the same scale.
 - **Whole task again:** pass all its repos in one call with `--fresh`; one reviewer then compares them side by side.
 - **Wrong task:** if the reviewer finds the repo was built for another task, `add` lists it as excluded instead of scoring it.
-- **New task or event:** add `rubrics/<id>.toml` (name, kind, order, deadline, brief, checks and `[weights]` adding up to 100), then review repos with that id. Add the teams to `TASKS` in `src/results.html` to show them on the results page.
+- **New task or event:** add `rubrics/<id>.toml` (name, kind, order, deadline, brief, checks and `[weights]` adding up to 100), then review repos with that id. Add the teams to `TASKS` in `web/data/results.ts` to show them on the results page.
 
 ## Build and deploy
 
