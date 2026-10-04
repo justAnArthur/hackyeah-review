@@ -156,6 +156,7 @@ section.task { display: grid; gap: 10px; scroll-margin-top: 24px; }
 .repo, .demo { font: 400 var(--fs-caption)/1.4 var(--mono); color: var(--muted); text-align: right; overflow-wrap: anywhere; border-radius: 4px; transition: color .16s; }
 .repo:hover, .demo:hover { color: var(--fg); }
 .repo.other { color: var(--faint); }
+.otherlabel { font-size: 11px; color: var(--faint); text-align: right; margin-top: 4px; }
 .review {
   font-size: 11px; font-weight: 500; color: var(--fg); text-decoration: none; border-radius: 6px; padding: 3px 7px;
   background: var(--surface-3); box-shadow: var(--shadow-2); white-space: nowrap; font-variant-numeric: tabular-nums;
@@ -198,7 +199,7 @@ footer p { margin: 0; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .row { grid-template-columns: 28px minmax(0, 1fr); }
   .aside { grid-column: 2; justify-items: start; padding-top: 4px; }
-  .repo, .demo { text-align: left; }
+  .repo, .demo, .otherlabel { text-align: left; }
   .meter span { font-size: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -249,7 +250,7 @@ const TASKS = [
       repos: ["RodrigoGaluppo/HackYeah2026-LayerOne"] },
     { team: "SOLVRO-NG", status: "removed",
       note: "Their Defence repo (bartzlot/HackYeah---2026) was public on 4 October and is no longer available. Their AI Control Layer entry is still public.",
-      other: ["bartzlot/HackYeah---AI-Control-Layer"] },
+      other: [{ repo: "bartzlot/HackYeah---AI-Control-Layer", task: "AI Control Layer" }] },
     { team: "Space Hamsters", status: "none" },
     { team: "SUBJECT.pdf", status: "none" },
   ]},
@@ -338,7 +339,7 @@ const TASKS = [
     { team: "SMK", status: "none" },
     { team: "Attention-Link", project: "Finance Without Intermediaries entry", status: "found",
       desc: "The team also entered Defence, streaming drone video to VR goggles.",
-      repos: ["Attention-link/HackYeah_Finance_Without_Intermediaries_2026", "Attention-link/HACKYEAH2026-defence"] },
+      repos: ["Attention-link/HackYeah_Finance_Without_Intermediaries_2026"], other: [{ repo: "Attention-link/HACKYEAH2026-defence", task: "Defence" }] },
   ]},
   { id: "krakow", name: "Cracow without barriers", kind: "Partner task · City of Kraków", entries: [
     { place: "best", team: "Jakobiany", project: "Swoją Drogą", status: "found",
@@ -356,9 +357,9 @@ const TASKS = [
       repos: ["mjble/bbx-hackyeah-2026"] },
   ]},
   { id: "goldman", name: "AI Control Layer", kind: "Partner task · Goldman Sachs", entries: [
-    { place: 1, team: "Solvro Londyn", status: "other",
+    { place: 1, team: "Solvro Londyn", status: "none",
       note: "No public repo found for their AI Control Layer entry. Their ImpactHer app, the Lunaria menstruation tracker, is public.",
-      other: ["Solvro/mobile-lunaria"] },
+      other: [{ repo: "Solvro/mobile-lunaria", task: "ImpactHer" }] },
     { place: 2, team: "Team MTG", status: "none" },
     { place: 3, team: "SEVA", status: "none" },
     { team: "Visdomers", project: "Clearance", status: "likely",
@@ -367,9 +368,9 @@ const TASKS = [
     { team: "Under Controllers", project: "Control", status: "found",
       desc: "Security gateway for AI agents: every model request and tool call is checked against a signed task warrant, a budget ledger and access rules.",
       repos: ["00200200/HackYeah2026"] },
-    { team: "LeMIKO", status: "other",
+    { team: "LeMIKO", status: "none",
       note: "No public repo found for their AI Control Layer entry. HerGPT, their women's health assistant for ImpactHer, is public.",
-      other: ["PW127/HerGPT-hackyeah"] },
+      other: [{ repo: "PW127/HerGPT-hackyeah", task: "ImpactHer" }] },
   ]},
 ];
 
@@ -394,7 +395,7 @@ function rowHtml(e, tid) {
   const mark = e.place ? (e.place === "best" ? "1" : e.place) : "";
   const links = [
     ...(e.repos || []).map(r => `<a class="repo" href="${GH + r}" target="_blank" rel="noopener">${esc(r)}</a>`),
-    ...(e.other || []).map(r => `<a class="repo other" href="${GH + r}" target="_blank" rel="noopener">${esc(r)}</a>`),
+    ...(e.other || []).map(o => `<span class="otherlabel">Their ${esc(o.task)} entry, not this one</span><a class="repo other" href="${GH + o.repo}" target="_blank" rel="noopener">${esc(o.repo)}</a>`),
     e.demo ? `<a class="demo" href="${e.demo}" target="_blank" rel="noopener">Live demo</a>` : "",
   ].join("");
   return `<article class="${cls}">
