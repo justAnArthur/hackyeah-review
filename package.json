@@ -8,8 +8,7 @@
     "start": "bun server/index.ts",
     "test": "bun test",
     "typecheck": "tsc -p .",
-    "review": "bun scripts/review.ts",
-    "deploy": "vercel deploy --prod --yes --scope justanarthurs-projects"
+    "review": "bun scripts/review.ts"
   },
   "dependencies": {
     "preact": "^11.0.0"

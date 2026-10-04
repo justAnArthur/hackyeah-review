@@ -72,9 +72,8 @@ In Claude Code, `/review krakow owner/repo --team "owner/repo=Team Name"` does t
 
 ## Build and deploy
 
-Pushes to `main` deploy to production on Vercel, which runs `bun ./build.ts` and serves `public/`. Pull requests get preview deployments.
+Pushes to `main` deploy to production on Dokploy through a GitHub webhook: the Dockerfile builds the site and starts the server.
 
 ```bash
 bun run build    # build locally into public/
-bun run deploy   # deploy from the working tree without pushing
 ```
