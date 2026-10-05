@@ -3,7 +3,8 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import type { Db } from "./db"
 
-const DAILY_LIMIT = Number(process.env.DAILY_LIMIT ?? 50)
+// 1000 free-model requests a day once the openrouter account has credits (50 without)
+const DAILY_LIMIT = Number(process.env.DAILY_LIMIT ?? 1000)
 const TIMEOUT_MS = Number(process.env.MODEL_TIMEOUT_MS ?? 360_000)
 
 // a model id is an OpenRouter id, "zai:<model>" for z.ai's general API, or "claude:<model>" for

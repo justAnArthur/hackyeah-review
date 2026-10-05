@@ -10,7 +10,11 @@ export type Project = Entry & {
   title: string
   review?: Review
   self?: boolean
+  // the council's score for a finalist, run to compare with its blind review
+  council?: CouncilScore
 }
+
+export type CouncilScore = { id: string; total: number; version: number }
 
 export type Task = ResultsTask & {
   weights?: Record<string, number>

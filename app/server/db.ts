@@ -28,6 +28,8 @@ export type Submission = {
   deck_path: string | null
   ip_hash: string
   hidden: number
+  // "form" for teams using the form, "curated" for finalists the council reviews for comparison
+  source: "form" | "curated"
 }
 
 export type Job = {
@@ -50,8 +52,10 @@ export function openDb(path = join(DATA_DIR, "reviews.db")) {
   db.run(`create table if not exists submissions (
     id text primary key, created_at integer not null, task text not null, team text not null, title text not null,
     result text not null, repo text not null, fields text not null, deck_path text, ip_hash text not null,
-    hidden integer not null default 0
+    hidden integer not null default 0, source text not null default 'form'
   )`)
+  const columns = db.query<{ name: string }, []>("pragma table_info(submissions)").all()
+  if (!columns.some(c => c.name === "source")) db.run("alter table submissions add column source text not null default 'form'")
   db.run(`create table if not exists jobs (
     id text primary key, status text not null, step text not null, attempts integer not null default 0,
     next_run_at integer not null, priority integer not null default 0, error text,

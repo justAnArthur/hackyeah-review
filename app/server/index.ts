@@ -1,8 +1,9 @@
 import { createHash, randomBytes } from "node:crypto"
 import { join, normalize } from "node:path"
 import { ROOT, loadRubrics } from "../../scripts/lib"
-import type { CouncilReview } from "./council"
-import { UPLOADS, events, getJob, getSubmission, openDb, queuePosition } from "./db"
+import { type CouncilReview, loadCouncil } from "./council"
+import { allCurated, curatedId, insertCurated } from "./curated"
+import { UPLOADS, events, getJob, getSubmission, logEvent, openDb, queuePosition } from "./db"
 import { checkRepo, parseRepo } from "./evidence"
 import { quotaUsed } from "./models"
 import { enqueue, startWorker } from "./queue"
@@ -100,7 +101,7 @@ function status(id: string, after = 0) {
   if (!sub || !job || sub.hidden === 1) return null
   const row = db.query<{ review: string }, [string]>("select review from reviews where id = ?").get(id)
   return {
-    submission: { id: sub.id, title: sub.title, team: sub.team, task: sub.task, result: sub.result, repo: sub.repo, created_at: sub.created_at, superseded: sub.hidden === 2 },
+    submission: { id: sub.id, title: sub.title, team: sub.team, task: sub.task, result: sub.result, repo: sub.repo, created_at: sub.created_at, superseded: sub.hidden === 2, source: sub.source },
     job: { status: job.status, step: job.step, position: queuePosition(db, job), next_run_at: job.next_run_at, error: job.error },
     events: events(db, id, after),
     review: row ? (JSON.parse(row.review) as CouncilReview) : null,
@@ -153,7 +154,7 @@ function community() {
   const rows = db
     .query<{ review: string }, []>(
       `select r.review from reviews r join submissions s on s.id = r.id join jobs j on j.id = r.id
-       where s.hidden = 0 and j.status = 'done' order by r.created_at desc`,
+       where s.hidden = 0 and s.source = 'form' and j.status = 'done' order by r.created_at desc`,
     )
     .all()
   const byTask: Record<string, CouncilReview[]> = {}
@@ -162,6 +163,63 @@ function community() {
     ;(byTask[r.task] ??= []).push(r)
   }
   return byTask
+}
+
+// council scores of the finalists, keyed "task|repo", shown next to their blind reviews
+function councilScores() {
+  const rows = db
+    .query<{ id: string; review: string }, []>(
+      `select r.id, r.review from reviews r join submissions s on s.id = r.id join jobs j on j.id = r.id
+       where s.source = 'curated' and s.hidden = 0 and j.status = 'done'`,
+    )
+    .all()
+  return Object.fromEntries(
+    rows.map(({ id, review }) => {
+      const r = JSON.parse(review) as CouncilReview
+      return [`${r.task}|${r.repo}`, { id, total: r.weighted_total, version: r.council.version }]
+    }),
+  )
+}
+
+const isAdmin = (req: Request) => !!ADMIN_TOKEN && req.headers.get("authorization") === `Bearer ${ADMIN_TOKEN}`
+
+type CuratedRequest = { import?: CouncilReview[]; enqueue?: { task: string; repo: string }[] | "all" }
+
+// imports finished comparison reviews of the finalists and queues the rest behind form submissions
+async function curated(req: Request) {
+  if (!isAdmin(req)) return fail("Not allowed.", 403)
+  const body = (await req.json().catch(() => null)) as CuratedRequest | null
+  if (!body) return fail("Send a JSON body.")
+  const { version } = await loadCouncil()
+  const counts = { imported: 0, queued: 0, skipped: 0 }
+
+  for (const r of body.import ?? []) {
+    const id = curatedId(r.task, r.repo)
+    const known = db.query("select 1 from reviews where id = ?").get(id)
+    if (r.council?.version !== version || known || (!getSubmission(db, id) && !(await insertCurated(db, id, r.task, r.repo)))) {
+      counts.skipped++
+      continue
+    }
+    const now = Date.now()
+    db.query(
+      "insert or replace into jobs (id, status, step, attempts, next_run_at, priority, error, created_at, updated_at) values (?, 'done', 'done', 0, ?, -1, null, ?, ?)",
+    ).run(id, now, now, now)
+    db.query("insert into reviews (id, review, council_version, created_at) values (?, ?, ?, ?)").run(id, JSON.stringify({ ...r, id }), version, r.created_at ?? now)
+    logEvent(db, id, `Imported from a council v${version} comparison run`)
+    counts.imported++
+  }
+
+  for (const t of body.enqueue === "all" ? await allCurated() : (body.enqueue ?? [])) {
+    const id = curatedId(t.task, t.repo)
+    const job = getJob(db, id)
+    if ((job && job.status !== "failed") || (!job && !getSubmission(db, id) && !(await insertCurated(db, id, t.task, t.repo)))) {
+      counts.skipped++
+      continue
+    }
+    enqueue(db, id, -1)
+    counts.queued++
+  }
+  return json(counts)
 }
 
 async function staticFile(pathname: string) {
@@ -189,9 +247,11 @@ const server = Bun.serve({
     },
     "/api/reviews/:id/events": req => sse(req.params.id),
     "/api/community": () => json(community()),
+    "/api/council-scores": () => json(councilScores()),
+    "/api/admin/curated": { POST: req => curated(req) },
     "/api/admin/reviews/:id/hide": {
       POST: req => {
-        if (!ADMIN_TOKEN || req.headers.get("authorization") !== `Bearer ${ADMIN_TOKEN}`) return fail("Not allowed.", 403)
+        if (!isAdmin(req)) return fail("Not allowed.", 403)
         db.query("update submissions set hidden = 1 where id = ?").run(req.params.id)
         return json({ ok: true })
       },

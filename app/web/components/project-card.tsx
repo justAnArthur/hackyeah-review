@@ -82,6 +82,11 @@ const Row = ({ p, open }: { p: Project; open: boolean }) => (
         <span className="w-full">
           <Bar value={p.review.weighted_total} max={100} ours={p.ours} />
         </span>
+        {p.council && (
+          <span className="text-[11px] text-muted-foreground tabular-nums" style={NORMAL} title="Council score">
+            council {fmt(p.council.total)}
+          </span>
+        )}
       </span>
     )}
   </span>
@@ -107,6 +112,7 @@ const Details = ({ p, task }: { p: Project; task: Task }) => {
     ...(p.repos ?? []).map(repo => ({ href: GH + repo, label: repo, external: true })),
     ...(p.demo ? [{ href: p.demo, label: "Live demo", external: true }] : []),
     ...(r?.link ? [{ href: r.link, label: "Full council review", external: false }] : []),
+    ...(p.council ? [{ href: `/r/${p.council.id}`, label: `Council review · ${fmt(p.council.total)}`, external: false }] : []),
   ]
   return (
     <div className="grid gap-4 pt-1 pb-2 pl-11 text-foreground max-sm:pl-0" style={NORMAL}>

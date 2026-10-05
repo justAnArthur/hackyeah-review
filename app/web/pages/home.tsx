@@ -4,7 +4,7 @@ import { ProjectList } from "@/components/project-card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select"
 import { TabItem, Tabs, TabsList } from "@/components/ui/tabs"
-import { type Project, type Sort, type Task, communityProject, mergeTasks, sortProjects } from "@/lib/projects"
+import { type CouncilScore, type Project, type Sort, type Task, communityProject, mergeTasks, sortProjects } from "@/lib/projects"
 import { RESULT, fmt } from "@/lib/site"
 import type { CouncilReview, ScorecardTask } from "@/lib/types"
 
@@ -38,9 +38,9 @@ function agreement(t: Task) {
   )
 }
 
-const Section = (props: { t: Task; filter: Filter; sort: Sort; community: CouncilReview[]; open: string[]; setOpen: (ids: string[], open: string[]) => void }) => {
+const Section = (props: { t: Task; filter: Filter; sort: Sort; community: CouncilReview[]; council: Record<string, CouncilScore>; open: string[]; setOpen: (ids: string[], open: string[]) => void }) => {
   const { t } = props
-  const projects = sortProjects(t.projects.filter(p => shown(p, props.filter)), props.sort)
+  const projects = sortProjects(t.projects.filter(p => shown(p, props.filter)), props.sort).map(p => ({ ...p, council: p.review && props.council[`${t.id}|${p.review.repo}`] }))
   const community = props.community.map(r => communityProject(t.id, r)).sort((a, b) => b.review!.weighted_total - a.review!.weighted_total)
   return (
     <section id={t.id} className="grid scroll-mt-6 gap-3">
@@ -141,6 +141,7 @@ export const HomePage = ({ data }: { data: ScorecardTask[] }) => {
   const [filter, setFilter] = useState<Filter>("all")
   const [sort, setSort] = useState<Sort>("result")
   const [community, setCommunity] = useState<Record<string, CouncilReview[]>>({})
+  const [council, setCouncil] = useState<Record<string, CouncilScore>>({})
   const [open, setOpenState] = useState<string[]>([])
 
   const setOpen = (ids: string[], next: string[]) => setOpenState(prev => [...prev.filter(v => !ids.includes(v)), ...next])
@@ -151,6 +152,10 @@ export const HomePage = ({ data }: { data: ScorecardTask[] }) => {
       if (["placed", "code"].includes(saved.filter)) setFilter(saved.filter)
       if (saved.sort === "score") setSort("score")
     } catch {}
+    fetch("/api/council-scores")
+      .then(r => (r.ok ? r.json() : {}))
+      .then(setCouncil)
+      .catch(() => {})
     fetch("/api/community")
       .then(r => (r.ok ? r.json() : {}))
       .then(setCommunity)
@@ -247,7 +252,7 @@ export const HomePage = ({ data }: { data: ScorecardTask[] }) => {
 
       <main className="grid gap-10">
         {tasks.map(t => (
-          <Section key={t.id} t={t} filter={filter} sort={sort} community={community[t.id] ?? []} open={open} setOpen={setOpen} />
+          <Section key={t.id} t={t} filter={filter} sort={sort} community={community[t.id] ?? []} council={council} open={open} setOpen={setOpen} />
         ))}
       </main>
 

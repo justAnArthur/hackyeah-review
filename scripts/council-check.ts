@@ -7,10 +7,10 @@
 import { join } from "node:path"
 import { parseArgs } from "node:util"
 import { type CouncilReview, loadCouncil } from "../app/server/council"
-import { events, getJob, getSubmission, openDb } from "../app/server/db"
+import { allCurated, curatedId, insertCurated } from "../app/server/curated"
+import { events, getJob, openDb } from "../app/server/db"
 import { enqueue, processJob } from "../app/server/queue"
-import { TASKS } from "../app/web/data/results"
-import { CACHE, type Review, loadRubrics, loadScores, loadTeams } from "./lib"
+import { CACHE, type Review, loadScores } from "./lib"
 
 const ENDED = ["done", "failed", "cancelled"]
 const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1)
@@ -22,16 +22,8 @@ const { values, positionals } = parseArgs({
   allowPositionals: true,
 })
 
-async function allTargets() {
-  const out: { task: string; repo: string }[] = []
-  for (const r of await loadRubrics()) {
-    for (const p of (await loadScores(r.id))?.projects ?? []) out.push({ task: r.id, repo: p.repo })
-  }
-  return out
-}
-
 let targets = values.all
-  ? await allTargets()
+  ? await allCurated()
   : positionals.map(arg => {
       const [task, repo] = arg.split(":")
       if (!task || !repo) throw new Error(`expected task:owner/repo, got "${arg}"`)
@@ -50,7 +42,6 @@ if (!targets.length) {
 const council = await loadCouncil()
 const dbName = process.env.CHECK_DB ?? `council-check-v${council.version}.db`
 const db = openDb(join(CACHE, dbName))
-const teams = await loadTeams()
 console.log(`council v${council.version} · ${targets.length} projects · ${dbName}`)
 
 async function blindReview(task: string, repo: string): Promise<Review> {
@@ -59,24 +50,11 @@ async function blindReview(task: string, repo: string): Promise<Review> {
   return review
 }
 
-// the council gets what a team would type into the form, minus the result, so it stays as blind as the original review
-function submit(task: string, repo: string, blind: Review) {
-  const id = `check--${task}--${repo.replace(/[^a-z0-9]/gi, "-")}`
-  if (getSubmission(db, id)) {
-    if (getJob(db, id)?.status === "failed") enqueue(db, id)
-    return id
-  }
-  const entry = TASKS.find(t => t.id === task)?.entries.find(e => e.repos?.includes(repo))
-  const fields = {
-    problem: "",
-    solution: entry?.desc ?? "",
-    progress: "",
-    instructions: entry?.demo ? `Live demo: ${entry.demo}` : "",
-    additional: "",
-  }
-  db.query(
-    "insert into submissions (id, created_at, task, team, title, result, repo, fields, deck_path, ip_hash) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-  ).run(id, Date.now(), task, teams[task]?.entries[repo]?.team ?? entry?.team ?? "Unknown team", blind.project, "Not disclosed", repo, JSON.stringify(fields), null, "council-check")
+async function submit(task: string, repo: string) {
+  const id = curatedId(task, repo, "check")
+  const job = getJob(db, id)
+  if (job?.status === "failed") enqueue(db, id)
+  if (job || !(await insertCurated(db, id, task, repo))) return id
   enqueue(db, id)
   return id
 }
@@ -100,7 +78,7 @@ const gaps: number[] = []
 for (const { task, repo } of targets) {
   const blind = await blindReview(task, repo)
   console.log(`\n${blind.project} (${task}, ${repo}) · blind ${fmt(blind.weighted_total)}`)
-  const id = submit(task, repo, blind)
+  const id = await submit(task, repo)
   const job = await run(id)
   const stored = db.query<{ review: string }, [string]>("select review from reviews where id = ?").get(id)
   const review = stored ? (JSON.parse(stored.review) as CouncilReview) : null

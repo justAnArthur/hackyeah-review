@@ -6,13 +6,13 @@ import { Banner, BannerDescription, BannerTitle } from "@/components/ui/banner"
 import { Button } from "@/components/ui/button"
 import { ThinkingStep, ThinkingStepDetails, ThinkingSteps, ThinkingStepsContent, ThinkingStepsHeader } from "@/components/ui/thinking-steps"
 import { Tooltip } from "@/components/ui/tooltip"
-import { fmt } from "@/lib/site"
+import { fmt, reviewId } from "@/lib/site"
 import type { CouncilReview, TaskOption } from "@/lib/types"
 
 type Event = { seq: number; at: number; message: string }
 
 type Status = {
-  submission: { id: string; title: string; team: string; task: string; result: string; repo: string; superseded: boolean }
+  submission: { id: string; title: string; team: string; task: string; result: string; repo: string; superseded: boolean; source: "form" | "curated" }
   job: { status: string; step: string; position: number; next_run_at: number; error: string | null }
   events: Event[]
   review: (CouncilReview & { scores: (CouncilReview["scores"][number] & { members: Record<string, number> })[] }) | null
@@ -98,7 +98,7 @@ const Track = ({ score }: { score: NonNullable<Status["review"]>["scores"][numbe
   </div>
 )
 
-const Result = ({ r }: { r: NonNullable<Status["review"]> }) => (
+const Result = ({ r, curated }: { r: NonNullable<Status["review"]>; curated: boolean }) => (
   <>
     <Panel>
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
@@ -175,8 +175,10 @@ const Result = ({ r }: { r: NonNullable<Status["review"]> }) => (
         ))}
       </div>
       <span className="text-xs text-muted-foreground">
-        Self-submitted and unverified. The council read an evidence pack built from the form, the repo and the deck; it didn't run the
-        code or see the pitch. It's a different reviewer from the blind reviews on the results page.
+        {curated
+          ? "A HackYeah 2026 finalist, reviewed by the council to compare with its blind review on the results page. The council wasn't told the jury's result."
+          : "Self-submitted and unverified. It's a different reviewer from the blind reviews on the results page."}{" "}
+        The council read an evidence pack built from the repo, its decks and docs; it didn't run the code or see the pitch.
       </span>
     </Panel>
   </>
@@ -227,6 +229,7 @@ export const ReviewPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
   }
 
   const task = tasks.find(t => t.id === s.submission.task)?.name ?? s.submission.task
+  const curated = s.submission.source === "curated"
   return (
     <Layout current="/r">
       <div className="grid min-w-0 gap-5">
@@ -235,10 +238,18 @@ export const ReviewPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
             eyebrow={
               <span className="flex flex-wrap items-center gap-1.5">
                 {task}
-                <ResultBadge result="self" />
-                <Badge color="gray" variant="dot" size="compact">
-                  {s.submission.result} (self-declared)
-                </Badge>
+                {curated ? (
+                  <Badge color="gray" variant="dot" size="compact">
+                    Finalist · compared with its blind review
+                  </Badge>
+                ) : (
+                  <>
+                    <ResultBadge result="self" />
+                    <Badge color="gray" variant="dot" size="compact">
+                      {s.submission.result} (self-declared)
+                    </Badge>
+                  </>
+                )}
               </span>
             }
             title={s.submission.title}
@@ -253,13 +264,13 @@ export const ReviewPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
               {copied ? "Link copied" : "Copy link"}
             </Button>
             {s.review && (
-              <a className="text-xs text-muted-foreground hover:text-foreground" href={`/#${s.submission.task}`}>
+              <a className="text-xs text-muted-foreground hover:text-foreground" href={`/#${curated ? reviewId(s.submission.task, s.submission.repo) : s.submission.task}`}>
                 See it with the other results →
               </a>
             )}
           </div>
         </div>
-        {s.review ? <Result r={s.review} /> : <Progress s={s} size={councilSize} />}
+        {s.review ? <Result r={s.review} curated={curated} /> : <Progress s={s} size={councilSize} />}
       </div>
     </Layout>
   )

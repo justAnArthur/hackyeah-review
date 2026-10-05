@@ -190,7 +190,15 @@ function numericAgreement(review: MemberReview, scores: CouncilScore[]) {
 export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: string): Promise<CouncilReview> {
   const [council, rubric] = await Promise.all([loadCouncil(), loadRubric(sub.task)])
   const system = await memberSystemPrompt(rubric, sub.task, sub.repo)
-  // only ok rows count as done, so a failed member is retried on the next attempt
+  // a member counts as done only with an ok row from the model now in its seat, so a failed member
+  // is retried and a review started under an older panel never mixes in the old models' scores
+  const seats = new Map(council.members.map((model, i) => [LETTERS[i], model]))
+  const prior = memberRows(db, sub.id)
+  for (const r of prior.filter(r => r.member !== "judge" && seats.get(r.member) !== r.model)) {
+    db.query("delete from member_results where id = ? and member = ?").run(sub.id, r.member)
+  }
+  const stale = prior.find(r => r.member === "judge" && r.model !== council.judge)
+  if (stale) db.query("delete from member_results where id = ? and member = 'judge'").run(sub.id)
   const done = new Set(memberRows(db, sub.id).filter(r => r.ok).map(r => r.member))
 
   for (const [i, model] of council.members.entries()) {
