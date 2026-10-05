@@ -2,13 +2,13 @@ import { Database } from "bun:sqlite"
 import { mkdirSync } from "node:fs"
 import { join } from "node:path"
 
-export const DATA_DIR = process.env.DATA_DIR ?? join(import.meta.dir, "../.cache/data")
+const DATA_DIR = process.env.DATA_DIR ?? join(import.meta.dir, "../.cache/data")
 export const UPLOADS = join(DATA_DIR, "uploads")
 mkdirSync(UPLOADS, { recursive: true })
 
-export type JobStatus = "queued" | "running" | "waiting_quota" | "done" | "failed" | "cancelled"
+type JobStatus = "queued" | "running" | "waiting_quota" | "done" | "failed" | "cancelled"
 
-export type Fields = {
+type Fields = {
   problem: string
   solution: string
   progress: string
@@ -44,6 +44,11 @@ export type Job = {
   updated_at: number
 }
 
+function addMissingColumn(db: Database, table: string, column: string, definition: string) {
+  const columns = db.query<{ name: string }, []>(`pragma table_info(${table})`).all()
+  if (!columns.some(c => c.name === column)) db.run(`alter table ${table} add column ${column} ${definition}`)
+}
+
 export function openDb(path = join(DATA_DIR, "reviews.db")) {
   const db = new Database(path, { create: true, strict: true })
   // the timeout first, so processes opening one database together wait instead of failing
@@ -54,22 +59,19 @@ export function openDb(path = join(DATA_DIR, "reviews.db")) {
     result text not null, repo text not null, fields text not null, deck_path text, ip_hash text not null,
     hidden integer not null default 0, source text not null default 'form'
   )`)
-  const columns = db.query<{ name: string }, []>("pragma table_info(submissions)").all()
-  if (!columns.some(c => c.name === "source")) db.run("alter table submissions add column source text not null default 'form'")
+  addMissingColumn(db, "submissions", "source", "text not null default 'form'")
   db.run(`create table if not exists jobs (
     id text primary key, status text not null, step text not null, attempts integer not null default 0,
     next_run_at integer not null, priority integer not null default 0, error text,
     created_at integer not null, updated_at integer not null
   )`)
   db.run("create table if not exists evidence (id text primary key, pack text not null, facts text not null, version integer not null default 1)")
-  const evidenceColumns = db.query<{ name: string }, []>("pragma table_info(evidence)").all()
-  if (!evidenceColumns.some(c => c.name === "version")) db.run("alter table evidence add column version integer not null default 1")
+  addMissingColumn(db, "evidence", "version", "integer not null default 1")
   db.run(`create table if not exists member_results (
     id text not null, member text not null, model text not null, ok integer not null, result text, error text,
     version integer not null default 0, primary key (id, member)
   )`)
-  const memberColumns = db.query<{ name: string }, []>("pragma table_info(member_results)").all()
-  if (!memberColumns.some(c => c.name === "version")) db.run("alter table member_results add column version integer not null default 0")
+  addMissingColumn(db, "member_results", "version", "integer not null default 0")
   db.run("create table if not exists reviews (id text primary key, review text not null, council_version integer not null, created_at integer not null)")
   db.run("create table if not exists events (seq integer primary key autoincrement, job_id text not null, at integer not null, message text not null)")
   db.run("create table if not exists quota (day text primary key, used integer not null)")

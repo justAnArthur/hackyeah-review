@@ -6,7 +6,7 @@ import { allCurated, curatedId, insertCurated } from "./curated"
 import { UPLOADS, events, getJob, getSubmission, logEvent, openDb, queuePosition } from "./db"
 import { checkRepo, parseRepo } from "./evidence"
 import { DAILY_LIMIT, quotaUsed } from "./models"
-import { enqueue, startWorker } from "./queue"
+import { enqueue, resumeInterrupted, startWorker } from "./queue"
 
 const PORT = Number(process.env.PORT ?? 3000)
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN ?? ""
@@ -22,16 +22,17 @@ const LIMITS = { title: 120, team: 80, problem: 5000, solution: 5000, progress: 
 const db = openDb()
 const tasks = (await loadRubrics()).map(r => ({ id: r.id, name: r.name, kind: r.kind }))
 
-const json = (data: unknown, status = 200) => Response.json(data, { status })
-const fail = (error: string, status = 400) => json({ error }, status)
+function json(data: unknown, status = 200) {
+  return Response.json(data, { status })
+}
+
+function fail(error: string, status = 400) {
+  return json({ error }, status)
+}
 
 function clientIp(req: Request, server: Bun.Server<unknown>) {
   const forwarded = TRUST_PROXY ? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() : null
   return forwarded || server.requestIP(req)?.address || "unknown"
-}
-
-function newId() {
-  return randomBytes(6).toString("base64url")
 }
 
 async function submit(req: Request, server: Bun.Server<unknown>) {
@@ -41,11 +42,8 @@ async function submit(req: Request, server: Bun.Server<unknown>) {
   } catch {
     return fail("The form could not be read.")
   }
-  const values = Object.fromEntries(Object.entries(LIMITS).map(([k]) => [k, String(form.get(k) ?? "").trim()])) as Record<
-    keyof typeof LIMITS,
-    string
-  >
 
+  const values = Object.fromEntries(Object.keys(LIMITS).map(k => [k, String(form.get(k) ?? "").trim()])) as Record<keyof typeof LIMITS, string>
   for (const [k, max] of Object.entries(LIMITS)) {
     if (values[k as keyof typeof LIMITS].length > max) return fail(`"${k}" is longer than ${max} characters.`)
   }
@@ -69,7 +67,7 @@ async function submit(req: Request, server: Bun.Server<unknown>) {
   const repoError = await checkRepo(repo)
   if (repoError) return fail(repoError)
 
-  const id = newId()
+  const id = randomBytes(6).toString("base64url")
   let deckPath: string | null = null
   const deck = form.get("deck")
   if (deck instanceof File && deck.size > 0) {
@@ -184,12 +182,13 @@ function community() {
   return byTask
 }
 
-// every finalist with public code and its council review, or where it is in the queue, keyed "task|repo"
 function finalists() {
   return Object.fromEntries(entries("curated").map(e => [`${e.task}|${e.repo}`, e]))
 }
 
-const isAdmin = (req: Request) => !!ADMIN_TOKEN && req.headers.get("authorization") === `Bearer ${ADMIN_TOKEN}`
+function isAdmin(req: Request) {
+  return !!ADMIN_TOKEN && req.headers.get("authorization") === `Bearer ${ADMIN_TOKEN}`
+}
 
 type CuratedRequest = { import?: CouncilReview[]; enqueue?: { task: string; repo: string }[] | "all" }
 
@@ -204,7 +203,7 @@ async function curated(req: Request) {
   for (const r of body.import ?? []) {
     const id = curatedId(r.task, r.repo)
     const known = db.query("select 1 from reviews where id = ?").get(id)
-    if (r.council?.version !== version || known || (!getSubmission(db, id) && !(await insertCurated(db, id, r.task, r.repo)))) {
+    if (r.council?.version !== version || known || (!getSubmission(db, id) && !insertCurated(db, id, r.task, r.repo))) {
       counts.skipped++
       continue
     }
@@ -217,10 +216,10 @@ async function curated(req: Request) {
     counts.imported++
   }
 
-  for (const t of body.enqueue === "all" ? await allCurated() : (body.enqueue ?? [])) {
+  for (const t of body.enqueue === "all" ? allCurated() : (body.enqueue ?? [])) {
     const id = curatedId(t.task, t.repo)
     const job = getJob(db, id)
-    if ((job && job.status !== "failed") || (!job && !getSubmission(db, id) && !(await insertCurated(db, id, t.task, t.repo)))) {
+    if ((job && job.status !== "failed") || (!job && !getSubmission(db, id) && !insertCurated(db, id, t.task, t.repo))) {
       counts.skipped++
       continue
     }
@@ -250,7 +249,7 @@ const server = Bun.serve({
   routes: {
     "/api/health": () => json({ ok: true, quota_used_today: quotaUsed(db), daily_limit: DAILY_LIMIT }),
     "/api/tasks": () => json(tasks),
-    "/api/submissions": { POST: (req, srv) => submit(req, srv) },
+    "/api/submissions": { POST: submit },
     "/api/reviews/:id": req => {
       const s = status(req.params.id)
       return s ? json(s) : fail("Not found.", 404)
@@ -258,7 +257,7 @@ const server = Bun.serve({
     "/api/reviews/:id/events": req => sse(req.params.id),
     "/api/community": () => json(community()),
     "/api/finalists": () => json(finalists()),
-    "/api/admin/curated": { POST: req => curated(req) },
+    "/api/admin/curated": { POST: curated },
     "/api/admin/reviews/:id/hide": {
       POST: req => {
         if (!isAdmin(req)) return fail("Not allowed.", 403)
@@ -281,8 +280,7 @@ const server = Bun.serve({
     "/api/admin/queue/resume": {
       POST: req => {
         if (!isAdmin(req)) return fail("Not allowed.", 403)
-        const { changes } = db.query("update jobs set status = 'queued', next_run_at = ? where status = 'waiting_quota'").run(Date.now())
-        return json({ ok: true, resumed: changes })
+        return json({ ok: true, resumed: resumeInterrupted(db) })
       },
     },
     "/r/:id": () => new Response(Bun.file(join(PUBLIC, "review.html"))),
@@ -292,8 +290,7 @@ const server = Bun.serve({
   async fetch(req) {
     const url = new URL(req.url)
     const file = await staticFile(url.pathname === "/" ? "/index" : url.pathname)
-    if (file) return new Response(file)
-    return new Response("Not found", { status: 404 })
+    return file ? new Response(file) : new Response("Not found", { status: 404 })
   },
 })
 

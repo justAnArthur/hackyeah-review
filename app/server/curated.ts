@@ -3,7 +3,7 @@ import type { Db } from "./db"
 
 // a finalist with public code, queued for a council review. it gets what a team would type into
 // the form (the description and the demo link), minus the jury's result
-export function curatedSubmission(task: string, repo: string) {
+function curatedSubmission(task: string, repo: string) {
   const entry = TASKS.find(t => t.id === task)?.entries.find(e => e.repos?.includes(repo))
   if (!entry) return null
   return {

@@ -1,5 +1,5 @@
 import { runCouncil } from "./council"
-import { type Db, type Job, getSubmission, logEvent, updateJob } from "./db"
+import { type Db, type Job, type Submission, getSubmission, logEvent, updateJob } from "./db"
 import { EVIDENCE_VERSION, type Facts, buildEvidence } from "./evidence"
 import { FatalError, QuotaExhausted, RateLimited } from "./models"
 import { describeImages } from "./vision"
@@ -19,13 +19,12 @@ export function enqueue(db: Db, id: string) {
 // takes effect. running jobs are left alone: during a deploy the old server may still be finishing
 // one, and requeueStale picks it up once it stops making progress
 export function resumeInterrupted(db: Db) {
-  db.query("update jobs set status = 'queued', next_run_at = ? where status = 'waiting_quota'").run(Date.now())
+  return db.query("update jobs set status = 'queued', next_run_at = ? where status = 'waiting_quota'").run(Date.now()).changes
 }
 
 export function nextJob(db: Db, now = Date.now()) {
   return db
     .query<Job, [number]>(
-      // first come, first served by upload time
       `select j.* from jobs j join submissions s on s.id = j.id
        where j.status in ('queued', 'waiting_quota') and j.next_run_at <= ?
        order by s.created_at asc, j.id asc limit 1`,
@@ -41,6 +40,54 @@ function fmtTime(ms: number) {
   return `${new Date(ms).toISOString().slice(11, 16)} UTC`
 }
 
+async function evidenceFor(db: Db, sub: Submission) {
+  const cached = db
+    .query<{ pack: string; facts: string }, [string, number]>("select pack, facts from evidence where id = ? and version = ?")
+    .get(sub.id, EVIDENCE_VERSION)
+  if (cached) return cached
+
+  // members who read an older pack would not have seen the same evidence as the rest
+  db.query("delete from member_results where id = ?").run(sub.id)
+  updateJob(db, sub.id, { step: "evidence" })
+  logEvent(db, sub.id, "Collecting evidence from the repo and deck")
+  const built = await buildEvidence(sub, (shots, prompt) => describeImages(db, shots, prompt)).catch(e => {
+    const msg = (e as Error).message
+    throw PERMANENT.test(msg) ? new FatalError(msg) : e
+  })
+  const facts = JSON.stringify(built.facts)
+  db.query("insert or replace into evidence (id, pack, facts, version) values (?, ?, ?, ?)").run(sub.id, built.pack, facts, EVIDENCE_VERSION)
+  const f = built.facts
+  logEvent(db, sub.id, `Found ${f.source_loc.toLocaleString("en")} source lines, ${f.tests.cases} test cases and ${f.commits.count} commits`)
+  logEvent(db, sub.id, `Read ${f.docs_read} docs and ${f.repo_decks.length} decks, opened ${f.demo_checks.filter(d => d.title).length} demo pages and described ${f.screenshots_described} screenshots`)
+  return { pack: built.pack, facts }
+}
+
+function retryOrFail(db: Db, job: Job, e: unknown) {
+  const now = Date.now()
+  if (e instanceof QuotaExhausted) {
+    updateJob(db, job.id, { status: "waiting_quota", next_run_at: e.resumeAt })
+    logEvent(db, job.id, `Today's free-model quota is used up; continuing at ${fmtTime(e.resumeAt)}`)
+    return
+  }
+
+  if (e instanceof RateLimited) {
+    updateJob(db, job.id, { status: "queued", next_run_at: now + e.retryAfterMs })
+    logEvent(db, job.id, `A model is busy; trying again in ${Math.round(e.retryAfterMs / 1000)} s`)
+    return
+  }
+
+  const message = (e as Error).message
+  if (e instanceof FatalError || job.attempts + 1 >= MAX_ATTEMPTS) {
+    updateJob(db, job.id, { status: "failed", step: "failed", error: message })
+    logEvent(db, job.id, `Failed: ${message}`)
+    return
+  }
+
+  const wait = backoff(job.attempts)
+  updateJob(db, job.id, { status: "queued", attempts: job.attempts + 1, next_run_at: now + wait, error: message })
+  logEvent(db, job.id, `Temporary problem (${message}); trying again in ${Math.round(wait / 1000)} s`)
+}
+
 export async function processJob(db: Db, job: Job) {
   updateJob(db, job.id, { status: "running" })
   const sub = getSubmission(db, job.id)
@@ -50,47 +97,12 @@ export async function processJob(db: Db, job: Job) {
   }
 
   try {
-    let ev = db
-      .query<{ pack: string; facts: string }, [string, number]>("select pack, facts from evidence where id = ? and version = ?")
-      .get(sub.id, EVIDENCE_VERSION)
-    if (!ev) {
-      // members who read an older pack would not have seen the same evidence as the rest
-      db.query("delete from member_results where id = ?").run(sub.id)
-      updateJob(db, job.id, { step: "evidence" })
-      logEvent(db, job.id, "Collecting evidence from the repo and deck")
-      let built: Awaited<ReturnType<typeof buildEvidence>>
-      try {
-        built = await buildEvidence(sub, (shots, prompt) => describeImages(db, shots, prompt))
-      } catch (e) {
-        const msg = (e as Error).message
-        throw PERMANENT.test(msg) ? new FatalError(msg) : e
-      }
-      db.query("insert or replace into evidence (id, pack, facts, version) values (?, ?, ?, ?)").run(sub.id, built.pack, JSON.stringify(built.facts), EVIDENCE_VERSION)
-      ev = { pack: built.pack, facts: JSON.stringify(built.facts) }
-      const f = built.facts
-      logEvent(db, job.id, `Found ${f.source_loc.toLocaleString("en")} source lines, ${f.tests.cases} test cases and ${f.commits.count} commits`)
-      logEvent(db, job.id, `Read ${f.docs_read} docs and ${f.repo_decks.length} decks, opened ${f.demo_checks.filter(d => d.title).length} demo pages and described ${f.screenshots_described} screenshots`)
-    }
-
+    const ev = await evidenceFor(db, sub)
     updateJob(db, job.id, { step: "council" })
     await runCouncil(db, sub, JSON.parse(ev.facts) as Facts, ev.pack)
     updateJob(db, job.id, { status: "done", step: "done", error: null })
   } catch (e) {
-    const now = Date.now()
-    if (e instanceof QuotaExhausted) {
-      updateJob(db, job.id, { status: "waiting_quota", next_run_at: e.resumeAt })
-      logEvent(db, job.id, `Today's free-model quota is used up; continuing at ${fmtTime(e.resumeAt)}`)
-    } else if (e instanceof RateLimited) {
-      updateJob(db, job.id, { status: "queued", next_run_at: now + e.retryAfterMs })
-      logEvent(db, job.id, `A model is busy; trying again in ${Math.round(e.retryAfterMs / 1000)} s`)
-    } else if (e instanceof FatalError || job.attempts + 1 >= MAX_ATTEMPTS) {
-      updateJob(db, job.id, { status: "failed", step: "failed", error: (e as Error).message })
-      logEvent(db, job.id, `Failed: ${(e as Error).message}`)
-    } else {
-      const wait = backoff(job.attempts)
-      updateJob(db, job.id, { status: "queued", attempts: job.attempts + 1, next_run_at: now + wait, error: (e as Error).message })
-      logEvent(db, job.id, `Temporary problem (${(e as Error).message}); trying again in ${Math.round(wait / 1000)} s`)
-    }
+    retryOrFail(db, job, e)
   }
 }
 

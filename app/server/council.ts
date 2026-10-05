@@ -4,7 +4,7 @@ import { type Db, type Submission, logEvent } from "./db"
 import { type Facts, builtDuringEvent, liveDemo, withoutSources } from "./evidence"
 import { FatalError, type Message, ProviderRefused, RateLimited, TransientError, chat } from "./models"
 
-export type Council = {
+type Council = {
   version: number
   temperature: number
   max_tokens: number
@@ -25,9 +25,11 @@ type MemberReview = {
   trimmed?: boolean
 }
 
+type JudgeReview = { why: Record<string, string>; strengths: string[]; weaknesses: string[]; red_flags: string[]; verdict: string; task_fit: string; agreement?: Record<string, number> }
+
 type MemberRow = { member: string; model: string; ok: number; result: string | null; error: string | null; version: number }
 
-export type CouncilScore = Score & { spread: number; members: Record<string, number> }
+type CouncilScore = Score & { spread: number; members: Record<string, number> }
 
 export type CouncilReview = {
   id: string
@@ -62,8 +64,8 @@ class InvalidReply extends Error {}
 
 // the panel never shrinks, so a garbled reply is retried with the job (finished members are kept);
 // only a permanent failure, such as a bad key or a model that is gone, ends the review
-function unusable(who: string, e: unknown) {
-  const message = `${who} gave no usable review: ${(e as Error).message}`
+function unusable(who: string, e: Error) {
+  const message = `${who} gave no usable review: ${e.message}`
   return e instanceof InvalidReply ? new TransientError(message) : new FatalError(message)
 }
 
@@ -122,6 +124,22 @@ export function parseMember(rubric: Rubric, text: string, label: string): Member
     weaknesses: strings(j.weaknesses),
     red_flags: strings(j.red_flags),
     verdict: decode(String(j.verdict ?? "")),
+  }
+}
+
+function parseJudge(rubric: Rubric, text: string): JudgeReview {
+  const j = extractJson(text)
+  const byName = new Map<string, string>((Array.isArray(j.criteria) ? j.criteria : []).map((c: any) => [decode(String(c.criterion)).toLowerCase().trim(), decode(String(c.why ?? ""))]))
+  const why = Object.fromEntries(Object.keys(rubric.weights).map(n => [n, byName.get(n.toLowerCase()) ?? ""]))
+  if (Object.values(why).filter(Boolean).length < Object.keys(why).length - 1) throw new Error("criteria explanations are missing")
+  return {
+    why,
+    strengths: strings(j.strengths, 4),
+    weaknesses: strings(j.weaknesses, 4),
+    red_flags: strings(j.red_flags, 6),
+    verdict: decode(String(j.verdict ?? "")),
+    task_fit: decode(String(j.task_fit ?? "yes")),
+    agreement: Object.fromEntries(Object.entries(j.agreement ?? {}).map(([k, v]) => [k, Math.round(clamp10(Number(v) * 10)) / 10])),
   }
 }
 
@@ -210,7 +228,7 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
       logEvent(db, sub.id, `Member ${letter} scored ${weightedTotal(review.scores)}`)
     } catch (e) {
       if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
-      saveMember(db, sub.id, letter, model, council.version, false, null, (e as Error).message)
+      saveMember(db, sub.id, letter, model, council.version, false, null, e.message)
       throw unusable(`member ${letter} (${model})`, e)
     }
   }
@@ -227,12 +245,10 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
     return { criterion, weight, score: median(values), why: "", spread: Math.max(...values) - Math.min(...values), members }
   })
 
-  let judged: { why: Record<string, string>; strengths: string[]; weaknesses: string[]; red_flags: string[]; verdict: string; task_fit: string; agreement?: Record<string, number> }
-  let judgeOk = false
+  let judged: JudgeReview
   const stored = memberRows(db, sub.id).find(r => r.member === "judge")
   if (stored?.ok) {
     judged = JSON.parse(stored.result!)
-    judgeOk = true
   } else {
     logEvent(db, sub.id, "The judge is writing the council review")
     const template = await Bun.file(join(ROOT, "review/prompts/council-judge.md")).text()
@@ -246,36 +262,18 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
       AGREEMENT_KEYS: valid.map(v => `"${v.letter}": 0`).join(", "),
     })
     try {
-      judged = await withRateLimit(db, sub.id, "judge", () => askJson(db, council, council.judge, [{ role: "user", content: prompt }], text => {
-        const j = extractJson(text)
-        const byName = new Map<string, string>((Array.isArray(j.criteria) ? j.criteria : []).map((c: any) => [decode(String(c.criterion)).toLowerCase().trim(), decode(String(c.why ?? ""))]))
-        const why = Object.fromEntries(Object.keys(rubric.weights).map(n => [n, byName.get(n.toLowerCase()) ?? ""]))
-        if (Object.values(why).filter(Boolean).length < Object.keys(why).length - 1) throw new Error("criteria explanations are missing")
-        return {
-          why,
-          strengths: strings(j.strengths, 4),
-          weaknesses: strings(j.weaknesses, 4),
-          red_flags: strings(j.red_flags, 6),
-          verdict: decode(String(j.verdict ?? "")),
-          task_fit: decode(String(j.task_fit ?? "yes")),
-          agreement: Object.fromEntries(Object.entries(j.agreement ?? {}).map(([k, v]) => [k, Math.round(clamp10(Number(v) * 10)) / 10])),
-        }
-      }))
+      judged = await withRateLimit(db, sub.id, "judge", () => askJson(db, council, council.judge, [{ role: "user", content: prompt }], text => parseJudge(rubric, text)))
       saveMember(db, sub.id, "judge", council.judge, council.version, true, judged, null)
-      judgeOk = true
     } catch (e) {
       if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
-      saveMember(db, sub.id, "judge", council.judge, council.version, false, null, (e as Error).message)
+      saveMember(db, sub.id, "judge", council.judge, council.version, false, null, e.message)
       throw unusable(`the judge (${council.judge})`, e)
     }
   }
 
-  for (const s of scores) {
-    s.why = judged.why[s.criterion] || ""
-  }
+  for (const s of scores) s.why = judged.why[s.criterion] || ""
 
-  const redFlags = [...judged.red_flags]
-  for (const hit of facts.injection_hits) redFlags.push(`Text that tries to steer the reviewers: ${hit}`)
+  const redFlags = [...judged.red_flags, ...facts.injection_hits.map(hit => `Text that tries to steer the reviewers: ${hit}`)]
   if (/^no\b/i.test(judged.task_fit)) redFlags.unshift(`May not be built for this task: ${judged.task_fit.replace(/^no:?\s*/i, "")}`)
 
   const review: CouncilReview = {
@@ -301,7 +299,7 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
     council: {
       version: council.version,
       judge: council.judge,
-      judge_ok: judgeOk,
+      judge_ok: true,
       members: council.members.map((model, i) => {
         const letter = LETTERS[i]
         const v = valid.find(x => x.letter === letter)

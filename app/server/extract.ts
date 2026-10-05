@@ -58,14 +58,15 @@ function pptxText(path: string) {
   return parts.filter(Boolean).join("\n\n")
 }
 
-// pdf, pptx and docx; pdfs are read up to `pages`
 export function documentText(path: string, pages = 15) {
   const ext = extname(path).toLowerCase()
   if (ext === ".pdf") {
     const text = run(["pdftotext", "-l", String(pages), "-layout", path, "-"])
     return text === null ? null : tidy(text)
   }
+
   if (ext === ".pptx") return pptxText(path)
+
   if (ext === ".docx") {
     const xml = run(["unzip", "-p", path, "word/document.xml"])
     return xml === null ? null : officeXmlText(xml)

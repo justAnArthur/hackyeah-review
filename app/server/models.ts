@@ -63,7 +63,8 @@ export type Message = { role: "system" | "user" | "assistant"; content: string |
 
 export function route(model: string): { provider: ProviderName; model: string } {
   if (model.startsWith("claude:")) return { provider: "claude", model: model.slice(7) }
-  return model.startsWith("zai:") ? { provider: "zai", model: model.slice(4) } : { provider: "openrouter", model }
+  if (model.startsWith("zai:")) return { provider: "zai", model: model.slice(4) }
+  return { provider: "openrouter", model }
 }
 
 function utcDay(now = Date.now()) {
@@ -80,10 +81,8 @@ export function quotaUsed(db: Db, now = Date.now()) {
 }
 
 export function takeQuota(db: Db, limit = DAILY_LIMIT, now = Date.now()) {
-  const day = utcDay(now)
-  const used = quotaUsed(db, now)
-  if (used >= limit) throw new QuotaExhausted(nextUtcMidnight(now))
-  db.query("insert into quota (day, used) values (?, 1) on conflict (day) do update set used = used + 1").run(day)
+  if (quotaUsed(db, now) >= limit) throw new QuotaExhausted(nextUtcMidnight(now))
+  db.query("insert into quota (day, used) values (?, 1) on conflict (day) do update set used = used + 1").run(utcDay(now))
 }
 
 const lastCall: Record<string, number> = {}
@@ -99,10 +98,6 @@ function textOf(content: Message["content"]) {
   return typeof content === "string" ? content : content.filter(p => p.type === "text").map(p => p.text).join("\n")
 }
 
-// the CLI takes one prompt, so a repair round's messages become a transcript, and temperature /
-// max_tokens have no CLI equivalents. safe mode skips CLAUDE.md and skills, restricted mode drops
-// Bash and web tools, and the empty temp cwd leaves file tools nothing to reach: the repo this
-// runs from holds earlier reviews, which members must not see
 const COOLDOWN_MS = 30 * 60_000
 
 // the CLI prints api errors on stdout or stderr. hitting the coding plan's usage window ("usage
@@ -116,6 +111,10 @@ export function cliFailure(model: string, code: number, text: string) {
   return new TransientError(`${model} (claude CLI) exited ${code}: ${why}`)
 }
 
+// the CLI takes one prompt, so a repair round's messages become a transcript, and temperature /
+// max_tokens have no CLI equivalents. safe mode skips CLAUDE.md and skills, restricted mode drops
+// Bash and web tools, and the empty temp cwd leaves file tools nothing to reach: the repo this
+// runs from holds earlier reviews, which members must not see
 async function claudeChat(base: string, key: string, model: string, messages: Message[]) {
   const cwd = await mkdtemp(join(tmpdir(), "council-"))
   const system = messages.filter(m => m.role === "system").map(m => textOf(m.content)).join("\n\n")
@@ -182,18 +181,18 @@ export async function chat(db: Db, id: string, messages: Message[], opts: { temp
     const after = Number(res.headers.get("retry-after"))
     throw new RateLimited(Number.isFinite(after) && after > 0 ? after * 1000 : 60_000)
   }
+
   if (res.status >= 500 || res.status === 408) throw new TransientError(`${id}: HTTP ${res.status}`)
+
   if (!res.ok) {
     const text = (await res.text()).slice(0, 300)
-    // openrouter passes upstream failures through as 400 with the provider named; those come and go
     if (res.status === 400 && /provider returned error|provider_name/i.test(text)) throw new ProviderRefused(`${id}: upstream HTTP 400 ${text}`)
     throw new FatalError(`${id}: HTTP ${res.status} ${text}`)
   }
 
   const body = (await res.json()) as any
   if (body.error) {
-    const code = Number(body.error.code)
-    if (code === 429) throw new RateLimited(60_000)
+    if (Number(body.error.code) === 429) throw new RateLimited(60_000)
     throw new TransientError(`${id}: ${body.error.message ?? "provider error"}`)
   }
   const content = body.choices?.[0]?.message?.content

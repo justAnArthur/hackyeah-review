@@ -20,7 +20,7 @@ export function isPrivateIp(ip: string) {
   if (isIP(ip) === 4) return isPrivateV4(ip)
   const v6 = ip.toLowerCase()
   if (v6.startsWith("::ffff:")) return isPrivateV4(v6.slice(7))
-  return v6 === "::" || v6 === "::1" || v6.startsWith("fc") || v6.startsWith("fd") || v6.startsWith("fe8") || v6.startsWith("fe9") || v6.startsWith("fea") || v6.startsWith("feb")
+  return v6 === "::" || v6 === "::1" || /^(f[cd]|fe[89ab])/.test(v6)
 }
 
 export async function isPublicHttps(url: string) {
@@ -62,7 +62,6 @@ export async function fetchPage(url: string, hops = 3): Promise<{ url: string; s
   if (!(await isPublicHttps(url))) return { url, status: "skipped (not a public https URL)", html: null }
   try {
     const res = await fetch(url, {
-      method: "GET",
       redirect: "manual",
       signal: AbortSignal.timeout(8000),
       headers: { accept: "text/html,*/*;q=0.5", "user-agent": "hackyeah-review (+https://hackyeah-review.justadomainname.dev)" },

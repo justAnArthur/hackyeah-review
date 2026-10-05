@@ -3,7 +3,6 @@ import type { Db } from "./db"
 import type { Shot } from "./evidence"
 import { type ContentPart, chat } from "./models"
 
-// turns images (screenshots, rendered pdf pages) into text the council can read;
 // the caller supplies the prompt, since only it knows what the images show
 export async function describeImages(db: Db, images: Shot[], prompt: string) {
   const { vision } = await loadCouncil()
