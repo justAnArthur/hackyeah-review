@@ -26,7 +26,7 @@ const councilSize = council.members.length
 const modelName = (id: string) => id.replace(/^(claude|zai):/, "").replace(/^[\w-]+\//, "").replace(/:free$/, "")
 const panel = { members: council.members.map(modelName), judge: modelName(council.judge), version: council.version }
 
-const PAGES: { name: PageName; out: string; href?: string; title: string; desc: string; props: object }[] = [
+const PAGES: { name: PageName; out: string; href?: string; title: string; desc: string; props: object; noindex?: boolean }[] = [
   {
     name: "home",
     out: "index.html",
@@ -49,6 +49,15 @@ const PAGES: { name: PageName; out: string; href?: string; title: string; desc: 
     title: "Council review · HackYeah 2026 Review",
     desc: "A HackYeah 2026 project reviewed by an AI council against its task's official criteria.",
     props: { tasks, councilSize },
+  },
+  // unlisted: no href means no canonical and no sitemap entry; noindex keeps it out of search
+  {
+    name: "mentors",
+    out: "mentors.html",
+    title: "Mentors · HackYeah 2026 Review",
+    desc: "The HackYeah 2026 mentors with the LinkedIn profile found for each.",
+    props: {},
+    noindex: true,
   },
 ]
 
@@ -78,6 +87,7 @@ for (const p of PAGES) {
   const html = renderToString(createElement(PAGE_COMPONENTS[p.name] as never, p.props))
   const props = JSON.stringify(p.props).replaceAll("<", "\\u003c")
   const url = p.href ? `<link rel="canonical" href="${SITE}${p.href}">\n<meta property="og:url" content="${SITE}${p.href}">\n` : ""
+  const robots = p.noindex ? `<meta name="robots" content="noindex">\n` : ""
   const doc = `<!doctype html>
 <html lang="en">
 <head>
@@ -85,7 +95,7 @@ for (const p of PAGES) {
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${p.title}</title>
 <meta name="description" content="${p.desc}">
-${url}<meta property="og:type" content="website">
+${robots}${url}<meta property="og:type" content="website">
 <meta property="og:title" content="${p.title}">
 <meta property="og:description" content="${p.desc}">
 <meta name="twitter:card" content="summary">
