@@ -44,8 +44,9 @@ export type Job = {
 
 export function openDb(path = join(DATA_DIR, "reviews.db")) {
   const db = new Database(path, { create: true, strict: true })
-  db.run("pragma journal_mode = wal")
+  // the timeout first, so processes opening one database together wait instead of failing
   db.run("pragma busy_timeout = 5000")
+  db.run("pragma journal_mode = wal")
   db.run(`create table if not exists submissions (
     id text primary key, created_at integer not null, task text not null, team text not null, title text not null,
     result text not null, repo text not null, fields text not null, deck_path text, ip_hash text not null,
