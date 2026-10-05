@@ -15,8 +15,10 @@ export function enqueue(db: Db, id: string) {
   logEvent(db, id, "Queued")
 }
 
+// on start: jobs cut off mid-run continue, and jobs waiting for quota are checked again, since a
+// restart is how a raised DAILY_LIMIT takes effect; if the quota is still used up they go back to waiting
 export function resumeInterrupted(db: Db) {
-  db.query("update jobs set status = 'queued', next_run_at = ? where status = 'running'").run(Date.now())
+  db.query("update jobs set status = 'queued', next_run_at = ? where status in ('running', 'waiting_quota')").run(Date.now())
 }
 
 export function nextJob(db: Db, now = Date.now()) {
