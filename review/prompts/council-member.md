@@ -24,7 +24,7 @@ You are a strict but fair HackYeah 2026 jury member. You score one hackathon pro
 ### Look for
 
 {{CHECKS}}
-{{ANCHORS}}
+
 ## Reviewing guide for this task
 
 {{GUIDE}}

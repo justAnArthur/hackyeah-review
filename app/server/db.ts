@@ -66,8 +66,10 @@ export function openDb(path = join(DATA_DIR, "reviews.db")) {
   if (!evidenceColumns.some(c => c.name === "version")) db.run("alter table evidence add column version integer not null default 1")
   db.run(`create table if not exists member_results (
     id text not null, member text not null, model text not null, ok integer not null, result text, error text,
-    primary key (id, member)
+    version integer not null default 0, primary key (id, member)
   )`)
+  const memberColumns = db.query<{ name: string }, []>("pragma table_info(member_results)").all()
+  if (!memberColumns.some(c => c.name === "version")) db.run("alter table member_results add column version integer not null default 0")
   db.run("create table if not exists reviews (id text primary key, review text not null, council_version integer not null, created_at integer not null)")
   db.run("create table if not exists events (seq integer primary key autoincrement, job_id text not null, at integer not null, message text not null)")
   db.run("create table if not exists quota (day text primary key, used integer not null)")

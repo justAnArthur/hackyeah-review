@@ -1,5 +1,5 @@
 import { join } from "node:path"
-import { ROOT, type Rubric, type Score, decode, extractJson, loadRubric, loadScores, normalizeScores, weightedTotal } from "../../scripts/lib"
+import { ROOT, type Rubric, type Score, decode, extractJson, loadRubric, normalizeScores, weightedTotal } from "../../scripts/lib"
 import { type Db, type Submission, logEvent } from "./db"
 import { type Facts, builtDuringEvent, liveDemo } from "./evidence"
 import { FatalError, type Message, RateLimited, TransientError, chat } from "./models"
@@ -23,7 +23,7 @@ type MemberReview = {
   verdict: string
 }
 
-type MemberRow = { member: string; model: string; ok: number; result: string | null; error: string | null }
+type MemberRow = { member: string; model: string; ok: number; result: string | null; error: string | null; version: number }
 
 export type CouncilScore = Score & { spread: number; members: Record<string, number> }
 
@@ -123,21 +123,7 @@ export function parseMember(rubric: Rubric, text: string, label: string): Member
   }
 }
 
-// 2-3 anonymized anchors from this task's published blind reviews keep members on one scale;
-// the entry under review is never among them, so a member can't just copy its blind score
-async function anchors(rubric: Rubric, task: string, excludeRepo: string) {
-  const others = ((await loadScores(task))?.projects ?? []).filter(p => p.repo !== excludeRepo)
-  if (others.length < 2) return ""
-  const byTotal = [...others].sort((a, b) => b.weighted_total - a.weighted_total)
-  const picks = [byTotal[0], byTotal[Math.floor((byTotal.length - 1) / 2)], byTotal[byTotal.length - 1]].filter((p, i, xs) => xs.indexOf(p) === i)
-  const lines = picks.map((p, i) => {
-    const byName = Object.fromEntries(p.scores.map(s => [s.criterion, s.score]))
-    return `- Entry ${String.fromCharCode(65 + i)}: ${p.weighted_total} (${Object.keys(rubric.weights).map(n => byName[n] ?? "?").join(", ")}). ${p.verdict}`
-  })
-  return `\n## Calibration anchors\n\nOther entries in this task were scored with this rubric by a senior reviewer. Keep your scale consistent with them (total, then criteria in the order listed above):\n\n${lines.join("\n")}\n`
-}
-
-export async function memberSystemPrompt(rubric: Rubric, task: string, excludeRepo: string) {
+export async function memberSystemPrompt(rubric: Rubric, task: string) {
   const template = await Bun.file(join(ROOT, "review/prompts/council-member.md")).text()
   return fill(template, {
     DEADLINE: rubric.deadline,
@@ -147,7 +133,6 @@ export async function memberSystemPrompt(rubric: Rubric, task: string, excludeRe
     WEIGHTS: Object.entries(rubric.weights).map(([k, v]) => `- ${k}: ${v}`).join("\n"),
     WEIGHTS_NOTE: rubric.weights_note ? `\n${rubric.weights_note}\n` : "",
     CHECKS: rubric.checks.map(c => `- ${c}`).join("\n") || "- Nothing task-specific.",
-    ANCHORS: await anchors(rubric, task, excludeRepo),
     GUIDE: await Bun.file(join(ROOT, "review/guides", `${task}.md`)).text().catch(() => ""),
   })
 }
@@ -174,12 +159,12 @@ async function askJson<T>(db: Db, council: Council, model: string, messages: Mes
 }
 
 function memberRows(db: Db, id: string) {
-  return db.query<MemberRow, [string]>("select member, model, ok, result, error from member_results where id = ?").all(id)
+  return db.query<MemberRow, [string]>("select member, model, ok, result, error, version from member_results where id = ?").all(id)
 }
 
-function saveMember(db: Db, id: string, member: string, model: string, ok: boolean, result: unknown, error: string | null) {
-  db.query("insert or replace into member_results (id, member, model, ok, result, error) values (?, ?, ?, ?, ?, ?)")
-    .run(id, member, model, ok ? 1 : 0, result ? JSON.stringify(result) : null, error)
+function saveMember(db: Db, id: string, member: string, model: string, version: number, ok: boolean, result: unknown, error: string | null) {
+  db.query("insert or replace into member_results (id, member, model, ok, result, error, version) values (?, ?, ?, ?, ?, ?, ?)")
+    .run(id, member, model, ok ? 1 : 0, result ? JSON.stringify(result) : null, error, version)
 }
 
 function numericAgreement(review: MemberReview, scores: CouncilScore[]) {
@@ -189,16 +174,13 @@ function numericAgreement(review: MemberReview, scores: CouncilScore[]) {
 
 export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: string): Promise<CouncilReview> {
   const [council, rubric] = await Promise.all([loadCouncil(), loadRubric(sub.task)])
-  const system = await memberSystemPrompt(rubric, sub.task, sub.repo)
-  // a member counts as done only with an ok row from the model now in its seat, so a failed member
-  // is retried and a review started under an older panel never mixes in the old models' scores
-  const seats = new Map(council.members.map((model, i) => [LETTERS[i], model]))
-  const prior = memberRows(db, sub.id)
-  for (const r of prior.filter(r => r.member !== "judge" && seats.get(r.member) !== r.model)) {
+  const system = await memberSystemPrompt(rubric, sub.task)
+  // a member counts as done only with an ok row from this council version and the model now in its
+  // seat, so a failed member is retried and a review never mixes in another version's prompts or models
+  const seats = new Map([...council.members.map((model, i) => [LETTERS[i], model] as const), ["judge", council.judge] as const])
+  for (const r of memberRows(db, sub.id).filter(r => r.version !== council.version || seats.get(r.member) !== r.model)) {
     db.query("delete from member_results where id = ? and member = ?").run(sub.id, r.member)
   }
-  const stale = prior.find(r => r.member === "judge" && r.model !== council.judge)
-  if (stale) db.query("delete from member_results where id = ? and member = 'judge'").run(sub.id)
   const done = new Set(memberRows(db, sub.id).filter(r => r.ok).map(r => r.member))
 
   for (const [i, model] of council.members.entries()) {
@@ -211,11 +193,11 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
           parseMember(rubric, text, `member ${letter}`),
         ),
       )
-      saveMember(db, sub.id, letter, model, true, review, null)
+      saveMember(db, sub.id, letter, model, council.version, true, review, null)
       logEvent(db, sub.id, `Member ${letter} scored ${weightedTotal(review.scores)}`)
     } catch (e) {
       if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
-      saveMember(db, sub.id, letter, model, false, null, (e as Error).message)
+      saveMember(db, sub.id, letter, model, council.version, false, null, (e as Error).message)
       throw unusable(`member ${letter} (${model})`, e)
     }
   }
@@ -266,11 +248,11 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
           agreement: Object.fromEntries(Object.entries(j.agreement ?? {}).map(([k, v]) => [k, Math.round(clamp10(Number(v) * 10)) / 10])),
         }
       }))
-      saveMember(db, sub.id, "judge", council.judge, true, judged, null)
+      saveMember(db, sub.id, "judge", council.judge, council.version, true, judged, null)
       judgeOk = true
     } catch (e) {
       if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
-      saveMember(db, sub.id, "judge", council.judge, false, null, (e as Error).message)
+      saveMember(db, sub.id, "judge", council.judge, council.version, false, null, (e as Error).message)
       throw unusable(`the judge (${council.judge})`, e)
     }
   }

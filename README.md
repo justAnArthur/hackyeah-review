@@ -1,12 +1,12 @@
 # HackYeah 2026 Review
 
-HackYeah 2026 finalists and winners, the public repo found for each team, blind repo reviews scored against each task's official weights, and a form where any team can get its own project reviewed by an AI council.
+HackYeah 2026 finalists and winners with the public repo found for each team, every project with public code scored by an AI council against its task's official criteria and weights, and a form where any team can send its own project to the same council.
 
 Live: https://hackyeah-review.justadomainname.dev
 
 ## Pages
 
-- `/` — every finalist by task, ordered by result or by review score. Each project card opens its repo links and blind review (scores per criterion, facts, strengths and weaknesses); community submissions sit under their task. `/scorecard` redirects here
+- `/` — every finalist by task, ordered by result or by score. Each project card shows its council score, or its place in the queue with a live indicator, and opens to its repo links and council review (scores per criterion, facts, strengths and weaknesses); community submissions sit under their task. `/scorecard` redirects here
 - `/submit` — "Review my project" form with the same fields as the HackTribe entry
 - `/r/<id>` — live progress and the council's review for one submission
 
@@ -15,7 +15,7 @@ Live: https://hackyeah-review.justadomainname.dev
 A submission goes through a queue in one Bun process (`app/server/`):
 
 1. **Evidence** (`app/server/evidence.ts`, `app/server/extract.ts`): the server collects the facts. It reads GitHub metadata and commit history, downloads the repo tarball, and counts source lines and tests. It extracts the text of the uploaded deck and of PDF, PowerPoint and Word decks committed to the repo (image-only PDFs are rendered and described), includes the README and docs in full, reads the static text of the demo pages, and samples the manifests and the most central source files. A vision model describes up to five screenshots as text. The result is one evidence pack of up to about 75k tokens. Team-written text is marked untrusted, and attempts to steer the score become red flags.
-2. **Council** (`app/server/council.ts`, `review/council.toml`): three fixed members score the pack against the task's rubric (`review/rubrics/<task>.toml`), the official weights, the task's reviewing guide (`review/guides/<task>.md`) and two or three calibration anchors (blind scores of *other* entries in the same task). The score per criterion is the median; the spread shows disagreement. A judge writes the consolidated text and rates each member's agreement; it never sets the numbers. Prompts: `review/prompts/council-member.md`, `review/prompts/council-judge.md`.
+2. **Council** (`app/server/council.ts`, `review/council.toml`): three fixed members score the pack against the task's rubric (`review/rubrics/<task>.toml`), the official weights, the task's reviewing guide (`review/guides/<task>.md`). Since v9 there are no calibration anchors: members score from the rubric, the guide and the scale alone. The score per criterion is the median; the spread shows disagreement. A judge writes the consolidated text and rates each member's agreement; it never sets the numbers. Prompts: `review/prompts/council-member.md`, `review/prompts/council-judge.md`.
 3. **Queue** (`app/server/queue.ts`): one job at a time. Every project faces the identical panel, so the panel never shrinks: a rate-limited member is waited for (60 s, doubling to 30 min), a garbled reply or an upstream provider error is retried with the job (finished members are kept), and only a permanent failure such as a bad key ends a review. Every finished step is stored in SQLite, so a restart resumes. Changing a model or a prompt means bumping `version` in `review/council.toml`.
 
 Where the models run (`app/server/models.ts`):
@@ -41,7 +41,7 @@ bun test                         # unit tests
 
 Without keys, use the mock: run `bun app/test/mock-openrouter.ts`, then start the server with `OPENROUTER_BASE_URL=http://localhost:4790 ZAI_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock ZAI_API_KEY=mock` (`claude:` members still need the real CLI and key).
 
-### Checking the council against the blind reviews
+### Checking the council against the earlier blind reviews (research only)
 
 ```bash
 bun scripts/council-check.ts --all --shard 1/3    # three terminals: --shard 2/3, --shard 3/3
@@ -49,7 +49,7 @@ bun scripts/council-check.ts sport:uteg-labs/just-mate defence:Mikformatycy/Safe
 bun scripts/council-report.ts                     # .cache/council-check/compare.html
 ```
 
-The council gets the project description but not the jury result or the project's own blind score. Each council version keeps its own database (`.cache/council-check-v<version>.db`), so a rerun resumes and queues failed reviews again, and the report never mixes versions.
+These compare the council with the Claude Opus blind reviews in `app/web/data/scores/`, which the site no longer shows. The council gets the project description but not the jury result. Each council version keeps its own database (`.cache/council-check-v<version>.db`), so a rerun resumes and queues failed reviews again, and the report never mixes versions.
 
 ### Deploy (Dokploy)
 
@@ -65,12 +65,12 @@ The `Dockerfile` builds the site and runs `bun app/server/index.ts` on port 3000
 - `app/web/data/teams.json` — team name and jury result for each reviewed repo, plus placed teams with no public repo
 - `app/web/app.css` — Tailwind v4 entry with the theme tokens
 - `review/rubrics/<task>.toml` — brief, official criteria and weights, and task-specific checks for each task
-- `review/prompts/` — the blind reviewer prompt (`reviewer.md`) and the council member and judge prompts
+- `review/prompts/` — the council member and judge prompts, and the earlier Opus reviewer prompt (`reviewer.md`, used by `scripts/review.ts`)
 - `review/guides/<task>.md` — a reviewing guide per task, embedded in that task's member prompt
 - `review/council.toml` — the fixed council panel and its version
 - `scripts/review.ts` — builds review prompts, runs reviews and merges the results
 - `scripts/council-check.ts`, `scripts/council-report.ts` — run the council on projects with a blind review and build the comparison page
-- `scripts/build.ts` — builds the scorecard data from rubrics, scores and teams, pre-renders every page to HTML (so search engines see the content), bundles the client and the Tailwind CSS, and writes `public/` (git-ignored, plus `robots.txt` and `sitemap.xml`)
+- `scripts/build.ts` — pre-renders every page to HTML (so search engines see the content), bundles the client and the Tailwind CSS, and writes `public/` (git-ignored, plus `robots.txt` and `sitemap.xml`)
 
 To add another Fluid component: `bunx shadcn@latest add https://www.fluidfunctionalism.com/r/base/<name>.json` (or `/r/<name>.json` for ones without a Base UI flavor), then move any file it writes to `src/components/` into `app/web/components/`.
 

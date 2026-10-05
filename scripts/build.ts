@@ -3,7 +3,7 @@ import { join } from "node:path"
 import { $ } from "bun"
 import { createElement } from "react"
 import { renderToString } from "react-dom/server"
-import { loadRubrics, scorecardData } from "./lib"
+import { loadRubrics } from "./lib"
 import { PAGE_COMPONENTS, type PageName } from "../app/web/pages"
 import { ICON, SITE } from "../app/web/lib/site"
 
@@ -17,9 +17,9 @@ const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com">
 // the theme follows the OS setting; set before paint so dark mode never flashes
 const THEME = `<script>try{const m=matchMedia("(prefers-color-scheme: dark)");const f=()=>document.documentElement.classList.toggle("dark",m.matches);f();m.addEventListener("change",f)}catch(e){}</script>`
 
-const data = await scorecardData()
-const tasks = (await loadRubrics()).map(r => ({ id: r.id, name: r.name, kind: r.kind }))
-const reviewed = data.reduce((n, t) => n + t.projects.length, 0)
+const rubrics = await loadRubrics()
+const tasks = rubrics.map(r => ({ id: r.id, name: r.name, kind: r.kind }))
+const weights = Object.fromEntries(rubrics.map(r => [r.id, r.weights]))
 const council = (await import("../review/council.toml")).default as { members: string[]; judge: string; version: number }
 const councilSize = council.members.length
 // model ids as people read them: no provider prefix, owner or ":free"
@@ -32,8 +32,8 @@ const PAGES: { name: PageName; out: string; href?: string; title: string; desc: 
     out: "index.html",
     href: "/",
     title: "HackYeah 2026 Results",
-    desc: `Every HackYeah 2026 finalist by task, ordered by result, with its public GitHub repo, a blind review and an AI council score for ${reviewed} entries against each task's official weights.`,
-    props: { data, panel },
+    desc: "Every HackYeah 2026 finalist by task, ordered by result, with its public GitHub repo and an AI council score against the task's official criteria and weights.",
+    props: { weights, panel },
   },
   {
     name: "submit",

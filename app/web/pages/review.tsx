@@ -176,8 +176,8 @@ const Result = ({ r, curated }: { r: NonNullable<Status["review"]>; curated: boo
       </div>
       <span className="text-xs text-muted-foreground">
         {curated
-          ? "A HackYeah 2026 finalist, reviewed by the council to compare with its blind review on the results page. The council wasn't told the jury's result."
-          : "Self-submitted and unverified. It's a different reviewer from the blind reviews on the results page."}{" "}
+          ? "A HackYeah 2026 finalist, queued automatically for a council review; the council wasn't told how it placed."
+          : "Self-submitted and unverified: the result shown is the team's own claim."}{" "}
         The council read an evidence pack built from the repo, its decks and docs; it didn't run the code or see the pitch.
       </span>
     </Panel>
@@ -240,7 +240,7 @@ export const ReviewPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
                 {task}
                 {curated ? (
                   <Badge color="gray" variant="dot" size="compact">
-                    Finalist · compared with its blind review
+                    HackYeah 2026 finalist
                   </Badge>
                 ) : (
                   <>

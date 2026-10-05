@@ -1,12 +1,11 @@
-import { CircleDashed, LoaderCircle } from "lucide-react"
+import { CircleDashed } from "lucide-react"
 import { Bar, Fact, List } from "@/components/layout"
 import { AccordionContent, AccordionGroup, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ThinkingIndicator } from "@/components/ui/thinking-indicator"
 import { fontWeights } from "@/lib/font-weight"
-import type { Pending, Project, Task } from "@/lib/projects"
-import { reviewRank } from "@/lib/projects"
+import type { Pending, Project } from "@/lib/projects"
 import { GH, RESULT, fmt } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -96,18 +95,6 @@ const Row = ({ p, open }: { p: Project; open: boolean }) => (
         <span className="w-full">
           <Bar value={p.review.weighted_total} max={100} ours={p.ours} />
         </span>
-        {p.council && (
-          <span className="flex items-center gap-1 text-[11px] text-muted-foreground tabular-nums" style={NORMAL} title="Council score">
-            {p.council.total === null ? (
-              <>
-                <LoaderCircle size={10} strokeWidth={2} className="animate-spin motion-reduce:animate-none" aria-hidden />
-                council
-              </>
-            ) : (
-              `council ${fmt(p.council.total)}`
-            )}
-          </span>
-        )}
       </span>
     )}
     {!p.review && p.pending && <PendingScore pending={p.pending} />}
@@ -127,14 +114,12 @@ const LinkButton = ({ href, children, external }: { href: string; children: stri
   </Button>
 )
 
-const Details = ({ p, task }: { p: Project; task: Task }) => {
+const Details = ({ p }: { p: Project }) => {
   const r = p.review
-  const rank = r && !p.self ? reviewRank(task, p) : null
   const links = [
     ...(p.repos ?? []).map(repo => ({ href: GH + repo, label: repo, external: true })),
     ...(p.demo ? [{ href: p.demo, label: "Live demo", external: true }] : []),
     ...(r?.link ? [{ href: r.link, label: "Full council review", external: false }] : []),
-    ...(p.council ? [{ href: `/r/${p.council.id}`, label: p.council.total === null ? "Council review in progress" : `Council review · ${fmt(p.council.total)}`, external: false }] : []),
     ...(p.pending && p.reviewUrl ? [{ href: p.reviewUrl, label: "Follow the review live", external: false }] : []),
   ]
   return (
@@ -162,7 +147,7 @@ const Details = ({ p, task }: { p: Project; task: Task }) => {
       {r && (
         <div className="grid gap-4 rounded-xl bg-surface-2 p-4 text-foreground shadow-surface-2">
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <div className="text-xs text-muted-foreground">{p.self ? "Council review" : "Blind review by Claude Opus"} · against the task's official weights</div>
+            <div className="text-xs text-muted-foreground">Council review v{r.council.version} · against the task's official weights</div>
             <div className="text-[22px] leading-none tabular-nums" style={{ fontVariationSettings: fontWeights.medium }}>
               {fmt(r.weighted_total)}
               <small className="text-xs text-muted-foreground"> / 100</small>
@@ -187,9 +172,9 @@ const Details = ({ p, task }: { p: Project; task: Task }) => {
           </div>
           <div className="grid grid-cols-4 gap-1.5 max-sm:grid-cols-2">
             <Fact label="Source lines">{r.source_loc ? `≈ ${Number(r.source_loc).toLocaleString("en")}` : "–"}</Fact>
-            <Fact label="Tests">{r.tests_label ?? (r.has_tests ? "Yes" : "None")}</Fact>
+            <Fact label="Tests">{r.tests_label}</Fact>
             <Fact label="Claims built">{fmt(r.build_reality)} / 10</Fact>
-            <Fact label="Reviewer rank">{rank ? `${rank.rank} of ${rank.of}` : "–"}</Fact>
+            <Fact label="Task fit">{/^no\b/i.test(r.task_fit) ? "Doubtful" : "Yes"}</Fact>
           </div>
           <div className="grid gap-1 text-xs text-muted-foreground">
             <div>
@@ -212,7 +197,7 @@ const Details = ({ p, task }: { p: Project; task: Task }) => {
 
 const expandable = (p: Project) => !!(p.note || p.repos?.length || p.review)
 
-export const ProjectList = (props: { task: Task; projects: Project[]; open: string[]; setOpen: (ids: string[], open: string[]) => void }) => {
+export const ProjectList = (props: { projects: Project[]; open: string[]; setOpen: (ids: string[], open: string[]) => void }) => {
   const ids = props.projects.map(p => p.id)
   return (
     <div className="rounded-xl border border-border/60 p-1">
@@ -235,7 +220,7 @@ export const ProjectList = (props: { task: Task; projects: Project[]; open: stri
               <Row p={p} open={props.open.includes(p.id)} />
             </AccordionTrigger>
             <AccordionContent>
-              <Details p={p} task={props.task} />
+              <Details p={p} />
             </AccordionContent>
           </AccordionItem>
         ))}

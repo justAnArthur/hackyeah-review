@@ -20,7 +20,9 @@
 # documents: invented score caps, unsourced claims and a generic jury process were removed or
 # corrected, and requirements are now task-specific. a garbled reply or an upstream provider
 # error is retried with the job instead of failing the review
-version = 8
+# v9: no calibration anchors — members no longer see the earlier Opus scores of other entries; they
+# score from the rubric, the task guide and the scale alone. stored member results are tied to a version
+version = 9
 temperature = 0.2
 max_tokens = 12000
 

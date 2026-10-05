@@ -98,7 +98,7 @@ function textOf(content: Message["content"]) {
 // the CLI takes one prompt, so a repair round's messages become a transcript, and temperature /
 // max_tokens have no CLI equivalents. safe mode skips CLAUDE.md and skills, restricted mode drops
 // Bash and web tools, and the empty temp cwd leaves file tools nothing to reach: the repo this
-// runs from holds the blind reviews the council is compared against, so members must stay blind
+// runs from holds earlier reviews, which members must not see
 const COOLDOWN_MS = 30 * 60_000
 
 // the CLI prints api errors on stdout or stderr. hitting the coding plan's usage window ("usage

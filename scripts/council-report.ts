@@ -198,7 +198,7 @@ ${sections || "<p>No reviews for this version yet. Run <span class='mono'>bun sc
 <section><h2>Prompts and reviewing guides</h2>
 <p class="dim">Each task's guide travels inside that task's member prompt, together with the brief, official weights, task checks and the calibration anchors. The evidence pack is the member's single user message.</p>
 ${guides}
-<details><summary>Member system prompt, filled for Sport &amp; Healthcare</summary><pre>${esc(await memberSystemPrompt(await loadRubric("sport"), "sport", "uteg-labs/just-mate"))}</pre></details>
+<details><summary>Member system prompt, filled for Sport &amp; Healthcare</summary><pre>${esc(await memberSystemPrompt(await loadRubric("sport"), "sport"))}</pre></details>
 <details><summary>Judge prompt template</summary><pre>${esc(await Bun.file(join(ROOT, "review/prompts/council-judge.md")).text())}</pre></details>
 <details><summary>Screenshot describer prompt</summary><pre>${esc(SHOT_PROMPT)}</pre></details>
 <details><summary>Image-only deck describer prompt</summary><pre>${esc(DECK_PAGE_PROMPT)}</pre></details>

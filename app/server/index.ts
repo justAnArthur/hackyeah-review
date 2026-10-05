@@ -184,21 +184,16 @@ function community() {
   return byTask
 }
 
-// council state of each finalist, keyed "task|repo", shown next to their blind reviews
-function councilScores() {
-  return Object.fromEntries(
-    entries("curated").map(e => [
-      `${e.task}|${e.repo}`,
-      { id: e.id, status: e.status, position: e.position, total: e.review?.weighted_total ?? null, version: e.review?.council.version ?? null },
-    ]),
-  )
+// every finalist with public code and its council review, or where it is in the queue, keyed "task|repo"
+function finalists() {
+  return Object.fromEntries(entries("curated").map(e => [`${e.task}|${e.repo}`, e]))
 }
 
 const isAdmin = (req: Request) => !!ADMIN_TOKEN && req.headers.get("authorization") === `Bearer ${ADMIN_TOKEN}`
 
 type CuratedRequest = { import?: CouncilReview[]; enqueue?: { task: string; repo: string }[] | "all" }
 
-// imports finished comparison reviews of the finalists and queues the rest, in upload order
+// imports finished council reviews of the finalists (from scripts/council-sync.ts) and queues the rest, in upload order
 async function curated(req: Request) {
   if (!isAdmin(req)) return fail("Not allowed.", 403)
   const body = (await req.json().catch(() => null)) as CuratedRequest | null
@@ -262,7 +257,7 @@ const server = Bun.serve({
     },
     "/api/reviews/:id/events": req => sse(req.params.id),
     "/api/community": () => json(community()),
-    "/api/council-scores": () => json(councilScores()),
+    "/api/finalists": () => json(finalists()),
     "/api/admin/curated": { POST: req => curated(req) },
     "/api/admin/reviews/:id/hide": {
       POST: req => {
