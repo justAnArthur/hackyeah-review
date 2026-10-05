@@ -34,7 +34,13 @@ const Media = ({ p }: { p: Project }) => {
 const PlaceBadge = ({ p }: { p: Project }) => {
   if (p.self) return <Badge color="blue" size="compact">Self-submitted</Badge>
   if (p.ours) return <Badge color="green" size="compact">Our entry</Badge>
-  if (!p.place) return null
+  if (!p.place) {
+    return (
+      <Badge color="gray" variant="dot" size="compact">
+        Finalist
+      </Badge>
+    )
+  }
   const r = RESULT[p.place]
   return (
     <Badge color={r.color} size="compact">
@@ -51,8 +57,8 @@ function subtitle(p: Project) {
   return parts.filter(Boolean).join(" · ") || (p.review?.repo ?? p.repos?.[0] ?? "")
 }
 
-const Row = ({ p }: { p: Project }) => (
-  <span className="flex w-full min-w-0 items-center gap-3 py-0.5">
+const Row = ({ p, open }: { p: Project; open: boolean }) => (
+  <span className="flex w-full min-w-0 items-start gap-3 py-0.5">
     <Media p={p} />
     <span className="grid min-w-0 flex-1 gap-0.5">
       <span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
@@ -60,8 +66,13 @@ const Row = ({ p }: { p: Project }) => (
         <PlaceBadge p={p} />
       </span>
       <span className="truncate text-[13px] text-muted-foreground" style={NORMAL}>
-        {subtitle(p) || " "}
+        {subtitle(p)}
       </span>
+      {p.desc && (
+        <span className={cn("mt-1 max-w-[62ch] text-[13px] leading-normal text-foreground/80", !open && "line-clamp-2")} style={NORMAL}>
+          {p.desc}
+        </span>
+      )}
     </span>
     {p.review && (
       <span className="grid w-[72px] shrink-0 justify-items-end gap-1.5 max-sm:w-12">
@@ -99,12 +110,7 @@ const Details = ({ p, task }: { p: Project; task: Task }) => {
   ]
   return (
     <div className="grid gap-4 pt-1 pb-2 pl-11 text-foreground max-sm:pl-0" style={NORMAL}>
-      {(p.desc || p.note) && (
-        <div className="grid gap-1">
-          {p.desc && <p className="max-w-[62ch] text-foreground">{p.desc}</p>}
-          {p.note && <p className="max-w-[62ch] text-xs text-muted-foreground">{p.note}</p>}
-        </div>
-      )}
+      {p.note && <p className="max-w-[62ch] text-xs text-muted-foreground">{p.note}</p>}
 
       {links.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
@@ -175,7 +181,7 @@ const Details = ({ p, task }: { p: Project; task: Task }) => {
   )
 }
 
-const expandable = (p: Project) => !!(p.desc || p.note || p.repos?.length || p.review)
+const expandable = (p: Project) => !!(p.note || p.repos?.length || p.review)
 
 export const ProjectList = (props: { task: Task; projects: Project[]; open: string[]; setOpen: (ids: string[], open: string[]) => void }) => {
   const ids = props.projects.map(p => p.id)
@@ -197,7 +203,7 @@ export const ProjectList = (props: { task: Task; projects: Project[]; open: stri
             className={cn("scroll-mt-6", p.ours && "bg-green-50/70 dark:bg-green-300/[.07]")}
           >
             <AccordionTrigger className={expandable(p) ? undefined : "cursor-default [&>span:last-child]:invisible"}>
-              <Row p={p} />
+              <Row p={p} open={props.open.includes(p.id)} />
             </AccordionTrigger>
             <AccordionContent>
               <Details p={p} task={props.task} />

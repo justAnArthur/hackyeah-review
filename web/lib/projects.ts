@@ -60,10 +60,14 @@ export function mergeTasks(data: ScorecardTask[]): Task[] {
   })
 }
 
+const score = (p: Project) => p.review?.weighted_total ?? -1
+
+// winners and podium by place, then finalists, then entries that weren't finalists; within a group by review score
+const group = (p: Project) => (p.place ? 0 : p.ours || p.self ? 2 : 1)
+
 export function sortProjects(projects: Project[], sort: Sort) {
-  if (sort === "score") return [...projects].sort((a, b) => (b.review?.weighted_total ?? -1) - (a.review?.weighted_total ?? -1))
-  const placed = projects.filter(p => p.place).sort((a, b) => ORDER[a.place!] - ORDER[b.place!])
-  return [...placed, ...projects.filter(p => !p.place)]
+  if (sort === "score") return [...projects].sort((a, b) => score(b) - score(a))
+  return [...projects].sort((a, b) => group(a) - group(b) || (a.place && b.place ? ORDER[a.place] - ORDER[b.place] : score(b) - score(a)))
 }
 
 export function reviewRank(task: Task, p: Project) {

@@ -212,10 +212,10 @@ export const HomePage = ({ data }: { data: ScorecardTask[] }) => {
               <SelectTrigger variant="borderless" />
               <SelectContent>
                 <SelectItem index={0} value="result">
-                  Order by jury result
+                  Winners, then finalists
                 </SelectItem>
                 <SelectItem index={1} value="score">
-                  Order by review score
+                  By review score
                 </SelectItem>
               </SelectContent>
             </Select>
