@@ -51,6 +51,8 @@ export async function processJob(db: Db, job: Job) {
       .query<{ pack: string; facts: string }, [string, number]>("select pack, facts from evidence where id = ? and version = ?")
       .get(sub.id, EVIDENCE_VERSION)
     if (!ev) {
+      // members who read an older pack would not have seen the same evidence as the rest
+      db.query("delete from member_results where id = ?").run(sub.id)
       updateJob(db, job.id, { step: "evidence" })
       logEvent(db, job.id, "Collecting evidence from the repo and deck")
       let built: Awaited<ReturnType<typeof buildEvidence>>

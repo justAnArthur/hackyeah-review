@@ -37,7 +37,31 @@ const GENERATED = /\.(min\.js|bundle\.js|map|g\.dart|pb\.go|generated\.\w+)$|(^|
 const TEST_PATH = /(^|\/)(tests?|__tests__|spec|e2e)(\/|$)|\.(test|spec)\.[cm]?[jt]sx?$|_test\.(go|py)$|(^|\/)test_[^/]*\.py$|Test\.(java|kt|cs)$|\.test\.ets$/
 const TEST_CASE = /\b(it|test)\s*\(\s*["'`]|\bdef test_\w+|#\[(tokio::)?test\]|@Test\b|\bfunc Test\w+\(/g
 const IMAGE = /\.(png|jpe?g|webp|gif)$/i
-const INJECTION = /(ignore (all |any )?(the )?(previous|prior|above) (instructions|prompts|rules)|disregard (the )?(previous|above)|you are (now )?(an? |the )?(judge|reviewer|jury)|(give|award|score) (this|us|it|the project) (a )?(10|ten|full|maximum|perfect)|(10|ten) ?\/ ?10 (score|points)|system prompt)/i
+// asks the reviewers for a score or a role: a red flag wherever it appears
+const STEERING = /(you are (now )?(an? |the )?(judge|reviewer|jury)|(give|award|score) (this|us|it|the project) (a )?(10|ten|full|maximum|perfect)|(10|ten) ?\/ ?10 (score|points))/i
+
+// generic jailbreak phrases. ai-security projects ship them as test payloads, and a provider can refuse a
+// request that contains even one, so the pack carries a marker instead. in the team's own form, readme,
+// deck or demo page they still count as an attempt to steer the reviewers
+const JAILBREAK = /\b(?:ignore|disregard|forget)\s+(?:(?:all|any|the|your|previous|prior|above|earlier)\s+)*(?:instructions|prompts|rules|directions)\b|\byou are (?:now )?DAN\b|\bdo anything now\b|\b(?:print|reveal|show|leak|output|repeat|dump)\s+(?:your|the|its)\s+(?:system|hidden|initial)\s+prompt\b|\bzignoruj\s+(?:\S+\s+){0,2}(?:instrukcj\w*|polece\w*|zasad\w*)|\bpoka\u017C\s+(?:\S+\s+)?prompt\w*\s+systemow\w*/i
+
+export const INJECTION_MASK = "[prompt-injection test string]"
+
+export function maskInjections(text: string) {
+  return text.replace(new RegExp(JAILBREAK.source, "gi"), INJECTION_MASK)
+}
+
+const jailbreaks = (text: string) => text.match(new RegExp(JAILBREAK.source, "gi"))?.length ?? 0
+
+// text the team wrote for the reader
+export function teamSteering(text: string) {
+  return text.match(STEERING)?.[0] ?? text.match(JAILBREAK)?.[0]
+}
+
+// code, docs and decks in the repo, where jailbreak phrases are usually test payloads
+export function repoSteering(text: string) {
+  return text.match(STEERING)?.[0]
+}
 
 export type Facts = {
   repo: string
@@ -58,13 +82,15 @@ export type Facts = {
   docs_read: number
   demo_checks: { url: string; status: string; title: string }[]
   injection_hits: string[]
+  injection_test_strings: number
 }
 
 export type Evidence = { pack: string; facts: Facts }
 
 // bump when the pack changes shape, so packs cached by an older builder are rebuilt
 // v2: decks in the repo, full docs, demo page text, screenshot descriptions, ~75k-token budget
-export const EVIDENCE_VERSION = 2
+// v3: jailbreak phrases masked; only steering text and jailbreaks in the team's own words are red flags
+export const EVIDENCE_VERSION = 3
 
 const SOURCE_HEADING = "\n\n## Source samples"
 
@@ -337,6 +363,7 @@ export async function buildEvidence(sub: Submission, describe?: Describe): Promi
     let readme = ""
     let aiDocs = ""
     const injection = new Set<string>()
+    let injectionTests = 0
 
     for (const f of files) {
       if (IMAGE.test(f.path)) {
@@ -350,8 +377,9 @@ export async function buildEvidence(sub: Submission, describe?: Describe): Promi
         const text = (await readText(join(root, f.path), 200_000)) ?? ""
         docs.push({ path: f.path, heading: text.match(/^#\s+(.+)$/m)?.[1] ?? "", text })
         if (/ai[_-]?(workflow|features|disclosure|usage)/i.test(f.path)) aiDocs += `\n## ${f.path}\n${clip(text, 2500)}`
-        const m = text.match(INJECTION)
-        if (m) injection.add(`${f.path}: "${m[0]}"`)
+        const m = repoSteering(text)
+        if (m) injection.add(`${f.path}: "${m}"`)
+        injectionTests += jailbreaks(text)
       }
 
       const lang = LANGS[extname(f.path).toLowerCase()]
@@ -362,8 +390,9 @@ export async function buildEvidence(sub: Submission, describe?: Describe): Promi
       locByLang[lang] = (locByLang[lang] ?? 0) + lines
       sourceLoc += lines
 
-      const m = text.match(INJECTION)
-      if (m) injection.add(`${f.path}: "${m[0]}"`)
+      const m = repoSteering(text)
+      if (m) injection.add(`${f.path}: "${m}"`)
+      injectionTests += jailbreaks(text)
 
       if (TEST_PATH.test(f.path)) {
         testFiles++
@@ -374,13 +403,13 @@ export async function buildEvidence(sub: Submission, describe?: Describe): Promi
     }
 
     for (const [source, text] of [["readme", readme], ...Object.entries(sub.fields)] as [string, string][]) {
-      const m = text.match(INJECTION)
-      if (m) injection.add(`${source}: "${m[0]}"`)
+      const m = teamSteering(text)
+      if (m) injection.add(`${source}: "${m}"`)
     }
 
     const deck = await uploadedDeck(sub.deck_path, describe)
-    const dm = deck.text.match(INJECTION)
-    if (dm) injection.add(`deck: "${dm[0]}"`)
+    const dm = teamSteering(deck.text)
+    if (dm) injection.add(`deck: "${dm}"`)
 
     let decksBudget = DECKS_BUDGET
     const repoDecks: { path: string; text: string }[] = []
@@ -397,8 +426,9 @@ export async function buildEvidence(sub: Submission, describe?: Describe): Promi
       const chunk = clip(text, Math.min(15_000, decksBudget))
       repoDecks.push({ path: f.path, text: chunk })
       decksBudget -= chunk.length
-      const m = text.match(INJECTION)
-      if (m) injection.add(`${f.path}: "${m[0]}"`)
+      const m = repoSteering(text)
+      if (m) injection.add(`${f.path}: "${m}"`)
+      injectionTests += jailbreaks(text)
     }
 
     docs.sort((a, b) => docOrder(a.path) - docOrder(b.path))
@@ -421,8 +451,8 @@ export async function buildEvidence(sub: Submission, describe?: Describe): Promi
       return { url: p.url, status: p.status, title: page?.title ?? "", description: page?.description ?? "", text: page?.text ?? "" }
     })
     for (const d of demoChecks) {
-      const m = d.text.match(INJECTION)
-      if (m) injection.add(`demo page ${d.url}: "${m[0]}"`)
+      const m = teamSteering(d.text)
+      if (m) injection.add(`demo page ${d.url}: "${m}"`)
     }
 
     const shots = pickShots(files)
@@ -462,6 +492,7 @@ export async function buildEvidence(sub: Submission, describe?: Describe): Promi
       docs_read: docsRead.length,
       demo_checks: demoChecks.map(({ url, status, title }) => ({ url, status, title })),
       injection_hits: [...injection].slice(0, 10),
+      injection_test_strings: injectionTests,
     }
 
     const manifests = files
@@ -527,7 +558,7 @@ export async function buildEvidence(sub: Submission, describe?: Describe): Promi
       ? `${head}${SOURCE_HEADING} (most central files first, truncated)\n${untrusted("source", samples.join("\n\n"))}`
       : head
 
-    return { pack: clip(pack, PACK_BUDGET), facts }
+    return { pack: clip(maskInjections(pack), PACK_BUDGET), facts }
   } finally {
     await rm(tmp, { recursive: true, force: true })
   }

@@ -266,6 +266,17 @@ const server = Bun.serve({
         return json({ ok: true })
       },
     },
+    // drops a finished or failed review and queues it again from fresh evidence; it keeps its upload time
+    "/api/admin/reviews/:id/rerun": {
+      POST: req => {
+        if (!isAdmin(req)) return fail("Not allowed.", 403)
+        const id = req.params.id
+        if (!getSubmission(db, id)) return fail("Not found.", 404)
+        for (const table of ["reviews", "member_results", "member_tries", "evidence"]) db.query(`delete from ${table} where id = ?`).run(id)
+        enqueue(db, id)
+        return json({ ok: true, position: queuePosition(db, getJob(db, id)!) })
+      },
+    },
     "/r/:id": () => new Response(Bun.file(join(PUBLIC, "review.html"))),
     // the scorecard merged into the results page; browsers keep the #fragment across the redirect
     "/scorecard": () => Response.redirect("/", 301),
