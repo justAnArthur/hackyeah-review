@@ -277,6 +277,14 @@ const server = Bun.serve({
         return json({ ok: true, position: queuePosition(db, getJob(db, id)!) })
       },
     },
+    // wakes reviews waiting for the daily quota, after DAILY_LIMIT was raised; they keep what they finished
+    "/api/admin/queue/resume": {
+      POST: req => {
+        if (!isAdmin(req)) return fail("Not allowed.", 403)
+        const { changes } = db.query("update jobs set status = 'queued', next_run_at = ? where status = 'waiting_quota'").run(Date.now())
+        return json({ ok: true, resumed: changes })
+      },
+    },
     "/r/:id": () => new Response(Bun.file(join(PUBLIC, "review.html"))),
     // the scorecard merged into the results page; browsers keep the #fragment across the redirect
     "/scorecard": () => Response.redirect("/", 301),
