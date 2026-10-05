@@ -5,7 +5,7 @@ import { type CouncilReview, loadCouncil } from "./council"
 import { allCurated, curatedId, insertCurated } from "./curated"
 import { UPLOADS, events, getJob, getSubmission, logEvent, openDb, queuePosition } from "./db"
 import { checkRepo, parseRepo } from "./evidence"
-import { quotaUsed } from "./models"
+import { DAILY_LIMIT, quotaUsed } from "./models"
 import { enqueue, startWorker } from "./queue"
 
 const PORT = Number(process.env.PORT ?? 3000)
@@ -248,7 +248,7 @@ const server = Bun.serve({
   idleTimeout: 120,
   maxRequestBodySize: MAX_DECK + 1024 * 1024,
   routes: {
-    "/api/health": () => json({ ok: true, quota_used_today: quotaUsed(db) }),
+    "/api/health": () => json({ ok: true, quota_used_today: quotaUsed(db), daily_limit: DAILY_LIMIT }),
     "/api/tasks": () => json(tasks),
     "/api/submissions": { POST: (req, srv) => submit(req, srv) },
     "/api/reviews/:id": req => {
