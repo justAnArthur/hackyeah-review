@@ -54,48 +54,52 @@ export type TeamTask = {
 }
 
 export async function loadRubrics() {
-  const files = [...new Bun.Glob("rubrics/*.toml").scanSync(ROOT)]
+  const files = [...new Bun.Glob("review/rubrics/*.toml").scanSync(ROOT)]
   const rubrics = await Promise.all(files.map(f => loadRubric(basename(f, ".toml"))))
   return rubrics.sort((a, b) => a.order - b.order)
 }
 
 export async function loadRubric(id: string): Promise<Rubric> {
-  const path = join(ROOT, "rubrics", `${id}.toml`)
-  if (!(await Bun.file(path).exists())) throw new Error(`no rubric for "${id}": add rubrics/${id}.toml first`)
+  const path = join(ROOT, "review/rubrics", `${id}.toml`)
+  if (!(await Bun.file(path).exists())) throw new Error(`no rubric for "${id}": add review/rubrics/${id}.toml first`)
   const r = (await import(path)).default
   const sum = Object.values(r.weights as Record<string, number>).reduce((a, b) => a + b, 0)
-  if (sum !== 100) throw new Error(`rubrics/${id}.toml: weights add up to ${sum}, not 100`)
+  if (sum !== 100) throw new Error(`review/rubrics/${id}.toml: weights add up to ${sum}, not 100`)
   return { id, checks: [], ...r }
 }
 
 export async function loadTeams(): Promise<Record<string, TeamTask>> {
-  return Bun.file(join(ROOT, "src/teams.json")).json()
+  return Bun.file(join(ROOT, "app/web/data/teams.json")).json()
 }
 
 export async function saveTeams(teams: Record<string, TeamTask>) {
-  await Bun.write(join(ROOT, "src/teams.json"), JSON.stringify(teams, null, 2) + "\n")
+  await Bun.write(join(ROOT, "app/web/data/teams.json"), JSON.stringify(teams, null, 2) + "\n")
 }
 
 export async function loadScores(id: string): Promise<TaskScores | null> {
-  const file = Bun.file(join(ROOT, "src/scores", `${id}.json`))
+  const file = Bun.file(join(ROOT, "app/web/data/scores", `${id}.json`))
   return (await file.exists()) ? file.json() : null
 }
 
 export async function saveScores(id: string, s: TaskScores) {
-  await Bun.write(join(ROOT, "src/scores", `${id}.json`), JSON.stringify(s, null, 2) + "\n")
+  await Bun.write(join(ROOT, "app/web/data/scores", `${id}.json`), JSON.stringify(s, null, 2) + "\n")
 }
 
 export function weightedTotal(scores: Score[]) {
   return Math.round(scores.reduce((sum, s) => sum + (s.score * s.weight) / 10, 0) * 100) / 100
 }
 
+const ENTITIES: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", "#39": "'" }
+
+// model output and extracted documents arrive with html entities; decode before parsing or matching
 export function decode(s: string) {
-  return s
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
+  return s.replace(/&(#x[0-9a-f]+|#\d+|\w+);/gi, (m, e: string) => {
+    if (e[0] === "#") {
+      const code = e[1].toLowerCase() === "x" ? Number.parseInt(e.slice(2), 16) : Number(e.slice(1))
+      return Number.isFinite(code) && code > 0 ? String.fromCodePoint(code) : m
+    }
+    return ENTITIES[e.toLowerCase()] ?? m
+  })
 }
 
 // model output often wraps json in prose or fences and leaves trailing commas
@@ -117,7 +121,14 @@ export function normalizeScores(rubric: Rubric, raw: RawScore[], label: string):
   const byKey = new Map(raw.map(s => [key(s.criterion), s]))
 
   return Object.keys(rubric.weights).map(name => {
-    const s = byKey.get(key(name))
+    // models sometimes shorten criterion names; a short form that matches exactly one
+    // criterion ("design" -> "design (visual/ui)") is that criterion, not a missing one
+    const k = key(name)
+    let s = byKey.get(k)
+    if (!s) {
+      const alias = [...byKey.keys()].filter(x => k.startsWith(x) || x.startsWith(k))
+      if (alias.length === 1) s = byKey.get(alias[0])
+    }
     if (!s) throw new Error(`${label}: missing criterion "${name}" (got: ${raw.map(x => x.criterion).join(", ")})`)
     const score = Number(s.score)
     if (!Number.isFinite(score) || score < 0 || score > 10) throw new Error(`${label}: "${name}" score must be 0–10`)

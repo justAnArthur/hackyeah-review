@@ -1,0 +1,21 @@
+name = "Finance Without Intermediaries"
+kind = "Partner task · Superteam Poland"
+order = 8
+deadline = "Sun 4 Oct 2026 11:00 CEST (rules also mention 23:00)"
+brief = """
+Remove the need for trust from one financial transaction on Solana (devnet is fine). The trust-replacing logic must live on-chain; if a backend enforces it, "the intermediary has become you". Name the target user explicitly. At least one full flow from user input to a confirmed transaction; show the moment the intermediary disappears. Live demo, public video of at most 3 minutes, repo with a clear README, description with design rationale. Judges ask where in code the intermediary disappears, what happens if a party vanishes mid-way, who holds which permissions and whether the author can change anything after deploy, and why blockchain rather than a database. They don't grade design or test coverage.
+"""
+checks = [
+  "Look hard at the on-chain program: admin keys, oracle choice, upgrade authority, backend overrides.",
+  "Is there a deployed program id and confirmed devnet transactions? Do not send any transactions yourself.",
+  "Does the submitted repo actually contain the code, or does it live in another or pre-event repo?",
+  "The rules say design and test coverage are not graded; spend no points on polish.",
+  "Are the required materials present: description with design rationale, PDF of at most 10 slides, video of at most 3 minutes, public repo?",
+]
+
+[weights]
+"Relevance" = 30
+"Completeness & functionality" = 25
+"Idea & problem" = 20
+"Implementation potential" = 15
+"Originality" = 10

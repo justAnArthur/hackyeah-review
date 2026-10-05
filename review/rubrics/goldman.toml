@@ -1,0 +1,20 @@
+name = "AI Control Layer"
+kind = "Partner task · Goldman Sachs"
+order = 10
+deadline = "Sun 4 Oct 2026 11:00 CEST (rules also mention 23:00)"
+brief = """
+A lightweight gateway, proxy, middleware or SDK wrapper that governs agent-to-model, agent-to-MCP, app-to-agent and similar traffic, driven by a central policy or config (controls, block-vs-redact thresholds, allowed models, budgets). Hybrid of deterministic controls (PII and secret patterns, authentication and authorization) and semantic AI-based controls. Budget and resource governance for paid APIs and local models; historical-attack mitigation with externally fed signatures (code execution, unsafe deserialization, model-repo supply chain); real-time metrics plus exportable audit logs; automated test suite with positive and negative cases. Deliverables: the layer plus an architecture diagram, a documented sample policy with strictness levels and budget rules, a simple dashboard (controls, posture, blocked threats, cost), a runnable test suite. Judges run the test suite, fire ad-hoc prompts, edit config and feeds live to see hot reload, ask for performance telemetry, and review architecture, dashboards and logs; it should run on local models such as Ollama.
+"""
+checks = [
+  "Are the semantic controls a real model call, or keyword simulations?",
+  "Is the dashboard wired to the gateway, or a mockup?",
+  "Count actual test cases; does policy hot reload exist in code?",
+  "Does it support local models such as Ollama, as the details document expects, and are audit logs exportable in code?",
+]
+
+[weights]
+"Robustness/guardrails" = 30
+"Architecture & performance" = 20
+"Security reporting" = 20
+"Test suite" = 15
+"Implementability & scalability" = 15

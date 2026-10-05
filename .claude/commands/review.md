@@ -10,7 +10,7 @@ Review hackathon projects for this site. Arguments: $ARGUMENTS
 3. Spawn one `general-purpose` subagent with the file's full contents as its prompt. Use one agent for all repos of the task so they are scored on the same scale. Don't add anything to the prompt, and never tell the agent how a team placed.
 4. Save the agent's final message to `.cache/reviews/<task>-<YYYY-MM-DD-HH-MM>.md`.
 5. Run `bun scripts/review.ts add <task> <that file>`, passing through `--team` and `--result`. It checks the criteria against the rubric, recomputes each total, moves repos the reviewer says weren't built for this task into the excluded list, and updates `src/scores/<task>.json` and `src/teams.json`.
-6. If a reviewed team isn't on the results page yet, add or update its entry in the `TASKS` list in `src/results.html` (team, project, status, desc, repos, demo).
+6. If a reviewed team isn't on the results page yet, add or update its entry in the `TASKS` list in `web/data/results.ts` (team, project, status, desc, repos, demo).
 7. Run `bun run build`, then report each project's total and its weakest criterion. Commit and push only when asked.
 
 To re-score a whole task consistently, pass every repo of that task in one call with `--fresh`, so the reviewer compares them side by side instead of against earlier anchors.
