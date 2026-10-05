@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils"
 const RESULTS = ["Not a finalist", "Finalist", "Winner", "1st place", "2nd place", "3rd place"]
 const DRAFT_KEY = "hy26-submit-draft"
 const MAX_DECK = 15 * 1024 * 1024
+const LABEL = "pl-2.5 text-[13px] text-muted-foreground"
 
 const LIMITS = {
   title: 120,
@@ -53,7 +54,7 @@ const AreaField = (props: { index: number; id: keyof typeof LIMITS; label: strin
   const state = focused ? "bg-card ring-border" : activeIndex === props.index ? "bg-muted/50 ring-border" : "bg-transparent ring-border/50"
   return (
     <div ref={ref} className="flex flex-col gap-1">
-      <label htmlFor={props.id} className="pl-2.5 text-[13px] text-muted-foreground">
+      <label htmlFor={props.id} className={LABEL}>
         {props.label}
       </label>
       <textarea
@@ -153,7 +154,7 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
           </InputGroup>
           <div className="grid grid-cols-2 gap-3 max-sm:grid-cols-1">
             <div className="grid gap-1">
-              <span className="pl-2.5 text-[13px] text-muted-foreground">Task</span>
+              <span className={LABEL}>Task</span>
               <Select value={draft.task} onValueChange={set("task")}>
                 <SelectTrigger placeholder="Choose the task you entered" />
                 <SelectContent>
@@ -166,7 +167,7 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
               </Select>
             </div>
             <div className="grid gap-1">
-              <span className="pl-2.5 text-[13px] text-muted-foreground">Result</span>
+              <span className={LABEL}>Result</span>
               <Select value={draft.result} onValueChange={set("result")}>
                 <SelectTrigger placeholder="How did it place?" />
                 <SelectContent>
@@ -202,7 +203,7 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
             <AreaField index={5} id="additional" label="Additional field for presentation / files" hint="Links to a video, Figma or anything else." rows={2} value={draft.additional} onChange={set("additional")} />
           </InputGroup>
           <div className="grid gap-1">
-            <span className="pl-2.5 text-[13px] text-muted-foreground">Presentation</span>
+            <span className={LABEL}>Presentation</span>
             <div className="flex flex-wrap items-center gap-3 pl-1">
               <input ref={fileRef} type="file" accept="application/pdf,.pdf" hidden onChange={e => pickDeck(e.target.files?.[0])} />
               <Button type="button" variant="secondary" leadingIcon={FileText} onClick={() => fileRef.current?.click()}>

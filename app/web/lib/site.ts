@@ -1,4 +1,5 @@
 import type { BadgeColor } from "@/components/ui/badge"
+import type { CouncilReview } from "@/lib/types"
 
 export const SITE = "https://hackyeah-review.justadomainname.dev"
 export const GH = "https://github.com/"
@@ -24,6 +25,18 @@ export const RESULT: Record<string, { label: string; color: BadgeColor; dot?: bo
   self: { label: "Self-submitted", color: "blue" },
 }
 
-export const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1)
+export function fmt(n: number) {
+  return (Math.round(n * 10) / 10).toFixed(1)
+}
 
-export const reviewId = (task: string, repo: string) => `${task}--${repo.replace(/[^a-z0-9]/gi, "-")}`
+export function reviewId(task: string, repo: string) {
+  return `${task}--${repo.replace(/[^a-z0-9]/gi, "-")}`
+}
+
+export function testsLabel(r: CouncilReview) {
+  return r.tests.cases ? `${r.tests.cases} cases` : r.has_tests ? `${r.tests.files} files` : "None"
+}
+
+export function taskFit(fit: string) {
+  return /^no\b/i.test(fit) ? "Doubtful" : "Yes"
+}

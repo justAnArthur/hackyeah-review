@@ -6,7 +6,7 @@ import { Banner, BannerDescription, BannerTitle } from "@/components/ui/banner"
 import { Button } from "@/components/ui/button"
 import { ThinkingStep, ThinkingStepDetails, ThinkingSteps, ThinkingStepsContent, ThinkingStepsHeader } from "@/components/ui/thinking-steps"
 import { Tooltip } from "@/components/ui/tooltip"
-import { fmt, reviewId } from "@/lib/site"
+import { GH, fmt, reviewId, taskFit, testsLabel } from "@/lib/site"
 import type { CouncilReview, TaskOption } from "@/lib/types"
 
 type Event = { seq: number; at: number; message: string }
@@ -15,27 +15,31 @@ type Status = {
   submission: { id: string; title: string; team: string; task: string; result: string; repo: string; superseded: boolean; source: "form" | "curated" }
   job: { status: string; step: string; position: number; next_run_at: number; error: string | null }
   events: Event[]
-  review: (CouncilReview & { scores: (CouncilReview["scores"][number] & { members: Record<string, number> })[] }) | null
+  review: CouncilReview | null
 }
 
 type StepState = "complete" | "active" | "pending"
 
-const time = (ms: number) => new Date(ms).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
 const ENDED = ["done", "failed", "cancelled"]
+
+function time(ms: number) {
+  return new Date(ms).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+}
 
 function steps(s: Status, size: number) {
   const order = ["queued", "evidence", "council", "done"]
   const at = order.indexOf(s.job.step === "failed" ? "council" : s.job.step)
   const members = s.events.filter(e => /^Member [A-H] (scored|gave|is unavailable)/.test(e.message))
   const judging = s.events.some(e => e.message.startsWith("The judge"))
-  const state = (i: number): StepState => (at > i || s.job.status === "done" ? "complete" : at === i ? "active" : "pending")
+  const done = s.job.status === "done"
+  const state = (i: number): StepState => (at > i || done ? "complete" : at === i ? "active" : "pending")
   return {
     members,
     list: [
       { icon: "clock", label: s.job.position > 1 ? `In the queue, #${s.job.position}` : "In the queue", state: state(0) },
       { icon: "search", label: "Collecting evidence from the repo and deck", state: state(1) },
-      { icon: "users", label: `The council scores the project · ${Math.min(members.length, size)} of ${size}`, state: judging || s.job.status === "done" ? "complete" : state(2) },
-      { icon: "brain", label: "The judge writes the review", state: s.job.status === "done" ? "complete" : judging ? "active" : "pending" },
+      { icon: "users", label: `The council scores the project · ${Math.min(members.length, size)} of ${size}`, state: judging || done ? "complete" : state(2) },
+      { icon: "brain", label: "The judge writes the review", state: done ? "complete" : judging ? "active" : "pending" },
     ] as const,
   }
 }
@@ -86,7 +90,7 @@ const Progress = ({ s, size }: { s: Status; size: number }) => {
   )
 }
 
-const Track = ({ score }: { score: NonNullable<Status["review"]>["scores"][number] }) => (
+const Track = ({ score }: { score: CouncilReview["scores"][number] }) => (
   <div className="relative h-[18px]">
     <span className="absolute inset-x-0 top-2 h-0.5 rounded-full bg-foreground/[.07]" />
     {Object.entries(score.members).map(([k, v]) => (
@@ -98,7 +102,7 @@ const Track = ({ score }: { score: NonNullable<Status["review"]>["scores"][numbe
   </div>
 )
 
-const Result = ({ r, curated }: { r: NonNullable<Status["review"]>; curated: boolean }) => (
+const Result = ({ r, curated }: { r: CouncilReview; curated: boolean }) => (
   <>
     <Panel>
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
@@ -139,9 +143,9 @@ const Result = ({ r, curated }: { r: NonNullable<Status["review"]>; curated: boo
 
     <div className="grid grid-cols-4 gap-2 max-sm:grid-cols-2">
       <Fact label="Source lines">{r.source_loc.toLocaleString("en")}</Fact>
-      <Fact label="Tests">{r.tests.cases ? `${r.tests.cases} cases` : r.has_tests ? `${r.tests.files} files` : "None"}</Fact>
+      <Fact label="Tests">{testsLabel(r)}</Fact>
       <Fact label="Claims built">{fmt(r.build_reality)} / 10</Fact>
-      <Fact label="Task fit">{/^no\b/i.test(r.task_fit) ? "Doubtful" : "Yes"}</Fact>
+      <Fact label="Task fit">{taskFit(r.task_fit)}</Fact>
     </div>
 
     <Panel>
@@ -258,7 +262,7 @@ export const ReviewPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
             title={s.submission.title}
           >
             {s.submission.team} ·{" "}
-            <a className="font-mono text-xs hover:text-foreground" href={`https://github.com/${s.submission.repo}`} target="_blank" rel="noopener">
+            <a className="font-mono text-xs hover:text-foreground" href={GH + s.submission.repo} target="_blank" rel="noopener">
               {s.submission.repo}
             </a>
           </PageHeader>

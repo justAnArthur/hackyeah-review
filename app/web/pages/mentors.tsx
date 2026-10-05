@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Search } from "lucide-react"
 import { Footer, Layout, PageHeader, Stats } from "@/components/layout"
-import { Badge } from "@/components/ui/badge"
+import { Badge, type BadgeColor } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { InputField, InputGroup } from "@/components/ui/input-group"
 import { TabItem, Tabs, TabsList } from "@/components/ui/tabs"
@@ -9,19 +9,20 @@ import { MENTORS, type Mentor, type MentorMatch } from "@/data/mentors"
 
 type Filter = "all" | MentorMatch
 
-const MATCH: Record<MentorMatch, { label: string; color: "green" | "amber" | "gray" }> = {
+const MATCH: Record<MentorMatch, { label: string; color: BadgeColor }> = {
   ok: { label: "Confirmed", color: "green" },
   prob: { label: "Name match", color: "amber" },
   none: { label: "No profile found", color: "gray" },
 }
 
-const initials = (name: string) =>
-  name
+function initials(name: string) {
+  return name
     .split(/\s+/)
     .map(w => w[0])
     .slice(0, 2)
     .join("")
     .toUpperCase()
+}
 
 // initials sit under the photo, so a Discord avatar that has since been
 // changed or expired falls back to initials on its own

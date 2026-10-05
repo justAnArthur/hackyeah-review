@@ -100,17 +100,17 @@ export const Bar = ({ value, max, cut, ours }: { value: number; max: number; cut
   </div>
 )
 
-export const ResultBadge = ({ result, children }: { result: string | number; children?: ReactNode }) => {
+export const ResultBadge = ({ result }: { result: string | number }) => {
   const r = RESULT[result] ?? RESULT.fin
   return (
     <Badge color={r.color} variant={r.dot ? "dot" : "solid"} size="compact">
-      {children ?? r.label}
+      {r.label}
     </Badge>
   )
 }
 
-export const Panel = ({ className, children }: { className?: string; children: ReactNode }) => (
-  <div className={cn("grid min-w-0 gap-4 rounded-xl bg-surface-2 p-4 shadow-surface-2", className)}>{children}</div>
+export const Panel = ({ children }: { children: ReactNode }) => (
+  <div className="grid min-w-0 gap-4 rounded-xl bg-surface-2 p-4 shadow-surface-2">{children}</div>
 )
 
 export const Footer = ({ children }: { children: ReactNode }) => (

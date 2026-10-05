@@ -1,12 +1,11 @@
 import { CircleDashed } from "lucide-react"
-import { Bar, Fact, List } from "@/components/layout"
+import { Bar, Fact, List, ResultBadge } from "@/components/layout"
 import { AccordionContent, AccordionGroup, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ThinkingIndicator } from "@/components/ui/thinking-indicator"
 import { fontWeights } from "@/lib/font-weight"
 import type { Pending, Project } from "@/lib/projects"
-import { GH, RESULT, fmt } from "@/lib/site"
+import { GH, fmt, taskFit, testsLabel } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 const NORMAL = { fontVariationSettings: fontWeights.normal }
@@ -17,7 +16,6 @@ function pendingWords(p: Pending) {
   return [p.position > 1 ? `In queue · #${p.position}` : "Up next"]
 }
 
-// an upload still being reviewed: the ai indicator stands where the score will be
 const PendingScore = ({ pending }: { pending: Pending }) => (
   <span className="shrink-0 self-center">
     <ThinkingIndicator size="compact" words={pendingWords(pending)} className="px-0 py-0 text-[13px]" />
@@ -36,29 +34,11 @@ const Media = ({ p }: { p: Project }) => {
   }
   return (
     <img
-      src={`https://github.com/${owner}.png?size=64`}
+      src={`${GH}${owner}.png?size=64`}
       alt=""
       loading="lazy"
       className="size-8 shrink-0 rounded-lg bg-muted object-cover outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
     />
-  )
-}
-
-const PlaceBadge = ({ p }: { p: Project }) => {
-  if (p.self) return <Badge color="blue" size="compact">Self-submitted</Badge>
-  if (p.ours) return <Badge color="green" size="compact">Our entry</Badge>
-  if (!p.place) {
-    return (
-      <Badge color="gray" variant="dot" size="compact">
-        Finalist
-      </Badge>
-    )
-  }
-  const r = RESULT[p.place]
-  return (
-    <Badge color={r.color} size="compact">
-      {r.label}
-    </Badge>
   )
 }
 
@@ -76,7 +56,7 @@ const Row = ({ p, open }: { p: Project; open: boolean }) => (
     <span className="grid min-w-0 flex-1 gap-0.5">
       <span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
         <span className="truncate text-[14px] text-foreground">{p.title}</span>
-        <PlaceBadge p={p} />
+        <ResultBadge result={p.self ? "self" : p.ours ? "ours" : (p.place ?? "fin")} />
       </span>
       <span className="truncate text-[13px] text-muted-foreground" style={NORMAL}>
         {subtitle(p)}
@@ -119,7 +99,7 @@ const Details = ({ p }: { p: Project }) => {
   const links = [
     ...(p.repos ?? []).map(repo => ({ href: GH + repo, label: repo, external: true })),
     ...(p.demo ? [{ href: p.demo, label: "Live demo", external: true }] : []),
-    ...(r?.link ? [{ href: r.link, label: "Full council review", external: false }] : []),
+    ...(r ? [{ href: r.link, label: "Full council review", external: false }] : []),
     ...(p.pending && p.reviewUrl ? [{ href: p.reviewUrl, label: "Follow the review live", external: false }] : []),
   ]
   return (
@@ -171,10 +151,10 @@ const Details = ({ p }: { p: Project }) => {
             ))}
           </div>
           <div className="grid grid-cols-4 gap-1.5 max-sm:grid-cols-2">
-            <Fact label="Source lines">{r.source_loc ? `≈ ${Number(r.source_loc).toLocaleString("en")}` : "–"}</Fact>
-            <Fact label="Tests">{r.tests_label}</Fact>
+            <Fact label="Source lines">{r.source_loc ? `≈ ${r.source_loc.toLocaleString("en")}` : "–"}</Fact>
+            <Fact label="Tests">{testsLabel(r)}</Fact>
             <Fact label="Claims built">{fmt(r.build_reality)} / 10</Fact>
-            <Fact label="Task fit">{/^no\b/i.test(r.task_fit) ? "Doubtful" : "Yes"}</Fact>
+            <Fact label="Task fit">{taskFit(r.task_fit)}</Fact>
           </div>
           <div className="grid gap-1 text-xs text-muted-foreground">
             <div>
@@ -195,7 +175,9 @@ const Details = ({ p }: { p: Project }) => {
   )
 }
 
-const expandable = (p: Project) => !!(p.note || p.repos?.length || p.review)
+function expandable(p: Project) {
+  return !!(p.note || p.repos?.length || p.review)
+}
 
 export const ProjectList = (props: { projects: Project[]; open: string[]; setOpen: (ids: string[], open: string[]) => void }) => {
   const ids = props.projects.map(p => p.id)

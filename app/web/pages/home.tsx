@@ -8,7 +8,7 @@ import { type Project, type ReviewEntry, type Sort, type Task, buildTasks, commu
 
 type Filter = "all" | "placed" | "code"
 
-export type CouncilPanel = { members: string[]; judge: string; version: number }
+type CouncilPanel = { members: string[]; judge: string; version: number }
 
 const PREFS_KEY = "hy26-view"
 
@@ -125,8 +125,10 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
     setLoaded(true)
   }
 
+  const entries = [...Object.values(finalists), ...Object.values(community).flat()]
+
   // refresh while a finalist or an upload is still being reviewed
-  const busy = [...Object.values(finalists), ...Object.values(community).flat()].some(e => !e.review)
+  const busy = entries.some(e => !e.review)
   useEffect(() => {
     if (!busy) return
     const timer = setInterval(load, 10_000)
@@ -155,8 +157,6 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
   }, [loaded])
 
   const all = tasks.flatMap(t => t.projects.filter(p => !p.ours))
-  // finalists and community uploads together: scored, or still waiting / being reviewed
-  const entries = [...Object.values(finalists), ...Object.values(community).flat()]
   const scored = entries.filter(e => e.review).length
   const inQueue = entries.length - scored
 
