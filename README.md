@@ -1,103 +1,132 @@
+<a href="https://hackyeah-review.justadomainname.dev"><img src=".github/hero.svg" alt="HackYeah 2026 Results: every finalist and every project teams sent in, scored out of 100 by an AI council" width="100%"></a>
+
 # HackYeah 2026 Review
 
-HackYeah 2026 finalists and winners with the public repo found for each team, every project with public code scored by an AI council against its task's official criteria and weights, and a form where any team can send its own project to the same council.
+This site lists every HackYeah 2026 finalist with the public repo found for its team. Every project with public code is scored out of 100 by an AI council, against its task's official criteria and weights. Any team can send its own project through the same form and get the same review for free.
 
-Live: https://hackyeah-review.justadomainname.dev
+**Live site:** [hackyeah-review.justadomainname.dev](https://hackyeah-review.justadomainname.dev) · **Send your project:** [/submit](https://hackyeah-review.justadomainname.dev/submit)
+
+If a review helped you, starring the repo helps other teams find it.
+
+## How a project is scored
+
+Each review is a job in one Bun process (`app/server/`), and the jobs run one at a time in upload order.
+
+1. **Evidence** (`app/server/evidence.ts`, `app/server/extract.ts`). A script builds the evidence pack; no model is involved in this step.
+   - **Measured facts:** GitHub metadata and commit history, plus source lines and tests counted in the repo tarball.
+   - **Documents:** the uploaded deck and any PDF, PowerPoint and Word decks committed to the repo, plus the README and docs in full. A vision model describes image-only PDFs.
+   - **Demo:** the static text of the demo pages, and descriptions of up to five screenshots, also written by the vision model.
+   - **Code:** samples of the manifests and the most central source files.
+
+   The pack is at most about 75k tokens. Text written by the team is marked untrusted and jailbreak phrases in it are masked. An attempt to steer the score becomes a red flag.
+2. **Council** (`app/server/council.ts`, `review/council.toml`). Three fixed models score the pack on each criterion from 0 to 10. They work from the task's rubric (`review/rubrics/<task>.toml`), its reviewing guide (`review/guides/<task>.md`) and one shared scale: 5 is a solid hackathon prototype, 7 is clearly strong, and 9 or more is exceptional.
+   - The score for each criterion is the median of the three; the spread between them shows disagreement.
+   - The official weights turn the criteria scores into a total out of 100.
+   - A judge model writes the review text and rates how much each member agrees with the rest. It never sets the numbers.
+   - Finalists are scored without their result. For an upload, the council sees the result the team declared.
+3. **Queue** (`app/server/queue.ts`). Every project faces the same panel, so the panel never shrinks:
+   - A rate-limited model is waited for, with a backoff of 60 s that doubles up to 30 min.
+   - A garbled reply or a provider error retries the job, and members that already finished keep their scores.
+   - Only a permanent failure, such as a bad key or a private repo, ends a review.
+   - Every finished step is stored in SQLite, so a restart or a deploy resumes where it stopped.
+
+Changing a model or a prompt means bumping `version` in `review/council.toml`, so scores stay comparable within one version.
+
+### The panel (council v9)
+
+| Role | Model | Runs on |
+|---|---|---|
+| Member | `glm-5.3-flash` | Claude Code CLI, headless, on z.ai's GLM Coding Plan |
+| Member | `dots-3-note-preview` | OpenRouter, free |
+| Member | `ling-3.0-flash-sante` | OpenRouter, free |
+| Judge | `glm-5.3` | Claude Code CLI, z.ai Coding Plan |
+| Vision | `glm-4.6v-flash` | z.ai API, free |
+
+The prefix of each model id in `review/council.toml` picks where it runs (`app/server/models.ts`):
+
+- **`claude:<model>`** runs `claude -p --safe-mode --restricted` in an empty directory, against z.ai's Anthropic-compatible endpoint. When the plan's usage window is used up, the review waits and retries every 30 minutes.
+- **`zai:<model>`** calls z.ai's general API.
+- **Anything else** is an OpenRouter id, capped at `DAILY_LIMIT` requests a day. OpenRouter allows 50 a day on a free account, or 1000 once it has credits.
 
 ## Pages
 
-- `/` — every finalist by task, ordered by result or by score. Each project card shows its council score, or its place in the queue with a live indicator, and opens to its repo links and council review (scores per criterion, facts, strengths and weaknesses); community submissions sit under their task. `/scorecard` redirects here
-- `/submit` — "Review my project" form with the same fields as the HackTribe entry
-- `/r/<id>` — live progress and the council's review for one submission
+- **`/`** lists every finalist and every upload, by task. Each card shows the council score, or the project's place in the queue with a live indicator. It opens to the repo links and the full review. The old `/scorecard` page redirects here.
+- **`/submit`** is the "Review my project" form, with the same fields as the HackTribe entry.
+- **`/r/<id>`** shows a review in progress and then the council's result: the score per criterion with each member's score, the measured facts, and strengths, weaknesses and red flags.
 
-## Council review
+## Run locally
 
-A submission goes through a queue in one Bun process (`app/server/`):
+```bash
+cp .env.example .env    # OPENROUTER_API_KEY and ZAI_API_KEY; GITHUB_TOKEN and ADMIN_TOKEN are optional
+bun install
+bun run dev             # builds the site, then serves it with the API on :3000
+bun test
+bun run typecheck
+```
 
-1. **Evidence** (`app/server/evidence.ts`, `app/server/extract.ts`): the server collects the facts. It reads GitHub metadata and commit history, downloads the repo tarball, and counts source lines and tests. It extracts the text of the uploaded deck and of PDF, PowerPoint and Word decks committed to the repo (image-only PDFs are rendered and described), includes the README and docs in full, reads the static text of the demo pages, and samples the manifests and the most central source files. A vision model describes up to five screenshots as text. The result is one evidence pack of up to about 75k tokens. Team-written text is marked untrusted, and attempts to steer the score become red flags.
-2. **Council** (`app/server/council.ts`, `review/council.toml`): three fixed members score the pack against the task's rubric (`review/rubrics/<task>.toml`), the official weights, the task's reviewing guide (`review/guides/<task>.md`). Since v9 there are no calibration anchors: members score from the rubric, the guide and the scale alone. The score per criterion is the median; the spread shows disagreement. A judge writes the consolidated text and rates each member's agreement; it never sets the numbers. Prompts: `review/prompts/council-member.md`, `review/prompts/council-judge.md`.
-3. **Queue** (`app/server/queue.ts`): one job at a time. Every project faces the identical panel, so the panel never shrinks: a rate-limited member is waited for (60 s, doubling to 30 min), a garbled reply or an upstream provider error is retried with the job (finished members are kept), and only a permanent failure such as a bad key ends a review. Every finished step is stored in SQLite, so a restart resumes. Changing a model or a prompt means bumping `version` in `review/council.toml`.
+`claude:` members need the Claude Code CLI on the path (`bun add -g @anthropic-ai/claude-code`).
 
-Where the models run (`app/server/models.ts`):
+To run without keys, start the mock with `bun app/test/mock-openrouter.ts`. Then start the server with these variables:
 
-- `claude:<model>` runs the Claude Code CLI headless (`--safe-mode --restricted`, empty working directory) against z.ai's Anthropic-compatible endpoint, on the GLM Coding Plan (`ZAI_API_KEY`, or `CLAUDE_API_KEY` to override). When the plan's usage window is used up, the review waits and retries every 30 minutes until it resets.
-- `zai:<model>` calls z.ai's general API (`ZAI_API_KEY`); the flash models there are free.
-- Anything else is an OpenRouter id (`OPENROUTER_API_KEY`), capped by `DAILY_LIMIT` requests a day (1000 on an account with credits).
+```bash
+OPENROUTER_BASE_URL=http://localhost:4790 ZAI_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock ZAI_API_KEY=mock bun run dev
+```
 
-Reviews are published right away under "Community submissions", marked self-submitted. To hide one:
+`claude:` members still need the real CLI and key.
+
+## Operating the queue
+
+The admin endpoints take `Authorization: Bearer $ADMIN_TOKEN`:
+
+| Endpoint | What it does |
+|---|---|
+| `POST /api/admin/reviews/<id>/hide` | Takes a review off the site |
+| `POST /api/admin/reviews/<id>/rerun` | Drops a review and queues it again from fresh evidence. It keeps its upload time |
+| `POST /api/admin/queue/resume` | Wakes reviews waiting for the daily quota, after `DAILY_LIMIT` was raised |
+| `POST /api/admin/curated` | Imports finished finalist reviews and queues the finalists (`{"enqueue": "all"}`) |
 
 ```bash
 curl -X POST https://hackyeah-review.justadomainname.dev/api/admin/reviews/<id>/hide -H "authorization: Bearer $ADMIN_TOKEN"
 ```
 
-### Run locally
+`GET /api/health` shows the requests used today against the daily limit.
+
+## Deploy and releases
+
+- **Deploy.** Every push to `main` deploys to Dokploy through a GitHub webhook.
+  - The `Dockerfile` builds the site and runs `bun app/server/index.ts` on port 3000.
+  - SQLite and uploaded decks live in a volume at `/data`.
+  - The variables come from `.env.example` and are set in Dokploy.
+- **Releases.** Versions and GitHub releases come from [just-github-actions-n-workflows](https://github.com/justAnArthur/just-github-actions-n-workflows): `bump-version.yml` and `release-on-tag.yml`.
+  - A conventional commit whose scope is one of `site`, `web`, `server`, `council`, `queue` or `evidence` bumps the version in `package.json`. The scopes are set in `properties.gitCommitScopeRelatedNames`.
+  - The bump tags the release `hackyeah-review@x.y.z` and publishes a release with notes.
+  - Commits without a scope release nothing.
+  - The workflows are owned by the toolkit. Update them with its CLI and don't edit them by hand:
 
 ```bash
-cp .env.example .env             # add OPENROUTER_API_KEY and ZAI_API_KEY, optionally GITHUB_TOKEN and ADMIN_TOKEN
-bun install
-bun run dev                      # builds the site and serves it with the API on :3000
-bun test                         # unit tests
+npx -p @justanarthur/just-github-actions-n-workflows-cli just-github-actions-n-workflows update
 ```
-
-Without keys, use the mock: run `bun app/test/mock-openrouter.ts`, then start the server with `OPENROUTER_BASE_URL=http://localhost:4790 ZAI_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock ZAI_API_KEY=mock` (`claude:` members still need the real CLI and key).
-
-### Checking the council against the earlier blind reviews (research only)
-
-```bash
-bun scripts/council-check.ts --all --shard 1/3    # three terminals: --shard 2/3, --shard 3/3
-bun scripts/council-check.ts sport:uteg-labs/just-mate defence:Mikformatycy/SafeWall
-bun scripts/council-report.ts                     # .cache/council-check/compare.html
-```
-
-These compare the council with the Claude Opus blind reviews in `app/web/data/scores/`, which the site no longer shows. The council gets the project description but not the jury result. Each council version keeps its own database (`.cache/council-check-v<version>.db`), so a rerun resumes and queues failed reviews again, and the report never mixes versions.
-
-### Deploy (Dokploy)
-
-The `Dockerfile` builds the site and runs `bun app/server/index.ts` on port 3000, with SQLite and uploaded decks in `/data`. In Dokploy, create an application from this repo (Dockerfile build type, auto-deploy on push) and mount a volume at `/data`. Set the variables from `.env.example`, and attach `hackyeah-review.justadomainname.dev` on port 3000 with HTTPS.
 
 ## Structure
 
-- `app/web/pages/` — the three pages (results, form, review) as React components, and `app/web/components/project-card.tsx` for the project cards; `app/web/main.tsx` hydrates them in the browser
-- `app/web/components/ui/` — [Fluid Functionalism](https://www.fluidfunctionalism.com) components, Base UI flavor, added with the shadcn CLI (`components.json`). They are copied into the repo, so small fixes live here
-- `app/web/components/layout.tsx` — the shared column (760px wide on every page), site bar and small building blocks
-- `app/web/data/results.ts` — finalists, results and repo matches; `app/web/lib/projects.ts` joins them with the reviews
-- `app/web/data/scores/<task>.json` — review scores per task
-- `app/web/data/teams.json` — team name and jury result for each reviewed repo, plus placed teams with no public repo
-- `app/web/app.css` — Tailwind v4 entry with the theme tokens
-- `review/rubrics/<task>.toml` — brief, official criteria and weights, and task-specific checks for each task
-- `review/prompts/` — the council member and judge prompts, and the earlier Opus reviewer prompt (`reviewer.md`, used by `scripts/review.ts`)
-- `review/guides/<task>.md` — a reviewing guide per task, embedded in that task's member prompt
-- `review/council.toml` — the fixed council panel and its version
-- `scripts/review.ts` — builds review prompts, runs reviews and merges the results
-- `scripts/council-check.ts`, `scripts/council-report.ts` — run the council on projects with a blind review and build the comparison page
-- `scripts/build.ts` — pre-renders every page to HTML (so search engines see the content), bundles the client and the Tailwind CSS, and writes `public/` (git-ignored, plus `robots.txt` and `sitemap.xml`)
+- **Server**
+  - `app/server/`: the Bun server, queue, evidence builder, council and model providers.
+  - `app/test/`: unit tests and the mock model server.
+- **Web**
+  - `app/web/pages/`: the results, form and review pages as React components, pre-rendered to HTML by `scripts/build.ts` and hydrated by `app/web/main.tsx`.
+  - `app/web/components/ui/`: [Fluid Functionalism](https://www.fluidfunctionalism.com) components (Base UI flavor), added with the shadcn CLI and kept in the repo.
+  - `app/web/data/results.ts`: finalists, results and repo matches. `app/web/lib/projects.ts` joins them with the reviews.
+- **Review**
+  - `review/council.toml`: the fixed panel and its version.
+  - `review/rubrics/<task>.toml`: each task's brief, official criteria and weights, and task-specific checks.
+  - `review/guides/<task>.md`: a reviewing guide per task, written from the official rules and details documents.
+  - `review/prompts/`: the council member and judge prompts.
+- **Scripts**
+  - `scripts/council-check.ts`, `scripts/council-report.ts`, `scripts/council-sync.ts`: run the council locally, compare it with the earlier blind reviews, and send finished finalist reviews to the site.
+  - `scripts/review.ts`: the earlier blind Claude Opus reviews in `app/web/data/scores/`, kept for research. The site no longer shows them.
 
-To add another Fluid component: `bunx shadcn@latest add https://www.fluidfunctionalism.com/r/base/<name>.json` (or `/r/<name>.json` for ones without a Base UI flavor), then move any file it writes to `src/components/` into `app/web/components/`.
-
-## Reviewing projects
-
-Each review is blind (the reviewer isn't told how a team placed) and read-only, scored 0 to 10 per criterion with the task's official weights. The script recomputes every total, so arithmetic slips don't reach the site.
+To add another Fluid component, run the command below. Use `/r/<name>.json` for components without a Base UI flavor. Then move any file it writes to `src/components/` into `app/web/components/`.
 
 ```bash
-bun scripts/review.ts tasks                              # list tasks and how many projects are reviewed
-bun scripts/review.ts prompt krakow owner/repo           # clone and write a ready prompt to .cache/prompts/
-bun scripts/review.ts run krakow owner/repo --team "owner/repo=Team Name" --result "owner/repo=fin"
-bun scripts/review.ts add krakow .cache/reviews/file.md  # add a review you ran yourself
-```
-
-`run` reviews with Claude Code (`claude -p`) and adds the scores. Results: `best` (single winner), `1`, `2`, `3` (podium), `fin` (finalist), `ours` (our own entry).
-
-In Claude Code, `/review krakow owner/repo --team "owner/repo=Team Name"` does the same with a subagent.
-
-- **One project later:** the prompt includes the task's existing scores as anonymous anchors, so the new score stays on the same scale.
-- **Whole task again:** pass all its repos in one call with `--fresh`; one reviewer then compares them side by side.
-- **Wrong task:** if the reviewer finds the repo was built for another task, `add` lists it as excluded instead of scoring it.
-- **New task or event:** add `review/rubrics/<id>.toml` (name, kind, order, deadline, brief, checks and `[weights]` adding up to 100), then review repos with that id. Add the teams to `TASKS` in `app/web/data/results.ts` to show them on the results page.
-
-## Build and deploy
-
-Pushes to `main` deploy to production on Dokploy through a GitHub webhook: the Dockerfile builds the site and starts the server.
-
-```bash
-bun run build    # build locally into public/
+bunx shadcn@latest add https://www.fluidfunctionalism.com/r/base/<name>.json
 ```

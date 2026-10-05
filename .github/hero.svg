@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-label="HackYeah 2026 Results: every finalist and every project teams sent in, scored out of 100 by an AI council">
+  <style>
+    text { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; fill: #171717; }
+    .bg { fill: #fafafa; stroke: rgba(0, 0, 0, 0.08); }
+    .card { fill: #ffffff; stroke: rgba(0, 0, 0, 0.08); }
+    .btn { fill: #171717; }
+    .btn-text { fill: #fafafa; }
+    .muted { fill: #737373; }
+    .icon { stroke: none; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #f5f5f5; }
+      .bg { fill: #171717; stroke: rgba(255, 255, 255, 0.1); }
+      .card { fill: #252525; stroke: rgba(255, 255, 255, 0.08); }
+      .btn { fill: #f5f5f5; }
+      .btn-text { fill: #171717; }
+      .muted { fill: #a3a3a3; }
+      .icon { stroke: rgba(255, 255, 255, 0.16); }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="1199" height="599" rx="24" />
+
+  <g transform="translate(56 44) scale(1.25)">
+    <rect class="icon" width="32" height="32" rx="8" fill="#171717" />
+    <rect x="8" y="17" width="4" height="7" rx="1" fill="#a3a3a3" />
+    <rect x="14" y="9" width="4" height="15" rx="1" fill="#fcd34d" />
+    <rect x="20" y="13" width="4" height="11" rx="1" fill="#d4d4d4" />
+  </g>
+  <text x="110" y="71" font-size="20" font-weight="500">HackYeah 2026 Review</text>
+  <rect class="btn" x="944" y="42" width="200" height="44" rx="10" />
+  <text class="btn-text" x="1044" y="70" font-size="16" font-weight="500" text-anchor="middle">Review my project</text>
+
+  <text class="muted" x="56" y="170" font-size="17">TAURON Arena Kraków · 3–4 October 2026</text>
+  <text x="54" y="228" font-size="50" font-weight="500" letter-spacing="-0.5">HackYeah 2026 Results</text>
+  <text class="muted" font-size="21">
+    <tspan x="56" y="278">Every HackYeah 2026 finalist and every project teams sent in, scored</tspan>
+    <tspan x="56" y="308">out of 100 by an AI council against its task’s official criteria and weights.</tspan>
+  </text>
+
+  <g font-variant-numeric="tabular-nums">
+    <rect class="card" x="56.5" y="372.5" width="259" height="119" rx="16" />
+    <text x="80" y="432" font-size="40" font-weight="500">10</text>
+    <text class="muted" x="80" y="466" font-size="16">Tasks</text>
+
+    <rect class="card" x="332.5" y="372.5" width="259" height="119" rx="16" />
+    <text x="356" y="432" font-size="40" font-weight="500">51</text>
+    <text class="muted" x="356" y="466" font-size="16">Finalists</text>
+
+    <rect class="card" x="608.5" y="372.5" width="259" height="119" rx="16" />
+    <text x="632" y="432" font-size="40" font-weight="500">3</text>
+    <text class="muted" x="632" y="466" font-size="16">AI models score each project</text>
+
+    <rect class="card" x="884.5" y="372.5" width="259" height="119" rx="16" />
+    <text x="908" y="432" font-size="40" font-weight="500">Free</text>
+    <text class="muted" x="908" y="466" font-size="16">Reviews for any team</text>
+  </g>
+
+  <text class="muted" x="56" y="548" font-size="15">hackyeah-review.justadomainname.dev</text>
+  <text class="muted" x="1144" y="548" font-size="15" text-anchor="end">Bun · React · SQLite · open source</text>
+</svg>
