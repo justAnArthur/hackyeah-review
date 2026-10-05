@@ -1,5 +1,5 @@
 // stand-in for OpenRouter's chat endpoint, for local end-to-end runs without a key:
-// OPENROUTER_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock bun server/index.ts
+// OPENROUTER_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock ZAI_BASE_URL=http://localhost:4790 ZAI_API_KEY=mock bun server/index.ts
 const PORT = Number(process.env.MOCK_PORT ?? 4790)
 const FLAKY = process.env.MOCK_FLAKY === "1"
 const BLOCKED = process.env.MOCK_BLOCK_MODEL ?? ""
@@ -44,11 +44,12 @@ Bun.serve({
     if (url.pathname !== "/chat/completions") return new Response("not found", { status: 404 })
     calls++
     if (FLAKY && calls === 2) return new Response("busy", { status: 429, headers: { "retry-after": "2" } })
-    const body = (await req.json()) as { model: string; messages: { role: string; content: string }[] }
+    const body = (await req.json()) as { model: string; messages: { role: string; content: string | unknown[] }[] }
     if (body.model === BLOCKED) return new Response("rate-limited upstream", { status: 429 })
     const system = body.messages.find(m => m.role === "system")?.content ?? ""
     const user = body.messages.find(m => m.role === "user")?.content ?? ""
-    const reply = system ? memberReply(body.model, criteria(system)) : judgeReply(user)
+    if (Array.isArray(user)) return Response.json({ choices: [{ message: { role: "assistant", content: "Image 1 (mock): a mock screen with a list and a map." } }] })
+    const reply = system ? memberReply(body.model, criteria(system as string)) : judgeReply(user as string)
     await Bun.sleep(150)
     return Response.json({ choices: [{ message: { role: "assistant", content: "```json\n" + JSON.stringify(reply) + "\n```" } }] })
   },

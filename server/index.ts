@@ -4,7 +4,7 @@ import { ROOT, loadRubrics } from "../scripts/lib"
 import type { CouncilReview } from "./council"
 import { UPLOADS, events, getJob, getSubmission, openDb, queuePosition } from "./db"
 import { checkRepo, parseRepo } from "./evidence"
-import { quotaUsed } from "./openrouter"
+import { quotaUsed } from "./models"
 import { enqueue, startWorker } from "./queue"
 
 const PORT = Number(process.env.PORT ?? 3000)

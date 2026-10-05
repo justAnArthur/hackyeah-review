@@ -1,8 +1,8 @@
 FROM oven/bun:1
 
-# pdftotext reads uploaded decks; tar unpacks repo tarballs
+# pdftotext reads pdf decks, unzip reads pptx and docx; tar unpacks repo tarballs
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends poppler-utils ca-certificates tar \
+  && apt-get install -y --no-install-recommends poppler-utils unzip ca-certificates tar \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

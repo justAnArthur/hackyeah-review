@@ -2,7 +2,7 @@ import { join } from "node:path"
 import { ROOT, type Rubric, type Score, decode, extractJson, loadRubric, normalizeScores, weightedTotal } from "../scripts/lib"
 import { type Db, type Submission, logEvent } from "./db"
 import { type Facts, builtDuringEvent, liveDemo } from "./evidence"
-import { FatalError, type Message, RateLimited, chat } from "./openrouter"
+import { FatalError, type Message, RateLimited, chat } from "./models"
 
 export type Council = {
   version: number
@@ -11,6 +11,7 @@ export type Council = {
   min_members: number
   members: string[]
   judge: string
+  vision?: string
 }
 
 type MemberReview = {

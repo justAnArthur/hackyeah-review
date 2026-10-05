@@ -23,7 +23,7 @@ type StepState = "complete" | "active" | "pending"
 const time = (ms: number) => new Date(ms).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
 const ENDED = ["done", "failed", "cancelled"]
 
-function steps(s: Status) {
+function steps(s: Status, size: number) {
   const order = ["queued", "evidence", "council", "done"]
   const at = order.indexOf(s.job.step === "failed" ? "council" : s.job.step)
   const members = s.events.filter(e => /^Member [A-H] (scored|gave|is unavailable)/.test(e.message))
@@ -34,14 +34,14 @@ function steps(s: Status) {
     list: [
       { icon: "clock", label: s.job.position > 1 ? `In the queue, #${s.job.position}` : "In the queue", state: state(0) },
       { icon: "search", label: "Collecting evidence from the repo and deck", state: state(1) },
-      { icon: "users", label: `Four council members score the project · ${Math.min(members.length, 4)} of 4`, state: judging || s.job.status === "done" ? "complete" : state(2) },
+      { icon: "users", label: `The council scores the project · ${Math.min(members.length, size)} of ${size}`, state: judging || s.job.status === "done" ? "complete" : state(2) },
       { icon: "brain", label: "The judge writes the review", state: s.job.status === "done" ? "complete" : judging ? "active" : "pending" },
     ] as const,
   }
 }
 
-const Progress = ({ s }: { s: Status }) => {
-  const { list, members } = steps(s)
+const Progress = ({ s, size }: { s: Status; size: number }) => {
+  const { list, members } = steps(s, size)
   const visible = list.filter(x => x.state !== "pending")
   return (
     <Panel>
@@ -182,7 +182,7 @@ const Result = ({ r }: { r: NonNullable<Status["review"]> }) => (
   </>
 )
 
-export const ReviewPage = ({ tasks }: { tasks: TaskOption[] }) => {
+export const ReviewPage = ({ tasks, councilSize }: { tasks: TaskOption[]; councilSize: number }) => {
   const [s, setS] = useState<Status | null>(null)
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
@@ -259,7 +259,7 @@ export const ReviewPage = ({ tasks }: { tasks: TaskOption[] }) => {
             )}
           </div>
         </div>
-        {s.review ? <Result r={s.review} /> : <Progress s={s} />}
+        {s.review ? <Result r={s.review} /> : <Progress s={s} size={councilSize} />}
       </div>
     </Layout>
   )

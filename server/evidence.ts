@@ -2,12 +2,16 @@ import { mkdtemp, readdir, rm, stat } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { basename, extname, join, relative } from "node:path"
 import type { Submission } from "./db"
-import { checkUrl } from "./ssrf"
+import { documentText, htmlText } from "./extract"
+import { fetchPage } from "./ssrf"
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN ?? ""
 const MAX_TARBALL = 150 * 1024 * 1024
-const PACK_BUDGET = 110_000
-const SAMPLE_BUDGET = 40_000
+// about 75k tokens; every council member takes 200k or more
+const PACK_BUDGET = 300_000
+const SAMPLE_BUDGET = 80_000
+const DOCS_BUDGET = 60_000
+const DECKS_BUDGET = 36_000
 
 // 3 Oct 11:00 CEST and 4 Oct 11:00 CEST
 export const EVENT_START = Date.UTC(2026, 9, 3, 9, 0)
@@ -47,8 +51,11 @@ export type Facts = {
   files: number
   tests: { files: number; cases: number }
   screenshots: number
+  screenshots_described: number
   deck: string
-  demo_checks: { url: string; status: string }[]
+  repo_decks: string[]
+  docs_read: number
+  demo_checks: { url: string; status: string; title: string }[]
   injection_hits: string[]
 }
 
@@ -182,11 +189,10 @@ function clip(text: string, max: number) {
   return text.length > max ? `${text.slice(0, max)}\n[… truncated]` : text
 }
 
-function deckText(path: string | null) {
+function uploadedDeck(path: string | null) {
   if (!path) return { text: "", status: "not provided" }
-  const p = Bun.spawnSync(["pdftotext", "-l", "10", "-layout", path, "-"])
-  if (p.exitCode !== 0) return { text: "", status: "uploaded, but the text could not be extracted" }
-  const text = p.stdout.toString().replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim()
+  const text = documentText(path)
+  if (text === null) return { text: "", status: "uploaded, but the text could not be extracted" }
   return { text, status: text ? "uploaded" : "uploaded, but it contains no text (images only)" }
 }
 
@@ -204,7 +210,45 @@ function demoUrls(sub: Submission, readme: string) {
   return [...new Set([...fromForm, ...fromReadme])].slice(0, 3)
 }
 
-export async function buildEvidence(sub: Submission): Promise<Evidence> {
+const DOC_FILE = /\.mdx?$/i
+const DOC_SKIP = /(^|\/)(license|licence|changelog|code_of_conduct|contributing|security|pull_request_template|issue_template)[^/]*$|(^|\/)\.github\//i
+const DECK_FILE = /\.(pdf|pptx|docx)$/i
+const DECK_HINT = /deck|pitch|present|prezent|slide|whitepaper|business|summary|hackyeah|opis|raport|report/i
+const SHOT_FILE = /\.(png|jpe?g|webp)$/i
+// app screens first, then anything in an image or docs folder
+const SHOT_HINTS = [/scre+n|mockup|preview|demo|showcase|(^|[/_.-])ui([/_.-]|$)/i, /(^|\/)(docs?|assets|images?|img|media)\//i]
+const SHOT_SKIP = /logo|icon|favicon|avatar|badge|sprite|emoji|flag|placeholder|splash|background|cover|banner|(^|[/_.-])bg[_.-]/i
+const MIME: Record<string, string> = { ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp" }
+
+export type Shot = { path: string; mime: string; data: Uint8Array }
+
+// a vision model turns screenshots into text the council can read; best effort, a failure only drops the section
+export type Describe = (shots: Shot[]) => Promise<string>
+
+function shotRank(path: string) {
+  const i = SHOT_HINTS.findIndex(r => r.test(path))
+  return i < 0 ? SHOT_HINTS.length : i
+}
+
+function pickShots(files: FileInfo[], max = 5) {
+  return files
+    .filter(f => SHOT_FILE.test(f.path) && !SHOT_SKIP.test(f.path) && f.size > 20_000 && f.size < 3_500_000)
+    .sort((a, b) => shotRank(a.path) - shotRank(b.path) || b.size - a.size)
+    .slice(0, max)
+}
+
+function pickDecks(files: FileInfo[], max = 3) {
+  return files
+    .filter(f => DECK_FILE.test(f.path) && f.size < 30_000_000)
+    .sort((a, b) => Number(DECK_HINT.test(b.path)) - Number(DECK_HINT.test(a.path)) || b.size - a.size)
+    .slice(0, max)
+}
+
+function docOrder(path: string) {
+  return (/(^|\/)docs?\//i.test(path) ? 0 : 1) + path.split("/").length * 0.1
+}
+
+export async function buildEvidence(sub: Submission, describe?: Describe): Promise<Evidence> {
   const meta = await gh(`/repos/${sub.repo}`)
   if (meta.private) throw new Error("repo is private")
   const [languages, commits] = await Promise.all([gh(`/repos/${sub.repo}/languages`), commitStats(sub.repo)])
@@ -218,7 +262,7 @@ export async function buildEvidence(sub: Submission): Promise<Evidence> {
     let testCases = 0
     let screenshots = 0
     const sources: (FileInfo & { text: string })[] = []
-    const docs: string[] = []
+    const docs: { path: string; heading: string; text: string }[] = []
     let readme = ""
     let aiDocs = ""
     const injection = new Set<string>()
@@ -230,10 +274,12 @@ export async function buildEvidence(sub: Submission): Promise<Evidence> {
       }
       const lower = f.path.toLowerCase()
       if (!readme && /^readme(\.md|\.txt)?$/i.test(f.path)) readme = (await readText(join(root, f.path))) ?? ""
-      if (lower.endsWith(".md") && !/^readme/i.test(basename(f.path)) && docs.length < 40) {
+      if (DOC_FILE.test(lower) && !/^readme/i.test(basename(f.path)) && !DOC_SKIP.test(f.path) && docs.length < 60) {
         const text = (await readText(join(root, f.path), 200_000)) ?? ""
-        docs.push(`${f.path}: ${text.match(/^#\s+(.+)$/m)?.[1] ?? ""}`)
+        docs.push({ path: f.path, heading: text.match(/^#\s+(.+)$/m)?.[1] ?? "", text })
         if (/ai[_-]?(workflow|features|disclosure|usage)/i.test(f.path)) aiDocs += `\n## ${f.path}\n${clip(text, 2500)}`
+        const m = text.match(INJECTION)
+        if (m) injection.add(`${f.path}: "${m[0]}"`)
       }
 
       const lang = LANGS[extname(f.path).toLowerCase()]
@@ -260,18 +306,67 @@ export async function buildEvidence(sub: Submission): Promise<Evidence> {
       if (m) injection.add(`${source}: "${m[0]}"`)
     }
 
-    const deck = deckText(sub.deck_path)
+    const deck = uploadedDeck(sub.deck_path)
     const dm = deck.text.match(INJECTION)
     if (dm) injection.add(`deck: "${dm[0]}"`)
 
-    const demoChecks = await Promise.all(demoUrls(sub, readme).map(async url => ({ url, status: await checkUrl(url) })))
+    let decksBudget = DECKS_BUDGET
+    const repoDecks: { path: string; text: string }[] = []
+    for (const f of pickDecks(files)) {
+      const text = documentText(join(root, f.path))
+      if (!text || decksBudget < 2000) continue
+      const chunk = clip(text, Math.min(15_000, decksBudget))
+      repoDecks.push({ path: f.path, text: chunk })
+      decksBudget -= chunk.length
+      const m = text.match(INJECTION)
+      if (m) injection.add(`${f.path}: "${m[0]}"`)
+    }
+
+    docs.sort((a, b) => docOrder(a.path) - docOrder(b.path))
+    let docsBudget = DOCS_BUDGET
+    const docsRead: string[] = []
+    const unread: string[] = []
+    for (const d of docs) {
+      if (docsBudget < 1500 || !d.text.trim()) {
+        unread.push(`${d.path}: ${d.heading}`)
+        continue
+      }
+      const chunk = clip(d.text, Math.min(15_000, docsBudget))
+      docsRead.push(`### ${d.path}\n${chunk}`)
+      docsBudget -= chunk.length
+    }
+
+    const pages = await Promise.all(demoUrls(sub, readme).map(fetchPage))
+    const demoChecks = pages.map(p => {
+      const page = p.html ? htmlText(p.html) : null
+      return { url: p.url, status: p.status, title: page?.title ?? "", description: page?.description ?? "", text: page?.text ?? "" }
+    })
+    for (const d of demoChecks) {
+      const m = d.text.match(INJECTION)
+      if (m) injection.add(`demo page ${d.url}: "${m[0]}"`)
+    }
+
+    const shots = pickShots(files)
+    let shotNotes = ""
+    let described = 0
+    if (describe && shots.length) {
+      const loaded = await Promise.all(
+        shots.map(async f => ({ path: f.path, mime: MIME[extname(f.path).toLowerCase()], data: new Uint8Array(await Bun.file(join(root, f.path)).arrayBuffer()) })),
+      )
+      try {
+        shotNotes = await describe(loaded)
+        described = loaded.length
+      } catch (e) {
+        shotNotes = `(the screenshots could not be described: ${(e as Error).message})`
+      }
+    }
 
     sources.sort((a, b) => centrality(b.path) - centrality(a.path) || b.size - a.size)
     let sampleBudget = SAMPLE_BUDGET
     const samples: string[] = []
-    for (const s of sources.slice(0, 30)) {
+    for (const s of sources.slice(0, 40)) {
       if (sampleBudget < 1500) break
-      const chunk = clip(s.text, Math.min(5000, sampleBudget))
+      const chunk = clip(s.text, Math.min(8000, sampleBudget))
       samples.push(`### ${s.path}\n${chunk}`)
       sampleBudget -= chunk.length
     }
@@ -289,8 +384,11 @@ export async function buildEvidence(sub: Submission): Promise<Evidence> {
       files: files.length,
       tests: { files: testFiles, cases: testCases },
       screenshots,
+      screenshots_described: described,
       deck: deck.status,
-      demo_checks: demoChecks,
+      repo_decks: repoDecks.map(d => d.path),
+      docs_read: docsRead.length,
+      demo_checks: demoChecks.map(({ url, status, title }) => ({ url, status, title })),
       injection_hits: [...injection].slice(0, 10),
     }
 
@@ -298,6 +396,10 @@ export async function buildEvidence(sub: Submission): Promise<Evidence> {
       .filter(f => /(^|\/)(package\.json|pyproject\.toml|requirements\.txt|Cargo\.toml|go\.mod|oh-package\.json5|module\.json5|build-profile\.json5|pubspec\.yaml|Anchor\.toml)$/.test(f.path))
       .slice(0, 6)
     const manifestText = (await Promise.all(manifests.map(async f => `### ${f.path}\n${clip((await readText(join(root, f.path), 100_000)) ?? "", 1500)}`))).join("\n\n")
+    const pageText = demoChecks
+      .filter(d => d.title || d.text)
+      .map(d => `### ${d.url} (${d.status})\nTitle: ${d.title}\nDescription: ${d.description}\n${clip(d.text, 4000)}`)
+      .join("\n\n")
 
     const pack = [
       `# Evidence pack for ${sub.repo}`,
@@ -316,15 +418,22 @@ export async function buildEvidence(sub: Submission): Promise<Evidence> {
         `Instructions on how to open project\n${sub.fields.instructions}`,
         `Additional field for presentation / files\n${sub.fields.additional}`,
       ].join("\n\n")),
-      "## Presentation (text of the uploaded PDF, first 10 pages)",
-      deck.text ? untrusted("deck", clip(deck.text, 12_000)) : `(${deck.status})`,
+      "## Presentation (text of the uploaded PDF, first 15 pages)",
+      deck.text ? untrusted("deck", clip(deck.text, 20_000)) : `(${deck.status})`,
+      "## Decks and documents committed to the repo (extracted text)",
+      repoDecks.length ? untrusted("repo-decks", repoDecks.map(d => `### ${d.path}\n${d.text}`).join("\n\n")) : "(none found)",
       "## README",
-      readme ? untrusted("readme", clip(readme, 9000)) : "(no README)",
+      readme ? untrusted("readme", clip(readme, 15_000)) : "(no README)",
+      "## Docs (full text, docs/ folder first)",
+      docsRead.length ? untrusted("docs", docsRead.join("\n\n")) : "(none)",
+      unread.length ? `## Other docs not included (path: first heading)\n${unread.join("\n")}` : "",
+      aiDocs ? `## AI workflow and disclosure docs\n${untrusted("ai-docs", aiDocs)}` : "",
+      "## Live demo pages (static text of each page; apps rendered by JavaScript show little here)",
+      pageText ? untrusted("demo-pages", pageText) : "(no demo page text)",
+      `## Screenshots (${described} of ${screenshots} images, described by a vision model, not seen by you directly)`,
+      shotNotes ? untrusted("screenshots", shotNotes) : "(none described)",
       "## File tree (vendored and build folders skipped)",
       tree(files),
-      "## Other docs (path: first heading)",
-      docs.join("\n") || "(none)",
-      aiDocs ? `## AI workflow and disclosure docs\n${untrusted("ai-docs", aiDocs)}` : "",
       "## Manifests",
       manifestText ? untrusted("manifests", manifestText) : "(none found)",
       "## Source samples (most central files first, truncated)",

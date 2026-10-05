@@ -75,7 +75,7 @@ const AreaField = (props: { index: number; id: keyof typeof LIMITS; label: strin
   )
 }
 
-export const SubmitPage = ({ tasks }: { tasks: TaskOption[] }) => {
+export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; councilSize: number }) => {
   const [draft, setDraft] = useState<Draft>(EMPTY)
   const [deck, setDeck] = useState<File | null>(null)
   const [consent, setConsent] = useState(false)
@@ -137,7 +137,7 @@ export const SubmitPage = ({ tasks }: { tasks: TaskOption[] }) => {
     <Layout current="/submit">
       <form className="grid min-w-0 gap-5" onSubmit={submit}>
         <PageHeader eyebrow="HackYeah 2026 · Council review" title="Review my project">
-          Fill in what you gave HackTribe. Four AI models score your project against your task's official criteria, a fifth writes the
+          Fill in what you gave HackTribe. {councilSize} AI models score your project against your task's official criteria, another writes the
           review, and it appears with the other results when it's done. It's free and runs on free models, so about 10 projects are
           reviewed a day; the rest wait in the queue.
         </PageHeader>

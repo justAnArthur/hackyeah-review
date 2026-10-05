@@ -40,18 +40,46 @@ export async function isPublicHttps(url: string) {
   }
 }
 
+const MAX_PAGE = 1024 * 1024
+
+async function readCapped(res: Response, max: number) {
+  const reader = res.body?.getReader()
+  if (!reader) return ""
+  const chunks: Uint8Array[] = []
+  let size = 0
+  while (size < max) {
+    const { done, value } = await reader.read()
+    if (done) break
+    chunks.push(value)
+    size += value.length
+  }
+  await reader.cancel()
+  return new TextDecoder().decode(Buffer.concat(chunks).subarray(0, max))
+}
+
 // demo links come from user input, so every hop is re-checked before it is fetched
-export async function checkUrl(url: string, hops = 3): Promise<string> {
-  if (!(await isPublicHttps(url))) return "skipped (not a public https URL)"
+export async function fetchPage(url: string, hops = 3): Promise<{ url: string; status: string; html: string | null }> {
+  if (!(await isPublicHttps(url))) return { url, status: "skipped (not a public https URL)", html: null }
   try {
-    const res = await fetch(url, { method: "GET", redirect: "manual", signal: AbortSignal.timeout(8000) })
+    const res = await fetch(url, {
+      method: "GET",
+      redirect: "manual",
+      signal: AbortSignal.timeout(8000),
+      headers: { accept: "text/html,*/*;q=0.5", "user-agent": "hackyeah-review (+https://hackyeah-review.justadomainname.dev)" },
+    })
     const location = res.headers.get("location")
     if (res.status >= 300 && res.status < 400 && location && hops > 0) {
-      return checkUrl(new URL(location, url).toString(), hops - 1)
+      await res.body?.cancel()
+      return fetchPage(new URL(location, url).toString(), hops - 1)
     }
-    await res.body?.cancel()
-    return `HTTP ${res.status}`
+    const isHtml = res.ok && (res.headers.get("content-type") ?? "").includes("html")
+    if (!isHtml) await res.body?.cancel()
+    return { url, status: `HTTP ${res.status}`, html: isHtml ? await readCapped(res, MAX_PAGE) : null }
   } catch (e) {
-    return `no response (${(e as Error).name === "TimeoutError" ? "timeout" : "error"})`
+    return { url, status: `no response (${(e as Error).name === "TimeoutError" ? "timeout" : "error"})`, html: null }
   }
+}
+
+export async function checkUrl(url: string) {
+  return (await fetchPage(url)).status
 }

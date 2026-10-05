@@ -1,7 +1,8 @@
 import { runCouncil } from "./council"
 import { type Db, type Job, getSubmission, logEvent, updateJob } from "./db"
 import { type Facts, buildEvidence } from "./evidence"
-import { FatalError, QuotaExhausted, RateLimited } from "./openrouter"
+import { FatalError, QuotaExhausted, RateLimited } from "./models"
+import { describeScreenshots } from "./vision"
 
 const MAX_ATTEMPTS = 8
 const PERMANENT = /not found|not public|private|larger than|could not unpack|HTTP 4\d\d/
@@ -50,7 +51,7 @@ export async function processJob(db: Db, job: Job) {
       logEvent(db, job.id, "Collecting evidence from the repo and deck")
       let built: Awaited<ReturnType<typeof buildEvidence>>
       try {
-        built = await buildEvidence(sub)
+        built = await buildEvidence(sub, shots => describeScreenshots(db, shots))
       } catch (e) {
         const msg = (e as Error).message
         throw PERMANENT.test(msg) ? new FatalError(msg) : e
@@ -59,6 +60,7 @@ export async function processJob(db: Db, job: Job) {
       ev = { pack: built.pack, facts: JSON.stringify(built.facts) }
       const f = built.facts
       logEvent(db, job.id, `Found ${f.source_loc.toLocaleString("en")} source lines, ${f.tests.cases} test cases and ${f.commits.count} commits`)
+      logEvent(db, job.id, `Read ${f.docs_read} docs and ${f.repo_decks.length} decks, opened ${f.demo_checks.filter(d => d.title).length} demo pages and described ${f.screenshots_described} screenshots`)
     }
 
     updateJob(db, job.id, { step: "council" })

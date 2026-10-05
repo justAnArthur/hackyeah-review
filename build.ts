@@ -20,6 +20,7 @@ const THEME = `<script>try{const m=matchMedia("(prefers-color-scheme: dark)");co
 const data = await scorecardData()
 const tasks = (await loadRubrics()).map(r => ({ id: r.id, name: r.name, kind: r.kind }))
 const reviewed = data.reduce((n, t) => n + t.projects.length, 0)
+const councilSize = ((await import("./council.toml")).default as { members: string[] }).members.length
 
 const PAGES: { name: PageName; out: string; href?: string; title: string; desc: string; props: object }[] = [
   {
@@ -36,14 +37,14 @@ const PAGES: { name: PageName; out: string; href?: string; title: string; desc: 
     href: "/submit",
     title: "Review my project · HackYeah 2026 Review",
     desc: "Send your HackYeah 2026 project for a free review by an AI council, scored against your task's official criteria.",
-    props: { tasks },
+    props: { tasks, councilSize },
   },
   {
     name: "review",
     out: "review.html",
     title: "Council review · HackYeah 2026 Review",
     desc: "A HackYeah 2026 project reviewed by an AI council against its task's official criteria.",
-    props: { tasks },
+    props: { tasks, councilSize },
   },
 ]
 

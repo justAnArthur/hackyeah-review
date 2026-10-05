@@ -2,16 +2,21 @@
 # means bumping version, so results stay comparable within one version.
 # v2: gemma-4-31b was rate-limited upstream almost every call, and inkling became
 # available only to agentic apps (HTTP 403)
-version = 2
+# v3: glm-4.7-flash joins through z.ai's free API, a vision model describes up to five
+# screenshots, and the evidence pack reads repo decks, full docs and demo pages
+version = 3
 temperature = 0.2
 max_tokens = 12000
 min_members = 3
 
+# "zai:" models go to z.ai's general API (ZAI_API_KEY), the rest to OpenRouter
 members = [
   "nvidia/nemotron-3-ultra-550b-a55b:free",
   "qwen/qwen3.8-27b:free",
   "dots-studio/dots-3-note-preview:free",
   "inclusionai/ling-3.0-flash-sante:free",
+  "zai:glm-4.7-flash",
 ]
 
 judge = "nvidia/nemotron-3-super-120b-a12b:free"
+vision = "zai:glm-4.6v-flash"

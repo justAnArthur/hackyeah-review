@@ -3,7 +3,8 @@ import { extractJson, loadRubric, normalizeScores, weightedTotal } from "../scri
 import { median, parseMember } from "../server/council"
 import { openDb } from "../server/db"
 import { builtDuringEvent, parseRepo } from "../server/evidence"
-import { QuotaExhausted, nextUtcMidnight, takeQuota } from "../server/openrouter"
+import { QuotaExhausted, nextUtcMidnight, route, takeQuota } from "../server/models"
+import { htmlText, officeXmlText } from "../server/extract"
 import { backoff, enqueue, nextJob } from "../server/queue"
 import { isPrivateIp, isPublicHttps } from "../server/ssrf"
 
@@ -119,5 +120,28 @@ describe("ssrf guard", () => {
     expect(await isPublicHttps("http://example.com")).toBe(false)
     expect(await isPublicHttps("https://127.0.0.1/admin")).toBe(false)
     expect(await isPublicHttps("https://user:pw@example.com")).toBe(false)
+  })
+})
+
+describe("text extraction", () => {
+  test("htmlText keeps the title, description and visible text, and drops scripts", () => {
+    const page = htmlText(
+      `<html><head><title>Will to Wheel &amp; more</title><meta name="description" content="Accessibility passport"><script>var x = "<p>hidden</p>"</script></head>` +
+        `<body><nav><a href="/">Home</a></nav><h1>Check a place</h1><p>Before you leave&nbsp;home.</p><style>p{}</style></body></html>`,
+    )
+    expect(page.title).toBe("Will to Wheel & more")
+    expect(page.description).toBe("Accessibility passport")
+    expect(page.text).toBe("Home\nCheck a place\nBefore you leave home.")
+  })
+
+  test("officeXmlText reads pptx and docx text runs, one paragraph per line", () => {
+    const slide = `<p:sld><a:p><a:r><a:t>Swoją Drogą</a:t></a:r></a:p><a:p><a:r><a:t>Routes &amp; places</a:t></a:r><a:r><a:t> without stairs</a:t></a:r></a:p></p:sld>`
+    expect(officeXmlText(slide)).toBe("Swoją Drogą\nRoutes & places without stairs")
+    expect(officeXmlText(`<w:body><w:p><w:r><w:t xml:space="preserve">Problem: </w:t></w:r><w:r><w:t>loneliness</w:t></w:r></w:p></w:body>`)).toBe("Problem: loneliness")
+  })
+
+  test("models route by prefix", () => {
+    expect(route("zai:glm-4.7-flash")).toEqual({ provider: "zai", model: "glm-4.7-flash" })
+    expect(route("qwen/qwen3.8-27b:free")).toEqual({ provider: "openrouter", model: "qwen/qwen3.8-27b:free" })
   })
 })
