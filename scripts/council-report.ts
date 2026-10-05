@@ -150,7 +150,7 @@ const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta n
   @media (prefers-color-scheme: dark) { .chip.ok { background: #14532d; color: #bbf7d0; } .chip.warn { background: #78350f; color: #fde68a; } .chip.off { background: #7f1d1d; color: #fecaca; } }
 </style></head><body>
 <h1>Council vs blind reviews</h1>
-<p class="sub">Every project below was scored twice: once by the original blind Claude review, and once by our 3-model council (glm-5.3-flash, dots, ling — median per criterion, glm-5.3 writing the verdict) reading the same public material: repo, decks, docs, demo page, screenshots. The council never saw the original scores. The greyed model ran in some reviews but is excluded from the panel. Generated ${new Date().toISOString().slice(0, 10)}.</p>
+<p class="sub">Every project below was scored twice: once by the original blind Claude review, and once by our 3-model council (glm-5.3-flash, dots, ling — median per criterion, glm-5.3 writing the verdict) reading the same public material: repo, decks, docs, demo page, screenshots. The council never saw the original scores, and since v7 its prompts follow the official rules: deck-first paper review, submission requirements (language, 10-slide deck, AI credit), simple-working over ambitious-broken. The greyed model ran in some reviews but is excluded from the panel. Generated ${new Date().toISOString().slice(0, 10)}.</p>
 <div class="legend">
   <div><b class="score blind">74.5%</b> original blind Claude review</div>
   <div><b class="score council">78.0%</b> council score</div>
@@ -164,8 +164,16 @@ const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta n
   <div class="stat"><b>${top1} / ${byTask.length}</b>tasks: same winner picked</div>
 </div>
 ${sections}
-<section id="prompts"><h2>The prompts the council sees</h2>
-<p class="sub">The member prompt below is the real one, filled in for the Sport &amp; Healthcare task. Every member of every task gets this same shape: rules, the task brief with the official criteria and weights, task-specific checks, and calibration anchors (other entries' blind scores, never the entry under review). The evidence pack — measured facts, the form, deck text, README, docs, demo page, screenshot descriptions, file tree, manifests, source samples — arrives as the member's single user message.</p>
+<section id="prompts"><h2>The prompts and per-task reviewing guides</h2>
+<p class="sub">Every task has its own reviewing guide (what the organizer asked for, how to read each criterion for that task, evidence checklist, verification steps, weak-entry patterns) — it travels inside the member prompt for that task, together with the task brief, official weights, task-specific checks and calibration anchors (other entries' blind scores, never the entry under review). Below: all ten guides, the filled member prompt for Sport &amp; Healthcare as an example of the whole assembly, the judge template, and the two image-describer prompts. The evidence pack — measured facts, the form, deck text, README, docs, demo page, screenshot descriptions, file tree, manifests, source samples — arrives as the member's single user message.</p>
+${(
+  await Promise.all(
+    rubrics.map(async r => {
+      const body = await Bun.file(join(ROOT, "review/guides", `${r.id}.md`)).text()
+      return `<details><summary>guide · ${esc(r.name)}</summary><pre>${br(body)}</pre></details>`
+    }),
+  )
+).join("")}
 <details><summary>member system prompt (Sport &amp; Healthcare, filled)</summary><pre>${br(await memberSystemPrompt(await loadRubric("sport"), "sport", "uteg-labs/just-mate"))}</pre></details>
 <details><summary>judge prompt template</summary><pre>${br(await Bun.file(join(ROOT, "review/prompts/council-judge.md")).text())}</pre></details>
 <details><summary>screenshot describer prompt</summary><pre>${br(SHOT_PROMPT)}</pre></details>

@@ -8,6 +8,7 @@ Help cities work better day to day, covering mobility, energy, urban data, publi
 checks = [
   "Is it a day-to-day city tool, or a tool for another domain (defence, emergency services) reframed as Smart City?",
   "Is the core capability real or simulated?",
+  "Would a city actually run this day to day: who operates it, and what data feeds it?",
 ]
 
 [weights]

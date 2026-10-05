@@ -13,7 +13,10 @@
 # v6: three members — zai:glm-4.7-flash leaves the panel (rate-limited often, scored high
 # on weak projects). every project faces the identical panel: a rate-limited member is
 # waited for with backoff, and a member or judge that cannot answer fails the review
-version = 6
+# v7: prompts and per-task checks now encode the official rules — jury process (deck-first
+# paper round, then pitch), submission requirements (language, 10-slide deck, AI credit),
+# and simple-working-beats-ambitious-broken calibration
+version = 7
 temperature = 0.2
 max_tokens = 12000
 

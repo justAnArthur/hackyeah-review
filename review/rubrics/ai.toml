@@ -8,6 +8,7 @@ AI must play a meaningful role for a specific user need. Example directions: fin
 checks = [
   "Did the AI path actually run during the event, or is it cached, mocked or hand-written?",
   "How do users verify AI output and stay in control?",
+  "Is one concrete use case actually demonstrated, and are the AI tools credited (AI_WORKFLOW.md or a disclosure doc)?",
 ]
 
 [weights]

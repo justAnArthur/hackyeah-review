@@ -10,6 +10,7 @@ checks = [
   "Are the semantic controls a real model call, or keyword simulations?",
   "Is the dashboard wired to the gateway, or a mockup?",
   "Count actual test cases; does policy hot reload exist in code?",
+  "Does it run on local models such as Ollama as the rules ask, and are audit logs exportable in code?",
 ]
 
 [weights]

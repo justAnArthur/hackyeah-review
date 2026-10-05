@@ -8,6 +8,7 @@ A technology solution for a real challenge that disproportionately affects women
 checks = [
   "Is the women-specific need explicit in the product, or only implied by naming?",
   "Is there a measurable-impact plan?",
+  "Is the need evidenced (research, data, the target group's own words) rather than assumed by naming?",
 ]
 
 [weights]

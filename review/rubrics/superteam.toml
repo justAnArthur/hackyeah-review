@@ -9,6 +9,8 @@ checks = [
   "Look hard at the on-chain program: admin keys, oracle choice, upgrade authority, backend overrides.",
   "Is there a deployed program id and confirmed devnet transactions? Do not send any transactions yourself.",
   "Does the submitted repo actually contain the code, or does it live in another or pre-event repo?",
+  "The rules say design and test coverage are not graded; spend no points on polish.",
+  "Are the required materials present: live demo, video of at most 3 minutes, repo with a clear README?",
 ]
 
 [weights]

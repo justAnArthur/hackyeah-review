@@ -9,6 +9,8 @@ Required: working MVP (matchmaking mandatory, each extra module scores more), UX
 checks = [
   "Which of the 7 modules exist in code (backend and UI), not only in docs?",
   "Was the project actually built for HubMI? Teams sometimes pivot to another task.",
+  "Matchmaking is mandatory: does it actually return similar existing cases for a described problem?",
+  "Everything must be in Polish: are the UI, description and materials Polish?",
 ]
 
 [weights]

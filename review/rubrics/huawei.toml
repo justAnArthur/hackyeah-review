@@ -10,6 +10,7 @@ checks = [
   "Is the demo a real emulator or device recording, or an animated mockup?",
   "Is AI_WORKFLOW.md present? Any committed keystores or secrets?",
   "Would the app run unchanged on another OS? That scores lower on platform capabilities.",
+  "This task is English-only: are the deck, README and recorded demo in English?",
 ]
 
 [weights]

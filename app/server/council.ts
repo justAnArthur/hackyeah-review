@@ -141,6 +141,7 @@ export async function memberSystemPrompt(rubric: Rubric, task: string, excludeRe
     WEIGHTS_NOTE: rubric.weights_note ? `\n${rubric.weights_note}\n` : "",
     CHECKS: rubric.checks.map(c => `- ${c}`).join("\n") || "- Nothing task-specific.",
     ANCHORS: await anchors(rubric, task, excludeRepo),
+    GUIDE: await Bun.file(join(ROOT, "review/guides", `${task}.md`)).text().catch(() => ""),
   })
 }
 

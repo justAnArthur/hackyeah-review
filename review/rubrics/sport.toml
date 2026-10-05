@@ -8,6 +8,7 @@ Holistically combine sport, physical health, mental wellbeing and access to care
 checks = [
   "Relation to Category: does it touch sport, physical health, mental wellbeing or access to care, and does health data drive decisions?",
   "What would a paper reviewer conclude from the deck alone?",
+  "Does health data drive a decision (a recommendation, alert or plan), or only display measurements?",
 ]
 
 [weights]
