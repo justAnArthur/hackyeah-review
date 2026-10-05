@@ -3,7 +3,7 @@ import { join, normalize } from "node:path"
 import { ROOT, loadRubrics } from "../../scripts/lib"
 import { type CouncilReview, loadCouncil } from "./council"
 import { allCurated, curatedId, insertCurated } from "./curated"
-import { UPLOADS, events, getJob, getSubmission, logEvent, openDb, queuePosition } from "./db"
+import { type Submission, UPLOADS, events, getJob, getSubmission, logEvent, openDb, queuePosition } from "./db"
 import { checkRepo, parseRepo } from "./evidence"
 import { DAILY_LIMIT, quotaUsed } from "./models"
 import { enqueue, resumeInterrupted, startWorker } from "./queue"
@@ -78,18 +78,44 @@ async function submit(req: Request, server: Bun.Server<unknown>) {
     await Bun.write(deckPath, deck)
   }
 
-  const now = Date.now()
-  const old = db.query<{ id: string }, [string, string]>("select id from submissions where repo = ? and task = ? and hidden = 0").all(repo, task)
+  const { title, team, ...fields } = values
+  addSubmission({ id, task, team, title, result, repo, fields, deck_path: deckPath, ip_hash: ipHash, source: "form" })
+  return json({ id, url: `/r/${id}` }, 201)
+}
+
+// one active submission per repo and task: a newer one replaces the old
+function addSubmission(s: Omit<Submission, "created_at" | "hidden">) {
+  const old = db.query<{ id: string }, [string, string]>("select id from submissions where repo = ? and task = ? and hidden = 0").all(s.repo, s.task)
   for (const o of old) {
     db.query("update submissions set hidden = 2 where id = ?").run(o.id)
     db.query("update jobs set status = 'cancelled' where id = ? and status not in ('done', 'failed')").run(o.id)
   }
 
-  const { title, team, ...fields } = values
   db.query(
-    "insert into submissions (id, created_at, task, team, title, result, repo, fields, deck_path, ip_hash) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-  ).run(id, now, task, team, title, result, repo, JSON.stringify(fields), deckPath, ipHash)
-  enqueue(db, id)
+    "insert into submissions (id, created_at, task, team, title, result, repo, fields, deck_path, ip_hash, source) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+  ).run(s.id, Date.now(), s.task, s.team, s.title, s.result, s.repo, JSON.stringify(s.fields), s.deck_path, s.ip_hash, s.source)
+  enqueue(db, s.id)
+}
+
+type AdminSubmission = { task: string; team: string; title: string; repo: string; result?: string; fields?: Partial<Submission["fields"]> }
+
+// a review a team asked for somewhere else, such as the HackYeah Discord, added without the form;
+// it shows with the other community submissions
+async function adminSubmission(req: Request) {
+  if (!isAdmin(req)) return fail("Not allowed.", 403)
+  const body = (await req.json().catch(() => null)) as AdminSubmission | null
+  if (!body?.title || !body.team) return fail("Send the task, team, title and repo.")
+  if (!tasks.some(t => t.id === body.task)) return fail("Unknown task.")
+  const result = body.result ?? "Not a finalist"
+  if (!RESULTS.includes(result)) return fail("Unknown result.")
+  const repo = parseRepo(body.repo ?? "")
+  if (!repo) return fail("The repo must be a GitHub link.")
+  const repoError = await checkRepo(repo)
+  if (repoError) return fail(repoError)
+
+  const id = randomBytes(6).toString("base64url")
+  const fields = { problem: "", solution: "", progress: "", instructions: "", additional: "", ...body.fields }
+  addSubmission({ id, task: body.task, team: body.team, title: body.title, result, repo, fields, deck_path: null, ip_hash: "admin", source: "form" })
   return json({ id, url: `/r/${id}` }, 201)
 }
 
@@ -258,6 +284,7 @@ const server = Bun.serve({
     "/api/community": () => json(community()),
     "/api/finalists": () => json(finalists()),
     "/api/admin/curated": { POST: curated },
+    "/api/admin/submissions": { POST: adminSubmission },
     "/api/admin/reviews/:id/hide": {
       POST: req => {
         if (!isAdmin(req)) return fail("Not allowed.", 403)

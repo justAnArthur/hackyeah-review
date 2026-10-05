@@ -84,6 +84,7 @@ The admin endpoints take `Authorization: Bearer $ADMIN_TOKEN`:
 | `POST /api/admin/reviews/<id>/rerun` | Drops a review and queues it again from fresh evidence. It keeps its upload time |
 | `POST /api/admin/queue/resume` | Wakes reviews waiting for the daily quota, after `DAILY_LIMIT` was raised |
 | `POST /api/admin/curated` | Imports finished finalist reviews and queues the finalists (`{"enqueue": "all"}`) |
+| `POST /api/admin/submissions` | Adds a community submission for a team that asked for a review elsewhere, such as on Discord: `{"task", "team", "title", "repo", "result"?, "fields"?}` |
 
 ```bash
 curl -X POST https://hackyeah-review.justadomainname.dev/api/admin/reviews/<id>/hide -H "authorization: Bearer $ADMIN_TOKEN"
