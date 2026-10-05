@@ -10,7 +10,7 @@ checks = [
   "Is missing data ever shown as accessible?",
   "Is the data real (city open data, OSM) or mostly invented demo venues?",
   "Is the business model priced, with numbers, or one sentence?",
-  "WCAG 2.2 AA evidence: keyboard use, screen reader, contrast, a text alternative to the map?",
+  "WCAG 2.2 AA as the target: keyboard use, screen reader, contrast, a text alternative to the map, and a stated list of known gaps?",
   "Are the deliverables in Polish: description, PDF of at most 10 slides, video of at most 3 minutes?",
 ]
 

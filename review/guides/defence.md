@@ -13,7 +13,7 @@ Something that strengthens security and resilience: prevent, detect earlier, or 
 ## Evidence checklist
 - Degraded scenario actually demonstrated (inputs missing, a service down, stale data).
 - Core security claims implemented: search the repo for the encryption/routing/detection code paths.
-- Real data feeds (Polish services score well: biała lista VAT, GUGiK, IMGW alerts) versus invented events.
+- Real data feeds versus invented events.
 - Alerting/escalation flow reachable in the demo, not a screenshot.
 
 ## Verification steps

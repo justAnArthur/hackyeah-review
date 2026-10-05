@@ -6,10 +6,9 @@ import type { Db } from "./db"
 const DAILY_LIMIT = Number(process.env.DAILY_LIMIT ?? 50)
 const TIMEOUT_MS = Number(process.env.MODEL_TIMEOUT_MS ?? 360_000)
 
-// a model id is an OpenRouter id, "zai:<model>" for z.ai's general API, or "claude:<model>"
-// for the local Claude Code CLI with the z.ai key as its Anthropic login (the coding plan's
-// terms only allow coding tools, so glm-5.3 models come through the CLI, not raw API calls).
-// only OpenRouter's free tier has a daily cap
+// a model id is an OpenRouter id, "zai:<model>" for z.ai's general API, or "claude:<model>" for
+// the Claude Code CLI on the GLM Coding Plan (z.ai's anthropic-compatible endpoint). only
+// OpenRouter counts toward DAILY_LIMIT
 const PROVIDERS = {
   openrouter: {
     base: process.env.OPENROUTER_BASE_URL ?? "https://openrouter.ai/api/v1",
@@ -99,6 +98,19 @@ function textOf(content: Message["content"]) {
 // max_tokens have no CLI equivalents. safe mode skips CLAUDE.md and skills, restricted mode drops
 // Bash and web tools, and the empty temp cwd leaves file tools nothing to reach: the repo this
 // runs from holds the blind reviews the council is compared against, so members must stay blind
+const COOLDOWN_MS = 30 * 60_000
+
+// the CLI prints api errors on stdout or stderr. hitting the coding plan's usage window ("usage
+// limit reached for 5 hour", codes 1308/1310) means waiting for it to reset, so the job retries
+// every half hour; a plain 429 is a short busy spell
+export function cliFailure(model: string, code: number, text: string) {
+  const why = text.trim().replace(/\s+/g, " ").slice(0, 300)
+  if (/usage limit|limit (has been )?reached|\b13(08|10)\b|insufficient (balance|quota)|quota/i.test(text)) return new RateLimited(COOLDOWN_MS)
+  if (/\b429\b|rate.?limit|too many requests|overloaded|\b1305\b/i.test(text)) return new RateLimited(60_000)
+  if (/\b(401|403)\b|invalid api key|authenticat|unauthorized/i.test(text)) return new FatalError(`${model} (claude CLI): ${why}`)
+  return new TransientError(`${model} (claude CLI) exited ${code}: ${why}`)
+}
+
 async function claudeChat(base: string, key: string, model: string, messages: Message[]) {
   const cwd = await mkdtemp(join(tmpdir(), "council-"))
   const system = messages.filter(m => m.role === "system").map(m => textOf(m.content)).join("\n\n")
@@ -125,12 +137,7 @@ async function claudeChat(base: string, key: string, model: string, messages: Me
     const [out, err] = await Promise.all([new Response(proc.stdout).text(), new Response(proc.stderr).text()])
     const code = await proc.exited
     clearTimeout(timer)
-    if (code !== 0) {
-      const why = err.trim().slice(0, 300)
-      if (/429|rate.?limit|quota/i.test(err)) throw new RateLimited(60_000)
-      if (/\b(401|403)\b|invalid api key|authenticat|unauthorized/i.test(err)) throw new FatalError(`${model} (claude CLI): ${why}`)
-      throw new TransientError(`${model} (claude CLI) exited ${code}: ${why}`)
-    }
+    if (code !== 0) throw cliFailure(model, code, `${out}\n${err}`)
     if (!out.trim()) throw new TransientError(`${model} (claude CLI): empty reply`)
     return out
   } catch (e) {
@@ -171,7 +178,12 @@ export async function chat(db: Db, id: string, messages: Message[], opts: { temp
     throw new RateLimited(Number.isFinite(after) && after > 0 ? after * 1000 : 60_000)
   }
   if (res.status >= 500 || res.status === 408) throw new TransientError(`${id}: HTTP ${res.status}`)
-  if (!res.ok) throw new FatalError(`${id}: HTTP ${res.status} ${(await res.text()).slice(0, 300)}`)
+  if (!res.ok) {
+    const text = (await res.text()).slice(0, 300)
+    // openrouter passes upstream failures through as 400 with the provider named; those come and go
+    if (res.status === 400 && /provider returned error|provider_name/i.test(text)) throw new TransientError(`${id}: upstream HTTP 400 ${text}`)
+    throw new FatalError(`${id}: HTTP ${res.status} ${text}`)
+  }
 
   const body = (await res.json()) as any
   if (body.error) {

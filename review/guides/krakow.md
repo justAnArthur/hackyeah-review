@@ -1,7 +1,7 @@
 # Reviewing Cracow without barriers (partner task · City of Kraków, 5,000 PLN, Polish only)
 
 ## What the partner asked for
-A tool for residents and tourists to assess accessibility of places and routes for individual needs, scoped to one group (e.g. wheelchair users and parents with prams). Detailed barrier and facility data (steps, thresholds, ramps, lifts, door width, surface, toilets, rest spots) — never just "accessible or not". Every datum carries a source, date and reliability status; unverified reports visually distinct; a data gap must never display as "accessible". The demo must include a conflicting, incomplete or source-down case. Open data only (Kraków open data, MSIP WMS/WFS, dane.gov.pl, OSM with attribution). Ingestion separate from presentation. WCAG 2.2 AA (keyboard, screen reader, contrast, text alternative to the map). No disability disclosure required. Hosting outside the city, privacy basics, how to add a new city. Deliverables in Polish: description, prototype/demo, target group, data sources with freshness and reliability, business model, PDF ≤10 slides, video ≤3 minutes.
+A tool for residents and tourists to assess accessibility of places and routes for individual needs, scoped to one group (e.g. wheelchair users and parents with prams). Detailed barrier and facility data (steps, thresholds, ramps, lifts, door width, surface, toilets, rest spots) — never just "accessible or not". Every datum carries a source, date and reliability status; unverified reports visually distinct; a data gap must never display as "accessible". The demo must include a conflicting, incomplete or source-down case. Data from open sources (Kraków open data, MSIP WMS/WFS, dane.gov.pl, OSM with attribution), venue owners and user reports, each marked by source; sample data is allowed only if clearly labelled. Ingestion separate from presentation. WCAG 2.2 AA as the development target: the prototype must work with a keyboard and screen reader, keep contrast, offer a text alternative to the map, and may list its known gaps. No disability disclosure required. Hosting outside the city, privacy basics, how to add a new city. Deliverables in Polish: description, prototype/demo, target group, data sources with freshness and reliability, business model, PDF ≤10 slides, video ≤3 minutes.
 
 ## How to read each criterion here
 - **Relation & usability (25)**: the accessibility assessment fits individual needs — filters that change the verdict per person, not one green icon. Wrong-verdict-on-missing-data is the cardinal sin here.
@@ -23,6 +23,6 @@ A tool for residents and tourists to assess accessibility of places and routes f
 3. Identify the ingestion module and check it's separate from the map UI.
 
 ## Weak-entry patterns
-- Invented demo venues with perfect data (violates the open-data rule and the reliability spirit).
+- Sample venues with perfect data that aren't labelled as sample data.
 - One "accessible: yes/no" flag — the brief explicitly rejects it.
 - Beautiful map that a screen reader cannot use, in a task about accessibility.

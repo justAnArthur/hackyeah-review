@@ -1,7 +1,7 @@
 # Reviewing Finance Without Intermediaries (partner task · Superteam Poland, 11,300 PLN)
 
 ## What the partner asked for
-Remove the need for trust from one financial transaction on Solana (devnet fine). The trust-replacing logic must live on-chain — if a backend enforces it, "the intermediary has become you". Name the target user explicitly. At least one full flow from user input to a confirmed transaction, showing the moment the intermediary disappears. Deliverables: live demo, public video ≤3 minutes, repo with a clear README, description with design rationale. Judges ask: where in the code does the intermediary disappear, what if a party vanishes mid-way, who holds which permissions, can the author change anything after deploy, and why blockchain rather than a database. Design and test coverage are explicitly NOT graded.
+Remove the need for trust from one financial transaction on Solana (devnet fine). The trust-replacing logic must live on-chain — if a backend enforces it, "the intermediary has become you". Name the target user explicitly. At least one full flow from user input to a confirmed transaction, showing the moment the intermediary disappears. Deliverables: a description with design rationale, a PDF of at most 10 slides, a public video of at most 3 minutes and the code repository; demo links are optional, and the app is shown live at the presentation. Judges ask: where in the code does the intermediary disappear, what if a party vanishes mid-way, who holds which permissions, can the author change anything after deploy, and why blockchain rather than a database. Design and test coverage are explicitly NOT graded.
 
 ## How to read each criterion here
 - **Relevance (30)**: genuinely trustless for the chosen flow — escrow, conditional payout, fair exchange. A custodial wallet with a nice frontend is off-task.
@@ -12,9 +12,9 @@ Remove the need for trust from one financial transaction on Solana (devnet fine)
 
 ## Evidence checklist
 - On-chain program in the repo (Anchor/Rust or program source), with a deployed program id and confirmed devnet transactions visible in the demo or README. Do not send transactions yourself.
-- Permission map: who can move funds at each state; upgrade authority and admin keys checked — centralized keys are the finding of this task.
+- Permission map: who can move funds at each state; upgrade authority and admin keys checked. Who holds which keys is a question the judges ask (they do not run an audit).
 - The vanishing-party case handled (timeout, refund path) in code.
-- Live demo link and video ≤3 minutes; README explains the flow.
+- PDF deck, video of at most 3 minutes, and a README that explains the flow.
 
 ## Verification steps
 1. Find the program source; read the instruction handlers — where does custody move on-chain?

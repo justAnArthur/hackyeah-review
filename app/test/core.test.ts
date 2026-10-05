@@ -3,7 +3,7 @@ import { extractJson, loadRubric, normalizeScores, weightedTotal } from "../../s
 import { median, parseMember } from "../server/council"
 import { openDb } from "../server/db"
 import { builtDuringEvent, parseRepo } from "../server/evidence"
-import { QuotaExhausted, nextUtcMidnight, route, takeQuota } from "../server/models"
+import { FatalError, QuotaExhausted, RateLimited, TransientError, cliFailure, nextUtcMidnight, route, takeQuota } from "../server/models"
 import { htmlText, officeXmlText } from "../server/extract"
 import { backoff, enqueue, nextJob } from "../server/queue"
 import { isPrivateIp, isPublicHttps } from "../server/ssrf"
@@ -34,6 +34,11 @@ describe("normalizeScores", async () => {
     const scores = normalizeScores(rubric, raw, "t")
     expect(scores.map(s => s.weight)).toEqual(Object.values(rubric.weights))
     expect(weightedTotal(scores)).toBe(80)
+  })
+
+  test("maps a unique shortened criterion name", () => {
+    const short = raw.map(r => ({ ...r, criterion: r.criterion === "Design (visual/UI)" ? "Design" : r.criterion }))
+    expect(normalizeScores(rubric, short, "t").map(s => s.criterion)).toEqual(Object.keys(rubric.weights))
   })
 
   test("rejects a missing criterion", () => {
@@ -144,5 +149,20 @@ describe("text extraction", () => {
     expect(route("claude:glm-5.3-flash")).toEqual({ provider: "claude", model: "glm-5.3-flash" })
     expect(route("zai:glm-4.7-flash")).toEqual({ provider: "zai", model: "glm-4.7-flash" })
     expect(route("qwen/qwen3.8-27b:free")).toEqual({ provider: "openrouter", model: "qwen/qwen3.8-27b:free" })
+  })
+})
+
+describe("claude CLI failures", () => {
+  test("a used-up coding plan window waits half an hour, a busy spell a minute", () => {
+    const window = cliFailure("glm-5.3", 1, 'API Error: 429 {"error":{"code":"1308","message":"Usage limit reached for 5 hour. Your limit will reset at 2026-10-05 22:13:46"}}')
+    expect(window).toBeInstanceOf(RateLimited)
+    expect((window as RateLimited).retryAfterMs).toBe(30 * 60_000)
+    const busy = cliFailure("glm-5.3", 1, "API Error: 429 Too Many Requests")
+    expect((busy as RateLimited).retryAfterMs).toBe(60_000)
+  })
+
+  test("a bad key fails for good, anything else is retried", () => {
+    expect(cliFailure("glm-5.3", 1, "API Error: 401 invalid api key")).toBeInstanceOf(FatalError)
+    expect(cliFailure("glm-5.3", 1, "socket hang up")).toBeInstanceOf(TransientError)
   })
 })

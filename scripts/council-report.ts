@@ -1,186 +1,212 @@
-// builds .cache/council-check/compare.html from the council-check databases plus the blind
-// reviews. the panel score is recomputed per project as the median of the three-member
-// panel (every stored member except zai:glm-4.7-flash), so v5 runs show as the v6 panel
-// bun scripts/council-report.ts
-import { join } from "node:path"
+// builds .cache/council-check/compare.html: one council version against the blind reviews.
+// only reviews made by that version count (newest per project), so runs of different panels never mix
+//   bun scripts/council-report.ts [--version 7]
 import { Database } from "bun:sqlite"
-import { memberSystemPrompt } from "../app/server/council"
+import { join } from "node:path"
+import { parseArgs } from "node:util"
+import { type CouncilReview, loadCouncil, memberSystemPrompt } from "../app/server/council"
 import { DECK_PAGE_PROMPT, SHOT_PROMPT } from "../app/server/evidence"
-import { CACHE, loadRubric, loadRubrics, ROOT } from "./lib"
+import { CACHE, ROOT, type Review, loadRubric, loadRubrics, loadScores } from "./lib"
 
-const EXCLUDED = "zai:glm-4.7-flash"
-const SHORT: Record<string, string> = {
-  "claude:glm-5.3-flash": "glm-5.3-flash",
-  "dots-studio/dots-3-note-preview:free": "dots",
-  "inclusionai/ling-3.0-flash-sante:free": "ling",
-  [EXCLUDED]: "glm-4.7 (off panel)",
-}
+const { values } = parseArgs({ args: process.argv.slice(2), options: { version: { type: "string" } } })
+const council = await loadCouncil()
+const version = Number(values.version ?? council.version)
 
-type Stored = {
-  repo: string
-  task: string
-  project: string
-  weighted_total: number
-  created_at: number
-  scores: { criterion: string; weight: number; members: Record<string, number> }[]
-  council: { version: number; judge_ok: boolean; members: { letter: string; model: string; ok: boolean; total: number | null }[] }
-}
-
-const median = (xs: number[]) => {
-  const s = [...xs].sort((a, b) => a - b)
-  const mid = Math.floor(s.length / 2)
-  return s.length % 2 ? s[mid] : Math.round(((s[mid - 1] + s[mid]) / 2) * 100) / 100
-}
-
-// newest stored review per submission id across every shard db
-const reviews = new Map<string, Stored>()
-const failures: { task: string; repo: string; error: string }[] = []
-for (const dbFile of [...new Bun.Glob("council-check*.db").scanSync(CACHE)].filter(f => f.endsWith(".db"))) {
-  // read-write open: the shards were killed mid-run, so their -wal journals need recovery
-  const db = new Database(join(CACHE, dbFile))
-  for (const { id, review, created_at } of db.query("select id, review, created_at from reviews").all() as any[]) {
-    const parsed = JSON.parse(review) as Stored
-    if (!reviews.has(id) || created_at > reviews.get(id)!.created_at) reviews.set(id, { ...parsed, created_at })
+const reviews = new Map<string, CouncilReview>()
+const failures = new Map<string, { task: string; repo: string; error: string }>()
+for (const file of new Bun.Glob("council-check*.db").scanSync(CACHE)) {
+  const db = new Database(join(CACHE, file))
+  for (const row of db.query<{ id: string; review: string }, []>("select id, review from reviews").all()) {
+    const r = JSON.parse(row.review) as CouncilReview
+    if (r.council.version !== version) continue
+    if ((reviews.get(row.id)?.created_at ?? 0) < r.created_at) reviews.set(row.id, r)
   }
-  for (const j of db.query("select id, error from jobs where status = 'failed'").all() as any[]) {
-    const s = db.query("select task, repo from submissions where id = ?").get(j.id) as any
-    if (s && !reviews.has(j.id)) failures.push({ task: s.task, repo: s.repo, error: j.error ?? "failed" })
+  if (file === `council-check-v${version}.db`) {
+    const failed = db
+      .query<{ id: string; task: string; repo: string; error: string | null }, []>(
+        "select j.id, s.task, s.repo, j.error from jobs j join submissions s on s.id = j.id where j.status = 'failed'",
+      )
+      .all()
+    for (const f of failed) failures.set(f.id, { task: f.task, repo: f.repo, error: f.error ?? "failed" })
   }
   db.close()
 }
+for (const id of reviews.keys()) failures.delete(id)
 
+type Row = { review: CouncilReview; blind: Review; gap: number }
 const rubrics = await loadRubrics()
-const blindOf = (task: string, repo: string) => {
-  const file = Bun.file(join(CACHE, "../app/web/data/scores", `${task}.json`))
-  return file.exists().then(async ok => (ok ? ((await file.json()) as any).projects.find((p: any) => p.repo === repo) : null))
+const tasks: { id: string; name: string; rows: Row[]; failed: { repo: string; error: string }[]; blindCount: number }[] = []
+for (const rubric of rubrics) {
+  const blind = (await loadScores(rubric.id))?.projects ?? []
+  const rows = [...reviews.values()]
+    .filter(r => r.task === rubric.id)
+    .flatMap(r => {
+      const b = blind.find(p => p.repo === r.repo)
+      return b ? [{ review: r, blind: b, gap: r.weighted_total - b.weighted_total }] : []
+    })
+    .sort((a, b) => b.blind.weighted_total - a.blind.weighted_total)
+  const failed = [...failures.values()].filter(f => f.task === rubric.id)
+  tasks.push({ id: rubric.id, name: rubric.name, rows, failed, blindCount: blind.length })
 }
 
-type Row = { project: string; task: string; repo: string; blind: any; panel: { total: number; n: number; scores: { criterion: string; weight: number; score: number; members: Record<string, number> }[] }; judge: boolean; version: number; allMembers: { letter: string; model: string; ok: boolean; total: number | null }[] }
-const rows: Row[] = []
-for (const r of reviews.values()) {
-  const meta = new Map(r.council.members.map(m => [m.letter, m.model]))
-  const scores = r.scores.map(s => {
-    const members = Object.fromEntries(Object.entries(s.members).filter(([l]) => meta.get(l) !== EXCLUDED))
-    return { criterion: s.criterion, weight: s.weight, score: median(Object.values(members)), members }
-  })
-  rows.push({
-    project: r.project,
-    task: r.task,
-    repo: r.repo,
-    blind: await blindOf(r.task, r.repo),
-    panel: { total: Math.round(scores.reduce((sum, s) => sum + (s.score * s.weight) / 10, 0) * 100) / 100, n: Math.min(...scores.map(s => Object.keys(s.members).length)), scores },
-    judge: r.council.judge_ok,
-    version: r.council.version,
-    allMembers: r.council.members,
-  })
+const all = tasks.flatMap(t => t.rows)
+const total = tasks.reduce((n, t) => n + t.blindCount, 0)
+const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0)
+const mae = mean(all.map(r => Math.abs(r.gap)))
+const bias = mean(all.map(r => r.gap))
+const within = (d: number) => all.filter(r => Math.abs(r.gap) <= d).length
+
+function ranks(xs: number[]) {
+  const order = xs.map((v, i) => [v, i] as const).sort((a, b) => a[0] - b[0])
+  const out = new Array<number>(xs.length)
+  for (let i = 0; i < order.length; ) {
+    let j = i
+    while (j + 1 < order.length && order[j + 1][0] === order[i][0]) j++
+    for (let k = i; k <= j; k++) out[order[k][1]] = (i + j) / 2 + 1
+    i = j + 1
+  }
+  return out
 }
+
+// spearman's rho: does the council order projects the way the blind reviews do
+function spearman(a: number[], b: number[]) {
+  if (a.length < 3) return null
+  const [ra, rb] = [ranks(a), ranks(b)]
+  const [ma, mb] = [mean(ra), mean(rb)]
+  const cov = mean(ra.map((x, i) => (x - ma) * (rb[i] - mb)))
+  const sd = (r: number[], m: number) => Math.sqrt(mean(r.map(x => (x - m) ** 2)))
+  return cov / (sd(ra, ma) * sd(rb, mb))
+}
+
+const rho = spearman(all.map(r => r.review.weighted_total), all.map(r => r.blind.weighted_total))
+const contested = tasks.filter(t => t.rows.length >= 2)
+const sameTop = contested.filter(t => {
+  const top = (key: (r: Row) => number) => t.rows.reduce((a, b) => (key(b) > key(a) ? b : a)).review.repo
+  return top(r => r.blind.weighted_total) === top(r => r.review.weighted_total)
+}).length
 
 const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1)
-const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;")
-const br = (s: string) => esc(s).split("\n").join("<br>")
-const bar = (v: number, cls: string) => `<b class="score ${cls}">${fmt(v)}%</b>`
-const chip = (gap: number) =>
-  `<span class="chip ${Math.abs(gap) <= 5 ? "ok" : Math.abs(gap) <= 10 ? "warn" : "off"}">${gap >= 0 ? "+" : ""}${fmt(gap)}</span>`
+const signed = (n: number) => `${n >= 0 ? "+" : "−"}${fmt(Math.abs(n))}`
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+const tone = (gap: number) => (Math.abs(gap) <= 5 ? "ok" : Math.abs(gap) <= 10 ? "warn" : "off")
+const short = (model: string) => model.replace(/^(claude|zai):/, "").replace(/^[\w-]+\//, "").replace(/:free$/, "")
 
-const compared = rows.filter(r => r.blind && r.panel.n >= 2)
-const gaps = compared.map(r => r.panel.total - r.blind.weighted_total)
-const meanGap = gaps.length ? gaps.reduce((a, b) => a + Math.abs(b), 0) / gaps.length : 0
-const within5 = gaps.filter(g => Math.abs(g) <= 5).length
-const byTask = rubrics.map(r => compared.filter(x => x.task === r.id)).filter(xs => xs.length >= 2)
-const top1 = byTask.filter(
-  xs => xs.reduce((a, b) => (a.blind.weighted_total >= b.blind.weighted_total ? a : b)).repo === xs.reduce((a, b) => (a.panel.total >= b.panel.total ? a : b)).repo,
-).length
+function projectRow(r: Row) {
+  const members = r.review.council.members
+    .map(m => `<span class="member">${esc(short(m.model))} <b>${m.total === null ? "–" : fmt(m.total)}</b></span>`)
+    .join("")
+  const criteria = r.review.scores
+    .map(s => {
+      const b = r.blind.scores.find(x => x.criterion.toLowerCase() === s.criterion.toLowerCase())?.score
+      const d = b === undefined ? null : s.score - b
+      return `<tr><td>${esc(s.criterion)} <span class="dim">${s.weight}%</span></td><td class="num">${b === undefined ? "–" : fmt(b)}</td><td class="num">${fmt(s.score)}</td>
+        <td class="num">${d === null ? "–" : `<span class="delta ${tone(d * 2)}">${signed(d)}</span>`}</td><td class="dim num">${Object.values(s.members).join(" · ")}</td></tr>`
+    })
+    .join("")
+  return `<tr>
+    <td><div class="project">${esc(r.review.project)}</div><div class="dim mono">${esc(r.review.repo)}</div></td>
+    <td class="num">${fmt(r.blind.weighted_total)}</td>
+    <td class="num strong">${fmt(r.review.weighted_total)}</td>
+    <td class="num"><span class="chip ${tone(r.gap)}">${signed(r.gap)}</span></td>
+    <td>${members}</td>
+  </tr>
+  <tr class="more"><td colspan="5"><details><summary>Criteria</summary>
+    <table class="inner"><thead><tr><th>Criterion</th><th class="num">Blind</th><th class="num">Council</th><th class="num">Δ</th><th class="num">Members</th></tr></thead><tbody>${criteria}</tbody></table>
+    <p class="verdict"><b>Council verdict.</b> ${esc(r.review.verdict)}</p>
+    <p class="verdict"><b>Blind verdict.</b> ${esc(r.blind.verdict)}</p>
+  </details></td></tr>`
+}
 
-const sections = rubrics
-  .map(r => {
-    const xs = rows.filter(x => x.task === r.id).sort((a, b) => (b.blind?.weighted_total ?? 0) - (a.blind?.weighted_total ?? 0))
-    const failed = failures.filter(f => f.task === r.id)
-    if (!xs.length && !failed.length) return ""
-    return `<section><h2>${esc(r.name)}</h2><table>
-      <thead><tr><th>project</th><th>original review</th><th>council</th><th>difference</th><th>council models</th></tr></thead><tbody>
-      ${xs.map(x => {
-        const members = x.allMembers
-          .map(m => `<span class="m ${m.ok ? (m.model === EXCLUDED ? "off" : "") : "skip"}">${SHORT[m.model] ?? m.model}${m.ok ? ` ${fmt(m.total ?? 0)}` : " skip"}</span>`)
-          .join("")
-        const crit = x.panel.scores
-          .map(s => {
-            const b = x.blind?.scores.find((y: any) => y.criterion === s.criterion)?.score
-            const d = s.score - (b ?? 0)
-            return `<tr><td>${esc(s.criterion)} <small>${s.weight}%</small></td><td>${b === undefined ? "–" : fmt(b)}</td><td>${fmt(s.score)}</td><td>${d >= 0 ? "+" : ""}${fmt(d)}</td><td><small>${Object.values(s.members).join(" / ")}</small></td></tr>`
-          })
-          .join("")
-        return `<tr><td><b>${esc(x.project)}</b><small>${esc(x.repo)}</small></td>
-          <td>${bar(x.blind?.weighted_total ?? 0, "blind")}</td>
-          <td>${bar(x.panel.total, "council")}</td>
-          <td>${x.blind ? chip(x.panel.total - x.blind.weighted_total) : "–"}</td>
-          <td>${members}<small class="judge">${x.judge ? "judge ✓" : "judge fallback"} · ran as v${x.version}${x.panel.n < 3 ? ` · ${x.panel.n} members only` : ""}</small></td></tr>
-          <tr class="detail"><td colspan="5"><details><summary>show the five criteria (idea, category fit, usability, design, completeness)</summary><table>
-          <thead><tr><th>criterion</th><th>blind</th><th>council</th><th>Δ</th><th>member scores</th></tr></thead>${crit}</table></details></td></tr>`
-      }).join("")}
-      ${failed.map(f => `<tr class="failed"><td><b>${esc(f.repo)}</b><small>${esc(f.task)}</small></td><td colspan="4">no review — ${esc(f.error.slice(0, 90))}</td></tr>`).join("")}
-      </tbody></table></section>`
-  })
+const sections = tasks
+  .filter(t => t.rows.length || t.failed.length)
+  .map(
+    t => `<section><h2>${esc(t.name)} <span class="dim">${t.rows.length} of ${t.blindCount} compared</span></h2>
+    <table><thead><tr><th>Project</th><th class="num">Blind</th><th class="num">Council</th><th class="num">Gap</th><th>Members</th></tr></thead><tbody>
+    ${t.rows.map(projectRow).join("")}
+    ${t.failed.map(f => `<tr class="failed"><td><div class="mono">${esc(f.repo)}</div></td><td colspan="4">No council review: ${esc(f.error.slice(0, 160))}</td></tr>`).join("")}
+    </tbody></table></section>`,
+  )
   .join("")
 
-const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Council vs blind reviews · HackYeah 2026</title><style>
-  :root { color-scheme: light dark; --ink: #1f2937; --paper: #fff; --dim: #6b7280; --line: rgba(0,0,0,.08); --wash: rgba(0,0,0,.05); }
-  @media (prefers-color-scheme: dark) { :root { --ink: #e5e7eb; --paper: #141414; --dim: #9ca3af; --line: rgba(255,255,255,.1); --wash: rgba(255,255,255,.06); } }
-  body { font: 14px/1.5 ui-sans-serif, system-ui, sans-serif; margin: 0 auto; max-width: 980px; padding: 32px 20px 60px; color: var(--ink); background: var(--paper); }
-  h1 { font-size: 22px; margin: 0 0 4px; } h2 { font-size: 16px; margin: 28px 0 8px; color: var(--ink); }
-  .sub { color: var(--dim); margin-bottom: 20px; max-width: 72ch; }
-  .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
-  .stat { border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; }
-  .stat b { font-size: 18px; display: block; }
-  table { border-collapse: collapse; width: 100%; }
-  th, td { text-align: left; padding: 6px 10px 6px 0; vertical-align: middle; border-bottom: 1px solid var(--line); }
-  th { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); }
-  td small { display: block; color: var(--dim); font-weight: 400; font-size: 11px; }
-  .score { font-size: 15px; font-variant-numeric: tabular-nums; }
-  .score.blind { color: var(--dim); } .score.council { color: #16a34a; }
-  .chip { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: 12px; font-weight: 600; }
-  .chip.ok { background: #dcfce7; color: #166534; } .chip.warn { background: #fef3c7; color: #92400e; } .chip.off { background: #fee2e2; color: #991b1b; }
-  .m { display: inline-block; margin-right: 6px; font-size: 12px; } .m.skip { color: var(--dim); text-decoration: line-through; } .m.off { color: var(--dim); }
-  .judge { display: block; }
-  .legend { display: grid; gap: 6px; margin: 0 0 18px; color: var(--dim); font-size: 12.5px; }
-  .legend .bar { width: 40px; }
-  tr.failed td { color: var(--dim); } tr.detail td { border-bottom: none; padding-top: 0; }
-  details summary { cursor: pointer; color: var(--dim); font-size: 12px; margin: 6px 0; }
-  pre { background: var(--wash); color: var(--ink); border-radius: 10px; padding: 14px; font-size: 12px; line-height: 1.55; overflow-x: auto; white-space: normal; }
-  @media (prefers-color-scheme: dark) { .chip.ok { background: #14532d; color: #bbf7d0; } .chip.warn { background: #78350f; color: #fde68a; } .chip.off { background: #7f1d1d; color: #fecaca; } }
-</style></head><body>
-<h1>Council vs blind reviews</h1>
-<p class="sub">Every project below was scored twice: once by the original blind Claude review, and once by our 3-model council (glm-5.3-flash, dots, ling — median per criterion, glm-5.3 writing the verdict) reading the same public material: repo, decks, docs, demo page, screenshots. The council never saw the original scores, and since v7 its prompts follow the official rules: deck-first paper review, submission requirements (language, 10-slide deck, AI credit), simple-working over ambitious-broken. The greyed model ran in some reviews but is excluded from the panel. Generated ${new Date().toISOString().slice(0, 10)}.</p>
-<div class="legend">
-  <div><b class="score blind">74.5%</b> original blind Claude review</div>
-  <div><b class="score council">78.0%</b> council score</div>
-  <div><span class="chip ok">+3.5</span> difference: green within 5 pts, amber within 10, red further</div>
-  <div><span class="m">model 71</span> each council model's own total · <span class="m skip">skip</span> model unavailable · <span class="m off">grey</span> excluded from the panel</div>
-</div>
-<div class="stats">
-  <div class="stat"><b>${compared.length} / 25</b>projects reviewed so far</div>
-  <div class="stat"><b>${fmt(meanGap)}</b>points off on average</div>
-  <div class="stat"><b>${within5} / ${compared.length}</b>within ±5 of the original</div>
-  <div class="stat"><b>${top1} / ${byTask.length}</b>tasks: same winner picked</div>
-</div>
-${sections}
-<section id="prompts"><h2>The prompts and per-task reviewing guides</h2>
-<p class="sub">Every task has its own reviewing guide (what the organizer asked for, how to read each criterion for that task, evidence checklist, verification steps, weak-entry patterns) — it travels inside the member prompt for that task, together with the task brief, official weights, task-specific checks and calibration anchors (other entries' blind scores, never the entry under review). Below: all ten guides, the filled member prompt for Sport &amp; Healthcare as an example of the whole assembly, the judge template, and the two image-describer prompts. The evidence pack — measured facts, the form, deck text, README, docs, demo page, screenshot descriptions, file tree, manifests, source samples — arrives as the member's single user message.</p>
-${(
+const guides = (
   await Promise.all(
-    rubrics.map(async r => {
-      const body = await Bun.file(join(ROOT, "review/guides", `${r.id}.md`)).text()
-      return `<details><summary>guide · ${esc(r.name)}</summary><pre>${br(body)}</pre></details>`
-    }),
+    rubrics.map(async r => `<details><summary>Reviewing guide · ${esc(r.name)}</summary><pre>${esc(await Bun.file(join(ROOT, "review/guides", `${r.id}.md`)).text())}</pre></details>`),
   )
-).join("")}
-<details><summary>member system prompt (Sport &amp; Healthcare, filled)</summary><pre>${br(await memberSystemPrompt(await loadRubric("sport"), "sport", "uteg-labs/just-mate"))}</pre></details>
-<details><summary>judge prompt template</summary><pre>${br(await Bun.file(join(ROOT, "review/prompts/council-judge.md")).text())}</pre></details>
-<details><summary>screenshot describer prompt</summary><pre>${br(SHOT_PROMPT)}</pre></details>
-<details><summary>image-only deck describer prompt</summary><pre>${br(DECK_PAGE_PROMPT)}</pre></details>
-</section>
-</body></html>`
+).join("")
 
-await Bun.write(join(CACHE, "council-check", "compare.html"), html)
-console.log(`${compared.length}/25 compared · mean abs gap ${fmt(meanGap)} · within ±5: ${within5} · top-1 match ${top1}/${byTask.length}`)
-console.log(join(CACHE, "council-check", "compare.html"))
+const panel = council.members.map(short).join(", ")
+const html = `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Council v${version} vs blind reviews</title>
+<style>
+  :root { --bg: #fafafa; --card: #fff; --fg: #171717; --dim: #737373; --line: #e5e5e5;
+    --ok: #166534; --ok-bg: #dcfce7; --warn: #92400e; --warn-bg: #fef3c7; --off: #991b1b; --off-bg: #fee2e2; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #171717; --card: #1e1e1e; --fg: #f5f5f5; --dim: #a3a3a3; --line: #2e2e2e;
+    --ok: #bbf7d0; --ok-bg: #14532d; --warn: #fde68a; --warn-bg: #78350f; --off: #fecaca; --off-bg: #7f1d1d; color-scheme: dark; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.55 Inter, ui-sans-serif, system-ui, sans-serif; }
+  main { max-width: 960px; margin: 0 auto; padding: 48px 16px 72px; }
+  h1 { font-size: 24px; font-weight: 600; margin: 0 0 6px; letter-spacing: -.01em; }
+  h2 { font-size: 16px; font-weight: 600; margin: 36px 0 10px; }
+  h2 .dim { font-weight: 400; font-size: 13px; margin-left: 6px; }
+  p { margin: 0 0 10px; max-width: 75ch; }
+  .dim { color: var(--dim); } .mono { font-family: ui-monospace, Menlo, monospace; font-size: 12px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 24px 0; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .stat b { display: block; font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--dim); font-size: 12px; }
+  .note { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin: 16px 0; }
+  .note ul { margin: 6px 0 0; padding-left: 18px; } .note li { margin: 4px 0; max-width: 80ch; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  th, td { padding: 9px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  th { font-size: 11px; font-weight: 500; color: var(--dim); text-transform: uppercase; letter-spacing: .04em; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .strong { font-weight: 600; } .project { font-weight: 500; }
+  .member { display: inline-block; margin: 0 10px 2px 0; font-size: 12px; color: var(--dim); } .member b { color: var(--fg); font-weight: 500; }
+  .chip, .delta { display: inline-block; border-radius: 999px; padding: 1px 8px; font-size: 12px; font-weight: 600; }
+  .delta { padding: 0 6px; font-weight: 500; }
+  .ok { background: var(--ok-bg); color: var(--ok); } .warn { background: var(--warn-bg); color: var(--warn); } .off { background: var(--off-bg); color: var(--off); }
+  tr.more td { padding-top: 0; } tr.failed td { color: var(--dim); }
+  details summary { cursor: pointer; color: var(--dim); font-size: 12px; padding: 4px 0; }
+  table.inner { border: 0; margin: 6px 0 10px; } table.inner td, table.inner th { padding: 5px 8px; }
+  .verdict { font-size: 13px; color: var(--dim); } .verdict b { color: var(--fg); font-weight: 500; }
+  pre { white-space: pre-wrap; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 12px; }
+  @media (max-width: 640px) { th:nth-child(5), td:nth-child(5) { display: none; } }
+</style></head><body><main>
+<h1>Council v${version} vs blind reviews</h1>
+<p class="dim">HackYeah 2026 Review · generated ${new Date().toISOString().slice(0, 16).replace("T", " ")} UTC</p>
+<p>Each project here was scored twice against its task's official weights: first by a blind Claude Opus review (an agent with the whole repo, its decks, docs and screenshots, which did not run the code), then by the council: ${esc(panel)} score an evidence pack built from the same public material, the median per criterion is the result, and ${esc(short(council.judge))} writes the verdict.</p>
+
+<div class="stats">
+  <div class="stat"><b>${all.length} / ${total}</b><span>projects compared</span></div>
+  <div class="stat"><b>${fmt(mae)}</b><span>mean absolute gap, points of 100</span></div>
+  <div class="stat"><b>${signed(bias)}</b><span>mean signed gap (council − blind)</span></div>
+  <div class="stat"><b>${within(5)} / ${all.length}</b><span>within ±5 points (±10: ${within(10)})</span></div>
+  <div class="stat"><b>${rho === null ? "–" : rho.toFixed(2)}</b><span>rank correlation (Spearman)</span></div>
+  <div class="stat"><b>${sameTop} / ${contested.length}</b><span>tasks with the same top project</span></div>
+</div>
+
+<div class="note"><b>How to read this</b><ul>
+  <li>The blind review is a reference, not ground truth: it is one model's careful reading, and the jury, who saw the pitches, often disagreed with it.</li>
+  <li>The council is told neither the jury result nor this project's blind score. It does get calibration anchors: the blind scores and verdicts of two or three <i>other</i> entries in the same task, to keep it on the same scale. Agreement measured here is therefore not fully independent of the blind reviews.</li>
+  <li>The evidence pack holds measured repo facts, the project description, extracted deck and doc text, demo page text and screenshot descriptions, up to about 75k tokens. The council reads that pack once; the blind reviewer could open any file.</li>
+  <li>Gap colours: green within 5 points, amber within 10, red beyond. Criterion deltas use half those bands, on the 0–10 scale.</li>
+</ul></div>
+
+${sections || "<p>No reviews for this version yet. Run <span class='mono'>bun scripts/council-check.ts --all</span>.</p>"}
+
+<section><h2>Prompts and reviewing guides</h2>
+<p class="dim">Each task's guide travels inside that task's member prompt, together with the brief, official weights, task checks and the calibration anchors. The evidence pack is the member's single user message.</p>
+${guides}
+<details><summary>Member system prompt, filled for Sport &amp; Healthcare</summary><pre>${esc(await memberSystemPrompt(await loadRubric("sport"), "sport", "uteg-labs/just-mate"))}</pre></details>
+<details><summary>Judge prompt template</summary><pre>${esc(await Bun.file(join(ROOT, "review/prompts/council-judge.md")).text())}</pre></details>
+<details><summary>Screenshot describer prompt</summary><pre>${esc(SHOT_PROMPT)}</pre></details>
+<details><summary>Image-only deck describer prompt</summary><pre>${esc(DECK_PAGE_PROMPT)}</pre></details>
+</section>
+</main></body></html>
+`
+
+const out = join(CACHE, "council-check", "compare.html")
+await Bun.write(out, html)
+console.log(`council v${version}: ${all.length}/${total} compared · mean abs gap ${fmt(mae)} · signed ${signed(bias)} · within ±5 ${within(5)} · rho ${rho === null ? "–" : rho.toFixed(2)} · same top ${sameTop}/${contested.length}`)
+console.log(out)

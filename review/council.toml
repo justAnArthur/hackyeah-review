@@ -16,7 +16,11 @@
 # v7: prompts and per-task checks now encode the official rules — jury process (deck-first
 # paper round, then pitch), submission requirements (language, 10-slide deck, AI credit),
 # and simple-working-beats-ambitious-broken calibration
-version = 7
+# v8: the guides, task checks and prompts were audited against the official rules and details
+# documents: invented score caps, unsourced claims and a generic jury process were removed or
+# corrected, and requirements are now task-specific. a garbled reply or an upstream provider
+# error is retried with the job instead of failing the review
+version = 8
 temperature = 0.2
 max_tokens = 12000
 

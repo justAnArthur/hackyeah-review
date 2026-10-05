@@ -1,17 +1,17 @@
 # Reviewing Smart City (HackYeah 2026 open task, 8,000 PLN)
 
 ## What the organizer asked for
-Help cities work better day to day: mobility, energy, urban data, public services, quality of life, crisis response. No detailed brief was published — the site paragraph is the brief — so judge whether a city would actually run this.
+Help cities work better day to day: mobility, energy, urban data, public services, quality of life, crisis response. No detailed brief was published — the site paragraph is the brief — so judge whether it would measurably improve city life for the people it serves.
 
 ## How to read each criterion here
-- **Idea & Innovation (30)**: a city-operations insight, not a consumer app with "smart city" in the title. Strong entries use urban data to change a decision (dispatch, routing, budget, alerting).
+- **Idea & Innovation (30)**: an insight into how a city works, for residents or for city staff, not a generic app with "smart city" in the title. Strong entries use urban data to change a decision (a route, a report, a dispatch, an alert).
 - **Relation to Category (20)**: day-to-day municipal reality. Tools for armies, private companies or one-off emergencies reframed as "city" score low; crisis response for city services counts.
-- **Practical Applicability / Usability (20)**: name the operator — a city office, ZTP, a resident. If nobody in a municipality would log in, it's a demo toy.
+- **Practical Applicability / Usability (20)**: name who uses it day to day (residents, city staff or both) and what they get from it.
 - **Design (20)**: maps and density are the native UI; legend, contrast and zoom behavior matter.
 - **Completeness & Implementation (10)**: the data pipeline exists; the map isn't a static image with pins.
 
 ## Evidence checklist
-- Real urban data feed in code (ZTP Kraków GTFS, GUGiK/Geoportal, GIOŚ, GUS BDL, OSM) — juries recognize and reward real Polish integrations.
+- Real urban data feed in code (ZTP Kraków GTFS, GUGiK/Geoportal, GIOŚ, GUS BDL, OSM).
 - The core capability computed, not simulated: actual ETA, actual overlay, actual aggregation.
 - A named city role that would use the result.
 
@@ -22,5 +22,5 @@ Help cities work better day to day: mobility, energy, urban data, public service
 
 ## Weak-entry patterns
 - A map with hardcoded pins called "city platform".
-- Warsaw ZTM clone (wrong city, most-crowded demo in Poland) or a generic smog dashboard.
+- A transit or smog dashboard that only re-displays an existing public feed.
 - Crisis command centre theatre with no live input.

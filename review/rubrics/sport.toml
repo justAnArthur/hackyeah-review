@@ -3,7 +3,7 @@ kind = "Open task"
 order = 2
 deadline = "Sun 4 Oct 2026 11:00 CEST (open-task rules also mention 23:00)"
 brief = """
-Holistically combine sport, physical health, mental wellbeing and access to care. Turn scattered health data into better decisions, not just monitoring. (No detailed brief was published; the site paragraph is the brief.) Round one is a paper review of a deck of up to 10 slides, a description and the repo, demo or video; a project needs at least 50% to reach the live pitch.
+Holistically combine sport, physical health, mental wellbeing and access to care. Turn scattered health data into better decisions, not just monitoring. (No detailed brief was published; the site paragraph is the brief.) Round one is a review of the whole submission (deck of up to 10 slides, description, repo, demo or video) by at least three mentors; the jury then picks finalists for a live pitch, and a project needs at least 50% of the points to receive the award.
 """
 checks = [
   "Relation to Category: does it touch sport, physical health, mental wellbeing or access to care, and does health data drive decisions?",

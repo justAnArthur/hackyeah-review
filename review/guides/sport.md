@@ -1,11 +1,11 @@
 # Reviewing Sport & Healthcare (HackYeah 2026 open task, 8,000 PLN)
 
 ## What the organizer asked for
-Holistically combine sport, physical health, mental wellbeing and access to care. Turn scattered health data into better decisions — not another monitoring dashboard. Round one is a paper review of a deck of up to 10 slides, the description, and the repo/demo/video; a project needs at least 50% to reach the live pitch.
+Holistically combine sport, physical health, mental wellbeing and access to care. Turn scattered health data into better decisions — not another monitoring dashboard. Round one is a review of the whole submission (deck of up to 10 slides, description, repo, demo or video) by at least three mentors; the jury then picks finalists for a live pitch. A project needs at least 50% of the points to receive the award.
 
 ## How to read each criterion here
-- **Idea & Innovation (30)**: a decision the user couldn't make before (train differently, see a doctor, adjust medication load), not a nicer chart of data they already have. Historically the winning shape here is simple + security-credible (mDawka: e-prescription to calendar reminders, won 1st of 37).
-- **Relation to Category (20)**: does it genuinely touch sport, physical health, mental wellbeing or access to care, and does health data drive a recommendation, alert or plan? Fitness-flavored generic apps score 4–5, not 8.
+- **Idea & Innovation (30)**: a decision the user couldn't make before (train differently, see a doctor, adjust medication load), not a nicer chart of data they already have.
+- **Relation to Category (20)**: does it genuinely touch sport, physical health, mental wellbeing or access to care, and does health data drive a recommendation, alert or plan? A generic fitness app where no health decision changes is weak here.
 - **Practical Applicability / Usability (20)**: would a patient or athlete actually use it? Consent flows, unclear medical claims ("diagnoses cancer") cost points.
 - **Design (20)**: health tools need calm, legible UI; screenshot descriptions are your evidence.
 - **Completeness & Implementation (10)**: the decision logic exists in code; integrations (watch data, e-prescription) are real or honestly stubbed.

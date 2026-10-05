@@ -4,12 +4,12 @@
 An innovative system feature or app for an OpenHarmony-based mobile device, leading with Intelligent Experiences, Spatial Experiences or Human-Centric Technology. ArkTS/ArkUI or C/C++ (cross-platform allowed if there is an OHOS target), HarmonyOS/OpenHarmony/Oniro, API 20+ as declared minimum. Must run on an emulator or device with reproducible setup. Deliverables: public repo, setup/build/launch instructions, working .hap, short recorded demo, architecture description, AI_WORKFLOW.md, AI integration docs if AI features exist. English only.
 
 ## How to read each criterion here
-- **Originality (20)**: a device-experience idea, not a web app ported to mobile. Fold the OpenHarmony capabilities (distributed devices, service cards, HMS alternatives) into the idea.
+- **Originality (20)**: a device-experience idea. A port of an existing app can be original too, if it solves something non-obvious along the way (details document). Fold the OpenHarmony capabilities (distributed devices, service cards, HMS alternatives) into the idea.
 - **Demonstrated usefulness (20)**: a person would want this on the phone; the use case survives contact with reality.
-- **Technical execution (20)**: real ArkTS/ArkUI structure, correct lifecycle, sensible state management; build files coherent.
+- **Technical execution (20)**: real ArkTS/ArkUI structure, correct lifecycle, sensible state management; build files coherent; no secrets committed to the repo (basic hygiene).
 - **Platform capabilities (20)**: uses at least one OHOS capability beyond a generic webview. A Flutter app that happens to build scores low here.
 - **Demo quality (10)**: an actual emulator/device recording showing the feature working.
-- **Reproducibility & transparency (10)**: instructions that a stranger could follow to build and run; no committed keystores or secrets (a real disqualifier smell).
+- **Reproducibility & transparency (10)**: instructions that a stranger could follow to build and run.
 
 ## Evidence checklist
 - `build-profile.json5` declares minimum API 20+; permissions in `module.json5` match the features.
@@ -26,4 +26,4 @@ An innovative system feature or app for an OpenHarmony-based mobile device, lead
 ## Weak-entry patterns
 - Web app in a webview with a HarmonyOS skin.
 - Broken build, missing steps, "works on my machine" README.
-- Committed signing keys or tokens (report as a red flag).
+- Committed signing keys or tokens (a hygiene weakness).

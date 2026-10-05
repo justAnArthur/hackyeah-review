@@ -121,7 +121,14 @@ export function normalizeScores(rubric: Rubric, raw: RawScore[], label: string):
   const byKey = new Map(raw.map(s => [key(s.criterion), s]))
 
   return Object.keys(rubric.weights).map(name => {
-    const s = byKey.get(key(name))
+    // models sometimes shorten criterion names; a short form that matches exactly one
+    // criterion ("design" -> "design (visual/ui)") is that criterion, not a missing one
+    const k = key(name)
+    let s = byKey.get(k)
+    if (!s) {
+      const alias = [...byKey.keys()].filter(x => k.startsWith(x) || x.startsWith(k))
+      if (alias.length === 1) s = byKey.get(alias[0])
+    }
     if (!s) throw new Error(`${label}: missing criterion "${name}" (got: ${raw.map(x => x.criterion).join(", ")})`)
     const score = Number(s.score)
     if (!Number.isFinite(score) || score < 0 || score > 10) throw new Error(`${label}: "${name}" score must be 0–10`)

@@ -5,9 +5,8 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends poppler-utils unzip ca-certificates tar \
   && rm -rf /var/lib/apt/lists/*
 
-# the claude CLI is a council member: the glm-5.3 models come through z.ai's anthropic
-# endpoint, which the coding plan only allows inside its coding tools. CLAUDE_API_KEY
-# (or ZAI_API_KEY) is injected as the CLI's login at spawn time
+# "claude:" council members run through the Claude Code CLI against z.ai's anthropic-compatible
+# endpoint (GLM Coding Plan); ZAI_API_KEY, or CLAUDE_API_KEY, is passed to it at spawn time
 RUN bun add -g @anthropic-ai/claude-code
 ENV PATH="/root/.bun/bin:${PATH}"
 

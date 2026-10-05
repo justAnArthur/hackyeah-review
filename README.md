@@ -12,11 +12,17 @@ Live: https://hackyeah-review.justadomainname.dev
 
 ## Council review
 
-A submission goes through a queue in one Bun process (`server/`):
+A submission goes through a queue in one Bun process (`app/server/`):
 
-1. **Evidence** (`app/server/evidence.ts`, `app/server/extract.ts`): the server collects the facts. It reads GitHub metadata and commit history, downloads the repo tarball, and counts source lines and tests. It extracts the text of the uploaded deck and of PDF, PowerPoint and Word decks committed to the repo, includes the README and docs in full, reads the static text of the demo pages, and samples the manifests and the most central source files. A vision model (`vision` in `review/council.toml`) describes up to five screenshots as text. The result is one evidence pack of up to about 75k tokens. Team-written text is marked untrusted, and attempts to steer the score become red flags.
-2. **Council** (`app/server/council.ts`, `review/council.toml`): five fixed free models score the pack against the task's rubric (`review/rubrics/<task>.toml`, `review/prompts/council-member.md`). Four run on OpenRouter and GLM-4.7-Flash on z.ai's general API (`zai:` ids, `ZAI_API_KEY` (and `CLAUDE_API_KEY` when `ZAI_API_KEY` points elsewhere); a GLM Coding Plan key may only be used in z.ai's list of coding tools, so it doesn't belong here). The final score per criterion is the median, and the spread shows disagreement. A judge model (`review/prompts/council-judge.md`) writes the consolidated text and rates each member's agreement; it never sets the numbers.
-3. **Queue** (`app/server/queue.ts`): it runs one job at a time, at 15 requests a minute and 50 free OpenRouter requests a day (`DAILY_LIMIT`; z.ai's flash models have no daily cap). When the quota runs out, jobs wait and continue after midnight UTC. Rate limits back off exponentially. A member that stays rate-limited after `MEMBER_MAX_TRIES` tries (default 6) is skipped for that review, which still needs 3 members. Every finished step is stored in SQLite, so a restart resumes instead of starting over. The models are never swapped, so every project faces the same panel; changing one means bumping `version` in `review/council.toml`.
+1. **Evidence** (`app/server/evidence.ts`, `app/server/extract.ts`): the server collects the facts. It reads GitHub metadata and commit history, downloads the repo tarball, and counts source lines and tests. It extracts the text of the uploaded deck and of PDF, PowerPoint and Word decks committed to the repo (image-only PDFs are rendered and described), includes the README and docs in full, reads the static text of the demo pages, and samples the manifests and the most central source files. A vision model describes up to five screenshots as text. The result is one evidence pack of up to about 75k tokens. Team-written text is marked untrusted, and attempts to steer the score become red flags.
+2. **Council** (`app/server/council.ts`, `review/council.toml`): three fixed members score the pack against the task's rubric (`review/rubrics/<task>.toml`), the official weights, the task's reviewing guide (`review/guides/<task>.md`) and two or three calibration anchors (blind scores of *other* entries in the same task). The score per criterion is the median; the spread shows disagreement. A judge writes the consolidated text and rates each member's agreement; it never sets the numbers. Prompts: `review/prompts/council-member.md`, `review/prompts/council-judge.md`.
+3. **Queue** (`app/server/queue.ts`): one job at a time. Every project faces the identical panel, so the panel never shrinks: a rate-limited member is waited for (60 s, doubling to 30 min), a garbled reply or an upstream provider error is retried with the job (finished members are kept), and only a permanent failure such as a bad key ends a review. Every finished step is stored in SQLite, so a restart resumes. Changing a model or a prompt means bumping `version` in `review/council.toml`.
+
+Where the models run (`app/server/models.ts`):
+
+- `claude:<model>` runs the Claude Code CLI headless (`--safe-mode --restricted`, empty working directory) against z.ai's Anthropic-compatible endpoint, on the GLM Coding Plan (`ZAI_API_KEY`, or `CLAUDE_API_KEY` to override). When the plan's usage window is used up, the review waits and retries every 30 minutes until it resets.
+- `zai:<model>` calls z.ai's general API (`ZAI_API_KEY`); the flash models there are free.
+- Anything else is an OpenRouter id (`OPENROUTER_API_KEY`), capped by `DAILY_LIMIT` requests a day (1000 on an account with credits).
 
 Reviews are published right away under "Community submissions", marked self-submitted. To hide one:
 
@@ -27,19 +33,23 @@ curl -X POST https://hackyeah-review.justadomainname.dev/api/admin/reviews/<id>/
 ### Run locally
 
 ```bash
-cp .env.example .env             # add OPENROUTER_API_KEY, optionally GITHUB_TOKEN and ADMIN_TOKEN
+cp .env.example .env             # add OPENROUTER_API_KEY and ZAI_API_KEY, optionally GITHUB_TOKEN and ADMIN_TOKEN
 bun install
 bun run dev                      # builds the site and serves it with the API on :3000
 bun test                         # unit tests
 ```
 
-To see how close the council lands to the blind reviews, run it on projects that already have one. The form fields get the project description and the result stays hidden, so the council is as blind as the original reviewer:
+Without keys, use the mock: run `bun app/test/mock-openrouter.ts`, then start the server with `OPENROUTER_BASE_URL=http://localhost:4790 ZAI_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock ZAI_API_KEY=mock` (`claude:` members still need the real CLI and key).
+
+### Checking the council against the blind reviews
 
 ```bash
-bun scripts/council-check.ts sport:x2oreo/Celia.ai defence:Mikformatycy/SafeWall
+bun scripts/council-check.ts --all --shard 1/3    # three terminals: --shard 2/3, --shard 3/3
+bun scripts/council-check.ts sport:uteg-labs/just-mate defence:Mikformatycy/SafeWall
+bun scripts/council-report.ts                     # .cache/council-check/compare.html
 ```
 
-Without a key, use the mock: run `bun test/mock-openrouter.ts`, then start the server with `OPENROUTER_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock`.
+The council gets the project description but not the jury result or the project's own blind score. Each council version keeps its own database (`.cache/council-check-v<version>.db`), so a rerun resumes and queues failed reviews again, and the report never mixes versions.
 
 ### Deploy (Dokploy)
 
@@ -55,8 +65,11 @@ The `Dockerfile` builds the site and runs `bun app/server/index.ts` on port 3000
 - `app/web/data/teams.json` — team name and jury result for each reviewed repo, plus placed teams with no public repo
 - `app/web/app.css` — Tailwind v4 entry with the theme tokens
 - `review/rubrics/<task>.toml` — brief, official criteria and weights, and task-specific checks for each task
-- `review/prompts/reviewer.md` — the reviewer prompt template
+- `review/prompts/` — the blind reviewer prompt (`reviewer.md`) and the council member and judge prompts
+- `review/guides/<task>.md` — a reviewing guide per task, embedded in that task's member prompt
+- `review/council.toml` — the fixed council panel and its version
 - `scripts/review.ts` — builds review prompts, runs reviews and merges the results
+- `scripts/council-check.ts`, `scripts/council-report.ts` — run the council on projects with a blind review and build the comparison page
 - `scripts/build.ts` — builds the scorecard data from rubrics, scores and teams, pre-renders every page to HTML (so search engines see the content), bundles the client and the Tailwind CSS, and writes `public/` (git-ignored, plus `robots.txt` and `sitemap.xml`)
 
 To add another Fluid component: `bunx shadcn@latest add https://www.fluidfunctionalism.com/r/base/<name>.json` (or `/r/<name>.json` for ones without a Base UI flavor), then move any file it writes to `src/components/` into `app/web/components/`.

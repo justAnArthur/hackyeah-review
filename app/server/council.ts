@@ -2,7 +2,7 @@ import { join } from "node:path"
 import { ROOT, type Rubric, type Score, decode, extractJson, loadRubric, loadScores, normalizeScores, weightedTotal } from "../../scripts/lib"
 import { type Db, type Submission, logEvent } from "./db"
 import { type Facts, builtDuringEvent, liveDemo } from "./evidence"
-import { FatalError, type Message, RateLimited, chat } from "./models"
+import { FatalError, type Message, RateLimited, TransientError, chat } from "./models"
 
 export type Council = {
   version: number
@@ -57,6 +57,13 @@ export type CouncilReview = {
 }
 
 class InvalidReply extends Error {}
+
+// the panel never shrinks, so a garbled reply is retried with the job (finished members are kept);
+// only a permanent failure, such as a bad key or a model that is gone, ends the review
+function unusable(who: string, e: unknown) {
+  const message = `${who} gave no usable review: ${(e as Error).message}`
+  return e instanceof InvalidReply ? new TransientError(message) : new FatalError(message)
+}
 
 // every project must face the identical panel: a rate-limited member is waited for, never
 // skipped. the tries counter only escalates the backoff (60 s doubling, capped at 30 min)
@@ -183,7 +190,8 @@ function numericAgreement(review: MemberReview, scores: CouncilScore[]) {
 export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: string): Promise<CouncilReview> {
   const [council, rubric] = await Promise.all([loadCouncil(), loadRubric(sub.task)])
   const system = await memberSystemPrompt(rubric, sub.task, sub.repo)
-  const done = new Set(memberRows(db, sub.id).map(r => r.member))
+  // only ok rows count as done, so a failed member is retried on the next attempt
+  const done = new Set(memberRows(db, sub.id).filter(r => r.ok).map(r => r.member))
 
   for (const [i, model] of council.members.entries()) {
     const letter = LETTERS[i]
@@ -200,7 +208,7 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
     } catch (e) {
       if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
       saveMember(db, sub.id, letter, model, false, null, (e as Error).message)
-      throw new FatalError(`member ${letter} (${model}) gave no usable review: ${(e as Error).message}`)
+      throw unusable(`member ${letter} (${model})`, e)
     }
   }
 
@@ -222,8 +230,6 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
   if (stored?.ok) {
     judged = JSON.parse(stored.result!)
     judgeOk = true
-  } else if (stored) {
-    throw new FatalError(`the judge gave no usable review: ${stored.error}`)
   } else {
     logEvent(db, sub.id, "The judge is writing the council review")
     const template = await Bun.file(join(ROOT, "review/prompts/council-judge.md")).text()
@@ -257,7 +263,7 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
     } catch (e) {
       if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
       saveMember(db, sub.id, "judge", council.judge, false, null, (e as Error).message)
-      throw new FatalError(`the judge (${council.judge}) gave no usable review: ${(e as Error).message}`)
+      throw unusable(`the judge (${council.judge})`, e)
     }
   }
 
