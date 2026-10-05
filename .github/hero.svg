@@ -31,7 +31,7 @@
   <text class="btn-text" x="1044" y="70" font-size="16" font-weight="500" text-anchor="middle">Review my project</text>
 
   <text class="muted" x="56" y="170" font-size="17">TAURON Arena Kraków · 3–4 October 2026</text>
-  <text x="54" y="228" font-size="50" font-weight="500" letter-spacing="-0.5">HackYeah 2026 Results</text>
+  <text x="54" y="228" font-size="50" font-weight="500">HackYeah 2026 Results</text>
   <text class="muted" font-size="21">
     <tspan x="56" y="278">Every HackYeah 2026 finalist and every project teams sent in, scored</tspan>
     <tspan x="56" y="308">out of 100 by an AI council against its task’s official criteria and weights.</tspan>
