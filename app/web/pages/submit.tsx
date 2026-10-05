@@ -137,9 +137,10 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
     <Layout current="/submit">
       <form className="grid min-w-0 gap-5" onSubmit={submit}>
         <PageHeader eyebrow="HackYeah 2026 · Council review" title="Review my project">
-          Fill in what you gave HackTribe. {councilSize} AI models score your project against your task's official criteria, another writes the
-          review, and it appears with the other results when it's done. It's free and runs on free models, so about 10 projects are
-          reviewed a day; the rest wait in the queue.
+          Fill in what you gave HackTribe. {councilSize} AI models score your project against your task's official criteria and weights,
+          the median of their scores is the result, and another model writes the review. Your project shows up in its task's list as soon
+          as you send it and gets its score when the review is done. Each review takes about five to ten minutes; they run one at a time,
+          in the order they were sent, and they are free.
         </PageHeader>
 
         <Panel>
@@ -224,8 +225,8 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
             />
           </CheckboxGroup>
           <p className="-mt-2 pl-2.5 text-xs text-muted-foreground">
-            The review appears on this site with your project name, team name and repo link. The form, the repo and the deck go to free
-            AI models through OpenRouter, whose providers may log inputs.
+            The review appears on this site with your project name, team name and repo link. The form, the repo and the deck go to AI
+            models through OpenRouter and z.ai, whose providers may log inputs.
           </p>
           {error && (
             <Banner status="error" contrast="high">

@@ -20,7 +20,11 @@ const THEME = `<script>try{const m=matchMedia("(prefers-color-scheme: dark)");co
 const data = await scorecardData()
 const tasks = (await loadRubrics()).map(r => ({ id: r.id, name: r.name, kind: r.kind }))
 const reviewed = data.reduce((n, t) => n + t.projects.length, 0)
-const councilSize = ((await import("../review/council.toml")).default as { members: string[] }).members.length
+const council = (await import("../review/council.toml")).default as { members: string[]; judge: string; version: number }
+const councilSize = council.members.length
+// model ids as people read them: no provider prefix, owner or ":free"
+const modelName = (id: string) => id.replace(/^(claude|zai):/, "").replace(/^[\w-]+\//, "").replace(/:free$/, "")
+const panel = { members: council.members.map(modelName), judge: modelName(council.judge), version: council.version }
 
 const PAGES: { name: PageName; out: string; href?: string; title: string; desc: string; props: object }[] = [
   {
@@ -28,8 +32,8 @@ const PAGES: { name: PageName; out: string; href?: string; title: string; desc: 
     out: "index.html",
     href: "/",
     title: "HackYeah 2026 Results",
-    desc: `Every HackYeah 2026 finalist by task, ordered by result, with the public GitHub repo for each team and blind reviews of ${reviewed} entries against each task's official weights.`,
-    props: { data },
+    desc: `Every HackYeah 2026 finalist by task, ordered by result, with its public GitHub repo, a blind review and an AI council score for ${reviewed} entries against each task's official weights.`,
+    props: { data, panel },
   },
   {
     name: "submit",

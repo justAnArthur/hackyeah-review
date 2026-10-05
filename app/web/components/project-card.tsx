@@ -162,7 +162,7 @@ const Details = ({ p, task }: { p: Project; task: Task }) => {
       {r && (
         <div className="grid gap-4 rounded-xl bg-surface-2 p-4 text-foreground shadow-surface-2">
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <div className="text-xs text-muted-foreground">{p.self ? "Council review" : "Blind review"} · scored against the task's official weights</div>
+            <div className="text-xs text-muted-foreground">{p.self ? "Council review" : "Blind review by Claude Opus"} · against the task's official weights</div>
             <div className="text-[22px] leading-none tabular-nums" style={{ fontVariationSettings: fontWeights.medium }}>
               {fmt(r.weighted_total)}
               <small className="text-xs text-muted-foreground"> / 100</small>
