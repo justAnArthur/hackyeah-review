@@ -155,8 +155,10 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
   }, [loaded])
 
   const all = tasks.flatMap(t => t.projects.filter(p => !p.ours))
-  const withCode = tasks.flatMap(t => t.projects.filter(p => p.repos?.length))
-  const reviewed = withCode.filter(p => p.review).length
+  // finalists and community uploads together: scored, or still waiting / being reviewed
+  const entries = [...Object.values(finalists), ...Object.values(community).flat()]
+  const scored = entries.filter(e => e.review).length
+  const inQueue = entries.length - scored
 
   return (
     <Layout current="/">
@@ -170,8 +172,8 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
           items={[
             [tasks.length, "Tasks"],
             [all.length, "Finalists"],
-            [withCode.length, "With public code"],
-            [loaded ? `${reviewed} / ${withCode.length}` : "–", "Reviewed by the council"],
+            [loaded ? scored : "–", "Projects scored, community included"],
+            [loaded ? inQueue : "–", "In the review queue now"],
           ]}
         />
         <div className="flex flex-wrap items-center justify-between gap-3">
