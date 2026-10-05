@@ -1,11 +1,10 @@
 import type { ReactNode } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { TabItem, Tabs, TabsList } from "@/components/ui/tabs"
-import { ICON, PAGES, RESULT } from "@/lib/site"
+import { ICON, RESULT } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
-// every page shares this column, so the home page, scorecard, form and review line up
+// every page shares this column, so the results, form and review line up
 export const Layout = ({ current, children }: { current: string; children: ReactNode }) => (
   <div className="mx-auto grid w-full max-w-[760px] min-w-0 gap-10 px-4 pt-14 pb-18 text-[13px] leading-normal max-sm:pt-8">
     <Sitebar current={current} />
@@ -20,13 +19,11 @@ const Sitebar = ({ current }: { current: string }) => (
       HackYeah 2026 Review
     </a>
     <div className="flex flex-wrap items-center gap-2">
-      <Tabs value={current}>
-        <TabsList>
-          {PAGES.map(p => (
-            <TabItem key={p.href} value={p.href} label={p.label} nativeButton={false} render={<a href={p.href} />} />
-          ))}
-        </TabsList>
-      </Tabs>
+      {current !== "/" && (
+        <Button variant="ghost" nativeButton={false} render={<a href="/" />}>
+          Results
+        </Button>
+      )}
       <Button variant={current === "/submit" ? "secondary" : "primary"} nativeButton={false} render={<a href="/submit" />}>
         Review my project
       </Button>

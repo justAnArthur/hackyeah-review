@@ -19,24 +19,15 @@ const THEME = `<script>try{const m=matchMedia("(prefers-color-scheme: dark)");co
 
 const data = await scorecardData()
 const tasks = (await loadRubrics()).map(r => ({ id: r.id, name: r.name, kind: r.kind }))
-const scores = Object.fromEntries(data.flatMap(t => t.projects.map(p => [`${t.id}|${p.repo}`, p.weighted_total])))
 const reviewed = data.reduce((n, t) => n + t.projects.length, 0)
 
 const PAGES: { name: PageName; out: string; href?: string; title: string; desc: string; props: object }[] = [
   {
-    name: "results",
+    name: "home",
     out: "index.html",
     href: "/",
     title: "HackYeah 2026 Results",
-    desc: "Every HackYeah 2026 finalist by task, ordered by result, with the public GitHub repo found for each team.",
-    props: { scores },
-  },
-  {
-    name: "scorecard",
-    out: "scorecard.html",
-    href: "/scorecard",
-    title: "HackYeah 2026 Scorecard",
-    desc: `Blind repo reviews of ${reviewed} HackYeah 2026 entries against each task's official weights, next to the jury's results.`,
+    desc: `Every HackYeah 2026 finalist by task, ordered by result, with the public GitHub repo for each team and blind reviews of ${reviewed} entries against each task's official weights.`,
     props: { data },
   },
   {

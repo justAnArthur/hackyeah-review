@@ -3,11 +3,6 @@ import type { BadgeColor } from "@/components/ui/badge"
 export const SITE = "https://hackyeah-review.justadomainname.dev"
 export const GH = "https://github.com/"
 
-export const PAGES = [
-  { href: "/", label: "Results" },
-  { href: "/scorecard", label: "Scorecard" },
-]
-
 export const ICON =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E" +
   "%3Crect width='32' height='32' rx='8' fill='%23171717'/%3E" +

@@ -176,7 +176,7 @@ const Result = ({ r }: { r: NonNullable<Status["review"]> }) => (
       </div>
       <span className="text-xs text-muted-foreground">
         Self-submitted and unverified. The council read an evidence pack built from the form, the repo and the deck; it didn't run the
-        code or see the pitch. It's a different reviewer from the curated scores on the scorecard.
+        code or see the pitch. It's a different reviewer from the blind reviews on the results page.
       </span>
     </Panel>
   </>
@@ -253,8 +253,8 @@ export const ReviewPage = ({ tasks }: { tasks: TaskOption[] }) => {
               {copied ? "Link copied" : "Copy link"}
             </Button>
             {s.review && (
-              <a className="text-xs text-muted-foreground hover:text-foreground" href={`/scorecard#${s.submission.task}`}>
-                See it on the scorecard →
+              <a className="text-xs text-muted-foreground hover:text-foreground" href={`/#${s.submission.task}`}>
+                See it with the other results →
               </a>
             )}
           </div>

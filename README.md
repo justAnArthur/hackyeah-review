@@ -6,8 +6,7 @@ Live: https://hackyeah-review.justadomainname.dev
 
 ## Pages
 
-- `/` — results by task, ordered by placing, with repo links
-- `/scorecard` — review scores per criterion, next to the jury's result, plus community submissions
+- `/` — every finalist by task, ordered by result or by review score. Each project card opens its repo links and blind review (scores per criterion, facts, strengths and weaknesses); community submissions sit under their task. `/scorecard` redirects here
 - `/submit` — "Review my project" form with the same fields as the HackTribe entry
 - `/r/<id>` — live progress and the council's review for one submission
 
@@ -42,10 +41,10 @@ The `Dockerfile` builds the site and runs `bun server/index.ts` on port 3000, wi
 
 ## Structure
 
-- `web/pages/` — the four pages (results, scorecard, form, review) as React components; `web/main.tsx` hydrates them in the browser
+- `web/pages/` — the three pages (results, form, review) as React components, and `web/components/project-card.tsx` for the project cards; `web/main.tsx` hydrates them in the browser
 - `web/components/ui/` — [Fluid Functionalism](https://www.fluidfunctionalism.com) components, Base UI flavor, added with the shadcn CLI (`components.json`). They are copied into the repo, so small fixes live here
 - `web/components/layout.tsx` — the shared column (760px wide on every page), site bar and small building blocks
-- `web/data/results.ts` — finalists, results and repo matches for the results page
+- `web/data/results.ts` — finalists, results and repo matches; `web/lib/projects.ts` joins them with the reviews
 - `web/app.css` — Tailwind v4 entry with the theme tokens
 - `src/scores/<task>.json` — review scores per task
 - `src/teams.json` — team name and jury result for each reviewed repo, plus placed teams with no public repo

@@ -1,11 +1,9 @@
-import { ResultsPage } from "./results"
+import { HomePage } from "./home"
 import { ReviewPage } from "./review"
-import { ScorecardPage } from "./scorecard"
 import { SubmitPage } from "./submit"
 
 export const PAGE_COMPONENTS = {
-  results: ResultsPage,
-  scorecard: ScorecardPage,
+  home: HomePage,
   submit: SubmitPage,
   review: ReviewPage,
 } as const

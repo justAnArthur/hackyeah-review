@@ -138,7 +138,7 @@ export const SubmitPage = ({ tasks }: { tasks: TaskOption[] }) => {
       <form className="grid min-w-0 gap-5" onSubmit={submit}>
         <PageHeader eyebrow="HackYeah 2026 · Council review" title="Review my project">
           Fill in what you gave HackTribe. Four AI models score your project against your task's official criteria, a fifth writes the
-          review, and it appears on the scorecard when it's done. It's free and runs on free models, so about 10 projects are
+          review, and it appears with the other results when it's done. It's free and runs on free models, so about 10 projects are
           reviewed a day; the rest wait in the queue.
         </PageHeader>
 

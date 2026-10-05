@@ -40,7 +40,7 @@ export const TASKS: ResultsTask[] = [
     { team: "Waldenburg Miners", status: "none" },
     { team: "FHS – Future Health Solution", status: "none" },
     { team: "XeniaHack Team", status: "none" },
-    { ours: true, team: "JustMate", project: "Our entry · did not reach the final", status: "ours",
+    { ours: true, team: "JustMate", status: "ours",
       desc: "A plan near you, a person who fits, and someone waiting when you get there.",
       repos: ["uteg-labs/just-mate"] },
   ]},

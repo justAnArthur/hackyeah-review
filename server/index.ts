@@ -195,6 +195,8 @@ const server = Bun.serve({
       },
     },
     "/r/:id": () => new Response(Bun.file(join(PUBLIC, "review.html"))),
+    // the scorecard merged into the results page; browsers keep the #fragment across the redirect
+    "/scorecard": () => Response.redirect("/", 301),
   },
   async fetch(req) {
     const url = new URL(req.url)
