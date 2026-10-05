@@ -68,8 +68,8 @@ const ScoringPanel = ({ panel }: { panel: CouncilPanel }) => (
         <div className="font-medium">The council</div>
         <p className="text-muted-foreground">
           Three AI models (<span className="font-mono text-xs">{panel.members.join(", ")}</span>) read an evidence pack built from the
-          project&apos;s public repo: measured facts such as code size, tests and commit history, its decks and docs, the demo page and
-          descriptions of its screenshots. Each scores every official criterion of the task; the median counts, and{" "}
+          project&apos;s public repo and deck: measured facts such as code size, tests and commit history, its decks and docs, the demo
+          page and descriptions of its screenshots. Each scores every official criterion of the task; the median counts, and{" "}
           <span className="font-mono text-xs">{panel.judge}</span> writes the review.
         </p>
       </div>
@@ -77,8 +77,8 @@ const ScoringPanel = ({ panel }: { panel: CouncilPanel }) => (
         <div className="font-medium">The score</div>
         <p className="text-muted-foreground">
           Every criterion is scored from 0 to 10, and the task&apos;s official weights, listed under each task, turn them into a score out
-          of 100. On that scale 5 is a solid hackathon prototype, 7 is clearly strong and 9 or more is exceptional. The council isn&apos;t
-          told how a project placed.
+          of 100. On that scale 5 is a solid hackathon prototype, 7 is clearly strong and 9 or more is exceptional. Finalists are
+          scored without their result; for an upload, the council sees the result the team declared.
         </p>
       </div>
       <div className="grid content-start gap-1">
@@ -164,9 +164,9 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
     <Layout current="/">
       <header className="grid gap-5">
         <PageHeader eyebrow="TAURON Arena Kraków · 3–4 October 2026" title="HackYeah 2026 Results">
-          Every finalist from the organisers&apos; announcement, ordered by result, with the public GitHub repo found for each team. Each
-          project with public code is scored by an AI council against its task&apos;s official criteria and weights, out of 100; open a
-          project to read its review.
+          Every finalist from the organisers&apos; announcement, ordered by result, with the public GitHub repo found for each team, plus
+          the projects teams sent in themselves. Each project with public code is scored by an AI council against its task&apos;s
+          official criteria and weights, out of 100; open a project to read its review.
         </PageHeader>
         <Stats
           items={[
