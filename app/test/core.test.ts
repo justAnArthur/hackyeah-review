@@ -201,7 +201,7 @@ describe("prompt-injection text", () => {
 })
 
 describe("workers sharing one database", () => {
-  const setup = () => {
+  function setup() {
     const db = openDb(":memory:")
     db.query("insert into submissions (id, created_at, task, team, title, result, repo, fields, ip_hash) values ('a', 1, 'sport', 't', 't', '', 'o/r', '{}', '')").run()
     enqueue(db, "a")

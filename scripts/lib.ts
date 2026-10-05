@@ -44,13 +44,11 @@ export type TaskScores = {
   calibration_note?: string
 }
 
-export type Excluded = { repo: string; project: string; weighted_total: number; reason: string }
-
-export type TeamTask = {
+type TeamTask = {
   ours?: boolean
   entries: Record<string, { team: string; result: Result; note?: string }>
   unscored: { team: string; result: Result }[]
-  excluded: Excluded[]
+  excluded: { repo: string; project: string; weighted_total: number; reason: string }[]
 }
 
 export async function loadRubrics() {
@@ -89,6 +87,19 @@ export function weightedTotal(scores: Score[]) {
   return Math.round(scores.reduce((sum, s) => sum + (s.score * s.weight) / 10, 0) * 100) / 100
 }
 
+export function mean(xs: number[]) {
+  return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0
+}
+
+export function fmt(n: number) {
+  return (Math.round(n * 10) / 10).toFixed(1)
+}
+
+// model ids as people read them: no provider prefix, owner or ":free"
+export function modelName(id: string) {
+  return id.replace(/^(claude|zai):/, "").replace(/^[\w-]+\//, "").replace(/:free$/, "")
+}
+
 const ENTITIES: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", "#39": "'" }
 
 // model output and extracted documents arrive with html entities; decode before parsing or matching
@@ -105,12 +116,11 @@ export function decode(s: string) {
 // model output often wraps json in prose or fences and leaves trailing commas
 export function extractJson(text: string) {
   const blocks = [...text.matchAll(/```(?:json)?\s*([\s\S]*?)```/g)]
-  let raw = blocks.length ? blocks[blocks.length - 1][1] : text
+  const raw = blocks.at(-1)?.[1] ?? text
   const start = raw.indexOf("{")
   const end = raw.lastIndexOf("}")
   if (start === -1 || end <= start) throw new Error("no JSON object in the reply")
-  raw = decode(raw.slice(start, end + 1)).replace(/,\s*([}\]])/g, "$1")
-  return JSON.parse(raw)
+  return JSON.parse(decode(raw.slice(start, end + 1)).replace(/,\s*([}\]])/g, "$1"))
 }
 
 type RawScore = { criterion: string; score: unknown; why?: string }
@@ -143,34 +153,4 @@ export function normalize(rubric: Rubric, p: Review): Review {
     console.warn(`  ${p.repo}: reviewer said ${p.weighted_total}, recomputed ${total}; using ${total}`)
   }
   return { ...p, scores, weighted_total: total }
-}
-
-export async function scorecardData() {
-  const [rubrics, teams] = await Promise.all([loadRubrics(), loadTeams()])
-  const tasks = []
-
-  for (const r of rubrics) {
-    const scores = await loadScores(r.id)
-    if (!scores?.projects.length) continue
-    const t = teams[r.id] ?? { entries: {}, unscored: [], excluded: [] }
-
-    const projects = scores.projects
-      .map(p => {
-        const e = t.entries[p.repo]
-        return { ...p, result: e?.result ?? "fin", team: e?.team ?? "Unknown team", ...(e?.note ? { result_note: e.note } : {}) }
-      })
-      .sort((a, b) => b.weighted_total - a.weighted_total)
-
-    tasks.push({
-      id: r.id,
-      name: r.name,
-      kind: t.ours ? `${r.kind} · our task` : r.kind,
-      weights: r.weights,
-      projects,
-      unscored: t.unscored,
-      excluded: t.excluded,
-      note: scores.calibration_note ?? "",
-    })
-  }
-  return tasks
 }

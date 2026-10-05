@@ -101,7 +101,7 @@ ${lines.join("\n")}
 async function buildPrompt(taskId: string, repos: string[]) {
   if (!repos.length) throw new Error("give at least one owner/repo")
   const rubric = await loadRubric(taskId)
-  const context = pairs(flags.context!)
+  const context = pairs(flags.context)
   for (const repo of repos) await clone(repo)
 
   const projects = repos
@@ -111,7 +111,7 @@ async function buildPrompt(taskId: string, repos: string[]) {
   const vars: Record<string, string> = {
     CLONE_ROOT: CLONES,
     DEADLINE: rubric.deadline,
-    MINUTES: flags.minutes!,
+    MINUTES: flags.minutes,
     TASK_ID: rubric.id,
     TASK_NAME: rubric.name,
     TASK_KIND: rubric.kind,
@@ -133,8 +133,8 @@ async function add(taskId: string, file: string) {
   const rubric = await loadRubric(taskId)
   const parsed = extractJson(await Bun.file(file).text())
   const incoming: Review[] = Array.isArray(parsed.projects) ? parsed.projects : [parsed]
-  const teamOf = pairs(flags.team!)
-  const resultOf = pairs(flags.result!)
+  const teamOf = pairs(flags.team)
+  const resultOf = pairs(flags.result)
 
   const scores: TaskScores = (await loadScores(taskId)) ?? { task: rubric.name, weights_used: rubric.weights, projects: [], ranking: [] }
   const teams = await loadTeams()
@@ -172,6 +172,13 @@ async function add(taskId: string, file: string) {
   console.log(`saved app/web/data/scores/${taskId}.json and app/web/data/teams.json; run "bun run build" to rebuild the site`)
 }
 
+async function savePrompt(taskId: string, repos: string[]) {
+  await mkdir(join(CACHE, "prompts"), { recursive: true })
+  const file = join(CACHE, "prompts", `${taskId}-${stamp()}.md`)
+  await Bun.write(file, await buildPrompt(taskId, repos))
+  console.log(file)
+}
+
 async function run(taskId: string, repos: string[]) {
   const prompt = await buildPrompt(taskId, repos)
   await mkdir(join(CACHE, "reviews"), { recursive: true })
@@ -200,12 +207,8 @@ async function tasks() {
 const [cmd, task, ...rest] = positionals
 try {
   if (cmd === "tasks") await tasks()
-  else if (cmd === "prompt" && task) {
-    await mkdir(join(CACHE, "prompts"), { recursive: true })
-    const file = join(CACHE, "prompts", `${task}-${stamp()}.md`)
-    await Bun.write(file, await buildPrompt(task, rest))
-    console.log(file)
-  } else if (cmd === "run" && task) await run(task, rest)
+  else if (cmd === "prompt" && task) await savePrompt(task, rest)
+  else if (cmd === "run" && task) await run(task, rest)
   else if (cmd === "add" && task && rest[0]) await add(task, rest[0])
   else console.log(USAGE)
 } catch (e) {

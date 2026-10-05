@@ -1,5 +1,5 @@
 // stand-in for OpenRouter's chat endpoint, for local end-to-end runs without a key:
-// OPENROUTER_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock ZAI_BASE_URL=http://localhost:4790 ZAI_API_KEY=mock bun server/index.ts
+// OPENROUTER_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock ZAI_BASE_URL=http://localhost:4790 ZAI_API_KEY=mock bun app/server/index.ts
 const PORT = Number(process.env.MOCK_PORT ?? 4790)
 const FLAKY = process.env.MOCK_FLAKY === "1"
 const BLOCKED = process.env.MOCK_BLOCK_MODEL ?? ""
@@ -40,8 +40,7 @@ function judgeReply(prompt: string) {
 Bun.serve({
   port: PORT,
   async fetch(req) {
-    const url = new URL(req.url)
-    if (url.pathname !== "/chat/completions") return new Response("not found", { status: 404 })
+    if (new URL(req.url).pathname !== "/chat/completions") return new Response("not found", { status: 404 })
     calls++
     if (FLAKY && calls === 2) return new Response("busy", { status: 429, headers: { "retry-after": "2" } })
     const body = (await req.json()) as { model: string; messages: { role: string; content: string | unknown[] }[] }

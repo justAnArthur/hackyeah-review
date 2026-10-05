@@ -6,7 +6,7 @@ import { join } from "node:path"
 import { parseArgs } from "node:util"
 import { type CouncilReview, loadCouncil, memberSystemPrompt } from "../app/server/council"
 import { DECK_PAGE_PROMPT, SHOT_PROMPT } from "../app/server/evidence"
-import { CACHE, ROOT, type Review, loadRubric, loadRubrics, loadScores } from "./lib"
+import { CACHE, ROOT, type Review, fmt, loadRubric, loadRubrics, loadScores, mean, modelName } from "./lib"
 
 const { values } = parseArgs({ args: process.argv.slice(2), options: { version: { type: "string" } } })
 const council = await loadCouncil()
@@ -51,7 +51,6 @@ for (const rubric of rubrics) {
 
 const all = tasks.flatMap(t => t.rows)
 const total = tasks.reduce((n, t) => n + t.blindCount, 0)
-const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0)
 const mae = mean(all.map(r => Math.abs(r.gap)))
 const bias = mean(all.map(r => r.gap))
 const within = (d: number) => all.filter(r => Math.abs(r.gap) <= d).length
@@ -85,15 +84,13 @@ const sameTop = contested.filter(t => {
   return top(r => r.blind.weighted_total) === top(r => r.review.weighted_total)
 }).length
 
-const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1)
 const signed = (n: number) => `${n >= 0 ? "+" : "−"}${fmt(Math.abs(n))}`
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
 const tone = (gap: number) => (Math.abs(gap) <= 5 ? "ok" : Math.abs(gap) <= 10 ? "warn" : "off")
-const short = (model: string) => model.replace(/^(claude|zai):/, "").replace(/^[\w-]+\//, "").replace(/:free$/, "")
 
 function projectRow(r: Row) {
   const members = r.review.council.members
-    .map(m => `<span class="member">${esc(short(m.model))} <b>${m.total === null ? "–" : fmt(m.total)}</b></span>`)
+    .map(m => `<span class="member">${esc(modelName(m.model))} <b>${m.total === null ? "–" : fmt(m.total)}</b></span>`)
     .join("")
   const criteria = r.review.scores
     .map(s => {
@@ -134,7 +131,7 @@ const guides = (
   )
 ).join("")
 
-const panel = council.members.map(short).join(", ")
+const panel = council.members.map(modelName).join(", ")
 const html = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Council v${version} vs blind reviews</title>
@@ -175,14 +172,14 @@ const html = `<!doctype html>
 </style></head><body><main>
 <h1>Council v${version} vs blind reviews</h1>
 <p class="dim">HackYeah 2026 Review · generated ${new Date().toISOString().slice(0, 16).replace("T", " ")} UTC</p>
-<p>Each project here was scored twice against its task's official weights: first by a blind Claude Opus review (an agent with the whole repo, its decks, docs and screenshots, which did not run the code), then by the council: ${esc(panel)} score an evidence pack built from the same public material, the median per criterion is the result, and ${esc(short(council.judge))} writes the verdict.</p>
+<p>Each project here was scored twice against its task's official weights: first by a blind Claude Opus review (an agent with the whole repo, its decks, docs and screenshots, which did not run the code), then by the council: ${esc(panel)} score an evidence pack built from the same public material, the median per criterion is the result, and ${esc(modelName(council.judge))} writes the verdict.</p>
 
 <div class="stats">
   <div class="stat"><b>${all.length} / ${total}</b><span>projects compared</span></div>
   <div class="stat"><b>${fmt(mae)}</b><span>mean absolute gap, points of 100</span></div>
   <div class="stat"><b>${signed(bias)}</b><span>mean signed gap (council − blind)</span></div>
   <div class="stat"><b>${within(5)} / ${all.length}</b><span>within ±5 points (±10: ${within(10)})</span></div>
-  <div class="stat"><b>${rho === null ? "–" : rho.toFixed(2)}</b><span>rank correlation (Spearman)</span></div>
+  <div class="stat"><b>${rho?.toFixed(2) ?? "–"}</b><span>rank correlation (Spearman)</span></div>
   <div class="stat"><b>${sameTop} / ${contested.length}</b><span>tasks with the same top project</span></div>
 </div>
 
@@ -208,5 +205,5 @@ ${guides}
 
 const out = join(CACHE, "council-check", "compare.html")
 await Bun.write(out, html)
-console.log(`council v${version}: ${all.length}/${total} compared · mean abs gap ${fmt(mae)} · signed ${signed(bias)} · within ±5 ${within(5)} · rho ${rho === null ? "–" : rho.toFixed(2)} · same top ${sameTop}/${contested.length}`)
+console.log(`council v${version}: ${all.length}/${total} compared · mean abs gap ${fmt(mae)} · signed ${signed(bias)} · within ±5 ${within(5)} · rho ${rho?.toFixed(2) ?? "–"} · same top ${sameTop}/${contested.length}`)
 console.log(out)

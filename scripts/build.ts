@@ -1,13 +1,12 @@
 import { tmpdir } from "node:os"
-import { join } from "node:path"
+import { basename, join } from "node:path"
 import { $ } from "bun"
 import { createElement } from "react"
 import { renderToString } from "react-dom/server"
-import { loadRubrics } from "./lib"
+import { ROOT, loadRubrics, modelName } from "./lib"
 import { PAGE_COMPONENTS, type PageName } from "../app/web/pages"
 import { ICON, SITE } from "../app/web/lib/site"
 
-const ROOT = join(import.meta.dir, "..")
 const OUT = `${ROOT}/public`
 
 const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,8 +21,6 @@ const tasks = rubrics.map(r => ({ id: r.id, name: r.name, kind: r.kind }))
 const weights = Object.fromEntries(rubrics.map(r => [r.id, r.weights]))
 const council = (await import("../review/council.toml")).default as { members: string[]; judge: string; version: number }
 const councilSize = council.members.length
-// model ids as people read them: no provider prefix, owner or ":free"
-const modelName = (id: string) => id.replace(/^(claude|zai):/, "").replace(/^[\w-]+\//, "").replace(/:free$/, "")
 const panel = { members: council.members.map(modelName), judge: modelName(council.judge), version: council.version }
 
 const PAGES: { name: PageName; out: string; href?: string; title: string; desc: string; props: object; noindex?: boolean }[] = [
@@ -75,7 +72,7 @@ if (!bundle.success) {
   for (const log of bundle.logs) console.error(log)
   process.exit(1)
 }
-const script = `/assets/${bundle.outputs[0].path.split("/").pop()}`
+const script = `/assets/${basename(bundle.outputs[0].path)}`
 
 const tmpCss = join(tmpdir(), "hackyeah-review-app.css")
 await $`bunx @tailwindcss/cli -i ${ROOT}/app/web/app.css -o ${tmpCss} --minify`.cwd(ROOT).quiet()

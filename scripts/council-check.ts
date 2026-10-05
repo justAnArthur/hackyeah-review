@@ -10,10 +10,9 @@ import { type CouncilReview, loadCouncil } from "../app/server/council"
 import { allCurated, curatedId, insertCurated } from "../app/server/curated"
 import { events, getJob, openDb } from "../app/server/db"
 import { enqueue, processJob } from "../app/server/queue"
-import { CACHE, type Review, loadScores } from "./lib"
+import { CACHE, type Review, fmt, loadScores, mean } from "./lib"
 
 const ENDED = ["done", "failed", "cancelled"]
-const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1)
 const sign = (n: number) => `${n >= 0 ? "+" : ""}${fmt(n)}`
 
 const { values, positionals } = parseArgs({
@@ -23,7 +22,7 @@ const { values, positionals } = parseArgs({
 })
 
 let targets = values.all
-  ? await allCurated()
+  ? allCurated()
   : positionals.map(arg => {
       const [task, repo] = arg.split(":")
       if (!task || !repo) throw new Error(`expected task:owner/repo, got "${arg}"`)
@@ -50,12 +49,11 @@ async function blindReview(task: string, repo: string): Promise<Review> {
   return review
 }
 
-async function submit(task: string, repo: string) {
+function submit(task: string, repo: string) {
   const id = curatedId(task, repo, "check")
   const job = getJob(db, id)
   if (job?.status === "failed") enqueue(db, id)
-  if (job || !(await insertCurated(db, id, task, repo))) return id
-  enqueue(db, id)
+  if (!job && insertCurated(db, id, task, repo)) enqueue(db, id)
   return id
 }
 
@@ -78,20 +76,20 @@ const gaps: number[] = []
 for (const { task, repo } of targets) {
   const blind = await blindReview(task, repo)
   console.log(`\n${blind.project} (${task}, ${repo}) · blind ${fmt(blind.weighted_total)}`)
-  const id = await submit(task, repo)
+  const id = submit(task, repo)
   const job = await run(id)
   const stored = db.query<{ review: string }, [string]>("select review from reviews where id = ?").get(id)
-  const review = stored ? (JSON.parse(stored.review) as CouncilReview) : null
-  if (review) gaps.push(review.weighted_total - blind.weighted_total)
-  console.log(
-    review
-      ? `  ⇒ council ${fmt(review.weighted_total)} vs blind ${fmt(blind.weighted_total)} (${sign(review.weighted_total - blind.weighted_total)})`
-      : `  ⇒ no council review: ${job.error ?? job.status}`,
-  )
+  if (!stored) {
+    console.log(`  ⇒ no council review: ${job.error ?? job.status}`)
+    continue
+  }
+  const review = JSON.parse(stored.review) as CouncilReview
+  const gap = review.weighted_total - blind.weighted_total
+  gaps.push(gap)
+  console.log(`  ⇒ council ${fmt(review.weighted_total)} vs blind ${fmt(blind.weighted_total)} (${sign(gap)})`)
 }
 
 if (gaps.length) {
-  const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length
   console.log(`\n${gaps.length}/${targets.length} reviewed · mean absolute gap ${fmt(mean(gaps.map(Math.abs)))} · mean signed gap ${sign(mean(gaps))}`)
 }
 console.log("Comparison page: bun scripts/council-report.ts")
