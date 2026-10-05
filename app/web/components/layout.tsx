@@ -1,7 +1,8 @@
 import type { ReactNode } from "react"
+import { Star } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ICON, RESULT } from "@/lib/site"
+import { GH, ICON, REPO, REPO_IMAGE, RESULT } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 // every page shares this column, so the results, form and review line up
@@ -9,6 +10,34 @@ export const Layout = ({ current, children }: { current: string; children: React
   <div className="mx-auto grid w-full max-w-[760px] min-w-0 gap-10 px-4 pt-14 pb-18 text-[13px] leading-normal max-sm:pt-8">
     <Sitebar current={current} />
     {children}
+    <RepoCard />
+  </div>
+)
+
+const RepoCard = () => (
+  <div className="grid grid-cols-[14rem_1fr] items-center gap-4 rounded-xl bg-surface-2 p-3 shadow-surface-2 max-sm:grid-cols-1">
+    <a href={GH + REPO} tabIndex={-1} aria-hidden>
+      <img
+        src={REPO_IMAGE}
+        alt=""
+        width={1200}
+        height={600}
+        loading="lazy"
+        className="aspect-[2/1] w-full rounded-lg bg-white object-cover ring-1 ring-border/60"
+      />
+    </a>
+    <div className="grid content-start justify-items-start gap-2 px-1 pb-1">
+      <div className="grid gap-1">
+        <div className="font-medium">The site is open source</div>
+        <p className="text-muted-foreground">
+          The council, the evidence pack, the prompts and the queue are all on GitHub. If a review helped you, a star helps other
+          teams find it.
+        </p>
+      </div>
+      <Button variant="secondary" size="compact" leadingIcon={Star} nativeButton={false} render={<a href={GH + REPO} />}>
+        Star on GitHub
+      </Button>
+    </div>
   </div>
 )
 

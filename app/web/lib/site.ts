@@ -3,6 +3,10 @@ import type { BadgeColor } from "@/components/ui/badge"
 export const SITE = "https://hackyeah-review.justadomainname.dev"
 export const GH = "https://github.com/"
 
+export const REPO = "justAnArthur/hackyeah-review"
+// github's generated social preview; the first path segment is only a cache key
+export const REPO_IMAGE = `https://opengraph.githubassets.com/2/${REPO}`
+
 export const ICON =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E" +
   "%3Crect width='32' height='32' rx='8' fill='%23171717'/%3E" +
