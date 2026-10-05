@@ -172,7 +172,7 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
           items={[
             [tasks.length, "Tasks"],
             [all.length, "Finalists"],
-            [loaded ? scored : "–", "Projects scored, community included"],
+            [loaded ? scored : "–", "Projects scored"],
             [loaded ? inQueue : "–", "In the review queue now"],
           ]}
         />
