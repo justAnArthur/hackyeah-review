@@ -3,10 +3,10 @@
 // needs OPENROUTER_API_KEY; finished steps are kept in .cache/council-check.db, so a re-run resumes
 import { mkdir } from "node:fs/promises"
 import { join } from "node:path"
-import type { CouncilReview } from "../server/council"
-import { events, getJob, getSubmission, openDb } from "../server/db"
-import { enqueue, processJob } from "../server/queue"
-import { TASKS } from "../web/data/results"
+import type { CouncilReview } from "../app/server/council"
+import { events, getJob, getSubmission, openDb } from "../app/server/db"
+import { enqueue, processJob } from "../app/server/queue"
+import { TASKS } from "../app/web/data/results"
 import { CACHE, type Review, loadScores, loadTeams } from "./lib"
 
 const ENDED = ["done", "failed", "cancelled"]
@@ -28,7 +28,9 @@ if (!targets.length) {
   process.exit(1)
 }
 
-const db = openDb(join(CACHE, "council-check.db"))
+// CHECK_DB shards a big run across parallel processes; each writes its own report
+const DB_NAME = process.env.CHECK_DB ?? "council-check.db"
+const db = openDb(join(CACHE, DB_NAME))
 const teams = await loadTeams()
 
 async function blindReview(task: string, repo: string): Promise<Review> {
@@ -109,5 +111,5 @@ if (scored.length) {
 }
 
 await mkdir(join(CACHE, "council-check"), { recursive: true })
-await Bun.write(join(CACHE, "council-check", "report.json"), JSON.stringify(rows, null, 2))
+await Bun.write(join(CACHE, "council-check", DB_NAME === "council-check.db" ? "report.json" : `report-${DB_NAME.replace(/\.db$/, "")}.json`), JSON.stringify(rows, null, 2))
 console.log(`\nFull results: .cache/council-check/report.json`)

@@ -122,9 +122,9 @@ async function buildPrompt(taskId: string, repos: string[]) {
     PROJECTS: projects,
     ANCHORS: flags.fresh ? "" : anchors(rubric, await loadScores(taskId), new Set(repos)),
   }
-  const template = await Bun.file(join(ROOT, "prompts/reviewer.md")).text()
+  const template = await Bun.file(join(ROOT, "review/prompts/reviewer.md")).text()
   return template.replace(/\{\{(\w+)\}\}/g, (_, k) => {
-    if (!(k in vars)) throw new Error(`prompts/reviewer.md: unknown placeholder {{${k}}}`)
+    if (!(k in vars)) throw new Error(`review/prompts/reviewer.md: unknown placeholder {{${k}}}`)
     return vars[k]
   })
 }
@@ -169,7 +169,7 @@ async function add(taskId: string, file: string) {
 
   await saveScores(taskId, scores)
   await saveTeams(teams)
-  console.log(`saved src/scores/${taskId}.json and src/teams.json; run "bun run build" to rebuild the site`)
+  console.log(`saved app/web/data/scores/${taskId}.json and app/web/data/teams.json; run "bun run build" to rebuild the site`)
 }
 
 async function run(taskId: string, repos: string[]) {

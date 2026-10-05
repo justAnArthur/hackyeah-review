@@ -2,7 +2,7 @@ import { runCouncil } from "./council"
 import { type Db, type Job, getSubmission, logEvent, updateJob } from "./db"
 import { type Facts, buildEvidence } from "./evidence"
 import { FatalError, QuotaExhausted, RateLimited } from "./models"
-import { describeScreenshots } from "./vision"
+import { describeImages } from "./vision"
 
 const MAX_ATTEMPTS = 8
 const PERMANENT = /not found|not public|private|larger than|could not unpack|HTTP 4\d\d/
@@ -51,7 +51,7 @@ export async function processJob(db: Db, job: Job) {
       logEvent(db, job.id, "Collecting evidence from the repo and deck")
       let built: Awaited<ReturnType<typeof buildEvidence>>
       try {
-        built = await buildEvidence(sub, shots => describeScreenshots(db, shots))
+        built = await buildEvidence(sub, (shots, prompt) => describeImages(db, shots, prompt))
       } catch (e) {
         const msg = (e as Error).message
         throw PERMANENT.test(msg) ? new FatalError(msg) : e

@@ -1,6 +1,6 @@
 import { createHash, randomBytes } from "node:crypto"
 import { join, normalize } from "node:path"
-import { ROOT, loadRubrics } from "../scripts/lib"
+import { ROOT, loadRubrics } from "../../scripts/lib"
 import type { CouncilReview } from "./council"
 import { UPLOADS, events, getJob, getSubmission, openDb, queuePosition } from "./db"
 import { checkRepo, parseRepo } from "./evidence"
@@ -40,8 +40,10 @@ async function submit(req: Request, server: Bun.Server<unknown>) {
   } catch {
     return fail("The form could not be read.")
   }
-  const text = (name: keyof typeof LIMITS) => String(form.get(name) ?? "").trim()
-  const values = Object.fromEntries(Object.keys(LIMITS).map(k => [k, text(k as keyof typeof LIMITS)])) as Record<keyof typeof LIMITS, string>
+  const values = Object.fromEntries(Object.entries(LIMITS).map(([k]) => [k, String(form.get(k) ?? "").trim()])) as Record<
+    keyof typeof LIMITS,
+    string
+  >
 
   for (const [k, max] of Object.entries(LIMITS)) {
     if (values[k as keyof typeof LIMITS].length > max) return fail(`"${k}" is longer than ${max} characters.`)

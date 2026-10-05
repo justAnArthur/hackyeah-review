@@ -14,9 +14,9 @@ Live: https://hackyeah-review.justadomainname.dev
 
 A submission goes through a queue in one Bun process (`server/`):
 
-1. **Evidence** (`server/evidence.ts`, `server/extract.ts`): the server collects the facts. It reads GitHub metadata and commit history, downloads the repo tarball, and counts source lines and tests. It extracts the text of the uploaded deck and of PDF, PowerPoint and Word decks committed to the repo, includes the README and docs in full, reads the static text of the demo pages, and samples the manifests and the most central source files. A vision model (`vision` in `council.toml`) describes up to five screenshots as text. The result is one evidence pack of up to about 75k tokens. Team-written text is marked untrusted, and attempts to steer the score become red flags.
-2. **Council** (`server/council.ts`, `council.toml`): five fixed free models score the pack against the task's rubric (`rubrics/<task>.toml`, `prompts/council-member.md`). Four run on OpenRouter and GLM-4.7-Flash on z.ai's general API (`zai:` ids, `ZAI_API_KEY`; a GLM Coding Plan key may only be used in z.ai's list of coding tools, so it doesn't belong here). The final score per criterion is the median, and the spread shows disagreement. A judge model (`prompts/council-judge.md`) writes the consolidated text and rates each member's agreement; it never sets the numbers.
-3. **Queue** (`server/queue.ts`): it runs one job at a time, at 15 requests a minute and 50 free OpenRouter requests a day (`DAILY_LIMIT`; z.ai's flash models have no daily cap). When the quota runs out, jobs wait and continue after midnight UTC. Rate limits back off exponentially. A member that stays rate-limited after `MEMBER_MAX_TRIES` tries (default 6) is skipped for that review, which still needs 3 members. Every finished step is stored in SQLite, so a restart resumes instead of starting over. The models are never swapped, so every project faces the same panel; changing one means bumping `version` in `council.toml`.
+1. **Evidence** (`app/server/evidence.ts`, `app/server/extract.ts`): the server collects the facts. It reads GitHub metadata and commit history, downloads the repo tarball, and counts source lines and tests. It extracts the text of the uploaded deck and of PDF, PowerPoint and Word decks committed to the repo, includes the README and docs in full, reads the static text of the demo pages, and samples the manifests and the most central source files. A vision model (`vision` in `review/council.toml`) describes up to five screenshots as text. The result is one evidence pack of up to about 75k tokens. Team-written text is marked untrusted, and attempts to steer the score become red flags.
+2. **Council** (`app/server/council.ts`, `review/council.toml`): five fixed free models score the pack against the task's rubric (`review/rubrics/<task>.toml`, `review/prompts/council-member.md`). Four run on OpenRouter and GLM-4.7-Flash on z.ai's general API (`zai:` ids, `ZAI_API_KEY` (and `CLAUDE_API_KEY` when `ZAI_API_KEY` points elsewhere); a GLM Coding Plan key may only be used in z.ai's list of coding tools, so it doesn't belong here). The final score per criterion is the median, and the spread shows disagreement. A judge model (`review/prompts/council-judge.md`) writes the consolidated text and rates each member's agreement; it never sets the numbers.
+3. **Queue** (`app/server/queue.ts`): it runs one job at a time, at 15 requests a minute and 50 free OpenRouter requests a day (`DAILY_LIMIT`; z.ai's flash models have no daily cap). When the quota runs out, jobs wait and continue after midnight UTC. Rate limits back off exponentially. A member that stays rate-limited after `MEMBER_MAX_TRIES` tries (default 6) is skipped for that review, which still needs 3 members. Every finished step is stored in SQLite, so a restart resumes instead of starting over. The models are never swapped, so every project faces the same panel; changing one means bumping `version` in `review/council.toml`.
 
 Reviews are published right away under "Community submissions", marked self-submitted. To hide one:
 
@@ -43,23 +43,23 @@ Without a key, use the mock: run `bun test/mock-openrouter.ts`, then start the s
 
 ### Deploy (Dokploy)
 
-The `Dockerfile` builds the site and runs `bun server/index.ts` on port 3000, with SQLite and uploaded decks in `/data`. In Dokploy, create an application from this repo (Dockerfile build type, auto-deploy on push) and mount a volume at `/data`. Set the variables from `.env.example`, and attach `hackyeah-review.justadomainname.dev` on port 3000 with HTTPS.
+The `Dockerfile` builds the site and runs `bun app/server/index.ts` on port 3000, with SQLite and uploaded decks in `/data`. In Dokploy, create an application from this repo (Dockerfile build type, auto-deploy on push) and mount a volume at `/data`. Set the variables from `.env.example`, and attach `hackyeah-review.justadomainname.dev` on port 3000 with HTTPS.
 
 ## Structure
 
-- `web/pages/` — the three pages (results, form, review) as React components, and `web/components/project-card.tsx` for the project cards; `web/main.tsx` hydrates them in the browser
-- `web/components/ui/` — [Fluid Functionalism](https://www.fluidfunctionalism.com) components, Base UI flavor, added with the shadcn CLI (`components.json`). They are copied into the repo, so small fixes live here
-- `web/components/layout.tsx` — the shared column (760px wide on every page), site bar and small building blocks
-- `web/data/results.ts` — finalists, results and repo matches; `web/lib/projects.ts` joins them with the reviews
-- `web/app.css` — Tailwind v4 entry with the theme tokens
-- `src/scores/<task>.json` — review scores per task
-- `src/teams.json` — team name and jury result for each reviewed repo, plus placed teams with no public repo
-- `rubrics/<task>.toml` — brief, official criteria and weights, and task-specific checks for each task
-- `prompts/reviewer.md` — the reviewer prompt template
+- `app/web/pages/` — the three pages (results, form, review) as React components, and `app/web/components/project-card.tsx` for the project cards; `app/web/main.tsx` hydrates them in the browser
+- `app/web/components/ui/` — [Fluid Functionalism](https://www.fluidfunctionalism.com) components, Base UI flavor, added with the shadcn CLI (`components.json`). They are copied into the repo, so small fixes live here
+- `app/web/components/layout.tsx` — the shared column (760px wide on every page), site bar and small building blocks
+- `app/web/data/results.ts` — finalists, results and repo matches; `app/web/lib/projects.ts` joins them with the reviews
+- `app/web/data/scores/<task>.json` — review scores per task
+- `app/web/data/teams.json` — team name and jury result for each reviewed repo, plus placed teams with no public repo
+- `app/web/app.css` — Tailwind v4 entry with the theme tokens
+- `review/rubrics/<task>.toml` — brief, official criteria and weights, and task-specific checks for each task
+- `review/prompts/reviewer.md` — the reviewer prompt template
 - `scripts/review.ts` — builds review prompts, runs reviews and merges the results
-- `build.ts` — builds the scorecard data from rubrics, scores and teams, pre-renders every page to HTML (so search engines see the content), bundles the client and the Tailwind CSS, and writes `public/` (git-ignored, plus `robots.txt` and `sitemap.xml`)
+- `scripts/build.ts` — builds the scorecard data from rubrics, scores and teams, pre-renders every page to HTML (so search engines see the content), bundles the client and the Tailwind CSS, and writes `public/` (git-ignored, plus `robots.txt` and `sitemap.xml`)
 
-To add another Fluid component: `bunx shadcn@latest add https://www.fluidfunctionalism.com/r/base/<name>.json` (or `/r/<name>.json` for ones without a Base UI flavor), then move any file it writes to `src/components/` into `web/components/`.
+To add another Fluid component: `bunx shadcn@latest add https://www.fluidfunctionalism.com/r/base/<name>.json` (or `/r/<name>.json` for ones without a Base UI flavor), then move any file it writes to `src/components/` into `app/web/components/`.
 
 ## Reviewing projects
 
@@ -79,7 +79,7 @@ In Claude Code, `/review krakow owner/repo --team "owner/repo=Team Name"` does t
 - **One project later:** the prompt includes the task's existing scores as anonymous anchors, so the new score stays on the same scale.
 - **Whole task again:** pass all its repos in one call with `--fresh`; one reviewer then compares them side by side.
 - **Wrong task:** if the reviewer finds the repo was built for another task, `add` lists it as excluded instead of scoring it.
-- **New task or event:** add `rubrics/<id>.toml` (name, kind, order, deadline, brief, checks and `[weights]` adding up to 100), then review repos with that id. Add the teams to `TASKS` in `web/data/results.ts` to show them on the results page.
+- **New task or event:** add `review/rubrics/<id>.toml` (name, kind, order, deadline, brief, checks and `[weights]` adding up to 100), then review repos with that id. Add the teams to `TASKS` in `app/web/data/results.ts` to show them on the results page.
 
 ## Build and deploy
 

@@ -79,7 +79,3 @@ export async function fetchPage(url: string, hops = 3): Promise<{ url: string; s
     return { url, status: `no response (${(e as Error).name === "TimeoutError" ? "timeout" : "error"})`, html: null }
   }
 }
-
-export async function checkUrl(url: string) {
-  return (await fetchPage(url)).status
-}

@@ -208,7 +208,7 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
                 {deck ? "Change PDF" : "Choose PDF"}
               </Button>
               <span className="min-w-0 truncate text-xs text-muted-foreground">
-                {deck ? `${deck.name} · ${(deck.size / 1024 / 1024).toFixed(1)} MB` : "PDF, at most 15 MB. The reviewers read the text of its first 10 pages."}
+                {deck ? `${deck.name} · ${(deck.size / 1024 / 1024).toFixed(1)} MB` : "PDF, at most 15 MB. The reviewers read the text of its first 15 pages."}
               </span>
             </div>
           </div>

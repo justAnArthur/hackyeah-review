@@ -1,10 +1,15 @@
+import { mkdtemp, rm } from "node:fs/promises"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
 import type { Db } from "./db"
 
 const DAILY_LIMIT = Number(process.env.DAILY_LIMIT ?? 50)
 const TIMEOUT_MS = Number(process.env.MODEL_TIMEOUT_MS ?? 360_000)
 
-// a model id is an OpenRouter id, or "zai:<model>" for z.ai's general API (not the Coding Plan endpoint,
-// whose terms only allow its own list of coding tools). only OpenRouter's free tier has a daily cap
+// a model id is an OpenRouter id, "zai:<model>" for z.ai's general API, or "claude:<model>"
+// for the local Claude Code CLI with the z.ai key as its Anthropic login (the coding plan's
+// terms only allow coding tools, so glm-5.3 models come through the CLI, not raw API calls).
+// only OpenRouter's free tier has a daily cap
 const PROVIDERS = {
   openrouter: {
     base: process.env.OPENROUTER_BASE_URL ?? "https://openrouter.ai/api/v1",
@@ -18,6 +23,14 @@ const PROVIDERS = {
     key: process.env.ZAI_API_KEY ?? "",
     keyName: "ZAI_API_KEY",
     rpm: Number(process.env.ZAI_REQUESTS_PER_MINUTE ?? 20),
+    daily: false,
+  },
+  claude: {
+    base: process.env.CLAUDE_BASE_URL ?? "https://api.z.ai/api/anthropic",
+    // separate key so zai: can point at a mock while the CLI still authenticates
+    key: process.env.CLAUDE_API_KEY ?? process.env.ZAI_API_KEY ?? "",
+    keyName: "CLAUDE_API_KEY (or ZAI_API_KEY)",
+    rpm: Number(process.env.CLAUDE_REQUESTS_PER_MINUTE ?? 20),
     daily: false,
   },
 }
@@ -45,6 +58,7 @@ export type ContentPart = { type: "text"; text: string } | { type: "image_url"; 
 export type Message = { role: "system" | "user" | "assistant"; content: string | ContentPart[] }
 
 export function route(model: string): { provider: ProviderName; model: string } {
+  if (model.startsWith("claude:")) return { provider: "claude", model: model.slice(7) }
   return model.startsWith("zai:") ? { provider: "zai", model: model.slice(4) } : { provider: "openrouter", model }
 }
 
@@ -77,12 +91,63 @@ async function throttle(provider: ProviderName) {
   lastCall[provider] = Date.now()
 }
 
+function textOf(content: Message["content"]) {
+  return typeof content === "string" ? content : content.filter(p => p.type === "text").map(p => p.text).join("\n")
+}
+
+// the CLI takes one prompt, so a repair round's messages become a transcript, and temperature /
+// max_tokens have no CLI equivalents. safe mode skips CLAUDE.md and skills, restricted mode drops
+// Bash and web tools, and the empty temp cwd leaves file tools nothing to reach: the repo this
+// runs from holds the blind reviews the council is compared against, so members must stay blind
+async function claudeChat(base: string, key: string, model: string, messages: Message[]) {
+  const cwd = await mkdtemp(join(tmpdir(), "council-"))
+  const system = messages.filter(m => m.role === "system").map(m => textOf(m.content)).join("\n\n")
+  const transcript = messages
+    .filter(m => m.role !== "system")
+    .map(m => (m.role === "assistant" ? `Your earlier reply:\n\n${textOf(m.content)}` : textOf(m.content)))
+    .join("\n\n---\n\n")
+  const args = ["claude", "-p", "--safe-mode", "--restricted", "--model", model, "--output-format", "text"]
+  if (system) args.push("--system-prompt", system)
+  try {
+    const proc = Bun.spawn(args, {
+      cwd,
+      env: {
+        ...process.env,
+        ANTHROPIC_BASE_URL: base,
+        ANTHROPIC_AUTH_TOKEN: key,
+        CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT: "1",
+      },
+      stdin: new Blob([transcript]),
+      stdout: "pipe",
+      stderr: "pipe",
+    })
+    const timer = setTimeout(() => proc.kill(), TIMEOUT_MS)
+    const [out, err] = await Promise.all([new Response(proc.stdout).text(), new Response(proc.stderr).text()])
+    const code = await proc.exited
+    clearTimeout(timer)
+    if (code !== 0) {
+      const why = err.trim().slice(0, 300)
+      if (/429|rate.?limit|quota/i.test(err)) throw new RateLimited(60_000)
+      if (/\b(401|403)\b|invalid api key|authenticat|unauthorized/i.test(err)) throw new FatalError(`${model} (claude CLI): ${why}`)
+      throw new TransientError(`${model} (claude CLI) exited ${code}: ${why}`)
+    }
+    if (!out.trim()) throw new TransientError(`${model} (claude CLI): empty reply`)
+    return out
+  } catch (e) {
+    if (e instanceof RateLimited || e instanceof TransientError || e instanceof FatalError) throw e
+    throw new FatalError(`claude CLI is not available: ${(e as Error).message}`)
+  } finally {
+    await rm(cwd, { recursive: true, force: true })
+  }
+}
+
 export async function chat(db: Db, id: string, messages: Message[], opts: { temperature: number; max_tokens: number }) {
   const { provider, model } = route(id)
   const p = PROVIDERS[provider]
   if (!p.key) throw new FatalError(`${p.keyName} is not set`)
   if (p.daily) takeQuota(db)
   await throttle(provider)
+  if (provider === "claude") return claudeChat(p.base, p.key, model, messages)
 
   let res: Response
   try {

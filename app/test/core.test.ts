@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { extractJson, loadRubric, normalizeScores, weightedTotal } from "../scripts/lib"
+import { extractJson, loadRubric, normalizeScores, weightedTotal } from "../../scripts/lib"
 import { median, parseMember } from "../server/council"
 import { openDb } from "../server/db"
 import { builtDuringEvent, parseRepo } from "../server/evidence"
@@ -141,6 +141,7 @@ describe("text extraction", () => {
   })
 
   test("models route by prefix", () => {
+    expect(route("claude:glm-5.3-flash")).toEqual({ provider: "claude", model: "glm-5.3-flash" })
     expect(route("zai:glm-4.7-flash")).toEqual({ provider: "zai", model: "glm-4.7-flash" })
     expect(route("qwen/qwen3.8-27b:free")).toEqual({ provider: "openrouter", model: "qwen/qwen3.8-27b:free" })
   })

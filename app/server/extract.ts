@@ -1,16 +1,5 @@
 import { extname } from "node:path"
-
-const ENTITIES: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", "#39": "'" }
-
-function entities(s: string) {
-  return s.replace(/&(#x[0-9a-f]+|#\d+|\w+);/gi, (m, e: string) => {
-    if (e[0] === "#") {
-      const code = e[1].toLowerCase() === "x" ? Number.parseInt(e.slice(2), 16) : Number(e.slice(1))
-      return Number.isFinite(code) && code > 0 ? String.fromCodePoint(code) : m
-    }
-    return ENTITIES[e.toLowerCase()] ?? m
-  })
-}
+import { decode } from "../../scripts/lib"
 
 function tidy(text: string) {
   return text
@@ -24,7 +13,7 @@ function meta(html: string, name: string) {
   for (const tag of html.match(/<meta\b[^>]*>/gi) ?? []) {
     if (!new RegExp(`(name|property)=["']${name}["']`, "i").test(tag)) continue
     const content = tag.match(/content=["']([^"']*)["']/i)?.[1]
-    if (content) return tidy(entities(content))
+    if (content) return tidy(decode(content))
   }
   return ""
 }
@@ -38,15 +27,15 @@ export function htmlText(html: string) {
     .replace(/<br\s*\/?>|<\/(p|div|section|article|main|header|footer|nav|li|tr|h[1-6]|button|a)>/gi, "\n")
     .replace(/<[^>]+>/g, " ")
   return {
-    title: tidy(entities(title)),
+    title: tidy(decode(title)),
     description: meta(html, "description") || meta(html, "og:description"),
-    text: tidy(entities(body)).replace(/\n{2,}/g, "\n"),
+    text: tidy(decode(body)).replace(/\n{2,}/g, "\n"),
   }
 }
 
 // text runs of a pptx slide (<a:t>) or a docx body (<w:t>), one line per paragraph
 export function officeXmlText(xml: string) {
-  return tidy(entities(xml.replace(/<\/(a|w):p>/g, "\n").replace(/<(a|w):(tab|br)\b[^>]*\/>/g, " ").replace(/<[^>]+>/g, "")))
+  return tidy(decode(xml.replace(/<\/(a|w):p>/g, "\n").replace(/<(a|w):(tab|br)\b[^>]*\/>/g, " ").replace(/<[^>]+>/g, "")))
 }
 
 function run(cmd: string[]) {

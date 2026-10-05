@@ -1,5 +1,5 @@
 import { join } from "node:path"
-import { ROOT, type Rubric, type Score, decode, extractJson, loadRubric, normalizeScores, weightedTotal } from "../scripts/lib"
+import { ROOT, type Rubric, type Score, decode, extractJson, loadRubric, loadScores, normalizeScores, weightedTotal } from "../../scripts/lib"
 import { type Db, type Submission, logEvent } from "./db"
 import { type Facts, builtDuringEvent, liveDemo } from "./evidence"
 import { FatalError, type Message, RateLimited, chat } from "./models"
@@ -8,7 +8,6 @@ export type Council = {
   version: number
   temperature: number
   max_tokens: number
-  min_members: number
   members: string[]
   judge: string
   vision?: string
@@ -59,12 +58,8 @@ export type CouncilReview = {
 
 class InvalidReply extends Error {}
 
-class Unavailable extends Error {}
-
-const MEMBER_MAX_TRIES = Number(process.env.MEMBER_MAX_TRIES ?? 6)
-
-// free models are often rate-limited upstream for long stretches. the panel stays fixed,
-// so after enough tries a member is skipped for this review instead of blocking the queue
+// every project must face the identical panel: a rate-limited member is waited for, never
+// skipped. the tries counter only escalates the backoff (60 s doubling, capped at 30 min)
 async function withRateLimit<T>(db: Db, id: string, member: string, call: () => Promise<T>) {
   try {
     return await call()
@@ -73,7 +68,6 @@ async function withRateLimit<T>(db: Db, id: string, member: string, call: () => 
     db.query("insert into member_tries (id, member, tries) values (?, ?, 1) on conflict (id, member) do update set tries = tries + 1")
       .run(id, member)
     const tries = db.query<{ tries: number }, [string, string]>("select tries from member_tries where id = ? and member = ?").get(id, member)!.tries
-    if (tries >= MEMBER_MAX_TRIES) throw new Unavailable(`rate-limited by the provider ${tries} times`)
     throw new RateLimited(Math.min(Math.max(e.retryAfterMs, 60_000 * 2 ** (tries - 1)), 30 * 60_000))
   }
 }
@@ -81,8 +75,8 @@ async function withRateLimit<T>(db: Db, id: string, member: string, call: () => 
 const LETTERS = "ABCDEFGH"
 
 export async function loadCouncil(): Promise<Council> {
-  const c = (await import(join(ROOT, "council.toml"))).default as Council
-  if (!c.members?.length || !c.judge) throw new Error("council.toml needs members and a judge")
+  const c = (await import(join(ROOT, "review/council.toml"))).default as Council
+  if (!c.members?.length || !c.judge) throw new Error("review/council.toml needs members and a judge")
   return c
 }
 
@@ -122,8 +116,22 @@ export function parseMember(rubric: Rubric, text: string, label: string): Member
   }
 }
 
-async function memberSystemPrompt(rubric: Rubric) {
-  const template = await Bun.file(join(ROOT, "prompts/council-member.md")).text()
+// 2-3 anonymized anchors from this task's published blind reviews keep members on one scale;
+// the entry under review is never among them, so a member can't just copy its blind score
+async function anchors(rubric: Rubric, task: string, excludeRepo: string) {
+  const others = ((await loadScores(task))?.projects ?? []).filter(p => p.repo !== excludeRepo)
+  if (others.length < 2) return ""
+  const byTotal = [...others].sort((a, b) => b.weighted_total - a.weighted_total)
+  const picks = [byTotal[0], byTotal[Math.floor((byTotal.length - 1) / 2)], byTotal[byTotal.length - 1]].filter((p, i, xs) => xs.indexOf(p) === i)
+  const lines = picks.map((p, i) => {
+    const byName = Object.fromEntries(p.scores.map(s => [s.criterion, s.score]))
+    return `- Entry ${String.fromCharCode(65 + i)}: ${p.weighted_total} (${Object.keys(rubric.weights).map(n => byName[n] ?? "?").join(", ")}). ${p.verdict}`
+  })
+  return `\n## Calibration anchors\n\nOther entries in this task were scored with this rubric by a senior reviewer. Keep your scale consistent with them (total, then criteria in the order listed above):\n\n${lines.join("\n")}\n`
+}
+
+export async function memberSystemPrompt(rubric: Rubric, task: string, excludeRepo: string) {
+  const template = await Bun.file(join(ROOT, "review/prompts/council-member.md")).text()
   return fill(template, {
     DEADLINE: rubric.deadline,
     TASK_NAME: rubric.name,
@@ -132,6 +140,7 @@ async function memberSystemPrompt(rubric: Rubric) {
     WEIGHTS: Object.entries(rubric.weights).map(([k, v]) => `- ${k}: ${v}`).join("\n"),
     WEIGHTS_NOTE: rubric.weights_note ? `\n${rubric.weights_note}\n` : "",
     CHECKS: rubric.checks.map(c => `- ${c}`).join("\n") || "- Nothing task-specific.",
+    ANCHORS: await anchors(rubric, task, excludeRepo),
   })
 }
 
@@ -165,25 +174,6 @@ function saveMember(db: Db, id: string, member: string, model: string, ok: boole
     .run(id, member, model, ok ? 1 : 0, result ? JSON.stringify(result) : null, error)
 }
 
-function judgeFallback(rubric: Rubric, valid: { letter: string; review: MemberReview }[], scores: CouncilScore[]) {
-  const total = weightedTotal(scores)
-  const closest = [...valid].sort(
-    (a, b) => Math.abs(weightedTotal(a.review.scores) - total) - Math.abs(weightedTotal(b.review.scores) - total),
-  )[0].review
-  const why = Object.fromEntries(
-    Object.keys(rubric.weights).map(name => {
-      const s = scores.find(x => x.criterion === name)!
-      const best = [...valid].sort(
-        (a, b) =>
-          Math.abs(a.review.scores.find(x => x.criterion === name)!.score - s.score) -
-          Math.abs(b.review.scores.find(x => x.criterion === name)!.score - s.score),
-      )[0]
-      return [name, best.review.scores.find(x => x.criterion === name)!.why]
-    }),
-  )
-  return { why, strengths: closest.strengths, weaknesses: closest.weaknesses, red_flags: closest.red_flags, verdict: closest.verdict, task_fit: closest.task_fit }
-}
-
 function numericAgreement(review: MemberReview, scores: CouncilScore[]) {
   const diffs = scores.map(s => Math.abs(review.scores.find(x => x.criterion === s.criterion)!.score - s.score))
   return Math.round((1 - diffs.reduce((a, b) => a + b, 0) / diffs.length / 10) * 100) / 100
@@ -191,7 +181,7 @@ function numericAgreement(review: MemberReview, scores: CouncilScore[]) {
 
 export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: string): Promise<CouncilReview> {
   const [council, rubric] = await Promise.all([loadCouncil(), loadRubric(sub.task)])
-  const system = await memberSystemPrompt(rubric)
+  const system = await memberSystemPrompt(rubric, sub.task, sub.repo)
   const done = new Set(memberRows(db, sub.id).map(r => r.member))
 
   for (const [i, model] of council.members.entries()) {
@@ -207,16 +197,16 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
       saveMember(db, sub.id, letter, model, true, review, null)
       logEvent(db, sub.id, `Member ${letter} scored ${weightedTotal(review.scores)}`)
     } catch (e) {
-      if (!(e instanceof InvalidReply || e instanceof FatalError || e instanceof Unavailable)) throw e
+      if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
       saveMember(db, sub.id, letter, model, false, null, (e as Error).message)
-      logEvent(db, sub.id, e instanceof Unavailable ? `Member ${letter} is unavailable (${e.message}), continuing without it` : `Member ${letter} gave no usable review`)
+      throw new FatalError(`member ${letter} (${model}) gave no usable review: ${(e as Error).message}`)
     }
   }
 
   const rows = memberRows(db, sub.id).filter(r => r.member !== "judge")
   const valid = rows.filter(r => r.ok).map(r => ({ letter: r.member, review: JSON.parse(r.result!) as MemberReview }))
-  if (valid.length < council.min_members) {
-    throw new FatalError(`only ${valid.length} of ${council.members.length} council members returned a usable review`)
+  if (valid.length < council.members.length) {
+    throw new FatalError(`only ${valid.length} of ${council.members.length} council members returned a usable review; refusing to score with a smaller panel`)
   }
 
   const scores: CouncilScore[] = Object.entries(rubric.weights).map(([criterion, weight]) => {
@@ -225,17 +215,17 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
     return { criterion, weight, score: median(values), why: "", spread: Math.max(...values) - Math.min(...values), members }
   })
 
-  let judged: ReturnType<typeof judgeFallback> & { agreement?: Record<string, number> }
+  let judged: { why: Record<string, string>; strengths: string[]; weaknesses: string[]; red_flags: string[]; verdict: string; task_fit: string; agreement?: Record<string, number> }
   let judgeOk = false
   const stored = memberRows(db, sub.id).find(r => r.member === "judge")
   if (stored?.ok) {
     judged = JSON.parse(stored.result!)
     judgeOk = true
   } else if (stored) {
-    judged = judgeFallback(rubric, valid, scores)
+    throw new FatalError(`the judge gave no usable review: ${stored.error}`)
   } else {
     logEvent(db, sub.id, "The judge is writing the council review")
-    const template = await Bun.file(join(ROOT, "prompts/council-judge.md")).text()
+    const template = await Bun.file(join(ROOT, "review/prompts/council-judge.md")).text()
     const { languages, loc_by_language, ...shortFacts } = facts
     const prompt = fill(template, {
       MEMBER_COUNT: String(valid.length),
@@ -264,15 +254,14 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
       saveMember(db, sub.id, "judge", council.judge, true, judged, null)
       judgeOk = true
     } catch (e) {
-      if (!(e instanceof InvalidReply || e instanceof FatalError || e instanceof Unavailable)) throw e
+      if (!(e instanceof InvalidReply || e instanceof FatalError)) throw e
       saveMember(db, sub.id, "judge", council.judge, false, null, (e as Error).message)
-      logEvent(db, sub.id, "The judge gave no usable review, so the closest member's text is used")
-      judged = judgeFallback(rubric, valid, scores)
+      throw new FatalError(`the judge (${council.judge}) gave no usable review: ${(e as Error).message}`)
     }
   }
 
   for (const s of scores) {
-    s.why = judged.why[s.criterion] || judgeFallback(rubric, valid, scores).why[s.criterion]
+    s.why = judged.why[s.criterion] || ""
   }
 
   const redFlags = [...judged.red_flags]

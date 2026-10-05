@@ -1,0 +1,29 @@
+# fixed panel: every submission is judged by the same models. changing any model
+# means bumping version, so results stay comparable within one version.
+# v2: gemma-4-31b was rate-limited upstream almost every call, and inkling became
+# available only to agentic apps (HTTP 403)
+# v3: glm-4.7-flash joins through z.ai's free API, a vision model describes up to five
+# screenshots, and the evidence pack reads repo decks, full docs and demo pages
+# v4: glm-5.3-flash and the glm-5.3 judge join through the local Claude Code CLI on the
+# z.ai coding plan; nemotron-3-ultra and the rate-limited qwen3.8-27b make way. where the
+# CLI is not installed (the server), those two are skipped and the panel still has
+# glm-4.7-flash plus the two free members
+# v5: members get anonymized calibration anchors from the task's published blind reviews,
+# and image-only pdf decks are rendered and described by the vision model
+# v6: three members — zai:glm-4.7-flash leaves the panel (rate-limited often, scored high
+# on weak projects). every project faces the identical panel: a rate-limited member is
+# waited for with backoff, and a member or judge that cannot answer fails the review
+version = 6
+temperature = 0.2
+max_tokens = 12000
+
+# "claude:" models run through the local Claude Code CLI (ZAI_API_KEY), "zai:" models go
+# to z.ai's general API (ZAI_API_KEY), the rest to OpenRouter
+members = [
+  "claude:glm-5.3-flash",
+  "dots-studio/dots-3-note-preview:free",
+  "inclusionai/ling-3.0-flash-sante:free",
+]
+
+judge = "claude:glm-5.3"
+vision = "zai:glm-4.6v-flash"

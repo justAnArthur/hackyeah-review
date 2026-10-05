@@ -1,4 +1,4 @@
-import type { scorecardData } from "../../scripts/lib"
+import type { scorecardData } from "../../../scripts/lib"
 import type { CouncilReview } from "../../server/council"
 
 export type ScorecardTask = Awaited<ReturnType<typeof scorecardData>>[number]

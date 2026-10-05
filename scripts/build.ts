@@ -3,11 +3,11 @@ import { join } from "node:path"
 import { $ } from "bun"
 import { createElement } from "react"
 import { renderToString } from "react-dom/server"
-import { loadRubrics, scorecardData } from "./scripts/lib"
-import { PAGE_COMPONENTS, type PageName } from "./web/pages"
-import { ICON, SITE } from "./web/lib/site"
+import { loadRubrics, scorecardData } from "./lib"
+import { PAGE_COMPONENTS, type PageName } from "../app/web/pages"
+import { ICON, SITE } from "../app/web/lib/site"
 
-const ROOT = import.meta.dir
+const ROOT = join(import.meta.dir, "..")
 const OUT = `${ROOT}/public`
 
 const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@ const THEME = `<script>try{const m=matchMedia("(prefers-color-scheme: dark)");co
 const data = await scorecardData()
 const tasks = (await loadRubrics()).map(r => ({ id: r.id, name: r.name, kind: r.kind }))
 const reviewed = data.reduce((n, t) => n + t.projects.length, 0)
-const councilSize = ((await import("./council.toml")).default as { members: string[] }).members.length
+const councilSize = ((await import("../review/council.toml")).default as { members: string[] }).members.length
 
 const PAGES: { name: PageName; out: string; href?: string; title: string; desc: string; props: object }[] = [
   {
@@ -51,7 +51,7 @@ const PAGES: { name: PageName; out: string; href?: string; title: string; desc: 
 await $`rm -rf ${OUT}`
 
 const bundle = await Bun.build({
-  entrypoints: [`${ROOT}/web/main.tsx`],
+  entrypoints: [`${ROOT}/app/web/main.tsx`],
   outdir: `${OUT}/assets`,
   naming: "[name]-[hash].[ext]",
   target: "browser",
@@ -65,7 +65,7 @@ if (!bundle.success) {
 const script = `/assets/${bundle.outputs[0].path.split("/").pop()}`
 
 const tmpCss = join(tmpdir(), "hackyeah-review-app.css")
-await $`bunx @tailwindcss/cli -i ${ROOT}/web/app.css -o ${tmpCss} --minify`.cwd(ROOT).quiet()
+await $`bunx @tailwindcss/cli -i ${ROOT}/app/web/app.css -o ${tmpCss} --minify`.cwd(ROOT).quiet()
 const css = await Bun.file(tmpCss).text()
 const style = `/assets/app-${Bun.hash(css).toString(36)}.css`
 await Bun.write(`${OUT}${style}`, css)

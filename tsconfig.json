@@ -18,15 +18,12 @@
     ],
     "paths": {
       "@/*": [
-        "./web/*"
+        "./app/web/*"
       ]
     }
   },
   "include": [
-    "build.ts",
     "scripts",
-    "server",
-    "web",
-    "test"
+    "app"
   ]
 }
