@@ -33,6 +33,12 @@ bun run dev                      # builds the site and serves it with the API on
 bun test                         # unit tests
 ```
 
+To see how close the council lands to the blind reviews, run it on projects that already have one. The form fields get the project description and the result stays hidden, so the council is as blind as the original reviewer:
+
+```bash
+bun scripts/council-check.ts sport:x2oreo/Celia.ai defence:Mikformatycy/SafeWall
+```
+
 Without a key, use the mock: run `bun test/mock-openrouter.ts`, then start the server with `OPENROUTER_BASE_URL=http://localhost:4790 OPENROUTER_API_KEY=mock`.
 
 ### Deploy (Dokploy)
