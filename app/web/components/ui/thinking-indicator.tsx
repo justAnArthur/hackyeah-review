@@ -21,7 +21,7 @@ const circleB =
   "M 12 16 C 14.21 16 16 14.21 16 12 C 16 9.79 14.21 8 12 8 C 9.79 8 8 9.79 8 12 C 8 14.21 9.79 16 12 16 Z";
 
 // The label moves to the next word every 4000ms.
-const words = ["Thinking", "Moonwalking", "Planning", "Refining"];
+const DEFAULT_WORDS = ["Thinking", "Moonwalking", "Planning", "Refining"];
 
 interface ThinkingIndicatorProps extends HTMLAttributes<HTMLDivElement> {
   /** Show the morphing circle⇄infinity glyph before the label. Set to `false`
@@ -29,10 +29,12 @@ interface ThinkingIndicatorProps extends HTMLAttributes<HTMLDivElement> {
   showIcon?: boolean;
   /** Step on the size ladder. Wins over the surrounding SizeProvider. */
   size?: SizeVariant;
+  /** Words the label cycles through; the first is also what screen readers hear. */
+  words?: string[];
 }
 
 const ThinkingIndicator = forwardRef<HTMLDivElement, ThinkingIndicatorProps>(
-  ({ className, showIcon = true, size, ...props }, ref) => {
+  ({ className, showIcon = true, size, words = DEFAULT_WORDS, ...props }, ref) => {
   const compactStep = useSize(size).variant === "compact";
   const [index, setIndex] = useState(0);
   // Reduced motion drops the infinite glyph morph and the word cycling — a
@@ -45,7 +47,7 @@ const ThinkingIndicator = forwardRef<HTMLDivElement, ThinkingIndicatorProps>(
       setIndex((i) => (i + 1) % words.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [reduceMotion]);
+  }, [reduceMotion, words.length]);
 
   return (
     <div
@@ -57,7 +59,7 @@ const ThinkingIndicator = forwardRef<HTMLDivElement, ThinkingIndicatorProps>(
       {/* Static announcement — the cycling word display below is aria-hidden
           so screen readers hear one "Thinking…" instead of a re-announcement
           every 4 seconds. */}
-      <span className="sr-only">Thinking…</span>
+      <span className="sr-only">{words[0]}…</span>
       {showIcon && (
         <motion.svg
           aria-hidden

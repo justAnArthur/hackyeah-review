@@ -4,9 +4,9 @@ import { ProjectList } from "@/components/project-card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select"
 import { TabItem, Tabs, TabsList } from "@/components/ui/tabs"
-import { type CouncilScore, type Project, type Sort, type Task, communityProject, mergeTasks, sortProjects } from "@/lib/projects"
+import { type CommunityEntry, type CouncilScore, type Project, type Sort, type Task, communityProject, mergeTasks, sortCommunity, sortProjects } from "@/lib/projects"
 import { RESULT, fmt } from "@/lib/site"
-import type { CouncilReview, ScorecardTask } from "@/lib/types"
+import type { ScorecardTask } from "@/lib/types"
 
 type Filter = "all" | "placed" | "code"
 
@@ -38,10 +38,10 @@ function agreement(t: Task) {
   )
 }
 
-const Section = (props: { t: Task; filter: Filter; sort: Sort; community: CouncilReview[]; council: Record<string, CouncilScore>; open: string[]; setOpen: (ids: string[], open: string[]) => void }) => {
+const Section = (props: { t: Task; filter: Filter; sort: Sort; community: CommunityEntry[]; council: Record<string, CouncilScore>; open: string[]; setOpen: (ids: string[], open: string[]) => void }) => {
   const { t } = props
   const projects = sortProjects(t.projects.filter(p => shown(p, props.filter)), props.sort).map(p => ({ ...p, council: p.review && props.council[`${t.id}|${p.review.repo}`] }))
-  const community = props.community.map(r => communityProject(t.id, r)).sort((a, b) => b.review!.weighted_total - a.review!.weighted_total)
+  const community = sortCommunity(props.community).map(e => communityProject(t.id, e))
   return (
     <section id={t.id} className="grid scroll-mt-6 gap-3">
       <div className="grid gap-1.5 px-1">
@@ -140,8 +140,9 @@ export const HomePage = ({ data }: { data: ScorecardTask[] }) => {
   const tasks = useMemo(() => mergeTasks(data), [data])
   const [filter, setFilter] = useState<Filter>("all")
   const [sort, setSort] = useState<Sort>("result")
-  const [community, setCommunity] = useState<Record<string, CouncilReview[]>>({})
+  const [community, setCommunity] = useState<Record<string, CommunityEntry[]>>({})
   const [council, setCouncil] = useState<Record<string, CouncilScore>>({})
+  const [loaded, setLoaded] = useState(false)
   const [open, setOpenState] = useState<string[]>([])
 
   const setOpen = (ids: string[], next: string[]) => setOpenState(prev => [...prev.filter(v => !ids.includes(v)), ...next])
@@ -152,15 +153,24 @@ export const HomePage = ({ data }: { data: ScorecardTask[] }) => {
       if (["placed", "code"].includes(saved.filter)) setFilter(saved.filter)
       if (saved.sort === "score") setSort("score")
     } catch {}
-    fetch("/api/council-scores")
-      .then(r => (r.ok ? r.json() : {}))
-      .then(setCouncil)
-      .catch(() => {})
-    fetch("/api/community")
-      .then(r => (r.ok ? r.json() : {}))
-      .then(setCommunity)
-      .catch(() => {})
+    load()
   }, [])
+
+  async function load() {
+    const get = (url: string) => fetch(url).then(r => (r.ok ? r.json() : {})).catch(() => ({}))
+    const [scores, entries] = await Promise.all([get("/api/council-scores"), get("/api/community")])
+    setCouncil(scores)
+    setCommunity(entries)
+    setLoaded(true)
+  }
+
+  // refresh while an upload or a finalist is still being reviewed
+  const busy = Object.values(council).some(c => c.total === null) || Object.values(community).flat().some(e => !e.review)
+  useEffect(() => {
+    if (!busy) return
+    const timer = setInterval(load, 10_000)
+    return () => clearInterval(timer)
+  }, [busy])
 
   function save(next: { filter?: Filter; sort?: Sort }) {
     if (next.filter) setFilter(next.filter)
@@ -181,7 +191,7 @@ export const HomePage = ({ data }: { data: ScorecardTask[] }) => {
     fromHash()
     addEventListener("hashchange", fromHash)
     return () => removeEventListener("hashchange", fromHash)
-  }, [community])
+  }, [loaded])
 
   const finalists = tasks.flatMap(t => t.projects.filter(p => !p.ours))
   const placed = finalists.filter(p => p.place)

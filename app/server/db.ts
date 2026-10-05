@@ -107,10 +107,11 @@ export function updateJob(db: Db, id: string, patch: Partial<Job>) {
 export function queuePosition(db: Db, job: Job) {
   if (!["queued", "waiting_quota"].includes(job.status)) return 0
   const row = db
-    .query<{ n: number }, [number, number, number]>(
-      `select count(*) as n from jobs where status in ('queued', 'waiting_quota', 'running')
-       and (priority > ? or (priority = ? and created_at < ?))`,
+    .query<{ n: number }, [string]>(
+      `select count(*) as n from jobs j join submissions s on s.id = j.id
+       where j.status in ('queued', 'waiting_quota', 'running')
+       and s.created_at < (select created_at from submissions where id = ?)`,
     )
-    .get(job.priority, job.priority, job.created_at)
+    .get(job.id)
   return (row?.n ?? 0) + 1
 }

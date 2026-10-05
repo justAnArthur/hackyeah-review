@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { extractJson, loadRubric, normalizeScores, weightedTotal } from "../../scripts/lib"
 import { median, parseMember } from "../server/council"
-import { openDb } from "../server/db"
+import { getJob, openDb, queuePosition } from "../server/db"
 import { builtDuringEvent, parseRepo } from "../server/evidence"
 import { FatalError, QuotaExhausted, RateLimited, TransientError, cliFailure, nextUtcMidnight, route, takeQuota } from "../server/models"
 import { htmlText, officeXmlText } from "../server/extract"
@@ -88,12 +88,18 @@ describe("quota and queue", () => {
     expect(backoff(20)).toBe(30 * 60_000)
   })
 
-  test("picks queued jobs in order and skips future ones", () => {
+  test("runs reviews in upload order and skips ones waiting for a retry", () => {
     const db = openDb(":memory:")
-    enqueue(db, "a")
-    enqueue(db, "b")
-    db.query("update jobs set next_run_at = ? where id = 'a'").run(Date.now() + 60_000)
-    expect(nextJob(db)?.id).toBe("b")
+    const upload = (id: string, at: number) =>
+      db.query("insert into submissions (id, created_at, task, team, title, result, repo, fields, ip_hash) values (?, ?, 'sport', 't', 't', '', 'o/r', '{}', '')").run(id, at)
+    upload("early", 1_000)
+    upload("late", 2_000)
+    enqueue(db, "late")
+    enqueue(db, "early")
+    expect(nextJob(db)?.id).toBe("early")
+    expect(queuePosition(db, getJob(db, "late")!)).toBe(2)
+    db.query("update jobs set next_run_at = ? where id = 'early'").run(Date.now() + 60_000)
+    expect(nextJob(db)?.id).toBe("late")
   })
 })
 

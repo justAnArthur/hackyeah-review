@@ -12,9 +12,25 @@ export type Project = Entry & {
   self?: boolean
   // the council's score for a finalist, run to compare with its blind review
   council?: CouncilScore
+  // a review still in the queue or running
+  pending?: Pending
+  // the review page of a submission
+  reviewUrl?: string
 }
 
-export type CouncilScore = { id: string; total: number; version: number }
+export type Pending = { status: string; position: number }
+
+export type CouncilScore = Pending & { id: string; total: number | null; version: number | null }
+
+export type CommunityEntry = Pending & {
+  id: string
+  task: string
+  repo: string
+  title: string
+  team: string
+  uploaded_at: number
+  review: CouncilReview | null
+}
 
 export type Task = ResultsTask & {
   weights?: Record<string, number>
@@ -39,22 +55,34 @@ function toProject(task: string, e: Entry, scored?: ScorecardTask): Project {
   }
 }
 
-export function communityProject(task: string, r: CouncilReview): Project {
+export function communityProject(task: string, e: CommunityEntry): Project {
+  const r = e.review
   return {
-    id: reviewId(`${task}--c`, r.repo),
-    team: r.team,
-    title: r.project,
+    id: reviewId(`${task}--c`, e.repo),
+    team: e.team,
+    title: e.title,
     status: "found",
-    repos: [r.repo],
+    repos: [e.repo],
     self: true,
-    review: {
-      ...r,
-      result: "fin",
-      result_note: `Self-declared result: ${r.result}. Reviewed by council v${r.council.version}.`,
-      link: `/r/${r.id}`,
-      tests_label: r.tests.cases ? `${r.tests.cases} cases` : r.has_tests ? `${r.tests.files} files` : "None",
-    },
+    reviewUrl: `/r/${e.id}`,
+    pending: r ? undefined : { status: e.status, position: e.position },
+    review: r
+      ? {
+          ...r,
+          result: "fin",
+          result_note: `Self-declared result: ${r.result}. Reviewed by council v${r.council.version}.`,
+          link: `/r/${r.id}`,
+          tests_label: r.tests.cases ? `${r.tests.cases} cases` : r.has_tests ? `${r.tests.files} files` : "None",
+        }
+      : undefined,
   }
+}
+
+// uploads still being reviewed first, newest on top, then finished reviews by score
+export function sortCommunity(entries: CommunityEntry[]) {
+  const pending = entries.filter(e => !e.review).sort((a, b) => b.uploaded_at - a.uploaded_at)
+  const done = entries.filter(e => e.review).sort((a, b) => b.review!.weighted_total - a.review!.weighted_total)
+  return [...pending, ...done]
 }
 
 export function mergeTasks(data: ScorecardTask[]): Task[] {

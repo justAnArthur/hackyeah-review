@@ -1,15 +1,29 @@
-import { CircleDashed } from "lucide-react"
+import { CircleDashed, LoaderCircle } from "lucide-react"
 import { Bar, Fact, List } from "@/components/layout"
 import { AccordionContent, AccordionGroup, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { ThinkingIndicator } from "@/components/ui/thinking-indicator"
 import { fontWeights } from "@/lib/font-weight"
-import type { Project, Task } from "@/lib/projects"
+import type { Pending, Project, Task } from "@/lib/projects"
 import { reviewRank } from "@/lib/projects"
 import { GH, RESULT, fmt } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 const NORMAL = { fontVariationSettings: fontWeights.normal }
+
+function pendingWords(p: Pending) {
+  if (p.status === "running") return ["Reviewing", "Reading the repo", "Scoring", "Writing the verdict"]
+  if (p.status === "waiting_quota") return ["Waiting for quota"]
+  return [p.position > 1 ? `In queue · #${p.position}` : "Up next"]
+}
+
+// an upload still being reviewed: the ai indicator stands where the score will be
+const PendingScore = ({ pending }: { pending: Pending }) => (
+  <span className="shrink-0 self-center">
+    <ThinkingIndicator size="compact" words={pendingWords(pending)} className="px-0 py-0 text-[13px]" />
+  </span>
+)
 
 // 32px tile like Fluid's CardMedia: the repo owner's avatar, or a dashed circle when there's no public code
 const Media = ({ p }: { p: Project }) => {
@@ -83,12 +97,20 @@ const Row = ({ p, open }: { p: Project; open: boolean }) => (
           <Bar value={p.review.weighted_total} max={100} ours={p.ours} />
         </span>
         {p.council && (
-          <span className="text-[11px] text-muted-foreground tabular-nums" style={NORMAL} title="Council score">
-            council {fmt(p.council.total)}
+          <span className="flex items-center gap-1 text-[11px] text-muted-foreground tabular-nums" style={NORMAL} title="Council score">
+            {p.council.total === null ? (
+              <>
+                <LoaderCircle size={10} strokeWidth={2} className="animate-spin motion-reduce:animate-none" aria-hidden />
+                council
+              </>
+            ) : (
+              `council ${fmt(p.council.total)}`
+            )}
           </span>
         )}
       </span>
     )}
+    {!p.review && p.pending && <PendingScore pending={p.pending} />}
   </span>
 )
 
@@ -112,7 +134,8 @@ const Details = ({ p, task }: { p: Project; task: Task }) => {
     ...(p.repos ?? []).map(repo => ({ href: GH + repo, label: repo, external: true })),
     ...(p.demo ? [{ href: p.demo, label: "Live demo", external: true }] : []),
     ...(r?.link ? [{ href: r.link, label: "Full council review", external: false }] : []),
-    ...(p.council ? [{ href: `/r/${p.council.id}`, label: `Council review · ${fmt(p.council.total)}`, external: false }] : []),
+    ...(p.council ? [{ href: `/r/${p.council.id}`, label: p.council.total === null ? "Council review in progress" : `Council review · ${fmt(p.council.total)}`, external: false }] : []),
+    ...(p.pending && p.reviewUrl ? [{ href: p.reviewUrl, label: "Follow the review live", external: false }] : []),
   ]
   return (
     <div className="grid gap-4 pt-1 pb-2 pl-11 text-foreground max-sm:pl-0" style={NORMAL}>

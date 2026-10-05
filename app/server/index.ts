@@ -150,34 +150,47 @@ function sse(id: string) {
   )
 }
 
-function community() {
+type Entry = { id: string; task: string; repo: string; title: string; team: string; uploaded_at: number; status: string; position: number; review: CouncilReview | null }
+
+// every visible submission with its state, so an upload shows in the list right away and its
+// score fills in when the council is done; failed and replaced reviews stay off the list
+function entries(source: "form" | "curated") {
   const rows = db
-    .query<{ review: string }, []>(
-      `select r.review from reviews r join submissions s on s.id = r.id join jobs j on j.id = r.id
-       where s.hidden = 0 and s.source = 'form' and j.status = 'done' order by r.created_at desc`,
+    .query<{ id: string; task: string; repo: string; title: string; team: string; created_at: number; review: string | null }, [string]>(
+      `select s.id, s.task, s.repo, s.title, s.team, s.created_at, r.review from submissions s join jobs j on j.id = s.id
+       left join reviews r on r.id = s.id
+       where s.source = ? and s.hidden = 0 and j.status not in ('failed', 'cancelled') order by s.created_at desc`,
     )
-    .all()
-  const byTask: Record<string, CouncilReview[]> = {}
-  for (const { review } of rows) {
-    const r = JSON.parse(review) as CouncilReview
-    ;(byTask[r.task] ??= []).push(r)
-  }
+    .all(source)
+  return rows.map((r): Entry => {
+    const job = getJob(db, r.id)!
+    return {
+      id: r.id,
+      task: r.task,
+      repo: r.repo,
+      title: r.title,
+      team: r.team,
+      uploaded_at: r.created_at,
+      status: job.status,
+      position: queuePosition(db, job),
+      review: r.review ? (JSON.parse(r.review) as CouncilReview) : null,
+    }
+  })
+}
+
+function community() {
+  const byTask: Record<string, Entry[]> = {}
+  for (const e of entries("form")) (byTask[e.task] ??= []).push(e)
   return byTask
 }
 
-// council scores of the finalists, keyed "task|repo", shown next to their blind reviews
+// council state of each finalist, keyed "task|repo", shown next to their blind reviews
 function councilScores() {
-  const rows = db
-    .query<{ id: string; review: string }, []>(
-      `select r.id, r.review from reviews r join submissions s on s.id = r.id join jobs j on j.id = r.id
-       where s.source = 'curated' and s.hidden = 0 and j.status = 'done'`,
-    )
-    .all()
   return Object.fromEntries(
-    rows.map(({ id, review }) => {
-      const r = JSON.parse(review) as CouncilReview
-      return [`${r.task}|${r.repo}`, { id, total: r.weighted_total, version: r.council.version }]
-    }),
+    entries("curated").map(e => [
+      `${e.task}|${e.repo}`,
+      { id: e.id, status: e.status, position: e.position, total: e.review?.weighted_total ?? null, version: e.review?.council.version ?? null },
+    ]),
   )
 }
 
@@ -185,7 +198,7 @@ const isAdmin = (req: Request) => !!ADMIN_TOKEN && req.headers.get("authorizatio
 
 type CuratedRequest = { import?: CouncilReview[]; enqueue?: { task: string; repo: string }[] | "all" }
 
-// imports finished comparison reviews of the finalists and queues the rest behind form submissions
+// imports finished comparison reviews of the finalists and queues the rest, in upload order
 async function curated(req: Request) {
   if (!isAdmin(req)) return fail("Not allowed.", 403)
   const body = (await req.json().catch(() => null)) as CuratedRequest | null
@@ -202,7 +215,7 @@ async function curated(req: Request) {
     }
     const now = Date.now()
     db.query(
-      "insert or replace into jobs (id, status, step, attempts, next_run_at, priority, error, created_at, updated_at) values (?, 'done', 'done', 0, ?, -1, null, ?, ?)",
+      "insert or replace into jobs (id, status, step, attempts, next_run_at, priority, error, created_at, updated_at) values (?, 'done', 'done', 0, ?, 0, null, ?, ?)",
     ).run(id, now, now, now)
     db.query("insert into reviews (id, review, council_version, created_at) values (?, ?, ?, ?)").run(id, JSON.stringify({ ...r, id }), version, r.created_at ?? now)
     logEvent(db, id, `Imported from a council v${version} comparison run`)
@@ -216,7 +229,9 @@ async function curated(req: Request) {
       counts.skipped++
       continue
     }
-    enqueue(db, id, -1)
+    // a finalist queued now counts as uploaded now, so it waits its turn like any upload
+    db.query("update submissions set created_at = ? where id = ?").run(Date.now(), id)
+    enqueue(db, id)
     counts.queued++
   }
   return json(counts)

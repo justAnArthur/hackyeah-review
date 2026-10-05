@@ -7,11 +7,11 @@ import { describeImages } from "./vision"
 const MAX_ATTEMPTS = 8
 const PERMANENT = /not found|not public|private|larger than|could not unpack|HTTP 4\d\d/
 
-export function enqueue(db: Db, id: string, priority = 0) {
+export function enqueue(db: Db, id: string) {
   const now = Date.now()
   db.query(
-    "insert or replace into jobs (id, status, step, attempts, next_run_at, priority, error, created_at, updated_at) values (?, 'queued', 'queued', 0, ?, ?, null, ?, ?)",
-  ).run(id, now, priority, now, now)
+    "insert or replace into jobs (id, status, step, attempts, next_run_at, priority, error, created_at, updated_at) values (?, 'queued', 'queued', 0, ?, 0, null, ?, ?)",
+  ).run(id, now, now, now)
   logEvent(db, id, "Queued")
 }
 
@@ -22,8 +22,10 @@ export function resumeInterrupted(db: Db) {
 export function nextJob(db: Db, now = Date.now()) {
   return db
     .query<Job, [number]>(
-      `select * from jobs where status in ('queued', 'waiting_quota') and next_run_at <= ?
-       order by priority desc, created_at asc limit 1`,
+      // first come, first served by upload time
+      `select j.* from jobs j join submissions s on s.id = j.id
+       where j.status in ('queued', 'waiting_quota') and j.next_run_at <= ?
+       order by s.created_at asc, j.id asc limit 1`,
     )
     .get(now)
 }
