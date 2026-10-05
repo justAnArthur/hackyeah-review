@@ -62,6 +62,10 @@ export type Facts = {
 
 export type Evidence = { pack: string; facts: Facts }
 
+// bump when the pack changes shape, so packs cached by an older builder are rebuilt
+// v2: decks in the repo, full docs, demo page text, screenshot descriptions, ~75k-token budget
+export const EVIDENCE_VERSION = 2
+
 export function parseRepo(input: string) {
   const m = input.trim().match(/^(?:https?:\/\/)?(?:www\.)?github\.com\/([\w.-]+)\/([\w.-]+?)(?:\.git)?(?:[/?#].*)?$/i)
   if (!m) return null

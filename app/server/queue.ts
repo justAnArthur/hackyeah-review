@@ -1,6 +1,6 @@
 import { runCouncil } from "./council"
 import { type Db, type Job, getSubmission, logEvent, updateJob } from "./db"
-import { type Facts, buildEvidence } from "./evidence"
+import { EVIDENCE_VERSION, type Facts, buildEvidence } from "./evidence"
 import { FatalError, QuotaExhausted, RateLimited } from "./models"
 import { describeImages } from "./vision"
 
@@ -47,7 +47,9 @@ export async function processJob(db: Db, job: Job) {
   }
 
   try {
-    let ev = db.query<{ pack: string; facts: string }, [string]>("select pack, facts from evidence where id = ?").get(sub.id)
+    let ev = db
+      .query<{ pack: string; facts: string }, [string, number]>("select pack, facts from evidence where id = ? and version = ?")
+      .get(sub.id, EVIDENCE_VERSION)
     if (!ev) {
       updateJob(db, job.id, { step: "evidence" })
       logEvent(db, job.id, "Collecting evidence from the repo and deck")
@@ -58,7 +60,7 @@ export async function processJob(db: Db, job: Job) {
         const msg = (e as Error).message
         throw PERMANENT.test(msg) ? new FatalError(msg) : e
       }
-      db.query("insert or replace into evidence (id, pack, facts) values (?, ?, ?)").run(sub.id, built.pack, JSON.stringify(built.facts))
+      db.query("insert or replace into evidence (id, pack, facts, version) values (?, ?, ?, ?)").run(sub.id, built.pack, JSON.stringify(built.facts), EVIDENCE_VERSION)
       ev = { pack: built.pack, facts: JSON.stringify(built.facts) }
       const f = built.facts
       logEvent(db, job.id, `Found ${f.source_loc.toLocaleString("en")} source lines, ${f.tests.cases} test cases and ${f.commits.count} commits`)
