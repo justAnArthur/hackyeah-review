@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test"
 import { extractJson, loadRubric, normalizeScores, weightedTotal } from "../../scripts/lib"
 import { median, parseMember } from "../server/council"
 import { getJob, openDb, queuePosition } from "../server/db"
-import { builtDuringEvent, parseRepo } from "../server/evidence"
+import { builtDuringEvent, parseRepo, withoutSources } from "../server/evidence"
 import { FatalError, QuotaExhausted, RateLimited, TransientError, cliFailure, nextUtcMidnight, route, takeQuota } from "../server/models"
 import { htmlText, officeXmlText } from "../server/extract"
 import { backoff, enqueue, nextJob } from "../server/queue"
@@ -170,5 +170,16 @@ describe("claude CLI failures", () => {
   test("a bad key fails for good, anything else is retried", () => {
     expect(cliFailure("glm-5.3", 1, "API Error: 401 invalid api key")).toBeInstanceOf(FatalError)
     expect(cliFailure("glm-5.3", 1, "socket hang up")).toBeInstanceOf(TransientError)
+  })
+})
+
+describe("evidence pack trimming", () => {
+  test("withoutSources keeps everything before the quoted code and says what was left out", () => {
+    const pack = "# Evidence pack\n\n## README\nhello\n\n## Source samples (most central files first, truncated)\n<untrusted>secret code</untrusted>"
+    const shorter = withoutSources(pack)!
+    expect(shorter).toContain("## README\nhello")
+    expect(shorter).not.toContain("secret code")
+    expect(shorter).toContain("left out for this model")
+    expect(withoutSources("# Evidence pack\n\n## README\nhello")).toBeNull()
   })
 })

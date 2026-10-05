@@ -53,6 +53,10 @@ export class TransientError extends Error {}
 
 export class FatalError extends Error {}
 
+// openrouter passes an upstream provider's 400 through; for a model that answers other packs, that is
+// usually the provider refusing this content (security repos full of attack strings and fake keys)
+export class ProviderRefused extends TransientError {}
+
 export type ContentPart = { type: "text"; text: string } | { type: "image_url"; image_url: { url: string } }
 
 export type Message = { role: "system" | "user" | "assistant"; content: string | ContentPart[] }
@@ -182,7 +186,7 @@ export async function chat(db: Db, id: string, messages: Message[], opts: { temp
   if (!res.ok) {
     const text = (await res.text()).slice(0, 300)
     // openrouter passes upstream failures through as 400 with the provider named; those come and go
-    if (res.status === 400 && /provider returned error|provider_name/i.test(text)) throw new TransientError(`${id}: upstream HTTP 400 ${text}`)
+    if (res.status === 400 && /provider returned error|provider_name/i.test(text)) throw new ProviderRefused(`${id}: upstream HTTP 400 ${text}`)
     throw new FatalError(`${id}: HTTP ${res.status} ${text}`)
   }
 

@@ -1,8 +1,8 @@
 import { join } from "node:path"
 import { ROOT, type Rubric, type Score, decode, extractJson, loadRubric, normalizeScores, weightedTotal } from "../../scripts/lib"
 import { type Db, type Submission, logEvent } from "./db"
-import { type Facts, builtDuringEvent, liveDemo } from "./evidence"
-import { FatalError, type Message, RateLimited, TransientError, chat } from "./models"
+import { type Facts, builtDuringEvent, liveDemo, withoutSources } from "./evidence"
+import { FatalError, type Message, ProviderRefused, RateLimited, TransientError, chat } from "./models"
 
 export type Council = {
   version: number
@@ -21,6 +21,8 @@ type MemberReview = {
   weaknesses: string[]
   red_flags: string[]
   verdict: string
+  // read the pack without quoted code, after its provider refused the full text
+  trimmed?: boolean
 }
 
 type MemberRow = { member: string; model: string; ok: number; result: string | null; error: string | null; version: number }
@@ -51,7 +53,7 @@ export type CouncilReview = {
     version: number
     judge: string
     judge_ok: boolean
-    members: { letter: string; model: string; ok: boolean; total: number | null; agreement: number | null; error: string | null }[]
+    members: { letter: string; model: string; ok: boolean; total: number | null; agreement: number | null; error: string | null; trimmed?: boolean }[]
   }
   created_at: number
 }
@@ -187,12 +189,23 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
     const letter = LETTERS[i]
     if (done.has(letter)) continue
     logEvent(db, sub.id, `Member ${letter} is reviewing`)
-    try {
-      const review = await withRateLimit(db, sub.id, letter, () =>
-        askJson(db, council, model, [{ role: "system", content: system }, { role: "user", content: pack }], text =>
+    const ask = (evidence: string) =>
+      withRateLimit(db, sub.id, letter, () =>
+        askJson(db, council, model, [{ role: "system", content: system }, { role: "user", content: evidence }], text =>
           parseMember(rubric, text, `member ${letter}`),
         ),
       )
+    try {
+      let review: MemberReview
+      try {
+        review = await ask(pack)
+      } catch (e) {
+        // same model, same prompt, minus the quoted code: the rest of the evidence still reaches it
+        const shorter = e instanceof ProviderRefused ? withoutSources(pack) : null
+        if (!shorter) throw e
+        logEvent(db, sub.id, `Member ${letter}'s provider refused the full evidence, so it reads it without the quoted code`)
+        review = { ...(await ask(shorter)), trimmed: true }
+      }
       saveMember(db, sub.id, letter, model, council.version, true, review, null)
       logEvent(db, sub.id, `Member ${letter} scored ${weightedTotal(review.scores)}`)
     } catch (e) {
@@ -300,6 +313,7 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
           total: v ? weightedTotal(v.review.scores) : null,
           agreement: v ? (judged.agreement?.[letter] ?? numericAgreement(v.review, scores)) : null,
           error: row?.error ?? null,
+          ...(v?.review.trimmed ? { trimmed: true } : {}),
         }
       }),
     },

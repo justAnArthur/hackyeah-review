@@ -66,6 +66,15 @@ export type Evidence = { pack: string; facts: Facts }
 // v2: decks in the repo, full docs, demo page text, screenshot descriptions, ~75k-token budget
 export const EVIDENCE_VERSION = 2
 
+const SOURCE_HEADING = "\n\n## Source samples"
+
+// the pack without its quoted code, for a model whose provider refuses the full text; null when there is nothing to cut
+export function withoutSources(pack: string) {
+  const i = pack.indexOf(SOURCE_HEADING)
+  if (i < 0) return null
+  return `${pack.slice(0, i)}${SOURCE_HEADING}\n(left out for this model: its provider refused the full text, so judge the code from the measured facts, docs and decks)`
+}
+
 export function parseRepo(input: string) {
   const m = input.trim().match(/^(?:https?:\/\/)?(?:www\.)?github\.com\/([\w.-]+)\/([\w.-]+?)(?:\.git)?(?:[/?#].*)?$/i)
   if (!m) return null
@@ -515,7 +524,7 @@ export async function buildEvidence(sub: Submission, describe?: Describe): Promi
     }
 
     const pack = samples.length
-      ? `${head}\n\n## Source samples (most central files first, truncated)\n${untrusted("source", samples.join("\n\n"))}`
+      ? `${head}${SOURCE_HEADING} (most central files first, truncated)\n${untrusted("source", samples.join("\n\n"))}`
       : head
 
     return { pack: clip(pack, PACK_BUDGET), facts }

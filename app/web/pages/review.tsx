@@ -166,7 +166,10 @@ const Result = ({ r, curated }: { r: NonNullable<Status["review"]>; curated: boo
         {[...r.council.members, { letter: "J", model: r.council.judge, ok: r.council.judge_ok, total: null, agreement: null, error: null }].map(m => (
           <div key={m.letter} className="grid grid-cols-[22px_minmax(0,1fr)_54px_96px] items-center gap-2.5 text-xs max-sm:grid-cols-[22px_minmax(0,1fr)_44px]">
             <b className="font-semibold">{m.letter}</b>
-            <code className="font-mono text-[11.5px] text-muted-foreground [overflow-wrap:anywhere]">{m.model}</code>
+            <span className="grid min-w-0">
+              <code className="font-mono text-[11.5px] text-muted-foreground [overflow-wrap:anywhere]">{m.model}</code>
+              {"trimmed" in m && m.trimmed && <span className="text-[11px] text-muted-foreground/70">read the evidence without quoted code: its provider refused the full text</span>}
+            </span>
             <span className="text-right tabular-nums">{m.total == null ? "–" : fmt(m.total)}</span>
             <span className="text-right text-muted-foreground tabular-nums max-sm:hidden">
               {m.letter === "J" ? (m.ok ? "judge" : "judge failed") : m.agreement == null ? (m.ok ? "" : "no answer") : `${Math.round(m.agreement * 100)}% agree`}
