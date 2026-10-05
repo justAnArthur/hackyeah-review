@@ -94,7 +94,10 @@ export const TASKS: ResultsTask[] = [
       note: "SiteQuestTeam's app looked like a match, but its own context file says it was built for the Smart City task, so it isn't this HubMI entry." },
   ]},
   { id: "huawei", name: "Imagine what's next", kind: "Partner task · Huawei", entries: [
-    { place: 1, team: "Pride of the UK v2", status: "none" },
+    { place: 1, team: "Pride of the UK v2", project: "Harmoniser", status: "likely",
+      desc: "Turns a one-sentence request into a tiny native HarmonyOS app: a JSON capsule checked against a strict schema that can only use the device features you allow.",
+      repos: ["Akshaz7/capsules-harmonyos", "SimpsonLWH/harmoniser-web"],
+      note: "Pointed out on the HackYeah Discord. The README says it was built at HackYeah 2026 for HarmonyOS, and two of its contributors are based in London and Edinburgh; the team name itself doesn't appear in the repo." },
     { place: 2, team: "Carrotly", project: "SafeMesh", status: "found",
       desc: "Native HarmonyOS prototype for signed offline alerts passed along a store-and-forward mesh.",
       repos: ["carrotly-technologies-2026/SafeMesh", "carrotly-technologies-2026/huawei-hackyeah-2026"] },
