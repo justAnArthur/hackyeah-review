@@ -15,10 +15,11 @@ export function enqueue(db: Db, id: string) {
   logEvent(db, id, "Queued")
 }
 
-// on start: jobs cut off mid-run continue, and jobs waiting for quota are checked again, since a
-// restart is how a raised DAILY_LIMIT takes effect; if the quota is still used up they go back to waiting
+// on start, jobs waiting for quota are checked again, since a restart is how a raised DAILY_LIMIT
+// takes effect. running jobs are left alone: during a deploy the old server may still be finishing
+// one, and requeueStale picks it up once it stops making progress
 export function resumeInterrupted(db: Db) {
-  db.query("update jobs set status = 'queued', next_run_at = ? where status in ('running', 'waiting_quota')").run(Date.now())
+  db.query("update jobs set status = 'queued', next_run_at = ? where status = 'waiting_quota'").run(Date.now())
 }
 
 export function nextJob(db: Db, now = Date.now()) {
@@ -93,13 +94,39 @@ export async function processJob(db: Db, job: Job) {
   }
 }
 
+// during a deploy the old and new server share the database for a minute, so a worker claims a job
+// atomically, and a running job with no progress for a while (its server was stopped) is queued again
+const STALE_MS = 20 * 60_000
+
+export function claimJob(db: Db, id: string) {
+  const { changes } = db
+    .query("update jobs set status = 'running', updated_at = ? where id = ? and status in ('queued', 'waiting_quota')")
+    .run(Date.now(), id)
+  return changes === 1
+}
+
+export function requeueStale(db: Db, now = Date.now()) {
+  const stale = db
+    .query<{ id: string }, [number]>(
+      `select j.id from jobs j where j.status = 'running'
+       and coalesce((select max(at) from events e where e.job_id = j.id), j.updated_at) < ?`,
+    )
+    .all(now - STALE_MS)
+  for (const { id } of stale) {
+    db.query("update jobs set status = 'queued', next_run_at = ? where id = ?").run(now, id)
+    logEvent(db, id, "Picked up again: the server that was running this review stopped")
+  }
+  return stale.length
+}
+
 export function startWorker(db: Db, intervalMs = 3000) {
   resumeInterrupted(db)
   let busy = false
   const timer = setInterval(async () => {
     if (busy) return
+    requeueStale(db)
     const job = nextJob(db)
-    if (!job) return
+    if (!job || !claimJob(db, job.id)) return
     busy = true
     try {
       await processJob(db, job)
