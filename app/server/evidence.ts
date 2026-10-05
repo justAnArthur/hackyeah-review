@@ -112,22 +112,43 @@ async function commitStats(repo: string) {
   }
 }
 
+const DOWNLOAD_MS = 300_000
+
+// streamed by hand: Bun.write(path, response) spins at full CPU when the download is aborted
+// mid-body, so a slow or oversized tarball now fails with an error the queue can retry
 async function downloadRepo(repo: string, branch: string) {
   const dir = await mkdtemp(join(tmpdir(), "hyr-"))
-  const tarball = join(dir, "repo.tar.gz")
-  const res = await fetch(`https://codeload.github.com/${repo}/tar.gz/${encodeURIComponent(branch)}`, {
-    signal: AbortSignal.timeout(120_000),
-  })
-  if (!res.ok) throw new Error(`could not download the repo (HTTP ${res.status})`)
-  if (Number(res.headers.get("content-length") ?? 0) > MAX_TARBALL) throw new Error("repo is larger than 150 MB")
-  await Bun.write(tarball, res)
-  if ((await stat(tarball)).size > MAX_TARBALL) throw new Error("repo is larger than 150 MB")
+  try {
+    const tarball = join(dir, "repo.tar.gz")
+    const res = await fetch(`https://codeload.github.com/${repo}/tar.gz/${encodeURIComponent(branch)}`, {
+      signal: AbortSignal.timeout(DOWNLOAD_MS),
+    })
+    if (!res.ok || !res.body) throw new Error(`could not download the repo (HTTP ${res.status})`)
+    if (Number(res.headers.get("content-length") ?? 0) > MAX_TARBALL) throw new Error("repo is larger than 150 MB")
 
-  const tar = Bun.spawnSync(["tar", "-xzf", tarball, "-C", dir])
-  if (tar.exitCode !== 0) throw new Error("could not unpack the repo")
-  await rm(tarball)
-  const [top] = (await readdir(dir, { withFileTypes: true })).filter(d => d.isDirectory())
-  return { tmp: dir, root: join(dir, top.name) }
+    const sink = Bun.file(tarball).writer()
+    let size = 0
+    try {
+      for await (const chunk of res.body) {
+        size += chunk.length
+        if (size > MAX_TARBALL) throw new Error("repo is larger than 150 MB")
+        sink.write(chunk)
+      }
+    } catch (e) {
+      throw (e as Error).name === "TimeoutError" ? new Error("repo download timed out") : e
+    } finally {
+      await sink.end()
+    }
+
+    const tar = Bun.spawnSync(["tar", "-xzf", tarball, "-C", dir])
+    if (tar.exitCode !== 0) throw new Error("could not unpack the repo")
+    await rm(tarball)
+    const [top] = (await readdir(dir, { withFileTypes: true })).filter(d => d.isDirectory())
+    return { tmp: dir, root: join(dir, top.name) }
+  } catch (e) {
+    await rm(dir, { recursive: true, force: true })
+    throw e
+  }
 }
 
 type FileInfo = { path: string; size: number }
