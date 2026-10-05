@@ -1,5 +1,9 @@
 {
   "name": "hackyeah-review",
+  "version": "1.0.0",
+  "properties": {
+    "gitCommitScopeRelatedNames": "site,web,server,council,queue,evidence"
+  },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "@types/bun": "^1.4.2",
@@ -11,7 +15,7 @@
   "private": true,
   "scripts": {
     "build": "bun ./scripts/build.ts",
-    "dev": "bun run build && bun --watch server/index.ts",
+    "dev": "bun run build && bun --watch app/server/index.ts",
     "start": "bun app/server/index.ts",
     "test": "bun test",
     "typecheck": "tsc -p .",
