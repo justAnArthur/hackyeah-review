@@ -1,7 +1,7 @@
 import { type FormEvent, useEffect, useRef, useState } from "react"
 import { FileText } from "lucide-react"
 import { Layout, PageHeader, Panel } from "@/components/layout"
-import { Banner, BannerTitle } from "@/components/ui/banner"
+import { Banner, BannerDescription, BannerTitle } from "@/components/ui/banner"
 import { Button } from "@/components/ui/button"
 import { CheckboxGroup, CheckboxItem } from "@/components/ui/checkbox-group"
 import { InputField, InputGroup, useInputGroup } from "@/components/ui/input-group"
@@ -81,6 +81,8 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
   const [deck, setDeck] = useState<File | null>(null)
   const [consent, setConsent] = useState(false)
   const [error, setError] = useState("")
+  // the review this project already has, when the server sends the team there instead
+  const [existing, setExisting] = useState("")
   const [sending, setSending] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
 
@@ -111,6 +113,7 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
   async function submit(e: FormEvent) {
     e.preventDefault()
     setError("")
+    setExisting("")
     if (!draft.task) return setError("Choose the task you entered.")
     if (!consent) return setError("Confirm that you're on the team and agree to publication.")
 
@@ -123,7 +126,10 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
     try {
       const res = await fetch("/api/submissions", { method: "POST", body })
       const json = await res.json().catch(() => ({}))
-      if (!res.ok) throw new Error(json.error ?? `The server answered ${res.status}.`)
+      if (!res.ok) {
+        setExisting(json.url ?? "")
+        throw new Error(json.error ?? `The server answered ${res.status}.`)
+      }
       try {
         localStorage.removeItem(DRAFT_KEY)
       } catch {}
@@ -232,13 +238,23 @@ export const SubmitPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
           {error && (
             <Banner status="error" contrast="high">
               <BannerTitle>{error}</BannerTitle>
+              {existing && (
+                <BannerDescription>
+                  <a href={existing} className="underline underline-offset-2">
+                    See the review
+                  </a>
+                </BannerDescription>
+              )}
             </Banner>
           )}
           <div className="flex flex-wrap items-center gap-3">
             <Button type="submit" loading={sending}>
               Send for review
             </Button>
-            <span className="text-xs text-muted-foreground">You get a link to follow the review live.</span>
+            <span className="text-xs text-muted-foreground">
+              You get a link to follow the review live. Each project gets one review per task, and one correction if you change the
+              details.
+            </span>
           </div>
         </Panel>
       </form>

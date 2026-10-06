@@ -1,4 +1,4 @@
-import { createHash, randomBytes } from "node:crypto"
+import { createHash, randomBytes, timingSafeEqual } from "node:crypto"
 import { join, normalize } from "node:path"
 import { ROOT, loadRubrics } from "../../scripts/lib"
 import { type CouncilReview, loadCouncil } from "./council"
@@ -13,7 +13,11 @@ const ADMIN_TOKEN = process.env.ADMIN_TOKEN ?? ""
 const IP_SALT = process.env.IP_SALT ?? randomBytes(16).toString("hex")
 const TRUST_PROXY = process.env.TRUST_PROXY === "1"
 const SUBMISSIONS_PER_HOUR = Number(process.env.SUBMISSIONS_PER_HOUR ?? 3)
+const SUBMISSIONS_PER_DAY = Number(process.env.SUBMISSIONS_PER_DAY ?? 60)
 const MAX_DECK = 15 * 1024 * 1024
+// a review per task plus one correction, and a repo entered in at most a few tasks
+const REVIEWS_PER_TASK = 2
+const TASKS_PER_REPO = 3
 const PUBLIC = join(ROOT, "public")
 
 const RESULTS = ["Winner", "1st place", "2nd place", "3rd place", "Finalist", "Not a finalist"]
@@ -30,9 +34,47 @@ function fail(error: string, status = 400) {
   return json({ error }, status)
 }
 
+// traefik appends the address it saw to x-forwarded-for; anything before it came from the client
 function clientIp(req: Request, server: Bun.Server<unknown>) {
-  const forwarded = TRUST_PROXY ? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() : null
+  const forwarded = TRUST_PROXY ? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() : null
   return forwarded || server.requestIP(req)?.address || "unknown"
+}
+
+type Prior = { id: string; task: string; title: string; team: string; fields: string; deck_path: string | null }
+
+// every submission of this repo except failed ones; one replaced by a correction while still in the
+// queue is cancelled, and it still counts
+function priorReviews(repo: string) {
+  return db
+    .query<Prior, [string]>(
+      `select s.id, s.task, s.title, s.team, s.fields, s.deck_path from submissions s join jobs j on j.id = s.id
+       where lower(s.repo) = lower(?) and j.status <> 'failed' order by s.created_at`,
+    )
+    .all(repo)
+}
+
+async function sameDeck(path: string | null, deck: Uint8Array | null) {
+  if (!path || !deck) return !path && !deck
+  const file = Bun.file(path)
+  return (await file.exists()) && Bun.hash(await file.bytes()) === Bun.hash(deck)
+}
+
+// a project gets one review per task, and one correction when the team changed the form or the deck;
+// sending the same details again only points to the review it already has
+async function admit(s: { repo: string; task: string; title: string; team: string; fields: Submission["fields"] }, deck: Uint8Array | null) {
+  const prior = priorReviews(s.repo)
+  const entered = new Set(prior.map(p => p.task))
+  if (!entered.has(s.task) && entered.size >= TASKS_PER_REPO) return fail(`A project can be reviewed for at most ${TASKS_PER_REPO} tasks.`)
+
+  const same = prior.filter(p => p.task === s.task)
+  const latest = same.at(-1)
+  if (!latest) return null
+
+  const url = `/r/${latest.id}`
+  if (same.length >= REVIEWS_PER_TASK) return json({ error: "This project already had its review and one correction for this task.", url }, 409)
+  const unchanged = latest.title === s.title && latest.team === s.team && latest.fields === JSON.stringify(s.fields) && (await sameDeck(latest.deck_path, deck))
+  if (unchanged) return json({ error: "This project was already reviewed with the same details. Change the form or the deck to send a correction.", url }, 409)
+  return null
 }
 
 async function submit(req: Request, server: Bun.Server<unknown>) {
@@ -63,29 +105,35 @@ async function submit(req: Request, server: Bun.Server<unknown>) {
   const recent = db.query<{ n: number }, [string, number]>("select count(*) as n from submissions where ip_hash = ? and created_at > ?")
     .get(ipHash, Date.now() - 3_600_000)
   if ((recent?.n ?? 0) >= SUBMISSIONS_PER_HOUR) return fail("Too many submissions from your network in the last hour. Try again later.", 429)
+  const today = db.query<{ n: number }, [number]>("select count(*) as n from submissions where source = 'form' and ip_hash <> 'admin' and created_at > ?")
+    .get(Date.now() - 86_400_000)
+  if ((today?.n ?? 0) >= SUBMISSIONS_PER_DAY) return fail("The review queue has taken all the projects it can for today. Try again tomorrow.", 429)
+
+  const file = form.get("deck")
+  let deck: Uint8Array | null = null
+  if (file instanceof File && file.size > 0) {
+    if (file.size > MAX_DECK) return fail("The presentation must be a PDF of at most 15 MB.")
+    deck = await file.bytes()
+    if (new TextDecoder().decode(deck.slice(0, 5)) !== "%PDF-") return fail("The presentation must be a PDF file.")
+  }
+
+  const { title, team, ...fields } = values
+  const refused = await admit({ repo, task, title, team, fields }, deck)
+  if (refused) return refused
 
   const repoError = await checkRepo(repo)
   if (repoError) return fail(repoError)
 
   const id = randomBytes(6).toString("base64url")
-  let deckPath: string | null = null
-  const deck = form.get("deck")
-  if (deck instanceof File && deck.size > 0) {
-    if (deck.size > MAX_DECK) return fail("The presentation must be a PDF of at most 15 MB.")
-    const head = new TextDecoder().decode(await deck.slice(0, 5).arrayBuffer())
-    if (head !== "%PDF-") return fail("The presentation must be a PDF file.")
-    deckPath = join(UPLOADS, `${id}.pdf`)
-    await Bun.write(deckPath, deck)
-  }
-
-  const { title, team, ...fields } = values
+  const deckPath = deck ? join(UPLOADS, `${id}.pdf`) : null
+  if (deckPath && deck) await Bun.write(deckPath, deck)
   addSubmission({ id, task, team, title, result, repo, fields, deck_path: deckPath, ip_hash: ipHash, source: "form" })
   return json({ id, url: `/r/${id}` }, 201)
 }
 
-// one active submission per repo and task: a newer one replaces the old
+// a correction replaces the review it corrects
 function addSubmission(s: Omit<Submission, "created_at" | "hidden">) {
-  const old = db.query<{ id: string }, [string, string]>("select id from submissions where repo = ? and task = ? and hidden = 0").all(s.repo, s.task)
+  const old = db.query<{ id: string }, [string, string]>("select id from submissions where lower(repo) = lower(?) and task = ? and hidden = 0").all(s.repo, s.task)
   for (const o of old) {
     db.query("update submissions set hidden = 2 where id = ?").run(o.id)
     db.query("update jobs set status = 'cancelled' where id = ? and status not in ('done', 'failed')").run(o.id)
@@ -110,6 +158,9 @@ async function adminSubmission(req: Request) {
   if (!RESULTS.includes(result)) return fail("Unknown result.")
   const repo = parseRepo(body.repo ?? "")
   if (!repo) return fail("The repo must be a GitHub link.")
+  // the team's own submission always wins over one added for it
+  const existing = priorReviews(repo).find(p => p.task === body.task)
+  if (existing) return json({ error: "This project already has a submission for this task.", url: `/r/${existing.id}` }, 409)
   const repoError = await checkRepo(repo)
   if (repoError) return fail(repoError)
 
@@ -212,8 +263,11 @@ function finalists() {
   return Object.fromEntries(entries("curated").map(e => [`${e.task}|${e.repo}`, e]))
 }
 
+// hashed first so both sides have the same length, which timingSafeEqual needs
 function isAdmin(req: Request) {
-  return !!ADMIN_TOKEN && req.headers.get("authorization") === `Bearer ${ADMIN_TOKEN}`
+  if (!ADMIN_TOKEN) return false
+  const digest = (s: string) => createHash("sha256").update(s).digest()
+  return timingSafeEqual(digest(req.headers.get("authorization") ?? ""), digest(`Bearer ${ADMIN_TOKEN}`))
 }
 
 type CuratedRequest = { import?: CouncilReview[]; enqueue?: { task: string; repo: string }[] | "all" }

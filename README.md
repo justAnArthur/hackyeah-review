@@ -51,7 +51,7 @@ The prefix of each model id in `review/council.toml` picks where it runs (`app/s
 ## Pages
 
 - **`/`** lists every finalist and every upload, by task. Each card shows the council score, or the project's place in the queue with a live indicator. It opens to the repo links and the full review. The old `/scorecard` page redirects here.
-- **`/submit`** is the "Review my project" form, with the same fields as the HackTribe entry.
+- **`/submit`** is the "Review my project" form, with the same fields as the HackTribe entry. Each repo gets one review per task, plus one correction when the form or the deck changed, and enters at most 3 tasks. Sending the same details again links to the existing review. Submissions are limited per network (`SUBMISSIONS_PER_HOUR`) and in total per day (`SUBMISSIONS_PER_DAY`).
 - **`/r/<id>`** shows a review in progress and then the council's result: the score per criterion with each member's score, the measured facts, and strengths, weaknesses and red flags.
 
 ## Run locally
