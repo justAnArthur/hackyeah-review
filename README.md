@@ -1,6 +1,6 @@
 <a href="https://hackyeah-review.justadomainname.dev"><img src=".github/hero.svg" alt="HackYeah 2026 Results: every finalist and every project teams sent in, scored out of 100 by an AI council" width="100%"></a>
 
-# HackYeah 2026 Review
+# hackyeah-review
 
 This site lists every HackYeah 2026 finalist with the public repo found for its team. Every project with public code is scored out of 100 by an AI council, against its task's official criteria and weights. Any team can send its own project through the same form and get the same review for free.
 
@@ -8,7 +8,21 @@ This site lists every HackYeah 2026 finalist with the public repo found for its 
 
 If a review helped you, starring the repo helps other teams find it.
 
-## How a project is scored
+## How it works
+
+Every project, finalist or upload, goes through the same pipeline: a script builds the evidence pack, three fixed models score it on the task's criteria, and a judge writes the review.
+
+```mermaid
+flowchart LR
+  F[Finalists and /submit uploads] --> Q[Queue in SQLite]
+  Q --> E[Evidence pack: repo, decks, docs, demo]
+  V[Vision model] -. screenshots and image-only PDFs .-> E
+  R[Task rubric and guide] --> A & B & C
+  E --> A[Member A] & B[Member B] & C[Member C]
+  A & B & C --> S[Median per criterion, official weights, total out of 100]
+  S --> J[Judge writes the review]
+  J --> P["Review page /r/id"]
+```
 
 Each review is a job in one Bun process (`app/server/`), and the jobs run one at a time in upload order.
 
@@ -54,7 +68,7 @@ The prefix of each model id in `review/council.toml` picks where it runs (`app/s
 - **`/submit`** is the "Review my project" form, with the same fields as the HackTribe entry. Each repo gets one review per task, plus one correction when the form or the deck changed, and enters at most 3 tasks. Sending the same details again links to the existing review. Submissions are limited per network (`SUBMISSIONS_PER_HOUR`) and in total per day (`SUBMISSIONS_PER_DAY`).
 - **`/r/<id>`** shows a review in progress and then the council's result: the score per criterion with each member's score, the measured facts, and strengths, weaknesses and red flags.
 
-## Run locally
+## Run
 
 ```bash
 cp .env.example .env    # OPENROUTER_API_KEY and ZAI_API_KEY; GITHUB_TOKEN and ADMIN_TOKEN are optional
@@ -92,21 +106,13 @@ curl -X POST https://hackyeah-review.justadomainname.dev/api/admin/reviews/<id>/
 
 `GET /api/health` shows the requests used today against the daily limit.
 
-## Deploy and releases
+## Deploy
 
-- **Deploy.** Every push to `main` deploys to Dokploy through a GitHub webhook.
-  - The `Dockerfile` builds the site and runs `bun app/server/index.ts` on port 3000.
-  - SQLite and uploaded decks live in a volume at `/data`.
-  - The variables come from `.env.example` and are set in Dokploy.
-- **Releases.** Versions and GitHub releases come from [just-github-actions-n-workflows](https://github.com/justAnArthur/just-github-actions-n-workflows): `bump-version.yml` and `release-on-tag.yml`.
-  - A conventional commit whose scope is one of `site`, `web`, `server`, `council`, `queue` or `evidence` bumps the version in `package.json`. The scopes are set in `properties.gitCommitScopeRelatedNames`.
-  - The bump tags the release `hackyeah-review@x.y.z` and publishes a release with notes.
-  - Commits without a scope release nothing.
-  - The workflows are owned by the toolkit. Update them with its CLI and don't edit them by hand:
+Every push to `main` deploys to Dokploy through a GitHub webhook.
 
-```bash
-npx -p @justanarthur/just-github-actions-n-workflows-cli just-github-actions-n-workflows update
-```
+- The `Dockerfile` builds the site and runs `bun app/server/index.ts` on port 3000.
+- SQLite and uploaded decks live in a volume at `/data`.
+- The variables come from `.env.example` and are set in Dokploy.
 
 ## Structure
 
@@ -131,3 +137,20 @@ To add another Fluid component, run the command below. Use `/r/<name>.json` for 
 ```bash
 bunx shadcn@latest add https://www.fluidfunctionalism.com/r/base/<name>.json
 ```
+
+## Releases
+
+Versions and GitHub releases come from [just-github-actions-n-workflows](https://github.com/justAnArthur/just-github-actions-n-workflows): `bump-version.yml` and `release-on-tag.yml`.
+
+- A conventional commit whose scope is one of `site`, `web`, `server`, `council`, `queue` or `evidence` bumps the version in `package.json`. The scopes are set in `properties.gitCommitScopeRelatedNames`.
+- The bump tags the release `hackyeah-review@x.y.z` and publishes a release with notes.
+- Commits without a scope release nothing.
+- The workflows are owned by the toolkit. Update them with its CLI and don't edit them by hand:
+
+```bash
+npx -p @justanarthur/just-github-actions-n-workflows-cli just-github-actions-n-workflows update
+```
+
+## License
+
+[MIT](LICENSE)
