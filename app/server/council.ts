@@ -69,6 +69,22 @@ function unusable(who: string, e: Error) {
   return e instanceof InvalidReply ? new TransientError(message) : new FatalError(message)
 }
 
+// the provider behind a free model sometimes answers 400 to a request it accepts a moment later,
+// more often the longer the input, so a refused request is sent again before any evidence is cut
+const REFUSAL_TRIES = 4
+const REFUSAL_PAUSE_MS = 15_000
+
+async function retryRefused<T>(ask: () => Promise<T>) {
+  for (let i = 1; ; i++) {
+    try {
+      return await ask()
+    } catch (e) {
+      if (!(e instanceof ProviderRefused) || i >= REFUSAL_TRIES) throw e
+      await Bun.sleep(REFUSAL_PAUSE_MS)
+    }
+  }
+}
+
 // every project must face the identical panel: a rate-limited member is waited for, never
 // skipped. the tries counter only escalates the backoff (60 s doubling, capped at 30 min)
 async function withRateLimit<T>(db: Db, id: string, member: string, call: () => Promise<T>) {
@@ -216,13 +232,13 @@ export async function runCouncil(db: Db, sub: Submission, facts: Facts, pack: st
     try {
       let review: MemberReview
       try {
-        review = await ask(pack)
+        review = await retryRefused(() => ask(pack))
       } catch (e) {
         // same model, same prompt, minus the quoted code: the rest of the evidence still reaches it
         const shorter = e instanceof ProviderRefused ? withoutSources(pack) : null
         if (!shorter) throw e
-        logEvent(db, sub.id, `Member ${letter}'s provider refused the full evidence, so it reads it without the quoted code`)
-        review = { ...(await ask(shorter)), trimmed: true }
+        logEvent(db, sub.id, `Member ${letter}'s provider kept refusing the full evidence, so it reads it without the quoted code`)
+        review = { ...(await retryRefused(() => ask(shorter))), trimmed: true }
       }
       saveMember(db, sub.id, letter, model, council.version, true, review, null)
       logEvent(db, sub.id, `Member ${letter} scored ${weightedTotal(review.scores)}`)
