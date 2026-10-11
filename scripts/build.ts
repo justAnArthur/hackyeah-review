@@ -36,9 +36,9 @@ const PAGES: { name: PageName; out: string; href?: string; title: string; desc: 
     name: "submit",
     out: "submit.html",
     href: "/submit",
-    title: "Review my project · HackYeah 2026 Review",
-    desc: "Send your HackYeah 2026 project for a free review by an AI council, scored against your task's official criteria.",
-    props: { tasks, councilSize },
+    title: "Submissions closed · HackYeah 2026 Review",
+    desc: "HackYeah 2026 ended and the review form is closed; the council reviews stay online as an archive.",
+    props: {},
   },
   {
     name: "review",

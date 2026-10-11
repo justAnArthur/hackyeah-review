@@ -90,9 +90,8 @@ const ScoringPanel = ({ panel }: { panel: CouncilPanel }) => (
       </div>
     </div>
     <p className="text-xs text-muted-foreground">
-      Every finalist with public code is queued automatically, and any team can send its own project through{" "}
-      <a href="/submit" className="underline decoration-border underline-offset-2 hover:text-foreground">Review my project</a>. Reviews
-      run one at a time, in upload order, and take five to ten minutes each.
+      Every finalist with public code was queued automatically, and teams could send their own projects while the form was open,
+      4–11 October 2026. Reviews ran one at a time, in upload order, and took five to ten minutes each.
     </p>
   </Panel>
 )
@@ -158,7 +157,7 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
 
   const all = tasks.flatMap(t => t.projects.filter(p => !p.ours))
   const scored = entries.filter(e => e.review).length
-  const inQueue = entries.length - scored
+  const communityCount = Object.values(community).flat().length
 
   return (
     <Layout current="/">
@@ -166,14 +165,15 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
         <PageHeader eyebrow="TAURON Arena Kraków · 3–4 October 2026" title="HackYeah 2026 Results">
           Every finalist from the organisers&apos; announcement, ordered by result, with the public GitHub repo found for each team, plus
           the projects teams sent in themselves. Each project with public code is scored by an AI council against its task&apos;s
-          official criteria and weights, out of 100; open a project to read its review.
+          official criteria and weights, out of 100; open a project to read its review. The form closed on 11 October — the site now
+          stays up as an archive.
         </PageHeader>
         <Stats
           items={[
             [tasks.length, "Tasks"],
             [all.length, "Finalists"],
             [loaded ? scored : "–", "Projects scored"],
-            [loaded ? inQueue : "–", "In the review queue now"],
+            [loaded ? communityCount : "–", "Community submissions"],
           ]}
         />
         <div className="flex flex-wrap items-center justify-between gap-3">

@@ -53,7 +53,7 @@ const Sitebar = ({ current }: { current: string }) => (
           Results
         </Button>
       )}
-      <Button variant={current === "/submit" ? "secondary" : "primary"} nativeButton={false} render={<a href="/submit" />}>
+      <Button variant={current === "/submit" ? "secondary" : "primary"} disabled title="Submissions are closed">
         Review my project
       </Button>
     </div>

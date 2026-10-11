@@ -3,25 +3,17 @@ import { join, normalize } from "node:path"
 import { ROOT, loadRubrics } from "../../scripts/lib"
 import { type CouncilReview, loadCouncil } from "./council"
 import { allCurated, curatedId, insertCurated } from "./curated"
-import { type Submission, UPLOADS, events, getJob, getSubmission, logEvent, openDb, queuePosition } from "./db"
+import { type Submission, events, getJob, getSubmission, logEvent, openDb, queuePosition } from "./db"
 import { checkRepo, parseRepo } from "./evidence"
 import { DAILY_LIMIT, quotaUsed } from "./models"
 import { enqueue, resumeInterrupted, startWorker } from "./queue"
 
 const PORT = Number(process.env.PORT ?? 3000)
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN ?? ""
-const IP_SALT = process.env.IP_SALT ?? randomBytes(16).toString("hex")
-const TRUST_PROXY = process.env.TRUST_PROXY === "1"
-const SUBMISSIONS_PER_HOUR = Number(process.env.SUBMISSIONS_PER_HOUR ?? 3)
-const SUBMISSIONS_PER_DAY = Number(process.env.SUBMISSIONS_PER_DAY ?? 60)
 const MAX_DECK = 15 * 1024 * 1024
-// a review per task plus one correction, and a repo entered in at most a few tasks
-const REVIEWS_PER_TASK = 2
-const TASKS_PER_REPO = 3
 const PUBLIC = join(ROOT, "public")
 
 const RESULTS = ["Winner", "1st place", "2nd place", "3rd place", "Finalist", "Not a finalist"]
-const LIMITS = { title: 120, team: 80, problem: 5000, solution: 5000, progress: 5000, instructions: 3000, additional: 2000 }
 
 const db = openDb()
 const tasks = (await loadRubrics()).map(r => ({ id: r.id, name: r.name, kind: r.kind }))
@@ -32,12 +24,6 @@ function json(data: unknown, status = 200) {
 
 function fail(error: string, status = 400) {
   return json({ error }, status)
-}
-
-// traefik appends the address it saw to x-forwarded-for; anything before it came from the client
-function clientIp(req: Request, server: Bun.Server<unknown>) {
-  const forwarded = TRUST_PROXY ? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() : null
-  return forwarded || server.requestIP(req)?.address || "unknown"
 }
 
 type Prior = { id: string; task: string; title: string; team: string; fields: string; deck_path: string | null }
@@ -51,84 +37,6 @@ function priorReviews(repo: string) {
        where lower(s.repo) = lower(?) and j.status <> 'failed' order by s.created_at`,
     )
     .all(repo)
-}
-
-async function sameDeck(path: string | null, deck: Uint8Array | null) {
-  if (!path || !deck) return !path && !deck
-  const file = Bun.file(path)
-  return (await file.exists()) && Bun.hash(await file.bytes()) === Bun.hash(deck)
-}
-
-// a project gets one review per task, and one correction when the team changed the form or the deck;
-// sending the same details again only points to the review it already has
-async function admit(s: { repo: string; task: string; title: string; team: string; fields: Submission["fields"] }, deck: Uint8Array | null) {
-  const prior = priorReviews(s.repo)
-  const entered = new Set(prior.map(p => p.task))
-  if (!entered.has(s.task) && entered.size >= TASKS_PER_REPO) return fail(`A project can be reviewed for at most ${TASKS_PER_REPO} tasks.`)
-
-  const same = prior.filter(p => p.task === s.task)
-  const latest = same.at(-1)
-  if (!latest) return null
-
-  const url = `/r/${latest.id}`
-  if (same.length >= REVIEWS_PER_TASK) return json({ error: "This project already had its review and one correction for this task.", url }, 409)
-  const unchanged = latest.title === s.title && latest.team === s.team && latest.fields === JSON.stringify(s.fields) && (await sameDeck(latest.deck_path, deck))
-  if (unchanged) return json({ error: "This project was already reviewed with the same details. Change the form or the deck to send a correction.", url }, 409)
-  return null
-}
-
-async function submit(req: Request, server: Bun.Server<unknown>) {
-  let form: FormData
-  try {
-    form = await req.formData()
-  } catch {
-    return fail("The form could not be read.")
-  }
-
-  const values = Object.fromEntries(Object.keys(LIMITS).map(k => [k, String(form.get(k) ?? "").trim()])) as Record<keyof typeof LIMITS, string>
-  for (const [k, max] of Object.entries(LIMITS)) {
-    if (values[k as keyof typeof LIMITS].length > max) return fail(`"${k}" is longer than ${max} characters.`)
-  }
-  if (!values.title || !values.team) return fail("Project title and team name are required.")
-  if (!values.problem || !values.solution || !values.progress) return fail("Fill in the problem, the solution and what's done so far.")
-
-  const task = String(form.get("task") ?? "")
-  if (!tasks.some(t => t.id === task)) return fail("Choose the task you entered.")
-  const result = String(form.get("result") ?? "")
-  if (!RESULTS.includes(result)) return fail("Choose how your project placed.")
-  if (form.get("consent") !== "on") return fail("Confirm that you're on the team and agree to publication.")
-
-  const repo = parseRepo(String(form.get("repo") ?? ""))
-  if (!repo) return fail("Code Repository must be a public GitHub repo link, like https://github.com/owner/name.")
-
-  const ipHash = createHash("sha256").update(IP_SALT + clientIp(req, server)).digest("hex")
-  const recent = db.query<{ n: number }, [string, number]>("select count(*) as n from submissions where ip_hash = ? and created_at > ?")
-    .get(ipHash, Date.now() - 3_600_000)
-  if ((recent?.n ?? 0) >= SUBMISSIONS_PER_HOUR) return fail("Too many submissions from your network in the last hour. Try again later.", 429)
-  const today = db.query<{ n: number }, [number]>("select count(*) as n from submissions where source = 'form' and ip_hash <> 'admin' and created_at > ?")
-    .get(Date.now() - 86_400_000)
-  if ((today?.n ?? 0) >= SUBMISSIONS_PER_DAY) return fail("The review queue has taken all the projects it can for today. Try again tomorrow.", 429)
-
-  const file = form.get("deck")
-  let deck: Uint8Array | null = null
-  if (file instanceof File && file.size > 0) {
-    if (file.size > MAX_DECK) return fail("The presentation must be a PDF of at most 15 MB.")
-    deck = await file.bytes()
-    if (new TextDecoder().decode(deck.slice(0, 5)) !== "%PDF-") return fail("The presentation must be a PDF file.")
-  }
-
-  const { title, team, ...fields } = values
-  const refused = await admit({ repo, task, title, team, fields }, deck)
-  if (refused) return refused
-
-  const repoError = await checkRepo(repo)
-  if (repoError) return fail(repoError)
-
-  const id = randomBytes(6).toString("base64url")
-  const deckPath = deck ? join(UPLOADS, `${id}.pdf`) : null
-  if (deckPath && deck) await Bun.write(deckPath, deck)
-  addSubmission({ id, task, team, title, result, repo, fields, deck_path: deckPath, ip_hash: ipHash, source: "form" })
-  return json({ id, url: `/r/${id}` }, 201)
 }
 
 // a correction replaces the review it corrects
@@ -329,7 +237,8 @@ const server = Bun.serve({
   routes: {
     "/api/health": () => json({ ok: true, quota_used_today: quotaUsed(db), daily_limit: DAILY_LIMIT }),
     "/api/tasks": () => json(tasks),
-    "/api/submissions": { POST: submit },
+    // the form closed with the event week (11 October 2026); the queue keeps finishing the reviews it already has
+    "/api/submissions": () => fail("Submissions are closed — HackYeah 2026 ended and the form is no longer taking projects.", 410),
     "/api/reviews/:id": req => {
       const s = status(req.params.id)
       return s ? json(s) : fail("Not found.", 404)
