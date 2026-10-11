@@ -1,0 +1,226 @@
+{
+ "submission": {
+  "id": "curated--huawei--Akshaz7-capsules-harmonyos",
+  "title": "Harmoniser",
+  "team": "Pride of the UK v2",
+  "task": "huawei",
+  "result": "Not disclosed",
+  "repo": "Akshaz7/capsules-harmonyos",
+  "created_at": 1791239833301,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791239833303,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 634,
+   "at": 1791239833307,
+   "message": "Queued"
+  },
+  {
+   "seq": 635,
+   "at": 1791239833895,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 636,
+   "at": 1791239859246,
+   "message": "Found 45,201 source lines, 420 test cases and 366 commits"
+  },
+  {
+   "seq": 637,
+   "at": 1791239859251,
+   "message": "Read 6 docs and 0 decks, opened 1 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 638,
+   "at": 1791239859261,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 639,
+   "at": 1791239957433,
+   "message": "Member A scored 75"
+  },
+  {
+   "seq": 640,
+   "at": 1791239957436,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 642,
+   "at": 1791240027546,
+   "message": "Member B scored 63"
+  },
+  {
+   "seq": 643,
+   "at": 1791240027548,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 644,
+   "at": 1791240042038,
+   "message": "Member C scored 62"
+  },
+  {
+   "seq": 645,
+   "at": 1791240042042,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 646,
+   "at": 1791240129289,
+   "message": "Done: 65 / 100"
+  }
+ ],
+ "review": {
+  "id": "curated--huawei--Akshaz7-capsules-harmonyos",
+  "repo": "Akshaz7/capsules-harmonyos",
+  "project": "Harmoniser",
+  "team": "Pride of the UK v2",
+  "task": "huawei",
+  "result": "Not disclosed",
+  "task_fit": "yes: a native ArkTS/ArkUI HarmonyOS app (API 20+) built entirely during the event that turns plain-language requests into native mini-apps, leads with Intelligent Experiences, and includes the required AI workflow and AI integration docs.",
+  "scores": [
+   {
+    "criterion": "Originality",
+    "weight": 20,
+    "score": 7,
+    "why": "All members agree the capsule idea is genuinely novel: plain-language requests become schema-validated JSON mini-apps with a per-permission consent gatekeeper and on-device-first AI routing. The median follows B and C over A, because with no demo and no deck the novelty rests on code and docs rather than a shown working product.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Demonstrated usefulness",
+    "weight": 20,
+    "score": 6,
+    "why": "Real everyday use cases are implemented and a judge-reported failure was diagnosed and fixed, but the cloud path needs a user-supplied API key, the on-device path needs a separate 480 MB model push, and no run is verifiable in the evidence. B's middle position fits best: C's 5 undersells the offline rule parser that delivers many capsules in code, and A's 7 ignores how narrow the submitted experience is.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 6,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Technical execution",
+    "weight": 20,
+    "score": 7.5,
+    "why": "The engineering is substantial and real: about 45,000 source lines, 420 tests in 56 files, 366 commits during the event, a strict validator, a hand-written safe expression parser instead of eval, and a Node-API C++ engine port. The score is held back because the team's own audit lists claim/code gaps and features marked built but never verified.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Platform capabilities",
+    "weight": 20,
+    "score": 8,
+    "why": "Usage goes far beyond a webview: Calendar, Notification, Form Kit widgets, Scan, Vision OCR, Sensor, Network and Preferences kits plus the self-ported Cactus inference engine. The median credits that breadth while accepting B's caveats that the .so is arm64-only and the model weights are not bundled, so the on-device path is unverified on an x86 emulator.",
+    "spread": 1.5,
+    "members": {
+     "A": 9,
+     "B": 7.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Demo quality",
+    "weight": 10,
+    "score": 2,
+    "why": "No recorded demo exists anywhere: the team's own compliance audit records it as missing, the 15 screenshots resolve to placeholders and sample eval images rather than the app running, and the only checkable demo link points to esbuild.github.io. The members differ only in wording, not substance, on this total absence.",
+    "spread": 1,
+    "members": {
+     "A": 2,
+     "B": 1,
+     "C": 2
+    }
+   },
+   {
+    "criterion": "Reproducibility & transparency",
+    "weight": 10,
+    "score": 6,
+    "why": "Transparency is excellent: AI_WORKFLOW.md, AI integration docs, a compliance audit that names its own gaps, third-party attribution with hashes, and exact test commands. Reproduction fails though, because there is no final signed .hap, the model must be pushed separately, the form's setup field is blank, 8 commits were unpushed at check time, and no deck exists.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 6,
+     "C": 6
+    }
+   }
+  ],
+  "weighted_total": 65,
+  "build_reality": 7,
+  "source_loc": 45201,
+  "has_tests": true,
+  "tests": {
+   "files": 56,
+   "cases": 420
+  },
+  "live_demo": "https://esbuild.github.io/ (HTTP 200)",
+  "built_during_event": "yes: 366 commits by 3 authors, 2026-10-03 12:59 to 2026-10-04 08:09 UTC",
+  "strengths": [
+   "Genuinely original concept: plain-language requests become schema-validated JSON capsules rendered natively, with per-permission consent, block logging and on-device-first AI routing.",
+   "Deeply native HarmonyOS build using Calendar, Notification, Form, Scan, Vision, Sensor, Network and Preferences kits plus a self-ported Cactus inference engine through Node-API, far beyond a webview.",
+   "Strong engineering hygiene: about 45,000 source lines, 420 test cases in 56 files, a hand-written safe expression parser, and no committed secrets.",
+   "Outstanding AI and process transparency: AI_WORKFLOW.md, AI integration docs, third-party attribution with hashes, and a compliance audit that names its own gaps."
+  ],
+  "weaknesses": [
+   "Required recorded demo is missing; the team's own compliance audit records this, and no screenshot or link in the pack shows the app actually running.",
+   "Required working .hap is not published; only an unsigned pre-release that is many features behind, and the on-device path needs a separate 480 MB model push plus an arm64-only library an x86 emulator cannot load.",
+   "Pitch deck is not provided, so the concept cannot be judged as presented.",
+   "Advertised capability exceeds the code: vibration is offered in the UI and README with no implementing action, and several features marked built were never verified on emulator or device."
+  ],
+  "red_flags": [
+   "The team's own audit documents a claim/code mismatch: vibration is advertised in the UI and README but no capsule action implements it.",
+   "Features marked built, such as reminders firing with the app closed and shake counting, were never verified on emulator or device.",
+   "The only checkable demo link in the submission resolves to esbuild.github.io, an unrelated website, so no demonstration of the app is verifiable.",
+   "In Smart mode the live marketplace search sends request text to the cloud without a consent notice, a privacy gap the team's own research flagged and fixed only for on-device mode."
+  ],
+  "verdict": "A technically exceptional and genuinely original native HarmonyOS entry whose strong engineering and broad platform use are undercut by missing required deliverables, above all the recorded demo and the final .hap, leaving its core claims unverifiable as submitted.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 75,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 63,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 62,
+     "agreement": 0.9,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791240129286
+ }
+}

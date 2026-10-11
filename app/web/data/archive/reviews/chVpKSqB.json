@@ -1,0 +1,211 @@
+{
+ "submission": {
+  "id": "chVpKSqB",
+  "title": "Portcullis",
+  "team": "Portcullis",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "repo": "rozumalex/controllayer",
+  "created_at": 1791291297781,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791291297785,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 1536,
+   "at": 1791291297789,
+   "message": "Queued"
+  },
+  {
+   "seq": 1537,
+   "at": 1791291298018,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1538,
+   "at": 1791291300470,
+   "message": "Found 32,183 source lines, 415 test cases and 77 commits"
+  },
+  {
+   "seq": 1539,
+   "at": 1791291300473,
+   "message": "Read 1 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 1540,
+   "at": 1791291300478,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 1541,
+   "at": 1791291398757,
+   "message": "Member A scored 88.25"
+  },
+  {
+   "seq": 1542,
+   "at": 1791291398760,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1543,
+   "at": 1791291440991,
+   "message": "Member B scored 81.25"
+  },
+  {
+   "seq": 1544,
+   "at": 1791291440993,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 1545,
+   "at": 1791291465491,
+   "message": "Member C scored 71.5"
+  },
+  {
+   "seq": 1546,
+   "at": 1791291465495,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 1547,
+   "at": 1791291546516,
+   "message": "Done: 81.25 / 100"
+  }
+ ],
+ "review": {
+  "id": "chVpKSqB",
+  "repo": "rozumalex/controllayer",
+  "project": "Portcullis",
+  "team": "Portcullis",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "task_fit": "yes: all three members confirm a real in-path gateway covering agent-to-model traffic (an OpenAI-compatible chat API) and agent-to-MCP traffic, with per-role policies, hybrid guards, budgets, audit logs and a live dashboard, which is what the task asked for.",
+  "scores": [
+   {
+    "criterion": "Robustness/guardrails",
+    "weight": 30,
+    "score": 8.5,
+    "why": "The guard pipeline is real code in the request path: deterministic patterns, PII and secret redaction, a genuine LLM semantic classifier, and behavioral guards for budget, loop, lockout and data-flow egress, all exercised by tests and a 1,057-case attack corpus. It stays below 9 because the semantic half is disabled without an OpenAI key and the headline block rate is self-measured.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 8.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Architecture & performance",
+    "weight": 20,
+    "score": 8,
+    "why": "The gateway is genuinely in the path for both chat and MCP traffic, reads the role policy from the database on every request so hot reload works without restart, and scopes data per organization. No aggregate latency or throughput benchmark appears anywhere to back the low-overhead claim.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Security reporting",
+    "weight": 20,
+    "score": 7.5,
+    "why": "Every verdict fans out to Postgres and logs with trace IDs, and the dashboard reads those traces live. The CSV/JSON export claimed in the form has no endpoint in the provided source, so that requirement is only partially evidenced; here the evidence supports the two members who read the samples and found no endpoint over the member who accepted the claim, which is why the median sits below A's 9.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Test suite",
+    "weight": 15,
+    "score": 8.5,
+    "why": "415 pytest cases across 43 files plus a separate mutation harness that expands 58 seeds into 1,057 cases with explicit block and allow expectations and false-alarm tracking. All three members agree this is a strength and the spread is small.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 8.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Implementability & scalability",
+    "weight": 15,
+    "score": 8,
+    "why": "One-command Docker bring-up that runs without a paid key, OpenAI and Ollama behind one interface, YAML policies with strictness and budgets, and OIDC and SCIM identity with per-organization isolation. No horizontal-scaling or production-hardening story is shown.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 81.25,
+  "build_reality": 8.5,
+  "source_loc": 32183,
+  "has_tests": true,
+  "tests": {
+   "files": 43,
+   "cases": 415
+  },
+  "live_demo": "https://controllayer.net (skipped (not a public https URL))",
+  "built_during_event": "yes: 77 commits by 2 authors, 2026-10-03 10:52 to 2026-10-04 08:54 UTC",
+  "strengths": [
+   "A genuine in-path gateway for both agent-to-model (OpenAI-compatible, with streaming) and agent-to-MCP traffic, with role-scoped tool, model and clearance access.",
+   "Deep hybrid guard pipeline: deterministic patterns plus a real semantic model call plus session-aware behavioral guards such as data-flow egress, loop and lockout.",
+   "Policy hot reload by construction: the role policy is read from the database on every request, so admin edits apply on the next call.",
+   "Large runnable verification: 415 automated tests plus a 1,057-case mutation-based attack corpus with benign controls and false-alarm counting."
+  ],
+  "weaknesses": [
+   "The semantic guard requires an OpenAI API key or a configured endpoint, so out of the box the hybrid pipeline degrades to deterministic-only.",
+   "The audit-log export (CSV/JSON with filters) is claimed in the form but the export endpoint is missing from the provided source, so that task requirement is only partially met.",
+   "No aggregate overhead or throughput numbers exist, and the live demo check was skipped, so performance and the headline block and false-alarm rates are self-measured and unverified.",
+   "The repo contains zero screenshots, so the dashboard has no visual evidence beyond members reading the frontend code, and the architecture diagram lives only in the deck."
+  ],
+  "red_flags": [
+   "The deck's 98.9 percent block rate is self-measured on the team's own corpus, and the member who read the attack harness reports the run excludes the database-dependent clearance and budget guards, so the headline number overstates coverage of the full pipeline."
+  ],
+  "verdict": "A genuinely implemented, in-path control layer with unusually deep hybrid guards, hot-reloading policies and strong automated verification, held back by an optional semantic guard, an export endpoint missing from the source, and headline metrics that are self-measured rather than independently verified.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 88.25,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 81.25,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 71.5,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791291546513
+ }
+}

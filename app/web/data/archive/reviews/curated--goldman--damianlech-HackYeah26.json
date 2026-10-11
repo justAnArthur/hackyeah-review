@@ -1,0 +1,313 @@
+{
+ "submission": {
+  "id": "curated--goldman--damianlech-HackYeah26",
+  "title": "Clearance",
+  "team": "Visdomers",
+  "task": "goldman",
+  "result": "Not disclosed",
+  "repo": "damianlech/HackYeah26",
+  "created_at": 1791226634010,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791231013881,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 84,
+   "at": 1791226634012,
+   "message": "Queued"
+  },
+  {
+   "seq": 155,
+   "at": 1791228532204,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 156,
+   "at": 1791228571448,
+   "message": "Found 11,382 source lines, 46 test cases and 37 commits"
+  },
+  {
+   "seq": 157,
+   "at": 1791228571451,
+   "message": "Read 4 docs and 0 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 158,
+   "at": 1791228571457,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 161,
+   "at": 1791228743922,
+   "message": "Member A scored 58.25"
+  },
+  {
+   "seq": 162,
+   "at": 1791228743925,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 163,
+   "at": 1791228745889,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"e30b2b8c-625f-90e7-8e92-05658b3b681b\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 30 s"
+  },
+  {
+   "seq": 176,
+   "at": 1791229039681,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 177,
+   "at": 1791229041635,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"00a6c7e5-ec75-4d54-98f0-893f5af219d3\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 60 s"
+  },
+  {
+   "seq": 180,
+   "at": 1791229144836,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 181,
+   "at": 1791229146890,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 182,
+   "at": 1791229162678,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 183,
+   "at": 1791229164528,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 190,
+   "at": 1791229245703,
+   "message": "Member B scored 36.5"
+  },
+  {
+   "seq": 191,
+   "at": 1791229245705,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 193,
+   "at": 1791229266171,
+   "message": "Member C scored 55"
+  },
+  {
+   "seq": 194,
+   "at": 1791229266176,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 195,
+   "at": 1791229358313,
+   "message": "Done: 53.5 / 100"
+  },
+  {
+   "seq": 211,
+   "at": 1791229440562,
+   "message": "Queued"
+  },
+  {
+   "seq": 270,
+   "at": 1791230916282,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 271,
+   "at": 1791230939747,
+   "message": "Found 11,382 source lines, 46 test cases and 37 commits"
+  },
+  {
+   "seq": 272,
+   "at": 1791230939749,
+   "message": "Read 4 docs and 0 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 273,
+   "at": 1791230939756,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 277,
+   "at": 1791231025897,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 278,
+   "at": 1791231276862,
+   "message": "Member A scored 69"
+  },
+  {
+   "seq": 279,
+   "at": 1791231276864,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 280,
+   "at": 1791231347978,
+   "message": "Member B scored 51.25"
+  },
+  {
+   "seq": 281,
+   "at": 1791231347980,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 282,
+   "at": 1791231362385,
+   "message": "Member C scored 49.5"
+  },
+  {
+   "seq": 283,
+   "at": 1791231362389,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 284,
+   "at": 1791231432529,
+   "message": "Done: 53.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "curated--goldman--damianlech-HackYeah26",
+  "repo": "damianlech/HackYeah26",
+  "project": "Clearance",
+  "team": "Visdomers",
+  "task": "goldman",
+  "result": "Not disclosed",
+  "task_fit": "yes: the submission is this task's product, a gateway and TLS-intercepting proxy enforcing a central hot-reloaded policy with deterministic controls, budgets, audit reporting and a test suite; only the semantic half is simulated.",
+  "scores": [
+   {
+    "criterion": "Robustness/guardrails",
+    "weight": 30,
+    "score": 5,
+    "why": "The deterministic half is real and deep: auth, model allowlist, checksum-validated PII redaction, a signature feed with self-test vectors, budgets and fail-closed behaviour under hot reload. The semantic half is a keyword-and-weight simulation and the authority-over-detection guarantees exist only in design docs, so the hybrid requirement is half met and the median of 5 is fair.",
+    "spread": 2,
+    "members": {
+     "A": 6.5,
+     "B": 4.5,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Architecture & performance",
+    "weight": 20,
+    "score": 7,
+    "why": "Two real in-path enforcement points exist in code, including a 3-layer proxy that terminates TLS, applies policy and re-encrypts with a virtual-to-real key swap, backed by committed latency benchmark results. Member C's claim that the performance numbers are placeholders in a deck is not supported, since no deck exists and two members independently saw measured results, so the higher median of 7 stands.",
+    "spread": 2.5,
+    "members": {
+     "A": 7.5,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Security reporting",
+    "weight": 20,
+    "score": 4,
+    "why": "Audit JSONL with trace IDs and a generator producing separate management and security tables from real log data are genuine. The dashboard deliverable is a static mockup not wired to the gateway, there is no live metrics endpoint and no tamper-evident log chaining, and the required deck is missing, so 4 is deserved.",
+    "spread": 2,
+    "members": {
+     "A": 6,
+     "B": 4,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Test suite",
+    "weight": 15,
+    "score": 6,
+    "why": "The 46 measured cases boot the real gateway, guard service and mock LLM as processes and include genuine negative cases such as prompt injection, budget exhaustion, guard outage and rejected policy edits. The README overstates this as 76 tests plus 120 browser checks, which the measured count does not support.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 6,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Implementability & scalability",
+    "weight": 15,
+    "score": 5,
+    "why": "One-command runs, pinned dependencies, three strictness profiles and prefix routing that can point at local models are real. Budgets are in-memory per process with check-then-charge, there are no Docker or Kubernetes artifacts and the two prototypes were never unified; Member C's claim that the build has not started is contradicted by roughly 11k lines of working prototype code that all members reviewed.",
+    "spread": 2.5,
+    "members": {
+     "A": 7,
+     "B": 4.5,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 53.5,
+  "build_reality": 5.5,
+  "source_loc": 11382,
+  "has_tests": true,
+  "tests": {
+   "files": 4,
+   "cases": 46
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 37 commits by 2 authors, 2026-10-03 11:09 to 2026-10-04 08:15 UTC",
+  "strengths": [
+   "Real enforcement code in the traffic path: a working OpenAI-compatible gateway plus a 3-layer TLS-intercepting proxy with certificate verification and virtual-to-real key swap.",
+   "Policy hot reload with last-known-good rejection of broken edits, plus a signature feed carrying per-rule positive and negative self-test vectors.",
+   "PII redaction with checksum validators for PESEL, IBAN and Luhn rather than plain regex matching.",
+   "Tests boot the actual stack as processes and cover real negative cases, with committed latency benchmarks comparing deterministic and guard-path enforcement."
+  ],
+  "weaknesses": [
+   "The required 10-slide deck was not provided and the submission form is essentially blank, leaving the repo to carry the review alone.",
+   "The semantic controls are keyword-and-weight simulators rather than model calls, so the hybrid deterministic plus semantic requirement is only half implemented.",
+   "The dashboard is a static mockup with seeded data, not a UI wired to the running gateway, and no live metrics endpoint exists.",
+   "Scalability is docs-only: in-memory budgets, no Docker or Kubernetes artifacts, and two prototypes that were never unified into one product."
+  ],
+  "red_flags": [
+   "The README claims 76 automated tests plus 120 browser checks while 46 test cases were measured, and claims Visdom integration with no Visdom code in the repo.",
+   "Keyword-matching simulators are labelled as AI-based guardrails.",
+   "Mockup dashboard pages are presented as screenshots of the product."
+  ],
+  "verdict": "A genuinely engineered control layer with real gateway and proxy enforcement, hot-reloaded policy and stack-booting tests, undermined by a simulated semantic half, a mockup dashboard, README overclaims and a missing required deck.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 69,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 51.25,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 49.5,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791231432526
+ }
+}

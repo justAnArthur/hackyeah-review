@@ -1,0 +1,211 @@
+{
+ "submission": {
+  "id": "5RLsCnVh",
+  "title": "Feel Free",
+  "team": "Feel Free",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "repo": "wesarda/feel-free",
+  "created_at": 1791241361847,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791241361852,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 690,
+   "at": 1791241361855,
+   "message": "Queued"
+  },
+  {
+   "seq": 738,
+   "at": 1791242463210,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 739,
+   "at": 1791242466317,
+   "message": "Found 14,183 source lines, 75 test cases and 5 commits"
+  },
+  {
+   "seq": 740,
+   "at": 1791242466320,
+   "message": "Read 7 docs and 1 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 741,
+   "at": 1791242466327,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 742,
+   "at": 1791242593326,
+   "message": "Member A scored 88"
+  },
+  {
+   "seq": 743,
+   "at": 1791242593329,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 744,
+   "at": 1791242662044,
+   "message": "Member B scored 90"
+  },
+  {
+   "seq": 745,
+   "at": 1791242662047,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 746,
+   "at": 1791242689406,
+   "message": "Member C scored 80.5"
+  },
+  {
+   "seq": 747,
+   "at": 1791242689410,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 748,
+   "at": 1791242778332,
+   "message": "Done: 88 / 100"
+  }
+ ],
+ "review": {
+  "id": "5RLsCnVh",
+  "repo": "wesarda/feel-free",
+  "project": "Feel Free",
+  "team": "Feel Free",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "task_fit": "yes: a Polish-language web app that assesses Kraków places and routes against individual mobility profiles (wheelchair, stroller, walking difficulty) with per-fact provenance, real open data and the required conflicting, incomplete and source-down demo cases, matching the partner brief.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 9,
+    "why": "Unanimous 9. Verdicts are computed per profile with adjustable thresholds (steps, kerb, slope, door width), missing data renders as an explicit unknown and never as accessible, and conflicting sources are shown side by side. Settings stay in the browser and no health questions are asked.",
+    "spread": 0,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 8,
+    "why": "The median 8 fits the evidence better than B's 9 or C's 7. The code is substantial and tested (about 14k lines, 75 test cases) and covers map, place cards, routing and the required demo cases, but the running UI is unverified: demo checks are empty, no screenshot is described and no video is in the pack, so B's treatment of self-reported axe-core and UI claims as verified is not supported.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 9,
+    "why": "Every fact carries source, date, reliability and a link to the original record, with real integrations: live Overpass plus nightly snapshots with meta.json, 156 ZTP stops from the Kraków ArcGIS service and the GUGiK orthophoto. Sample data is clearly labelled and toggleable, as the task permits, so C's 8 is not supported over the 9.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 9,
+    "why": "Source adapters feed a framework-free core consumed by the React UI and a data pipeline; a new city is one config file and a new source is one adapter, with a documented recipe and an OSM coverage report. The code structure confirms this, supporting the 9 over C's more cautious 8.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 9,
+    "why": "The plan is priced with numbers: free for users, about 30 PLN per year verification, 900 to 1500 PLN on-site audits, 2.5 to 4.5k PLN monthly city costs and a computed break-even of 1,000 to 1,800 verified places per year, plus market sizing and integrity safeguards such as paying for the check, not the outcome.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 8
+    }
+   }
+  ],
+  "weighted_total": 88,
+  "build_reality": 8,
+  "source_loc": 14183,
+  "has_tests": true,
+  "tests": {
+   "files": 11,
+   "cases": 75
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 5 commits by 2 authors, 2026-10-04 05:11 to 2026-10-05 09:07 UTC",
+  "strengths": [
+   "Per-fact provenance (source, date, reliability, link) is implemented in the data model and surfaced in the UI, with an explicit reliability ladder from on-site audit down to user report.",
+   "Missing data is never shown as accessible: an 'unknown' verdict, 'Brak danych' states, a transparent question block for unrecorded steps, and conflicts that block a meets-needs verdict.",
+   "Real open-data integration with attribution: live Overpass queries with nightly snapshots and meta.json, the ZTP stop register from the Kraków open data portal, and the GUGiK orthophotomap.",
+   "Clean separation of adapters, tested core and presentation makes a new city a single config file, and the business model is fully costed with a break-even calculation and an embeddable B2B card."
+  ],
+  "weaknesses": [
+   "The official submission form was left empty (repo link sent via Discord) and the deck field was not filled even though the PDF exists in the repo, so the formal deliverables rest entirely on repo materials.",
+   "The live demo is unverified: demo checks are empty, no screenshot is described, the demo URL cannot be verified from the pack and the mentioned video is not included; the WCAG and axe-core results are self-reported.",
+   "The richest per-place detail (owner declarations, audits, several reports) is labelled sample data and the edge-case demos rely on it, since real detail coverage in Kraków OSM is thin.",
+   "Repo history is thin: 5 commits total with all work compressed into about 28 hours, and the AI-use disclosure is not visible in the pack."
+  ],
+  "red_flags": [
+   "One commit landed after the Sunday 11:00 CEST deadline and the pack does not show what changed, so what was submitted on time is not fully verifiable."
+  ],
+  "verdict": "An unusually complete and honest entry that implements the partner's hardest requirements, per-need verdicts, per-fact provenance, missing data never shown as accessible, real open data and a costed business model, held back by unverified demo evidence, sample-based detail data, an unfilled submission form and one post-deadline commit.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 88,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 90,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 80.5,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791242778328
+ }
+}

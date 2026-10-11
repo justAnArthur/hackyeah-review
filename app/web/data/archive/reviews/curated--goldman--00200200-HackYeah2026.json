@@ -1,0 +1,491 @@
+{
+ "submission": {
+  "id": "curated--goldman--00200200-HackYeah2026",
+  "title": "Control",
+  "team": "Under Controllers",
+  "task": "goldman",
+  "result": "Not disclosed",
+  "repo": "00200200/HackYeah2026",
+  "created_at": 1791226634004,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791273102560,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 83,
+   "at": 1791226634007,
+   "message": "Queued"
+  },
+  {
+   "seq": 141,
+   "at": 1791228244120,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 142,
+   "at": 1791228261477,
+   "message": "Found 11,368 source lines, 193 test cases and 20 commits"
+  },
+  {
+   "seq": 143,
+   "at": 1791228261480,
+   "message": "Read 13 docs and 3 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 144,
+   "at": 1791228261487,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 146,
+   "at": 1791228367340,
+   "message": "Member A scored 86.75"
+  },
+  {
+   "seq": 147,
+   "at": 1791228367343,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 148,
+   "at": 1791228440938,
+   "message": "Member B scored 89.95"
+  },
+  {
+   "seq": 149,
+   "at": 1791228440941,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 150,
+   "at": 1791228457510,
+   "message": "Member C scored 76.5"
+  },
+  {
+   "seq": 151,
+   "at": 1791228457513,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 152,
+   "at": 1791228527295,
+   "message": "Done: 85.25 / 100"
+  },
+  {
+   "seq": 212,
+   "at": 1791229440638,
+   "message": "Queued"
+  },
+  {
+   "seq": 261,
+   "at": 1791230775253,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 262,
+   "at": 1791230799164,
+   "message": "Found 11,368 source lines, 193 test cases and 20 commits"
+  },
+  {
+   "seq": 263,
+   "at": 1791230799167,
+   "message": "Read 13 docs and 3 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 264,
+   "at": 1791230799172,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 266,
+   "at": 1791230908918,
+   "message": "Member A scored 85.5"
+  },
+  {
+   "seq": 267,
+   "at": 1791230908921,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 268,
+   "at": 1791230910919,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 269,
+   "at": 1791230915212,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"768edbf4-d32b-40dd-89cc-fe01bebe9765\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 30 s"
+  },
+  {
+   "seq": 274,
+   "at": 1791231016905,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 275,
+   "at": 1791231019027,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 276,
+   "at": 1791231023005,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"0b368b56-0a67-454f-a13f-56d0a1ee92a9\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 60 s"
+  },
+  {
+   "seq": 285,
+   "at": 1791231433959,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 286,
+   "at": 1791231435876,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 287,
+   "at": 1791231440415,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"b4379700-07a0-463e-bb92-dbba7818283c\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 120 s"
+  },
+  {
+   "seq": 297,
+   "at": 1791231607977,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 298,
+   "at": 1791231609955,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 299,
+   "at": 1791231613735,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"7a62b8d7-0313-404a-b209-46a303eecba3\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 240 s"
+  },
+  {
+   "seq": 311,
+   "at": 1791231863017,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 312,
+   "at": 1791231863022,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 399,
+   "at": 1791233915204,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 400,
+   "at": 1791233915214,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 424,
+   "at": 1791233962792,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 425,
+   "at": 1791233962801,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 452,
+   "at": 1791234424888,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 453,
+   "at": 1791234424893,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 482,
+   "at": 1791234598702,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 483,
+   "at": 1791234601177,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 484,
+   "at": 1791234605095,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"9a085214-3332-4ada-93ff-78c69867c11b\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 480 s"
+  },
+  {
+   "seq": 517,
+   "at": 1791235187185,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 518,
+   "at": 1791235189388,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 519,
+   "at": 1791235192982,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"a4e7018d-bbbe-46e5-96b1-df07afbd3bf0\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 960 s"
+  },
+  {
+   "seq": 561,
+   "at": 1791236462366,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 562,
+   "at": 1791236464695,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 563,
+   "at": 1791236468050,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"a3f802aa-fa0f-44d6-9e04-65b395bd396b\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 1800 s"
+  },
+  {
+   "seq": 606,
+   "at": 1791238269032,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 607,
+   "at": 1791238271186,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 608,
+   "at": 1791238274466,
+   "message": "Failed: dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"7311eab3-687d-4ce0-9835-79a286ca00d0\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}"
+  },
+  {
+   "seq": 923,
+   "at": 1791271774579,
+   "message": "Queued"
+  },
+  {
+   "seq": 924,
+   "at": 1791271776190,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 962,
+   "at": 1791272977918,
+   "message": "Picked up again: the server that was running this review stopped"
+  },
+  {
+   "seq": 963,
+   "at": 1791272977927,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 964,
+   "at": 1791272979983,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 967,
+   "at": 1791273040623,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 968,
+   "at": 1791273042564,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 971,
+   "at": 1791273102943,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 972,
+   "at": 1791273124842,
+   "message": "Found 11,368 source lines, 193 test cases and 20 commits"
+  },
+  {
+   "seq": 973,
+   "at": 1791273124843,
+   "message": "Read 13 docs and 3 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 974,
+   "at": 1791273124850,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 975,
+   "at": 1791273243309,
+   "message": "Member A scored 82"
+  },
+  {
+   "seq": 976,
+   "at": 1791273243312,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 977,
+   "at": 1791273325357,
+   "message": "Member B scored 87.5"
+  },
+  {
+   "seq": 978,
+   "at": 1791273325359,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 979,
+   "at": 1791273381687,
+   "message": "Member C scored 71.5"
+  },
+  {
+   "seq": 980,
+   "at": 1791273381689,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 981,
+   "at": 1791273502580,
+   "message": "Done: 82 / 100"
+  }
+ ],
+ "review": {
+  "id": "curated--goldman--00200200-HackYeah2026",
+  "repo": "00200200/HackYeah2026",
+  "project": "Control",
+  "team": "Under Controllers",
+  "task": "goldman",
+  "result": "Not disclosed",
+  "task_fit": "yes: a real gateway enforcing one central policy.yaml over agent-to-model (/v1/chat/completions, OpenAI SDK compatible) and agent-to-MCP (/mcp/) traffic, with deterministic plus semantic controls, budgets, a signed audit log and metrics, exactly the AI Control Layer task.",
+  "scores": [
+   {
+    "criterion": "Robustness/guardrails",
+    "weight": 30,
+    "score": 8.5,
+    "why": "Deterministic detectors plus a real Ollama judge with structured risk scoring and fail-closed behaviour blocked 20 of 20 semantic attacks and redacted all four authored personal-data cases in the committed live run. The median sits below B's 9 because of one documented false block, PII detectors that miss names and postal addresses, and evidence limited to the team's own 48 authored cases rather than a held-out set.",
+    "spread": 2,
+    "members": {
+     "A": 8.5,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Architecture & performance",
+    "weight": 20,
+    "score": 8,
+    "why": "The gateway is verifiably in the request path for chat and MCP traffic, with hot policy reload that keeps the last valid snapshot and a measured 8.7 ms median overhead without AI checks. The AI judge adds about 4.83 s median and the single-process SQLite design has no streaming, which caps the score at A's 8 rather than B's 8.5.",
+    "spread": 1.5,
+    "members": {
+     "A": 8,
+     "B": 8.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Security reporting",
+    "weight": 20,
+    "score": 9,
+    "why": "All members confirm the SHA-256 chained, Ed25519 signed audit log with rule IDs and policy hash but no raw prompts, plus JSONL export, a signed checkpoint, an offline verifier, a live dashboard and Prometheus metrics. A and B's 9 stands because C's deductions, such as no GPU measurement or dollar-cost tracking, are extras the brief does not ask for.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Test suite",
+    "weight": 15,
+    "score": 8,
+    "why": "The pack shows 23 test files with 193 measured cases, 8 Rego tests in a real OPA container and a 48-case live evaluation with expected outcomes, all runnable offline via make check. B and C repeat the team's claim of 494 pytest cases, but the measurement supports A's more careful 8, and the live cases are authored rather than held-out.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Implementability & scalability",
+    "weight": 15,
+    "score": 7,
+    "why": "Ollama is first-class with a documented activation flow, the YAML policy and make targets are clear, and a 130-dependency licence inventory is unusually thorough. The median stays at 7 because the Postgres scale-out is described but not built, there are no monetary caps or per-minute rate limits, and the full stack was validated only on Apple-silicon macOS with the Docker Ollama path untested.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 82,
+  "build_reality": 9,
+  "source_loc": 11368,
+  "has_tests": true,
+  "tests": {
+   "files": 23,
+   "cases": 193
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 20 commits by 2 authors, 2026-10-03 10:30 to 2026-10-04 08:29 UTC",
+  "strengths": [
+   "One genuine pipeline in front of both model and MCP traffic, with signed warrants, delegation that only narrows, cascading revocation, and hot policy reload that keeps the last valid snapshot on invalid edits.",
+   "The semantic control is a real local Ollama model call with structured risk scoring, budget charging and fail-closed behaviour on timeout or malformed output, not a keyword list, and the committed live run blocked 20 of 20 semantic attacks.",
+   "Tamper-evident SHA-256 chained, Ed25519 signed audit log with JSONL export, a signed off-server checkpoint and an offline verifier, plus a dashboard wired to live gateway data rather than a mockup.",
+   "Honest evidence discipline: a documented false block kept in the expected results, candid limits sections throughout the docs, and tests runnable offline without API keys."
+  ],
+  "weaknesses": [
+   "The AI judge adds a median of about 4.83 seconds per request, which the team itself notes makes the full guard path unsuitable for high-volume traffic.",
+   "Single-process SQLite with in-process locks; the Postgres multi-node path is described but not built, there is no streaming, and full-stack validation covers only Apple-silicon macOS with the Docker Ollama path untested.",
+   "MCP support is limited to tools/call and the downstream MCP tools are mocks rather than real integrations.",
+   "Submission requirements were missed: the form's problem, solution and instructions fields are largely empty, the pitch deck was not provided through the form and exists only in the repo, and no live demo was captured."
+  ],
+  "red_flags": [
+   "The deck claims 494 pytest cases while the measurement counts 193 test functions across 23 files; probably parametrization, but the claim is unverified in the evidence pack."
+  ],
+  "verdict": "An unusually complete and honest control layer whose real hybrid guardrails and tamper-evident reporting are held back by judge latency, single-process scaling, mocked MCP tools and an incomplete submission form.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 82,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 87.5,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 71.5,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791273502578
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "submission": {
+  "id": "curated--huawei--carrotly-technologies-2026-SafeMesh",
+  "title": "SafeMesh",
+  "team": "Carrotly",
+  "task": "huawei",
+  "result": "Not disclosed",
+  "repo": "carrotly-technologies-2026/SafeMesh",
+  "created_at": 1791226633925,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633927,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 74,
+   "at": 1791226633933,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--huawei--carrotly-technologies-2026-SafeMesh",
+  "repo": "carrotly-technologies-2026/SafeMesh",
+  "project": "SafeMesh",
+  "team": "Carrotly",
+  "task": "huawei",
+  "result": "Not disclosed",
+  "task_fit": "yes: a native ArkTS/ArkUI HarmonyOS app, minimum API 20 declared, with a public repo, released HAP, demo video, architecture docs and AI_WORKFLOW.md all present",
+  "scores": [
+   {
+    "criterion": "Originality",
+    "weight": 20,
+    "score": 7,
+    "why": "Per-hop ECDSA P-256 verification with store-and-forward and a bundled offline protective-point map is a distinctive combination built around NearLink. Mesh alerting itself exists and the signed-relay pattern alone is not new, so the score sits above average but not top.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Demonstrated usefulness",
+    "weight": 20,
+    "score": 7,
+    "why": "The offline map, verified inbox and relay demonstrably work across three emulator apps and fit a real civilian problem with a bilingual UI. The headline phone-to-phone promise is only shown through a labelled WebSocket hub and the issuer is exercise-only, so field usefulness is not yet proven.",
+    "spread": 0.5,
+    "members": {
+     "A": 6.5,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Technical execution",
+    "weight": 20,
+    "score": 8.5,
+    "why": "Clean MVVM ArkTS with 177 passing host tests that run the real transpiled source, zero ArkTS and lint errors on both source sets, bounded parsing and correct lifecycle handling. No secrets or keystores are committed.",
+    "spread": 1,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Platform capabilities",
+    "weight": 20,
+    "score": 9,
+    "why": "Genuine deep use of OHOS kits: a NearLink adapter with capability gating and MTU framing, Crypto Architecture Kit verification, Network, Location, ArkData, Accessibility, Localization and Sensor kits, plus a second Oniro product built from the same codebase. The only cap is that the radio path itself is emulator-mocked.",
+    "spread": 0.5,
+    "members": {
+     "A": 8.5,
+     "B": 9,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Demo quality",
+    "weight": 10,
+    "score": 8,
+    "why": "A 2 min 58 s narrated, captioned recording of three synchronized API 24 emulator apps with stand-ins and speed-ups clearly labelled, backed by a 68-screenshot gallery. The pack could not independently verify the video, but the committed evidence is consistent with it.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Reproducibility & transparency",
+    "weight": 10,
+    "score": 9,
+    "why": "One-command checks with documented expected output, Windows and Linux/Oniro instructions, a released HAP with SHA-256, fresh-clone build evidence and an unusually candid AI_WORKFLOW.md. A stranger could plausibly rebuild, with the caveat of a specific DevEco setup.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 9
+    }
+   }
+  ],
+  "weighted_total": 80,
+  "build_reality": 8,
+  "source_loc": 16168,
+  "has_tests": true,
+  "tests": {
+   "files": 16,
+   "cases": 177
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 41 commits by 2 authors, 2026-10-03 16:07 to 2026-10-04 08:57 UTC",
+  "strengths": [
+   "Per-hop ECDSA P-256 signature verification with store-and-forward, ACKs and forged, expired and duplicate rejection, all covered by tests",
+   "Broad, real platform use: a NearLink adapter with capability gating, on-device crypto, and many OHOS kits, plus a second Oniro product from the same source",
+   "Exceptional transparency and reproducibility: every simulated piece labelled, a physical-device runbook, one-command checks, a SHA-256 HAP release and detailed AI disclosure",
+   "A convincing synchronized three-emulator demo showing publish, two relay hops, forged-copy rejection and offline map search"
+  ],
+  "weaknesses": [
+   "NearLink radio delivery has never been demonstrated on physical hardware; all relay evidence runs through a labelled laptop WebSocket hub on emulators",
+   "The issuer is a local exercise signing service, not a real authority, and every alert is a drill, so trust in a real warning chain is unproven",
+   "No background relaying until an API 26 continuous-task mode, which limits the phone-to-phone-when-the-network-is-down promise",
+   "The submission form fields are largely empty, so the deck, video and HAP are discoverable only from the repo and releases"
+  ],
+  "red_flags": [],
+  "verdict": "An exceptionally well-engineered, honest and reproducible native HarmonyOS prototype whose per-hop-signed mesh alerting genuinely works across three emulators, held below the top tier only because the NearLink radio path has never been proven on real hardware.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 79,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 78,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 80,
+     "agreement": 0.9,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791225913969
+ }
+}

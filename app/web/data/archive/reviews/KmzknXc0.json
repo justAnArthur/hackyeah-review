@@ -1,0 +1,209 @@
+{
+ "submission": {
+  "id": "KmzknXc0",
+  "title": "OpenWAF",
+  "team": "OpenWAF-Team",
+  "task": "ai",
+  "result": "Not a finalist",
+  "repo": "AleksanderGPL/OpenWAF",
+  "created_at": 1791241359963,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791241359966,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 687,
+   "at": 1791241359970,
+   "message": "Queued"
+  },
+  {
+   "seq": 705,
+   "at": 1791241617047,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 706,
+   "at": 1791241618335,
+   "message": "Found 16,277 source lines, 66 test cases and 37 commits"
+  },
+  {
+   "seq": 707,
+   "at": 1791241618338,
+   "message": "Read 4 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 708,
+   "at": 1791241618342,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 709,
+   "at": 1791241701195,
+   "message": "Member A scored 70"
+  },
+  {
+   "seq": 710,
+   "at": 1791241701198,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 711,
+   "at": 1791241760244,
+   "message": "Member B scored 78"
+  },
+  {
+   "seq": 712,
+   "at": 1791241760247,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 713,
+   "at": 1791241774443,
+   "message": "Member C scored 81"
+  },
+  {
+   "seq": 714,
+   "at": 1791241774446,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 715,
+   "at": 1791241828914,
+   "message": "Done: 78 / 100"
+  }
+ ],
+ "review": {
+  "id": "KmzknXc0",
+  "repo": "AleksanderGPL/OpenWAF",
+  "project": "OpenWAF",
+  "team": "OpenWAF-Team",
+  "task": "ai",
+  "result": "Not a finalist",
+  "task_fit": "yes: AI is the core operator-facing layer, not a garnish. Anomaly detectors queue investigations that a tool-calling agent runs over real WAF telemetry, publishes evidence-backed assessments, and answers follow-up questions, which fits the AI task's direction of a specific user need, here security triage.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 8,
+    "why": "Unanimous. This is more than a chat wrapper: bounded autonomous investigations, read-only telemetry tools, and report validation that rejects evidence citations not returned by tools. Docked because commercial AI SOC triage already exists and the detection layer feeding it is fixed-threshold heuristics.",
+    "spread": 0,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8.5,
+    "why": "The AI layer is the headline feature, wired into detection, SSE progress and the operator workflow. The council sides with A and B over C here: strip the model and a working Coraza/CRS WAF with dashboard remains, so AI is the differentiating layer rather than the entire product.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 8.5,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 8,
+    "why": "A concrete user is served end to end: cited request IDs, evidence snapshots, acknowledge/resolve/dismiss, retry and cancel, adjustable thresholds, and read-only tools that cannot touch WAF rules. Docked because no screenshot or demo lets the jury confirm the actual UI, and setup needs AI_KEY and AI_MODEL.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 6,
+    "why": "The codebase shows a real Nuxt frontend with Tailwind, EN/PL i18n, ECharts and a coherent admin layout, which supports B's mid score over A's 4 and C's 7. But with zero screenshots, no deck and no demo text, the rendered UI is inferred from code alone and cannot be verified.",
+    "spread": 3,
+    "members": {
+     "A": 4,
+     "B": 6,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 9,
+    "why": "16,277 LOC across 37 commits, all during the event with none before or after, 66 test cases in 27 files, real integrations and guardrails with explicit failure states. The median keeps A's caveat in view but the code and test suite carry the score: the live AI test exists yet is opt-in and gated on a key, with no recorded run in the pack.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 9
+    }
+   }
+  ],
+  "weighted_total": 78,
+  "build_reality": 8,
+  "source_loc": 16277,
+  "has_tests": true,
+  "tests": {
+   "files": 27,
+   "cases": 66
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 37 commits by 3 authors, 2026-10-03 10:35 to 2026-10-04 07:25 UTC",
+  "strengths": [
+   "Real tool-calling agent over live telemetry with bounded iterations, tool calls, concurrency and deadlines, not a canned model response.",
+   "Evidence discipline: cited request IDs are validated against tool results, snapshots are retained, and missing evidence forces an inconclusive assessment.",
+   "Strong operator control: acknowledge, resolve, dismiss, retry and cancel, per-service thresholds, SSE with replay, and read-only tools that cannot change WAF rules or block traffic.",
+   "Substantial event-built implementation with honest documentation, including limits, failure states and open disclosure of the AI stack in the repo docs."
+  ],
+  "weaknesses": [
+   "No screenshots, demo video or deck, so visual design and UI usability cannot be judged from the submission pack.",
+   "The official submission form was left blank and only a repo link was shared, leaving required narrative deliverables missing.",
+   "Nothing in the pack shows the AI path executing end to end: the live investigation test is opt-in and gated on AI_KEY, so the jury cannot verify it without a key.",
+   "Detection feeding the AI is fixed-threshold heuristics and investigation quality depends on the chosen model, with no benchmark shown."
+  ],
+  "red_flags": [],
+  "verdict": "A genuinely engineered agentic security-triage layer on a working WAF, built entirely during the event with real guardrails and tests, whose entry is capped by missing visual, demo and submission-form deliverables rather than by what was built.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 70,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 78,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 81,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791241828911
+ }
+}

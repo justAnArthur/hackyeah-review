@@ -1,0 +1,158 @@
+{
+ "submission": {
+  "id": "curated--defence--Mikformatycy-SafeWall",
+  "title": "SafeWall",
+  "team": "Mikformatycy",
+  "task": "defence",
+  "result": "Not disclosed",
+  "repo": "Mikformatycy/SafeWall",
+  "created_at": 1791226633814,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633816,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 63,
+   "at": 1791226633821,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--defence--Mikformatycy-SafeWall",
+  "repo": "Mikformatycy/SafeWall",
+  "project": "SafeWall",
+  "team": "Mikformatycy",
+  "task": "defence",
+  "result": "Not disclosed",
+  "task_fit": "yes: a privacy gateway that silences a phone's radios and routes it over its own LTE with planned Tor is prevention-focused security work for journalists and activists, squarely matching the Defence brief, though only the groundwork is implemented.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 6,
+    "why": "A concrete threat model (radio tracking, telemetry domains) aimed at a real gap for journalists, with unusually honest limits. Pocket Tor routers are a known category and every differentiating feature is listed in the team's own docs as planned or untested, so a 6 rewards strong reasoning over delivered novelty.",
+    "spread": 0.5,
+    "members": {
+     "A": 6,
+     "B": 6.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8,
+    "why": "Unambiguously security and resilience work: preventing radio-based exposure and traffic identification for civil-society users. The score sits below the top because the resilience half, operation in a degraded scenario, is described only as future acceptance criteria and never demonstrated.",
+    "spread": 0.5,
+    "members": {
+     "A": 8,
+     "B": 8.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 4,
+    "why": "The intended flow of one cable and a glance at a panel is right, but the LTE link measured about 1.4 kB/s with unresolved timeouts, the dashboard runs on demo data, and operation needs root Linux rigs and SSH over USB. Member B's 2.5 is defensible given the broken data path, but the evidence and the team's own honest documentation support the median view that the concept is right while nothing is field-usable today.",
+    "spread": 1.5,
+    "members": {
+     "A": 4,
+     "B": 2.5,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7,
+    "why": "Coherent craft: a full brand system with scripted logo exports, a generated 8-slide deck, Blender CAD renders of the powerbank-like enclosure, and a clean CSP-hardened dashboard with offline preview. The score reflects real polish that rests on renders and simulated statuses rather than verified live views, which supports the median over Member C's 6.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 3,
+    "why": "The router base is real and tested (nftables isolation, DHCP/DNS, 28 test cases including a namespace suite), but the defining security features are absent from code: no torrc, no Tor redirect rules, no fail-closed kill-switch, no DNS filter, and the API returns 503. Member B's 1 is too harsh given the tested router base and Member A's 4 slightly overcredits unimplemented claims; Member C's claim that DNS filtering is present in the repo is contradicted by STATUS.md and the other two reviews, so the median of 3 stands.",
+    "spread": 3,
+    "members": {
+     "A": 4,
+     "B": 1,
+     "C": 3
+    }
+   }
+  ],
+  "weighted_total": 59,
+  "build_reality": 3,
+  "source_loc": 9559,
+  "has_tests": true,
+  "tests": {
+   "files": 6,
+   "cases": 28
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "unclear: 2 commits by 1 author, 2026-10-03 17:43 to 2026-10-04 08:40 UTC, so the history is squashed",
+  "strengths": [
+   "Genuine hardware prototype (Raspberry Pi 4 with PiTalk EG25-G modem) and tested router plumbing: nftables segment isolation, DHCP/DNS, WAN detection, USB admin isolation, and 28 test cases including a network-namespace router suite.",
+   "Exceptional epistemic honesty: STATUS.md, README and the draft consistently separate verified results from plans and label the dashboard as demo-only.",
+   "Clear, realistic threat model for journalists under radio surveillance that states what the device does not protect against.",
+   "Strong reproducible design pipeline: vector brand identity with scripted exports, a generated jury deck, and CAD concept renders of a discreet powerbank enclosure."
+  ],
+  "weaknesses": [
+   "The core security claims are not in code: no torrc or Tor redirect rules, no fail-closed kill-switch, no DNS filter, and the committed config still implements the earlier direct NAT to the modem.",
+   "The LTE data path was broken at submission (about 1.4 kB/s with unresolved timeouts on Pi, Mac and reportedly Windows), so the device has no usable connectivity.",
+   "The dashboard runs on simulated data while its real API endpoint returns 503 DATA_SOURCE_NOT_CONFIGURED, and no live demo was verified (demo checks empty).",
+   "The task's required degraded-scenario demonstration was never shown, existing only as planned acceptance criteria, and the submission form was largely empty with no reachable hosted demo or working video link."
+  ],
+  "red_flags": [
+   "mock-check-tor is a static green Tor Check page built for presentations: disclosed as a mock, but designed to visually assert a security state the repo cannot reproduce.",
+   "The positive Tor Check rests on a user-confirmed recording whose demo segment was cut and sped up 1.35x, and the presentation's video link points to a placeholder youtube.com URL rather than the promised film.",
+   "Simulated dashboard data is presented alongside security claims while the device has no working protection path."
+  ],
+  "verdict": "An honestly documented and well-designed privacy-gateway concept with a genuinely engineered router base, but the features that define it as a defence tool (Tor routing, fail-closed protection, DNS filtering, live panel) exist only as plans, mocks and a recording.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 60,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 56.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 57,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791223457450
+ }
+}

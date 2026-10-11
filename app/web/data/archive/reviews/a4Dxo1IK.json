@@ -1,0 +1,252 @@
+{
+ "submission": {
+  "id": "a4Dxo1IK",
+  "title": "PlanSafe",
+  "team": "Pioneer Collective",
+  "task": "defence",
+  "result": "Not a finalist",
+  "repo": "Hackyeah2026/PlanSafe",
+  "created_at": 1791231505087,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791234595648,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 292,
+   "at": 1791231505098,
+   "message": "Queued"
+  },
+  {
+   "seq": 376,
+   "at": 1791233071571,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 377,
+   "at": 1791233075823,
+   "message": "Found 43,286 source lines, 57 test cases and 135 commits"
+  },
+  {
+   "seq": 378,
+   "at": 1791233075825,
+   "message": "Read 0 docs and 0 decks, opened 1 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 379,
+   "at": 1791233075830,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 380,
+   "at": 1791233199940,
+   "message": "Member A scored 77.5"
+  },
+  {
+   "seq": 381,
+   "at": 1791233199942,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 382,
+   "at": 1791233199946,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 419,
+   "at": 1791233945197,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 420,
+   "at": 1791233945202,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 444,
+   "at": 1791233992793,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 445,
+   "at": 1791233992797,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 472,
+   "at": 1791234448888,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 473,
+   "at": 1791234448892,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 542,
+   "at": 1791235754283,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 544,
+   "at": 1791235837250,
+   "message": "Member B scored 74"
+  },
+  {
+   "seq": 545,
+   "at": 1791235837252,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 546,
+   "at": 1791235852646,
+   "message": "Member C scored 61"
+  },
+  {
+   "seq": 547,
+   "at": 1791235852667,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 548,
+   "at": 1791235952933,
+   "message": "Done: 73.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "a4Dxo1IK",
+  "repo": "Hackyeah2026/PlanSafe",
+  "project": "PlanSafe",
+  "team": "Pioneer Collective",
+  "task": "defence",
+  "result": "Not a finalist",
+  "task_fit": "yes: a civilian evacuation planning and resident guidance tool that matches the Defence brief's emergency coordination and preparedness direction, letting coordinators test plans under degraded conditions and push verified routing to residents",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "Scenario branching, a browser-side WebGPU crowd simulation, and the closed loop from coordinator planning to QR-published resident shelter assignment address a real emergency coordination gap. Crowd simulation itself is a known genre, so the novelty sits mainly in the workflow connection, which supports the middle score.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "Two of three members found the tool squarely civil defence: coordinators test evacuations under degraded conditions such as blocked passages and shelter overload, and residents receive routing built on real Krakow census and OSM data. Member C's stricter reading, that the demo must show services fully down, is a fair reservation, but the demonstrated degraded-condition planning and resident routing support the stronger fit.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "Staff need only a browser and residents only a phone, with a guided tour and real data. The prototype is untested with real emergency planners, coordinator endpoints lack authentication, state is in-memory, and the resident flow fails without connectivity.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 6,
+    "why": "The code shows deliberate crisis readability choices such as speed color coding, heatmaps, themes, and resident handling of degraded inputs. None of the six screenshots is described and the live page renders only a loading shell, so visual quality could not be verified from the pack.",
+    "spread": 1.5,
+    "members": {
+     "A": 6.5,
+     "B": 6,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 8.5,
+    "why": "The core claims exist in code rather than mocks: WebGPU shaders with a CPU engine and parity tests, publish, assign and check-in endpoints, QR generation, 58 test files, CI, and a live deployment returning HTTP 200. Gaps include an empty worker stub, no persistence, and a deck claim of 139 tests against 57 measured.",
+    "spread": 2,
+    "members": {
+     "A": 8.5,
+     "B": 9,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 73.5,
+  "build_reality": 9,
+  "source_loc": 43286,
+  "has_tests": true,
+  "tests": {
+   "files": 58,
+   "cases": 57
+  },
+  "live_demo": "https://plansafe.mikrus.dev/ (HTTP 200)",
+  "built_during_event": "yes: 135 commits by 3 authors, 2026-10-03 09:14 to 2026-10-04 08:56 UTC",
+  "strengths": [
+   "End-to-end loop implemented and deployed: draw a zone, simulate with scenario branching, publish via QR, assign residents with occupancy balancing, and check in to update occupancy",
+   "Real data rather than invented events: bundled Krakow OpenStreetMap material and the GUS NSP 2021 census on a 125 m grid",
+   "Serious engineering: WebGPU crowd simulation with a CPU fallback, parity tests, benchmarks, CI, and automated deploy to a live demo, with all 135 commits made during the event",
+   "Honest scoping with a limitations slide and explicit AI tooling disclosure, plus a resident UI that handles denied GPS, timeouts, and full shelters"
+  ],
+  "weaknesses": [
+   "No authentication on coordinator actions and CORS open to any origin, so anyone can call mutating endpoints such as publish or reset on the public deployment",
+   "State is in-memory with no persistence, so a restart mid-incident loses the plan, and resident assignment depends entirely on the API being reachable with no offline mode",
+   "No usable visual evidence: all six screenshots are undescribed and the live page shows only a loading shell, so the UI and the interactive workflow could not be independently verified",
+   "No validation with real emergency planners or evacuation exercises, so simulation output validity is unproven"
+  ],
+  "red_flags": [
+   "Open CORS combined with unauthenticated mutating endpoints on a public evacuation coordination deployment, reported independently by two members and contradicting the tool's own security framing",
+   "The deck claims 139 .NET tests while the measured count is 57 test cases, an overstatement of the test evidence"
+  ],
+  "verdict": "A deeply engineered and honestly scoped civil defence evacuation tool whose planning-to-resident loop demonstrably exists in code and runs on a live deployment, held back by missing hardening such as authentication, persistence and offline continuity, and by an evidence pack that does not let the jury verify the interface.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 77.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 74,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 61,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791235952929
+ }
+}

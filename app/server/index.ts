@@ -273,7 +273,7 @@ const server = Bun.serve({
         return json({ ok: true, resumed: resumeInterrupted(db) })
       },
     },
-    "/r/:id": () => new Response(Bun.file(join(PUBLIC, "review.html"))),
+    // /r/<id> pages are pre-rendered into public/r/<id>/index.html and served by staticFile
     // the scorecard merged into the results page; browsers keep the #fragment across the redirect
     "/scorecard": () => Response.redirect("/", 301),
   },

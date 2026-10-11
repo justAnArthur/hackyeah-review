@@ -1,0 +1,241 @@
+{
+ "submission": {
+  "id": "1Ki67iGD",
+  "title": "pakt",
+  "team": "btw-means-by-the-way-btw",
+  "task": "superteam",
+  "result": "Not a finalist",
+  "repo": "btw-means-by-the-way-btw/pakt",
+  "created_at": 1791233851689,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791234595648,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 394,
+   "at": 1791233851694,
+   "message": "Queued"
+  },
+  {
+   "seq": 395,
+   "at": 1791233854682,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 396,
+   "at": 1791233856231,
+   "message": "Found 18,772 source lines, 94 test cases and 11 commits"
+  },
+  {
+   "seq": 397,
+   "at": 1791233856233,
+   "message": "Read 3 docs and 0 decks, opened 1 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 398,
+   "at": 1791233856238,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 423,
+   "at": 1791233951199,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 448,
+   "at": 1791233998792,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 449,
+   "at": 1791234142612,
+   "message": "Member A scored 82.95"
+  },
+  {
+   "seq": 450,
+   "at": 1791234142614,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 451,
+   "at": 1791234142619,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 476,
+   "at": 1791234454889,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 477,
+   "at": 1791234454893,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 564,
+   "at": 1791236468366,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 565,
+   "at": 1791236550452,
+   "message": "Member B scored 74"
+  },
+  {
+   "seq": 566,
+   "at": 1791236550454,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 567,
+   "at": 1791236571073,
+   "message": "Member C scored 61"
+  },
+  {
+   "seq": 568,
+   "at": 1791236571076,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 569,
+   "at": 1791236658292,
+   "message": "Done: 74.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "1Ki67iGD",
+  "repo": "btw-means-by-the-way-btw/pakt",
+  "project": "pakt",
+  "team": "btw-means-by-the-way-btw",
+  "task": "superteam",
+  "result": "Not a finalist",
+  "task_fit": "yes: a double-deposit escrow on Solana where a PDA-owned vault, not a company or backend, holds the price and both deposits, and payouts go only to the two recorded parties, which matches the partner's trustless-transaction brief.",
+  "scores": [
+   {
+    "criterion": "Relevance",
+    "weight": 30,
+    "score": 8,
+    "why": "Custody is genuinely on-chain: the vault is a token account owned by the deal PDA, payouts go only to the recorded seller and buyer, there is no admin instruction, and the server only relays unsigned transactions. It stops short of the top because the deployer key still held upgrade authority at submission, so the authors could still change every rule.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & functionality",
+    "weight": 25,
+    "score": 6.8,
+    "why": "The flow is fully implemented across program, CLI, GUI and server with 94 measured test cases including security refusals, which supports A and B over C's 4. But the required PDF deck and video of at most 3 minutes were not submitted, no devnet transaction signature or explorer link appears in the pack, and the automated check reached only the faucet, never the claimed live app.",
+    "spread": 3,
+    "members": {
+     "A": 6.8,
+     "B": 7,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Idea & problem",
+    "weight": 20,
+    "score": 8,
+    "why": "The target user is named precisely, people paying strangers a few hundred to a few thousand zloty outside buyer-protection platforms, with a cost table against Vinted, OLX, Allegro and Escrow.com and a substantive answer to why a database cannot do it: an administrator can be begged or bribed, the program cannot. The honest payoff-matrix analysis, including that the honest side loses more in a standoff, strengthens the framing.",
+    "spread": 1.5,
+    "members": {
+     "A": 9,
+     "B": 7.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Implementation potential",
+    "weight": 15,
+    "score": 7,
+    "why": "The Anchor program is soundly engineered, with terms pinned by hash at take, checked arithmetic, a vault-shortfall guard, permissionless release and refund on two silence clocks, and typed errors, so it is deployable beyond the demo. A's 9.3 overshoots the median because real limits remain: upgrade authority is still active, a dispute freezes funds indefinitely, and deposits lock twice the item value with no fiat ramp.",
+    "spread": 3.3000000000000007,
+    "members": {
+     "A": 9.3,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Originality",
+    "weight": 10,
+    "score": 7,
+    "why": "The double-deposit core is borrowed and self-admitted from Solidity's Safe Remote Purchase and Particl MAD, so it is beyond a renamed tutorial but not a new mechanism. The additions A and B substantiate in code, partial settlement as a dispute exit, anyone-callable release and refund, on-chain track records, a simulate-the-refusal panel, are real, which does not support C's 5.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 74.5,
+  "build_reality": 8,
+  "source_loc": 18772,
+  "has_tests": true,
+  "tests": {
+   "files": 25,
+   "cases": 94
+  },
+  "live_demo": "https://faucet.solana.com (HTTP 200)",
+  "built_during_event": "yes: 11 commits by 1 author, 2026-10-03 18:36 to 2026-10-04 08:37 UTC",
+  "strengths": [
+   "Custody is on-chain in locatable code: four payout entry points funnel into one pay_out signed by the deal PDA, recipients are pinned to the recorded seller and buyer, and no admin instruction exists.",
+   "Vanishing-party handling is complete on both sides: permissionless refund if the seller never ships and permissionless release if the buyer never confirms, each gated by an on-chain clock.",
+   "94 tests across 25 files target the judges' questions, including security cases showing a non-party cannot drain the vault or redirect a payout.",
+   "Unusual honesty: the README and RATIONALE disclose the still-active upgrade authority, the dispute deadlock, and the link-forgery and stablecoin-issuer risks."
+  ],
+  "weaknesses": [
+   "Two required deliverables are missing: no PDF deck and no video of at most 3 minutes were submitted.",
+   "The devnet deployment and the claimed completed deal are uncorroborated: no transaction signature or explorer link appears in the pack, and the automated check reached only faucet.solana.com, never the claimed live app.",
+   "The deployer key still holds upgrade authority, so the authors can change all rules until finalize is run.",
+   "A dispute freezes funds indefinitely with no timeout and, by the team's own analysis, the honest side loses more in a standoff; deposits equal to the price lock twice the item value and there is no fiat on-ramp."
+  ],
+  "red_flags": [
+   "The completed devnet deal and the live app are asserted in the submission but nothing in the evidence pack corroborates them, and the form's single unverifiable line 'fULL WORK' is not proof."
+  ],
+  "verdict": "A genuinely trustless, carefully engineered double-deposit escrow on Solana that answers the partner's hard questions in code, but it was submitted without the required deck and video and its devnet deployment is claimed rather than verifiable from the evidence pack.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 82.95,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 74,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 61,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791236658289
+ }
+}

@@ -1,0 +1,251 @@
+{
+ "submission": {
+  "id": "_RZlP7sC",
+  "title": "MaydayMama",
+  "team": "c",
+  "task": "impacther",
+  "result": "Not a finalist",
+  "repo": "MikolajRowicki/ImpactHerHackYeah2026",
+  "created_at": 1791230527058,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791234595648,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 250,
+   "at": 1791230527066,
+   "message": "Queued"
+  },
+  {
+   "seq": 354,
+   "at": 1791232762527,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 355,
+   "at": 1791232764668,
+   "message": "Found 21,684 source lines, 985 test cases and 92 commits"
+  },
+  {
+   "seq": 356,
+   "at": 1791232764670,
+   "message": "Read 9 docs and 3 decks, opened 1 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 357,
+   "at": 1791232764676,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 358,
+   "at": 1791232847166,
+   "message": "Member A scored 80"
+  },
+  {
+   "seq": 359,
+   "at": 1791232847168,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 360,
+   "at": 1791232847174,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 413,
+   "at": 1791233936193,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 414,
+   "at": 1791233936196,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 438,
+   "at": 1791233983791,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 439,
+   "at": 1791233983796,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 466,
+   "at": 1791234439889,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 467,
+   "at": 1791234439894,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 520,
+   "at": 1791235193184,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 521,
+   "at": 1791235259865,
+   "message": "Member B scored 86.5"
+  },
+  {
+   "seq": 522,
+   "at": 1791235259868,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 523,
+   "at": 1791235300235,
+   "message": "Member C scored 64"
+  },
+  {
+   "seq": 524,
+   "at": 1791235300239,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 525,
+   "at": 1791235383419,
+   "message": "Done: 80 / 100"
+  }
+ ],
+ "review": {
+  "id": "_RZlP7sC",
+  "repo": "MikolajRowicki/ImpactHerHackYeah2026",
+  "project": "MaydayMama",
+  "team": "c",
+  "task": "impacther",
+  "result": "Not a finalist",
+  "task_fit": "yes: postpartum depression is a health challenge that disproportionately affects women, and every core feature (mother check-ins, anonymous close-circle observations, shared 7-day trend, PPD-specific help paths) only makes sense for that need, not just the naming.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 8,
+    "why": "The insight that close ones see changes but have no safe way to act together without judging her or going behind her back is specific and backed by cited Polish and international statistics. Circle-based PPD support is not wholly new, so it lands strong rather than exceptional.",
+    "spread": 1.5,
+    "members": {
+     "A": 8,
+     "B": 8.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "Strip the name and the product still only works for postpartum depression: one-minute mood, sleep and anxiety check-ins, observation questions for loved ones, explainable trend rules, per-voivodeship care paths and a PPD conversation guide. A gender-neutral product could not reuse this.",
+    "spread": 1.5,
+    "members": {
+     "A": 9,
+     "B": 9.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "A live mobile-first demo at maydaymama.pl with demo accounts, a free core tier and crisis lines that work signed out with dialable numbers makes it genuinely reachable. It loses points for having no measurable-impact plan and health content still awaiting expert review.",
+    "spread": 3,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7.5,
+    "why": "Code and specs show disciplined, dignity-centered design: a token system, dark mode, reduced-motion support, focus management, and e2e tests asserting contrast and no horizontal scroll at 375px. But only one screenshot exists in the repo and none are described, so visual quality rests mostly on code evidence.",
+    "spread": 2.5,
+    "members": {
+     "A": 7.5,
+     "B": 8.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 9,
+    "why": "Measured 21,684 SLOC, 42 API operations with a frozen OpenAPI baseline, 985 test cases in 75 files, live-mode browser journeys and a deployed demo make the whole helping loop real. On the disputed README line about sample data, the evidence supports Members A and B, who both describe a deliberate mock fallback plus live-mode e2e tests against the deployed backend, over Member C's reading that the app is an empty shell; the line is a stale status note and a documentation defect, not proof of a missing frontend.",
+    "spread": 4,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 80,
+  "build_reality": 9,
+  "source_loc": 21684,
+  "has_tests": true,
+  "tests": {
+   "files": 75,
+   "cases": 985
+  },
+  "live_demo": "https://maydaymama.pl (HTTP 200)",
+  "built_during_event": "yes: 92 commits by 3 authors, 2026-10-03 13:47 to 2026-10-04 07:41 UTC",
+  "strengths": [
+   "Need evidenced with cited Polish and international statistics (GUS, the NFZ referral gap, JAMA, MBRRACE-UK) and a concrete insight about families noticing changes with no safe way to act.",
+   "Privacy and safety handled in code: anonymous observations feed only an aggregate, RBAC is enforced server-side, crisis text is never stored, phrase rules run before any AI call, and dialable helplines work even signed out.",
+   "Explainable rules-based trend engine combining check-ins and observations into a signal, not a black box, plus a real crisis path with calm wording.",
+   "Engineering discipline rare for a hackathon: 92 commits all within the event window, frozen contract baseline, spec-driven workflow, and 985 tests including browser e2e against the live deployment."
+  ],
+  "weaknesses": [
+   "No measurable-impact plan: no baseline metric, target improvement or measurement method, and no evidence of testing with the target group, only a sketched midwife pilot.",
+   "Health and education content is self-written and flagged by the team itself as awaiting psychologist or midwife review.",
+   "Stale README status line claiming the frontend still runs on sample data, contradicting the live-mode screens and e2e tests; documentation is out of step with the code.",
+   "Visual evidence for the jury is thin: one screenshot in the repo and none described, so design must be judged mainly from code and deck text."
+  ],
+  "red_flags": [
+   "Minor claim discrepancies in the submission: the deck claims 1500+ fast tests versus 985 measured cases, and lists four team members while commits show three authors, with the form team name left as just 'c'. Sloppy hygiene rather than deception."
+  ],
+  "verdict": "A genuinely built and deployed postpartum depression early-warning network with cited evidence, privacy-first execution and rare engineering discipline, held back by the absence of a measurable-impact plan, not-yet-reviewed health content and stale submission hygiene rather than by any real gap in the working product.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 80,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 86.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 64,
+     "agreement": 0.5,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791235383417
+ }
+}

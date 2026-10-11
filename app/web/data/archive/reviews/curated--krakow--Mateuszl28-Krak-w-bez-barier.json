@@ -1,0 +1,212 @@
+{
+ "submission": {
+  "id": "curated--krakow--Mateuszl28-Krak-w-bez-barier",
+  "title": "Dostępnik",
+  "team": "PL{Byte_Bandits}",
+  "task": "krakow",
+  "result": "Not disclosed",
+  "repo": "Mateuszl28/Krak-w-bez-barier",
+  "created_at": 1791226633982,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633983,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 80,
+   "at": 1791226633985,
+   "message": "Queued"
+  },
+  {
+   "seq": 111,
+   "at": 1791227509038,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 112,
+   "at": 1791227511504,
+   "message": "Found 9,197 source lines, 15 test cases and 24 commits"
+  },
+  {
+   "seq": 113,
+   "at": 1791227511506,
+   "message": "Read 2 docs and 0 decks, opened 1 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 114,
+   "at": 1791227511511,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 115,
+   "at": 1791227643008,
+   "message": "Member A scored 78.75"
+  },
+  {
+   "seq": 116,
+   "at": 1791227643010,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 117,
+   "at": 1791227767369,
+   "message": "Member B scored 79.25"
+  },
+  {
+   "seq": 118,
+   "at": 1791227767370,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 119,
+   "at": 1791227787697,
+   "message": "Member C scored 69.5"
+  },
+  {
+   "seq": 120,
+   "at": 1791227787699,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 121,
+   "at": 1791227883388,
+   "message": "Done: 75 / 100"
+  }
+ ],
+ "review": {
+  "id": "curated--krakow--Mateuszl28-Krak-w-bez-barier",
+  "repo": "Mateuszl28/Krak-w-bez-barier",
+  "project": "Dostępnik",
+  "team": "PL{Byte_Bandits}",
+  "task": "krakow",
+  "result": "Not disclosed",
+  "task_fit": "yes: a Kraków accessibility checker for wheelchair users and parents with prams that implements the task's core asks - per-attribute barrier data with source, date and reliability, missing data never shown as accessible, conflict and source-outage cases, open-data ingestion separated from presentation, and a proven path to new cities.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 8.5,
+    "why": "Profile-based, per-requirement assessment with missing data rendered as unknown or incomplete rather than accessible, all demonstrated live in Polish with English support. On the split, the evidence supports A and B: C's 7 double-counts the missing deliverables, which the council charges to prototype quality.",
+    "spread": 2,
+    "members": {
+     "A": 8.5,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 6,
+    "why": "The live demo is broad and the required conflict case (krk-wc-11) and outage simulation (?awaria=osm) exist as demoable objects, but two mandatory deliverables are absent and only 15 tests in one file cover the logic. On the main disagreement the evidence supports B and C over A's 8: the deck is measured as not provided and no video file exists, which caps the score at 6.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 6,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 8.5,
+    "why": "Every fact carries source, date and reference link; confirmed, conflicting, stale and unverified statuses are computed and surfaced; the data is real open data (OSM, ZTP ArcGIS, MSIP) with attribution and an honest coverage report. Members differ by half a point at most, so the median is a consensus.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 8.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 8.5,
+    "why": "Ingestion is fully separated from presentation and Warsaw was added as data configuration, proving the add-a-city path in practice. A's caveat is correct and keeps this below B's 9: a new city's municipal feeds still need an adapter, and report storage persists to /tmp.",
+    "spread": 1,
+    "members": {
+     "A": 8.5,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 6,
+    "why": "Costs are priced with numbers and the paying side is named (venues, booking platforms and cities, with users free), but no revenue figures, tiers or projections exist. With members spread from 5.5 to 7, the evidence best supports C's middle view: a direction without numbers.",
+    "spread": 1.5,
+    "members": {
+     "A": 5.5,
+     "B": 7,
+     "C": 6
+    }
+   }
+  ],
+  "weighted_total": 75,
+  "build_reality": 8,
+  "source_loc": 9197,
+  "has_tests": true,
+  "tests": {
+   "files": 1,
+   "cases": 15
+  },
+  "live_demo": "https://krak-w-bez-barier.vercel.app (HTTP 200)",
+  "built_during_event": "yes: 24 commits by 2 authors, 2026-10-03 17:23 to 2026-10-05 10:27 UTC",
+  "strengths": [
+   "Per-datum provenance (source, date, link) with confirmed, conflict, stale and unverified statuses implemented in code and UI, not just claimed.",
+   "Missing data is never rendered as accessible: a three-state verdict in assess.ts, with unknown route segments counted and dashed separately.",
+   "Real open data (OSM Overpass, ZTP ArcGIS, MSIP) with licenses and attribution, ingested by scripts fully separated from the presentation layer.",
+   "The add-a-city path is proven, not claimed: Warsaw (7258 places) exists as data configuration with city selection in app and API."
+  ],
+  "weaknesses": [
+   "Required PDF deck (max 10 slides) is not provided; no deck exists in the repo or the submission.",
+   "Required demo video (max 3 min) is missing; only a script at docs/scenariusz-wideo.md exists.",
+   "Business model names who pays and prices the costs, but gives no revenue figures, price tiers or market assumptions.",
+   "Only 15 test cases in one file, all on assessment logic; WCAG 2.2 AA is self-claimed without test evidence, and user reports persist to /tmp on Vercel."
+  ],
+  "red_flags": [
+   "Two commits landed after the deadline (last commit 2026-10-05), so the reviewed state may differ from the state judged live.",
+   "Both mandatory pitch deliverables are absent and the submission form is largely blank, so the entire pitch rests on the README."
+  ],
+  "verdict": "A technically deep, honest prototype that implements the task's core rule of provenance-tracked data where gaps never show as accessible and proves scalability with Warsaw, but missing mandatory deliverables, two post-deadline commits, and a business model without numbers keep it below finalist level.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 78.75,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 79.25,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 69.5,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791227883386
+ }
+}

@@ -1,0 +1,154 @@
+{
+ "submission": {
+  "id": "curated--smartcity--portugalskie-armatki-sniezne-eHackYeah2026",
+  "title": "pomożeMy",
+  "team": "Portugalskie Armatki Śnieżne",
+  "task": "smartcity",
+  "result": "Not disclosed",
+  "repo": "portugalskie-armatki-sniezne/eHackYeah2026",
+  "created_at": 1791226633807,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633809,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 62,
+   "at": 1791226633812,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--smartcity--portugalskie-armatki-sniezne-eHackYeah2026",
+  "repo": "portugalskie-armatki-sniezne/eHackYeah2026",
+  "project": "pomożeMy",
+  "team": "Portugalskie Armatki Śnieżne",
+  "task": "smartcity",
+  "result": "Not disclosed",
+  "task_fit": "yes: a resident-to-city civic reporting platform that routes reports and initiatives to real Polish municipal institutions using GUGiK ULDK and UUG data, TERYT codes and the ROPS catalog, squarely a day-to-day public services and quality-of-life tool.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "Members converge: routing each report to the competent institution via AI classification plus nearest-seat geospatial matching, clustering duplicates into master cases, and hybrid vector search over the ROPS innovations catalog is genuine urban-process insight. The civic-reporting concept itself is not novel, and measured routing accuracy is only about 81 percent on synthetic data.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "All three agree the project is deeply municipal, with real GUGiK ULDK and UUG integration, TERYT codes and the ROPS catalog serving both residents and office staff, and no reframing from another domain. The evidence of real Polish public-data plumbing supports the 9 over C's lone 8.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "A public deployment with a demo account, bilingual UI and onboarding tour is usable today. But the service is locked to Małopolskie with Krakow mock data, about one in five reports would be misrouted at the measured accuracy, and no real email reaches an office.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "Unanimous: a polished custom-styled MapLibre map with clustered status-colored pins, 3D buildings, accessibility handling and full Polish-English switching. The described screenshots cover teasers and mock photos, so the rendered live UI is only evidenced through the code.",
+    "spread": 0,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 9,
+    "why": "The measured facts side with A and B over C's 6: 28,740 SLOC across services, 306 tests in 38 files, 14 migrations, CI with in-build classifier checks, and a readiness-gated public deploy are real implemented value. The mocked mail loop, CPU-only model and missing deck are true gaps but do not outweigh a tested, deployed stack.",
+    "spread": 3,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 6
+    }
+   }
+  ],
+  "weighted_total": 78,
+  "build_reality": 9,
+  "source_loc": 28740,
+  "has_tests": true,
+  "tests": {
+   "files": 38,
+   "cases": 306
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "partly: 1 commit before the event; 127 commits by 7 authors, 2026-10-03 08:23 to 2026-10-04 08:56 UTC",
+  "strengths": [
+   "Real data pipelines in code: GUGiK ULDK for municipality and county assignment, UUG geocoding of institution seats with EPSG:2180 conversion, and the ROPS social-innovations catalog with hybrid pgvector and Polish stemming search.",
+   "The core capability is computed, not simulated: master-report clustering with a calibrated match ratio, PostGIS nearest-seat routing, and local AI classification and translation models with defined fallbacks.",
+   "Production engineering: 306 tests, 14 migrations, CI that validates the Polish classifier inside the Docker build, queued workers with idempotency keys and leases, and a readiness-gated public deployment with a demo account.",
+   "Rare honesty: a measured 80.8 percent classification evaluation with named confusions and explicit caveats, wrapped in an accessible bilingual UI with an interactive onboarding tour."
+  ],
+  "weaknesses": [
+   "The presentation deck was not submitted and the submission form fields are mostly empty, so a required narrative deliverable is missing.",
+   "Notification to institutions is forced to a single test address or mock SMTP, so the loop to real offices is never demonstrated end to end; A and C's reading is better supported than B's claim of a fully working Gmail relay.",
+   "Routing accuracy is 80.8 percent on synthetic fixtures only, and matching is by nearest geocoded seat rather than verified competence, so roughly one in five reports would be misrouted in real use.",
+   "Scope is locked to the Małopolskie region with Krakow mock data, and reliance on external services (GUGiK, Google Gemini, Gmail SMTP) creates availability and cost risk."
+  ],
+  "red_flags": [],
+  "verdict": "An unusually deep, honestly evaluated and publicly deployed municipal reporting platform whose remaining gaps are the missing deck, a notification loop that stops at a test inbox, roughly 81 percent routing accuracy on synthetic data, and a single-region scope.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 79.5,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 78,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 71,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791223413502
+ }
+}

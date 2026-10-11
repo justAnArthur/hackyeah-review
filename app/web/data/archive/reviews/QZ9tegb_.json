@@ -1,0 +1,223 @@
+{
+ "submission": {
+  "id": "QZ9tegb_",
+  "title": "OpenBarriers",
+  "team": "FESTnators",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "repo": "divadsn/openbarriers-hackyeah2026",
+  "created_at": 1791241168306,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791242781300,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 679,
+   "at": 1791241168312,
+   "message": "Queued"
+  },
+  {
+   "seq": 680,
+   "at": 1791241170860,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 681,
+   "at": 1791241192727,
+   "message": "Found 24,753 source lines, 298 test cases and 47 commits"
+  },
+  {
+   "seq": 682,
+   "at": 1791241192729,
+   "message": "Read 8 docs and 0 decks, opened 2 demo pages and described 2 screenshots"
+  },
+  {
+   "seq": 683,
+   "at": 1791241192738,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 684,
+   "at": 1791241312200,
+   "message": "Member A scored 69.5"
+  },
+  {
+   "seq": 685,
+   "at": 1791241312203,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 749,
+   "at": 1791242781303,
+   "message": "Picked up again: the server that was running this review stopped"
+  },
+  {
+   "seq": 750,
+   "at": 1791242781318,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 751,
+   "at": 1791242879681,
+   "message": "Member B scored 62"
+  },
+  {
+   "seq": 752,
+   "at": 1791242879685,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 753,
+   "at": 1791242898442,
+   "message": "Member C scored 67"
+  },
+  {
+   "seq": 754,
+   "at": 1791242898444,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 755,
+   "at": 1791243000307,
+   "message": "Done: 67 / 100"
+  }
+ ],
+ "review": {
+  "id": "QZ9tegb_",
+  "repo": "divadsn/openbarriers-hackyeah2026",
+  "project": "OpenBarriers",
+  "team": "FESTnators",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "task_fit": "yes: the submission is the challenged tool itself - a Polish-language map and API that scores every accessibility feature separately against an editable needs profile for wheelchair users and parents with prams, with source, date and trust on each datum and no binary accessible or not verdict.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 8,
+    "why": "Profile-driven matching is enforced in both frontend and backend, missing data always renders as brak danych and never as a positive match, and the list view is a full text alternative to the map with shape and icon differentiation on pins. It stops at 8 only because the live demo runs on labelled sample data, so real-world usability for Kraków residents is unproven.",
+    "spread": 0.5,
+    "members": {
+     "A": 8,
+     "B": 7.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 7,
+    "why": "A full FastAPI, PostGIS and Redis backend with a React and MapLibre frontend is actually deployed with live Swagger docs, 298 tests in 47 files, a report wizard, an operator queue and an embeddable widget. Routing is an honestly labelled fixture stub and the required short video is absent, which caps the median at 7.",
+    "spread": 1,
+    "members": {
+     "A": 7.5,
+     "B": 6.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 6,
+    "why": "The per-datum source, date and trust model with side-by-side conflict display and stale downgrades is well designed and tested, but MSIP and Otwarte Dane serve HTML and Overpass is rate limited, so the deployed dataset is fictional. The evidence supports the middle score over the more generous reading, since no real-city data is demonstrated end to end.",
+    "spread": 1.5,
+    "members": {
+     "A": 7,
+     "B": 5.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 8,
+    "why": "Ingestion is a separate aggregator service, a new source is one file plus a config entry, and a new city is a cities.json record rather than a code change, matching the claimed portability. No member found a structural limit, which supports the higher end of the range.",
+    "spread": 0.5,
+    "members": {
+     "A": 8,
+     "B": 7.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 4,
+    "why": "Payers are identified (foundations for hosting, hotels and event organizers for the widget) and the one-VPS architecture is genuinely cheap, but there is not a single PLN figure for costs, prices or revenue in the pack. All members agree the criterion requires numbers, so the score is 4.",
+    "spread": 0.5,
+    "members": {
+     "A": 4,
+     "B": 3.5,
+     "C": 4
+    }
+   }
+  ],
+  "weighted_total": 67,
+  "build_reality": 8,
+  "source_loc": 24753,
+  "has_tests": true,
+  "tests": {
+   "files": 47,
+   "cases": 298
+  },
+  "live_demo": "https://demo.openbarriers.divadsn.me (HTTP 200); https://demo.openbarriers.divadsn.me/api/docs (HTTP 200)",
+  "built_during_event": "yes: 47 commits by 2 authors, 2026-10-03 14:11 to 2026-10-05 22:54 UTC",
+  "strengths": [
+   "Missing data can never render as accessible: the API contract, schemas and frontend all enforce that a missing feature yields no positive match, and the place verdict falls back to unknown.",
+   "Every claim carries source, date and trust, conflicts are shown side by side, and the required conflict, missing and source-down scenarios are first-class demo states with an operator queue to resolve them.",
+   "Real engineering discipline: 47 test files with 298 cases including axe checks, a live deployed demo with Swagger docs, and WCAG 2.2 AA patterns such as keyboard navigation and a full text list alternative to the map.",
+   "Scaling is configuration, not code: the separate aggregator adds sources as single files, cities as cities.json records, and the whole stack is docker-compose on one VPS."
+  ],
+  "weaknesses": [
+   "The live demo runs on clearly labelled fictional sample data because MSIP and Otwarte Dane are down and Overpass returns errors, so real Kraków open data is not demonstrated.",
+   "Routing is a fixture stub that only answers pre-baked start and end pairs, with real barrier-aware routing deferred.",
+   "The business model has no numbers at all: no hosting costs, no widget pricing, no revenue.",
+   "The required short video deliverable is missing from the submission pack; the form's files field is empty and no video appears in the evidence."
+  ],
+  "red_flags": [
+   "The operator admin panel is unauthenticated on the public demo, so anyone can approve reports or resolve conflicts on the live instance.",
+   "Four commits landed after the deadline and the public repository was created only on 5 October, so the final state is hard to verify against the cutoff.",
+   "The deck proposes AGPL-3.0 for the server while the repository LICENSE is GPL-3.0, an inconsistency for a project pitched on open-source governance."
+  ],
+  "verdict": "A strong, honest, well-tested prototype that meets the task's core rules on profiles, provenance and missing data, but sample-data demos, fixture routing, an unpriced business model and the missing video keep it short of top marks.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 69.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 62,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 67,
+     "agreement": 1,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791243000304
+ }
+}

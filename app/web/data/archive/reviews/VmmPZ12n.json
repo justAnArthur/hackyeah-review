@@ -1,0 +1,209 @@
+{
+ "submission": {
+  "id": "VmmPZ12n",
+  "title": "OrthoEdge",
+  "team": "Banany",
+  "task": "sport",
+  "result": "Not a finalist",
+  "repo": "Vtoshik/OrthoEdge",
+  "created_at": 1791289773856,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791289773863,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 1480,
+   "at": 1791289773866,
+   "message": "Queued"
+  },
+  {
+   "seq": 1481,
+   "at": 1791289774987,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1482,
+   "at": 1791289776346,
+   "message": "Found 2,331 source lines, 59 test cases and 7 commits"
+  },
+  {
+   "seq": 1483,
+   "at": 1791289776349,
+   "message": "Read 0 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 1484,
+   "at": 1791289776359,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 1485,
+   "at": 1791289871993,
+   "message": "Member A scored 69"
+  },
+  {
+   "seq": 1486,
+   "at": 1791289871995,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1488,
+   "at": 1791289903126,
+   "message": "Member B scored 76"
+  },
+  {
+   "seq": 1489,
+   "at": 1791289903128,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 1490,
+   "at": 1791289931762,
+   "message": "Member C scored 68"
+  },
+  {
+   "seq": 1491,
+   "at": 1791289931765,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 1492,
+   "at": 1791290007557,
+   "message": "Done: 71 / 100"
+  }
+ ],
+ "review": {
+  "id": "VmmPZ12n",
+  "repo": "Vtoshik/OrthoEdge",
+  "project": "OrthoEdge",
+  "team": "Banany",
+  "task": "sport",
+  "result": "Not a finalist",
+  "task_fit": "yes: a post-surgery knee rehab tool where patient-measured range-of-motion and pain data drives clinician alerts, next-step exercise advice, and stage advancement, squarely in physical health and access to care, though sport and mental wellbeing are only thinly covered",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "The decision output is real and specific: a deterministic rule engine turns daily readings into alerts, a one-action next step, and stage-advance flags, with a server-side recompute cross-check. Phone-based ROM measurement builds honestly on cited 2024 research, so the novelty lies mainly in the edge-native, signed-minimal-export architecture rather than the concept.",
+    "spread": 0,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 7,
+    "why": "Physical health and access to care are genuinely addressed through exception-based triage and remote clinician alerts. Mental wellbeing is thin (a pain score and motivation copy) and sport appears only as post-surgical rehab context, so the entry does not holistically combine the category's areas.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "The flow is designed for real patients and clinics: two-minute zero-typing sessions, large touch targets, offline queueing, and explicit disclaimers. Barriers remain: measurement accuracy is unmeasured on real phones, setup needs mkcert and same-network HTTPS, and the demo trust model uses a shared PIN.",
+    "spread": 0,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7,
+    "why": "Deck and code show a deliberate, calm, legible health UI with self-hosted fonts and a strict CSP. But the pack contains zero screenshots and the demo runs only on localhost so the checks were skipped, meaning visual quality could not be confirmed by a reviewer.",
+    "spread": 2,
+    "members": {
+     "A": 6,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 8,
+    "why": "The rule engine, ES256 signing with non-extractable keys, replay and tamper rejection, FHIR validation with Medplum, encrypted identity store, hash-chained audit log, and Playwright e2e flow exist as coherent code with 59 measured test cases across 8 files. Unbuilt parts such as calibration, e-referral, and reminders are honestly labelled mocks.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 71,
+  "build_reality": 7,
+  "source_loc": 2331,
+  "has_tests": true,
+  "tests": {
+   "files": 8,
+   "cases": 59
+  },
+  "live_demo": "https://localhost:8443/portal/ (skipped (not a public https URL)); https://:8443/portal/ (skipped (not a public https URL))",
+  "built_during_event": "yes: 7 commits by 1 author, 2026-10-04 06:34 to 2026-10-04 08:54 UTC",
+  "strengths": [
+   "Health data drives concrete decisions: alerts when off-plan beyond literature-based tolerances, next-step exercise advice, and clinician-confirmed stage advancement, with the server re-running the rules to cross-check the client",
+   "Unusually serious privacy and security engineering: non-extractable device keys, signed minimal FHIR exports, replay and tamper rejection, pseudonymised encrypted storage, and a hash-chained audit log",
+   "Synthetic patients generated from cited clinical recovery curves, with tests reproducing published means and spread instead of hand-typed numbers",
+   "Honesty throughout: a known-limits section, declared mocks, disclosed AI use, and all 7 commits inside the event window"
+  ],
+  "weaknesses": [
+   "No reviewer-verifiable demo or screenshots: the app runs only on localhost so the demo checks were skipped, and the pack contains zero screenshots, so live behaviour and visual quality cannot be confirmed without building the project",
+   "Measurement accuracy is unvalidated: the entire value proposition rests on phone tilt readings never compared to a goniometer, and strap placement is unverified",
+   "Sport and mental wellbeing are barely covered (a pain score and motivation copy), so the entry does not holistically combine the category's dimensions",
+   "Key integrations are mocked or missing (e-referral, calibration, reminders, GDPR consent), the portal is a demo with a shared PIN and self-signed cert, and the README claims 63 tests while 59 were counted"
+  ],
+  "red_flags": [],
+  "verdict": "A disciplined, privacy-first knee-rehab prototype whose measurement data demonstrably drives alerts and care-plan decisions, held back by an unverifiable demo with zero screenshots, unmeasured accuracy, and thin coverage of the category's sport and mental-wellbeing dimensions.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 69,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 76,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 68,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791290007554
+ }
+}

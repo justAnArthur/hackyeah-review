@@ -1,0 +1,4121 @@
+{
+ "submission": {
+  "id": "Ij_5enmB",
+  "title": "Tollgate",
+  "team": "United",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "repo": "Aayan-DEV/tollgate",
+  "created_at": 1791269708376,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791302453733,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 866,
+   "at": 1791269708380,
+   "message": "Queued"
+  },
+  {
+   "seq": 868,
+   "at": 1791269752604,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 869,
+   "at": 1791269765898,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 870,
+   "at": 1791269827882,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 871,
+   "at": 1791269838536,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 872,
+   "at": 1791269900785,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 873,
+   "at": 1791269910405,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 874,
+   "at": 1791269972712,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 875,
+   "at": 1791269982095,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 876,
+   "at": 1791270044361,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 877,
+   "at": 1791270098995,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 878,
+   "at": 1791270160524,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 879,
+   "at": 1791270169878,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 880,
+   "at": 1791270232074,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 881,
+   "at": 1791270241242,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 882,
+   "at": 1791270303613,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 883,
+   "at": 1791270312825,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 884,
+   "at": 1791270375176,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 885,
+   "at": 1791270384418,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 886,
+   "at": 1791270446635,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 887,
+   "at": 1791270509234,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 888,
+   "at": 1791270570673,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 889,
+   "at": 1791270580244,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 890,
+   "at": 1791270642604,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 891,
+   "at": 1791270651760,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 892,
+   "at": 1791270713998,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 893,
+   "at": 1791270723609,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 894,
+   "at": 1791270785816,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 895,
+   "at": 1791270795486,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 896,
+   "at": 1791270856962,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 897,
+   "at": 1791270866751,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 898,
+   "at": 1791270927192,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 899,
+   "at": 1791270937049,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 900,
+   "at": 1791270999208,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 901,
+   "at": 1791271008976,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 902,
+   "at": 1791271071254,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 903,
+   "at": 1791271080663,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 904,
+   "at": 1791271142682,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 905,
+   "at": 1791271152164,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 906,
+   "at": 1791271214435,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 907,
+   "at": 1791271223995,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 908,
+   "at": 1791271285973,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 909,
+   "at": 1791271295388,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 910,
+   "at": 1791271357739,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 911,
+   "at": 1791271368038,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 912,
+   "at": 1791271430359,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 913,
+   "at": 1791271439410,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 914,
+   "at": 1791271501703,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 915,
+   "at": 1791271511288,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 916,
+   "at": 1791271573295,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 917,
+   "at": 1791271582510,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 918,
+   "at": 1791271644805,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 919,
+   "at": 1791271654337,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 920,
+   "at": 1791271716577,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 921,
+   "at": 1791271726299,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 927,
+   "at": 1791271788965,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 928,
+   "at": 1791271799124,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 931,
+   "at": 1791271861526,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 932,
+   "at": 1791271871056,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 944,
+   "at": 1791272287158,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 945,
+   "at": 1791272297576,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 946,
+   "at": 1791272359101,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 947,
+   "at": 1791272368484,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 948,
+   "at": 1791272430745,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 949,
+   "at": 1791272473050,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 950,
+   "at": 1791272535049,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 951,
+   "at": 1791272577805,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 952,
+   "at": 1791272640142,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 953,
+   "at": 1791272649518,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 954,
+   "at": 1791272711851,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 955,
+   "at": 1791272721434,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 956,
+   "at": 1791272783588,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 957,
+   "at": 1791272792938,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 958,
+   "at": 1791272855212,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 959,
+   "at": 1791272864415,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 960,
+   "at": 1791272926702,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 961,
+   "at": 1791272936580,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 965,
+   "at": 1791272998928,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 966,
+   "at": 1791273008365,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 969,
+   "at": 1791273070634,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 970,
+   "at": 1791273079855,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 982,
+   "at": 1791273505070,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 983,
+   "at": 1791273514785,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 984,
+   "at": 1791273576836,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 985,
+   "at": 1791273586238,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 986,
+   "at": 1791273648387,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 987,
+   "at": 1791273685536,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 988,
+   "at": 1791273747604,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 989,
+   "at": 1791273757129,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 990,
+   "at": 1791273819209,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 991,
+   "at": 1791273828803,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 992,
+   "at": 1791273891069,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 993,
+   "at": 1791273900282,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 994,
+   "at": 1791273962496,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 995,
+   "at": 1791273971619,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 996,
+   "at": 1791274033985,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 997,
+   "at": 1791274043324,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 998,
+   "at": 1791274105637,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 999,
+   "at": 1791274115568,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1000,
+   "at": 1791274177150,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1001,
+   "at": 1791274186269,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1002,
+   "at": 1791274248715,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1003,
+   "at": 1791274258045,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1004,
+   "at": 1791274320321,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1005,
+   "at": 1791274329631,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1006,
+   "at": 1791274391893,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1007,
+   "at": 1791274401055,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1008,
+   "at": 1791274463425,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1009,
+   "at": 1791274472718,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1010,
+   "at": 1791274535067,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1011,
+   "at": 1791274544439,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1012,
+   "at": 1791274606706,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1013,
+   "at": 1791274616392,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1014,
+   "at": 1791274678118,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1015,
+   "at": 1791274714844,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1016,
+   "at": 1791274777140,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1017,
+   "at": 1791274786569,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1018,
+   "at": 1791274848902,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1019,
+   "at": 1791274858514,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1020,
+   "at": 1791274920556,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1021,
+   "at": 1791274958767,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1022,
+   "at": 1791275021035,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1023,
+   "at": 1791275030462,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1024,
+   "at": 1791275092710,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1025,
+   "at": 1791275101986,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1026,
+   "at": 1791275164355,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1027,
+   "at": 1791275173854,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1028,
+   "at": 1791275235908,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1029,
+   "at": 1791275245270,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1030,
+   "at": 1791275307553,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1031,
+   "at": 1791275316792,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1032,
+   "at": 1791275379152,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1033,
+   "at": 1791275388462,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1034,
+   "at": 1791275450677,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1035,
+   "at": 1791275460290,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1036,
+   "at": 1791275522391,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1037,
+   "at": 1791275532244,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1038,
+   "at": 1791275594281,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1039,
+   "at": 1791275603893,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1040,
+   "at": 1791275666253,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1041,
+   "at": 1791275675593,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1042,
+   "at": 1791275737984,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1043,
+   "at": 1791275774863,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1044,
+   "at": 1791275837247,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1045,
+   "at": 1791275846479,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1046,
+   "at": 1791275908800,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1047,
+   "at": 1791275918046,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1048,
+   "at": 1791275980391,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1049,
+   "at": 1791275989578,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1053,
+   "at": 1791276051826,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1054,
+   "at": 1791276061431,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1057,
+   "at": 1791276123363,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1058,
+   "at": 1791276157933,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1061,
+   "at": 1791276220234,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1062,
+   "at": 1791276229730,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1074,
+   "at": 1791276532022,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1075,
+   "at": 1791276541538,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1076,
+   "at": 1791276603773,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1077,
+   "at": 1791276641968,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1078,
+   "at": 1791276704360,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1079,
+   "at": 1791276713669,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1080,
+   "at": 1791276775907,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1081,
+   "at": 1791276785372,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1082,
+   "at": 1791276847570,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1083,
+   "at": 1791276857028,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1084,
+   "at": 1791276919265,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1085,
+   "at": 1791276980964,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1086,
+   "at": 1791277042792,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1087,
+   "at": 1791277052504,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1088,
+   "at": 1791277114824,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1089,
+   "at": 1791277124446,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1090,
+   "at": 1791277186438,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1091,
+   "at": 1791277195624,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1092,
+   "at": 1791277257871,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1093,
+   "at": 1791277267244,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1094,
+   "at": 1791277329619,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1095,
+   "at": 1791277339279,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1096,
+   "at": 1791277401522,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1097,
+   "at": 1791277411698,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1098,
+   "at": 1791277473229,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1099,
+   "at": 1791277510228,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1100,
+   "at": 1791277572316,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1101,
+   "at": 1791277581957,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1102,
+   "at": 1791277644108,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1103,
+   "at": 1791277653295,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1104,
+   "at": 1791277715621,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1105,
+   "at": 1791277724954,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1106,
+   "at": 1791277787242,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1107,
+   "at": 1791277796588,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1108,
+   "at": 1791277858806,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1109,
+   "at": 1791277893423,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1110,
+   "at": 1791277955614,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1111,
+   "at": 1791277964882,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1112,
+   "at": 1791278027081,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1113,
+   "at": 1791278036498,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1114,
+   "at": 1791278098731,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1115,
+   "at": 1791278108225,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1116,
+   "at": 1791278170481,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1117,
+   "at": 1791278179937,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1118,
+   "at": 1791278242124,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1119,
+   "at": 1791278251835,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1120,
+   "at": 1791278314018,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1121,
+   "at": 1791278323872,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1122,
+   "at": 1791278385476,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1123,
+   "at": 1791278394759,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1124,
+   "at": 1791278456939,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1125,
+   "at": 1791278511566,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1126,
+   "at": 1791278574000,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1127,
+   "at": 1791278584082,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1128,
+   "at": 1791278645724,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1129,
+   "at": 1791278654987,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1130,
+   "at": 1791278717284,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1131,
+   "at": 1791278726552,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1132,
+   "at": 1791278788856,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1133,
+   "at": 1791278798588,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1134,
+   "at": 1791278860888,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1135,
+   "at": 1791278870579,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1136,
+   "at": 1791278932814,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1137,
+   "at": 1791278942100,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1138,
+   "at": 1791279004411,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1139,
+   "at": 1791279013862,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1140,
+   "at": 1791279076138,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1141,
+   "at": 1791279086066,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1142,
+   "at": 1791279147622,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1143,
+   "at": 1791279157319,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1144,
+   "at": 1791279219328,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1145,
+   "at": 1791279228812,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1146,
+   "at": 1791279290855,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1147,
+   "at": 1791279300243,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1148,
+   "at": 1791279362559,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1149,
+   "at": 1791279418425,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1150,
+   "at": 1791279480532,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1151,
+   "at": 1791279490136,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1152,
+   "at": 1791279552259,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1153,
+   "at": 1791279561387,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1154,
+   "at": 1791279623758,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1155,
+   "at": 1791279633283,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1156,
+   "at": 1791279695500,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1157,
+   "at": 1791279704988,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1158,
+   "at": 1791279767325,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1159,
+   "at": 1791279776672,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1160,
+   "at": 1791279838874,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1161,
+   "at": 1791279849499,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1162,
+   "at": 1791279911845,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1163,
+   "at": 1791279921285,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1164,
+   "at": 1791279983416,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1165,
+   "at": 1791279992809,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1166,
+   "at": 1791280055046,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1167,
+   "at": 1791280064597,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1168,
+   "at": 1791280126582,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1169,
+   "at": 1791280136147,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1170,
+   "at": 1791280198295,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1171,
+   "at": 1791280207907,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1172,
+   "at": 1791280270179,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1173,
+   "at": 1791280279596,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1174,
+   "at": 1791280341829,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1175,
+   "at": 1791280351655,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1176,
+   "at": 1791280413649,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1177,
+   "at": 1791280423487,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1181,
+   "at": 1791280485395,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1182,
+   "at": 1791280494417,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1185,
+   "at": 1791280556790,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1186,
+   "at": 1791280566247,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1189,
+   "at": 1791280628515,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1190,
+   "at": 1791280637778,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1193,
+   "at": 1791280700079,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1194,
+   "at": 1791280709243,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1197,
+   "at": 1791280771475,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1198,
+   "at": 1791280781257,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1201,
+   "at": 1791280843243,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1202,
+   "at": 1791280853274,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1205,
+   "at": 1791280914839,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1206,
+   "at": 1791280924038,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1209,
+   "at": 1791280986387,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1210,
+   "at": 1791280995901,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1213,
+   "at": 1791281058128,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1214,
+   "at": 1791281067566,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1217,
+   "at": 1791281129943,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1218,
+   "at": 1791281139221,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1221,
+   "at": 1791281201483,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1222,
+   "at": 1791281240634,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1225,
+   "at": 1791281302672,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1226,
+   "at": 1791281311795,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1229,
+   "at": 1791281374111,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1230,
+   "at": 1791281383509,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1233,
+   "at": 1791281445651,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1234,
+   "at": 1791281455078,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1237,
+   "at": 1791281517323,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1238,
+   "at": 1791281526692,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1241,
+   "at": 1791281588910,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1242,
+   "at": 1791281598204,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1255,
+   "at": 1791282059598,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1256,
+   "at": 1791282069474,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1259,
+   "at": 1791282131721,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1260,
+   "at": 1791282141139,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1263,
+   "at": 1791282203385,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1264,
+   "at": 1791282212967,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1267,
+   "at": 1791282275239,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1268,
+   "at": 1791282284617,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1271,
+   "at": 1791282346912,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1272,
+   "at": 1791282356947,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1275,
+   "at": 1791282418622,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1276,
+   "at": 1791282428192,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1279,
+   "at": 1791282490436,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1280,
+   "at": 1791282500014,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1283,
+   "at": 1791282562302,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1284,
+   "at": 1791282572351,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1292,
+   "at": 1791282774956,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1293,
+   "at": 1791282784563,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1300,
+   "at": 1791283035759,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1301,
+   "at": 1791283045435,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1302,
+   "at": 1791283107652,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1303,
+   "at": 1791283116989,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1304,
+   "at": 1791283179289,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1305,
+   "at": 1791283188737,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1306,
+   "at": 1791283250931,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1307,
+   "at": 1791283260466,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1308,
+   "at": 1791283322680,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1309,
+   "at": 1791283332391,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1310,
+   "at": 1791283394308,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1311,
+   "at": 1791283404223,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1312,
+   "at": 1791283466507,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1313,
+   "at": 1791283475741,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1314,
+   "at": 1791283538051,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1315,
+   "at": 1791283547585,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1316,
+   "at": 1791283609669,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1317,
+   "at": 1791283619471,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1318,
+   "at": 1791283681606,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1319,
+   "at": 1791283726384,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1320,
+   "at": 1791283788667,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1321,
+   "at": 1791283797981,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1322,
+   "at": 1791283860308,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1323,
+   "at": 1791283869595,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1324,
+   "at": 1791283931880,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1325,
+   "at": 1791283941133,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1326,
+   "at": 1791284003479,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1327,
+   "at": 1791284041071,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1328,
+   "at": 1791284103425,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1329,
+   "at": 1791284148220,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1330,
+   "at": 1791284210591,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1331,
+   "at": 1791284247718,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1332,
+   "at": 1791284309984,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1333,
+   "at": 1791284319477,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1334,
+   "at": 1791284381639,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1335,
+   "at": 1791284392032,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1336,
+   "at": 1791284453849,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1337,
+   "at": 1791284463409,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1338,
+   "at": 1791284525683,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1339,
+   "at": 1791284535278,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1340,
+   "at": 1791284597342,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1341,
+   "at": 1791284606725,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1342,
+   "at": 1791284669018,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1343,
+   "at": 1791284678890,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1344,
+   "at": 1791284740433,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1345,
+   "at": 1791284749963,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1346,
+   "at": 1791284811994,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1347,
+   "at": 1791284821367,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1348,
+   "at": 1791284883724,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1349,
+   "at": 1791284893301,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1350,
+   "at": 1791284955578,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1351,
+   "at": 1791284964696,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1352,
+   "at": 1791285027076,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1353,
+   "at": 1791285036655,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1354,
+   "at": 1791285098973,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1355,
+   "at": 1791285108340,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1356,
+   "at": 1791285170548,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1357,
+   "at": 1791285179860,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1358,
+   "at": 1791285242247,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1359,
+   "at": 1791285252761,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1360,
+   "at": 1791285314694,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1361,
+   "at": 1791285324273,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1362,
+   "at": 1791285386368,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1363,
+   "at": 1791285395707,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1364,
+   "at": 1791285457869,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1365,
+   "at": 1791285467743,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1366,
+   "at": 1791285529412,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1367,
+   "at": 1791285540103,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1368,
+   "at": 1791285602447,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1369,
+   "at": 1791285611779,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1370,
+   "at": 1791285674029,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1371,
+   "at": 1791285684015,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1372,
+   "at": 1791285745610,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1373,
+   "at": 1791285755389,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1374,
+   "at": 1791285817371,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1375,
+   "at": 1791285827146,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1376,
+   "at": 1791285889010,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1377,
+   "at": 1791285898378,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1378,
+   "at": 1791285960554,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1379,
+   "at": 1791285970547,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1380,
+   "at": 1791286032614,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1381,
+   "at": 1791286042028,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1382,
+   "at": 1791286104187,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1383,
+   "at": 1791286143172,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1384,
+   "at": 1791286205211,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1385,
+   "at": 1791286214513,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1386,
+   "at": 1791286276940,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1387,
+   "at": 1791286286438,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1388,
+   "at": 1791286348697,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1389,
+   "at": 1791286358515,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1390,
+   "at": 1791286420809,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1391,
+   "at": 1791286430934,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1392,
+   "at": 1791286492630,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1393,
+   "at": 1791286502077,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1394,
+   "at": 1791286564467,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1395,
+   "at": 1791286574005,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1396,
+   "at": 1791286636166,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1397,
+   "at": 1791286645682,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1398,
+   "at": 1791286707978,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1399,
+   "at": 1791286717540,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1400,
+   "at": 1791286779795,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1401,
+   "at": 1791286789012,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1402,
+   "at": 1791286851322,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1403,
+   "at": 1791286860854,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1404,
+   "at": 1791286922982,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1405,
+   "at": 1791286975657,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1406,
+   "at": 1791287037962,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1407,
+   "at": 1791287047372,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1408,
+   "at": 1791287109604,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1409,
+   "at": 1791287118900,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1410,
+   "at": 1791287181256,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1411,
+   "at": 1791287190517,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1412,
+   "at": 1791287252802,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1413,
+   "at": 1791287262293,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1414,
+   "at": 1791287324583,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1415,
+   "at": 1791287334087,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1416,
+   "at": 1791287396306,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1417,
+   "at": 1791287406021,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1418,
+   "at": 1791287468125,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1419,
+   "at": 1791287477498,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1420,
+   "at": 1791287539704,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1421,
+   "at": 1791287549167,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1422,
+   "at": 1791287611528,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1423,
+   "at": 1791287620886,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1424,
+   "at": 1791287683247,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1425,
+   "at": 1791287724178,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1426,
+   "at": 1791287786095,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1427,
+   "at": 1791287795588,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1428,
+   "at": 1791287857811,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1429,
+   "at": 1791287867297,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1430,
+   "at": 1791287929559,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1431,
+   "at": 1791287939098,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1432,
+   "at": 1791288001315,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1433,
+   "at": 1791288011456,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1434,
+   "at": 1791288073335,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1435,
+   "at": 1791288084313,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1436,
+   "at": 1791288145855,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1437,
+   "at": 1791288155226,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1438,
+   "at": 1791288217449,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1439,
+   "at": 1791288226828,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1440,
+   "at": 1791288289221,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1441,
+   "at": 1791288299482,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1442,
+   "at": 1791288361794,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1443,
+   "at": 1791288371544,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1444,
+   "at": 1791288433790,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1445,
+   "at": 1791288442940,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1446,
+   "at": 1791288505311,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1447,
+   "at": 1791288515283,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1448,
+   "at": 1791288577489,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1449,
+   "at": 1791288586973,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1450,
+   "at": 1791288649229,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1451,
+   "at": 1791288658889,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1452,
+   "at": 1791288721140,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1453,
+   "at": 1791288730849,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1454,
+   "at": 1791288793183,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1455,
+   "at": 1791288802603,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1456,
+   "at": 1791288864895,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1457,
+   "at": 1791288909306,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1458,
+   "at": 1791288971419,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1459,
+   "at": 1791288981383,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1460,
+   "at": 1791289043652,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1461,
+   "at": 1791289053788,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1462,
+   "at": 1791289116018,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1463,
+   "at": 1791289129411,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1464,
+   "at": 1791289191775,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1465,
+   "at": 1791289201330,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1466,
+   "at": 1791289263619,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1467,
+   "at": 1791289273617,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1468,
+   "at": 1791289335826,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1469,
+   "at": 1791289345227,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1470,
+   "at": 1791289405408,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1471,
+   "at": 1791289414988,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1472,
+   "at": 1791289477170,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1473,
+   "at": 1791289486627,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1474,
+   "at": 1791289548809,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1475,
+   "at": 1791289584319,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1476,
+   "at": 1791289646543,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1477,
+   "at": 1791289655996,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1478,
+   "at": 1791289718302,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1479,
+   "at": 1791289727801,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1493,
+   "at": 1791290009035,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1494,
+   "at": 1791290019653,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1502,
+   "at": 1791290201280,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1503,
+   "at": 1791290211992,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1510,
+   "at": 1791290402665,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1511,
+   "at": 1791290412591,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1512,
+   "at": 1791290474910,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1513,
+   "at": 1791290484396,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1514,
+   "at": 1791290546613,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1515,
+   "at": 1791290556048,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1516,
+   "at": 1791290618314,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1517,
+   "at": 1791290627714,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1518,
+   "at": 1791290689933,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1519,
+   "at": 1791290699420,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1520,
+   "at": 1791290761761,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1521,
+   "at": 1791290771000,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1522,
+   "at": 1791290833363,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1523,
+   "at": 1791290842704,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1524,
+   "at": 1791290905012,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1525,
+   "at": 1791290914438,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1526,
+   "at": 1791290976648,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1527,
+   "at": 1791290986487,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1528,
+   "at": 1791291048602,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1529,
+   "at": 1791291058344,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1530,
+   "at": 1791291120579,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1531,
+   "at": 1791291129977,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1532,
+   "at": 1791291192252,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1533,
+   "at": 1791291203136,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1534,
+   "at": 1791291265287,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1535,
+   "at": 1791291274748,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1548,
+   "at": 1791291547084,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1549,
+   "at": 1791291557770,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1550,
+   "at": 1791291620023,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1551,
+   "at": 1791291629753,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1552,
+   "at": 1791291691743,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1553,
+   "at": 1791291737400,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1554,
+   "at": 1791291799289,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1555,
+   "at": 1791291809202,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1556,
+   "at": 1791291871500,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1557,
+   "at": 1791291880824,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1558,
+   "at": 1791291943131,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1559,
+   "at": 1791291952823,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1560,
+   "at": 1791292015011,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1561,
+   "at": 1791292024877,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1562,
+   "at": 1791292087205,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1563,
+   "at": 1791292131739,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1564,
+   "at": 1791292193828,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1565,
+   "at": 1791292203355,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1566,
+   "at": 1791292265676,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1567,
+   "at": 1791292275101,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1568,
+   "at": 1791292337423,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1569,
+   "at": 1791292346934,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1570,
+   "at": 1791292409116,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1571,
+   "at": 1791292418571,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1572,
+   "at": 1791292480861,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1573,
+   "at": 1791292490194,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1574,
+   "at": 1791292552578,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1575,
+   "at": 1791292562066,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1576,
+   "at": 1791292624374,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1577,
+   "at": 1791292634155,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1578,
+   "at": 1791292696425,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1579,
+   "at": 1791292705853,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1580,
+   "at": 1791292768151,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1581,
+   "at": 1791292777630,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1582,
+   "at": 1791292839871,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1583,
+   "at": 1791292849170,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1584,
+   "at": 1791292911531,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1585,
+   "at": 1791292943713,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1586,
+   "at": 1791293006073,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1587,
+   "at": 1791293015323,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1588,
+   "at": 1791293077694,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1589,
+   "at": 1791293087522,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1590,
+   "at": 1791293149807,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1591,
+   "at": 1791293159809,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1592,
+   "at": 1791293221646,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1593,
+   "at": 1791293231046,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1594,
+   "at": 1791293293364,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1595,
+   "at": 1791293332990,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1596,
+   "at": 1791293395201,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1597,
+   "at": 1791293434368,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1598,
+   "at": 1791293496762,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1599,
+   "at": 1791293506040,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1600,
+   "at": 1791293568379,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1601,
+   "at": 1791293577706,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1602,
+   "at": 1791293640044,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1603,
+   "at": 1791293649649,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1604,
+   "at": 1791293711846,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1605,
+   "at": 1791293747144,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1606,
+   "at": 1791293809365,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1607,
+   "at": 1791293819461,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1608,
+   "at": 1791293881063,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1609,
+   "at": 1791293951397,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1610,
+   "at": 1791294013138,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1611,
+   "at": 1791294069808,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1612,
+   "at": 1791294132230,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1613,
+   "at": 1791294141697,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1614,
+   "at": 1791294203953,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1615,
+   "at": 1791294263246,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1616,
+   "at": 1791294323303,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1617,
+   "at": 1791294332528,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1618,
+   "at": 1791294394911,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1619,
+   "at": 1791294404285,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1620,
+   "at": 1791294466605,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1621,
+   "at": 1791294476169,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1622,
+   "at": 1791294538361,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1623,
+   "at": 1791294547737,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1624,
+   "at": 1791294610147,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1625,
+   "at": 1791294620887,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1626,
+   "at": 1791294682907,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1627,
+   "at": 1791294718336,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1628,
+   "at": 1791294780753,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1629,
+   "at": 1791294790639,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1630,
+   "at": 1791294852739,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1631,
+   "at": 1791294888736,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1632,
+   "at": 1791294951016,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1633,
+   "at": 1791294961378,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1634,
+   "at": 1791295022873,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1635,
+   "at": 1791295061521,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1636,
+   "at": 1791295123888,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1637,
+   "at": 1791295189950,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1638,
+   "at": 1791295251913,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1639,
+   "at": 1791295261818,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1640,
+   "at": 1791295323949,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1641,
+   "at": 1791295333537,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1642,
+   "at": 1791295395855,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1643,
+   "at": 1791295429721,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1644,
+   "at": 1791295491044,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1645,
+   "at": 1791295500451,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1646,
+   "at": 1791295562707,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1647,
+   "at": 1791295573302,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1648,
+   "at": 1791295635519,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1649,
+   "at": 1791295645184,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1650,
+   "at": 1791295707432,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1651,
+   "at": 1791295749153,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1652,
+   "at": 1791295811345,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1653,
+   "at": 1791295820952,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1654,
+   "at": 1791295883014,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1655,
+   "at": 1791295892486,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1656,
+   "at": 1791295954740,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1657,
+   "at": 1791295994869,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1658,
+   "at": 1791296057192,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1659,
+   "at": 1791296066916,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1660,
+   "at": 1791296129180,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1661,
+   "at": 1791296162414,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1662,
+   "at": 1791296224802,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1663,
+   "at": 1791296234223,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1664,
+   "at": 1791296296544,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1665,
+   "at": 1791296337274,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1666,
+   "at": 1791296399423,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1667,
+   "at": 1791296440469,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1668,
+   "at": 1791296502748,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1669,
+   "at": 1791296512593,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1670,
+   "at": 1791296574607,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1671,
+   "at": 1791296635881,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1672,
+   "at": 1791296697035,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1673,
+   "at": 1791296706627,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1674,
+   "at": 1791296768823,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1675,
+   "at": 1791296778194,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1676,
+   "at": 1791296840404,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1677,
+   "at": 1791296877765,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1678,
+   "at": 1791296939954,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1679,
+   "at": 1791296975520,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1680,
+   "at": 1791297037612,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1681,
+   "at": 1791297047110,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1682,
+   "at": 1791297109222,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1683,
+   "at": 1791297168346,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1684,
+   "at": 1791297230739,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1685,
+   "at": 1791297240231,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1689,
+   "at": 1791297302498,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1690,
+   "at": 1791297312454,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1693,
+   "at": 1791297374715,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1694,
+   "at": 1791297384187,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1697,
+   "at": 1791297446516,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1698,
+   "at": 1791297480795,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1701,
+   "at": 1791297543165,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1702,
+   "at": 1791297552885,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1714,
+   "at": 1791297861001,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1715,
+   "at": 1791297870793,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1716,
+   "at": 1791297932945,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1717,
+   "at": 1791297942474,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1718,
+   "at": 1791298004847,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1719,
+   "at": 1791298014837,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1720,
+   "at": 1791298077107,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1721,
+   "at": 1791298121077,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1722,
+   "at": 1791298183379,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1723,
+   "at": 1791298193645,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1724,
+   "at": 1791298255961,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1725,
+   "at": 1791298265367,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1726,
+   "at": 1791298327706,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1727,
+   "at": 1791298337174,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1728,
+   "at": 1791298399492,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1729,
+   "at": 1791298409125,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1730,
+   "at": 1791298471401,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1731,
+   "at": 1791298481162,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1732,
+   "at": 1791298543349,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1733,
+   "at": 1791298553055,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1734,
+   "at": 1791298615369,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1735,
+   "at": 1791298660601,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1736,
+   "at": 1791298722940,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1737,
+   "at": 1791298732280,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1738,
+   "at": 1791298794516,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1739,
+   "at": 1791298804305,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1740,
+   "at": 1791298866396,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1741,
+   "at": 1791298877070,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1742,
+   "at": 1791298938280,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1743,
+   "at": 1791298948044,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1744,
+   "at": 1791299010229,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1745,
+   "at": 1791299019855,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1746,
+   "at": 1791299082058,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1747,
+   "at": 1791299091485,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1748,
+   "at": 1791299153836,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1749,
+   "at": 1791299190527,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1750,
+   "at": 1791299252644,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1751,
+   "at": 1791299262313,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1752,
+   "at": 1791299324405,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1753,
+   "at": 1791299334113,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1754,
+   "at": 1791299396204,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1755,
+   "at": 1791299452420,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1756,
+   "at": 1791299514153,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1757,
+   "at": 1791299523738,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1758,
+   "at": 1791299585735,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1759,
+   "at": 1791299595045,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1760,
+   "at": 1791299657358,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1761,
+   "at": 1791299667239,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1762,
+   "at": 1791299729496,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1763,
+   "at": 1791299739711,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1764,
+   "at": 1791299801358,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1765,
+   "at": 1791299811610,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1766,
+   "at": 1791299873964,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1767,
+   "at": 1791299883701,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1768,
+   "at": 1791299945692,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1769,
+   "at": 1791299955057,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1770,
+   "at": 1791300017461,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1771,
+   "at": 1791300026780,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1772,
+   "at": 1791300089090,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1773,
+   "at": 1791300098938,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1774,
+   "at": 1791300161022,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1775,
+   "at": 1791300170320,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1776,
+   "at": 1791300232627,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1777,
+   "at": 1791300290373,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1778,
+   "at": 1791300352551,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1779,
+   "at": 1791300362050,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1780,
+   "at": 1791300424246,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1781,
+   "at": 1791300433930,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1782,
+   "at": 1791300496040,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1783,
+   "at": 1791300505436,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1784,
+   "at": 1791300567744,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1785,
+   "at": 1791300617464,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1786,
+   "at": 1791300679697,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1787,
+   "at": 1791300689228,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1788,
+   "at": 1791300751597,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1789,
+   "at": 1791300761200,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1790,
+   "at": 1791300823436,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1791,
+   "at": 1791300832938,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1792,
+   "at": 1791300895067,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1793,
+   "at": 1791300904714,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1794,
+   "at": 1791300967083,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1795,
+   "at": 1791300976438,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1796,
+   "at": 1791301038767,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1797,
+   "at": 1791301048071,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1798,
+   "at": 1791301110351,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1799,
+   "at": 1791301119874,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1800,
+   "at": 1791301182225,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1801,
+   "at": 1791301191844,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1802,
+   "at": 1791301253832,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1803,
+   "at": 1791301263426,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1804,
+   "at": 1791301325688,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1805,
+   "at": 1791301335565,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1806,
+   "at": 1791301397822,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1807,
+   "at": 1791301407274,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1808,
+   "at": 1791301469531,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1809,
+   "at": 1791301479116,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1810,
+   "at": 1791301541339,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1811,
+   "at": 1791301552087,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1812,
+   "at": 1791301614173,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1813,
+   "at": 1791301653793,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1814,
+   "at": 1791301716177,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1815,
+   "at": 1791301725570,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1816,
+   "at": 1791301787867,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1817,
+   "at": 1791301829345,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1818,
+   "at": 1791301891742,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1819,
+   "at": 1791301900963,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1820,
+   "at": 1791301963358,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1821,
+   "at": 1791301972781,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1822,
+   "at": 1791302035045,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1823,
+   "at": 1791302044827,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1824,
+   "at": 1791302107019,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1825,
+   "at": 1791302116255,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1826,
+   "at": 1791302178577,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1827,
+   "at": 1791302188468,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1828,
+   "at": 1791302250069,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1829,
+   "at": 1791302292170,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1830,
+   "at": 1791302354528,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1831,
+   "at": 1791302393737,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1832,
+   "at": 1791302456086,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1833,
+   "at": 1791302579185,
+   "message": "Found 10,811 source lines, 68 test cases and 4 commits"
+  },
+  {
+   "seq": 1834,
+   "at": 1791302579187,
+   "message": "Read 4 docs and 1 decks, opened 2 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 1835,
+   "at": 1791302579191,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 1836,
+   "at": 1791302771783,
+   "message": "Member A scored 89.85"
+  },
+  {
+   "seq": 1837,
+   "at": 1791302771784,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1838,
+   "at": 1791302846409,
+   "message": "Member B scored 81.5"
+  },
+  {
+   "seq": 1839,
+   "at": 1791302846411,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 1840,
+   "at": 1791302861623,
+   "message": "Member C scored 67"
+  },
+  {
+   "seq": 1841,
+   "at": 1791302861626,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 1842,
+   "at": 1791302965737,
+   "message": "Done: 81.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "Ij_5enmB",
+  "repo": "Aayan-DEV/tollgate",
+  "project": "Tollgate",
+  "team": "United",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "task_fit": "yes: Tollgate is an action-level control layer that sits genuinely between agents and the systems they touch, gating tool calls, model calls and MCP traffic under central policy, which is the task's core ask.",
+  "scores": [
+   {
+    "criterion": "Robustness/guardrails",
+    "weight": 30,
+    "score": 9,
+    "why": "Deterministic contract, limit and binding controls combine with a real model cascade and a quote-verified judge that can only tighten, all fail-closed. The 9 rather than A's 9.2 reflects that the 0-harm evidence is self-authored, and the empty live injection probe is inconclusive because the JavaScript demo exposes little to automated checks, so Member A's and B's reading is better supported than C's claim of a superficial detector.",
+    "spread": 2.1999999999999993,
+    "members": {
+     "A": 9.2,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Architecture & performance",
+    "weight": 20,
+    "score": 8,
+    "why": "A true reference monitor where the agent holds no keys, with policy, contract and feed hot reload implemented in code and committed benchmark artifacts showing p50 0.17 ms and about 3,000 decisions per second. The numbers come from the team's own committed files rather than an independent re-run, and shared SQLite WAL state is the acknowledged scaling ceiling.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Security reporting",
+    "weight": 20,
+    "score": 8,
+    "why": "The audit log is hash-chained with a verify endpoint, CSV export carries the deciding control, judge quote and policy hash, and Prometheus metrics plus the evidence dashboard give investigation-grade context. The depth is demonstrated through code and screenshots rather than an inspected live incident.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Test suite",
+    "weight": 15,
+    "score": 7,
+    "why": "68 measured cases across 10 files, explicitly positive and negative, runnable by judges without AI, including tampered-feed and fail-closed tests. The claimed 174 control tests are not supported by the measured count and the gap is unexplained.",
+    "spread": 3.5,
+    "members": {
+     "A": 8.5,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Implementability & scalability",
+    "weight": 15,
+    "score": 8,
+    "why": "Two commands to run, Dockerfile and a live Railway deployment, Ollama-first with a hosted no-Ollama mode, YAML-only contracts for adding tools, and a small StateStore interface giving a credible path to Postgres or Redis.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 81.5,
+  "build_reality": 9,
+  "source_loc": 10811,
+  "has_tests": true,
+  "tests": {
+   "files": 10,
+   "cases": 68
+  },
+  "live_demo": "https://tollgate-production-9154.up.railway.app (HTTP 200); https://tollgate-production-9154.up.railway.app/ (HTTP 200)",
+  "built_during_event": "yes: 4 commits by 1 author, 2026-10-04 03:12 to 2026-10-04 08:25 UTC",
+  "strengths": [
+   "The gateway is genuinely in the path: the agent holds only the Gate object with connectors and credentials inside it, and an MCP gateway applies the same checks to external clients.",
+   "The semantic controls are real model calls: a rules-to-qwen3:0.6b-to-qwen3:8b injection cascade and a judge blind to documents that must quote the user verbatim, with the AI only able to tighten decisions.",
+   "Policy, contract and feed hot reload plus a signed attack feed with tamper refusal are implemented in code, with invalid edits rejected and the last good version kept.",
+   "A hash-chained audit log with verification and CSV export, a runnable 68-case test suite, and committed before/after result files for both Gemini and local qwen3:8b."
+  ],
+  "weaknesses": [
+   "The headline 0-harm results were measured on 23 scenarios the team wrote themselves against controls they also wrote, on their own synthetic ERP, so generality is asserted rather than shown.",
+   "The form claims 174 control tests plus 18 live tests against 68 measured test functions, an unexplained gap even if parametrization is the likely cause.",
+   "Heavy AI coding assistance is evident from about 10,800 lines and 160 files committed by a single author in 4 commits inside roughly five hours plus a skills-lock.json in the repo, but the submission never discloses it.",
+   "The live demo is a JavaScript app that exposes little to automated inspection; a two-string injection probe registered no hits, so live effectiveness of the semantic controls is undemonstrated rather than disproven."
+  ],
+  "red_flags": [
+   "Quantitative claims in the submission exceed the measured facts: 174 claimed control tests versus 68 measured, with no explanation offered in the pack."
+  ],
+  "verdict": "A genuinely in-the-path control layer with real hybrid guardrails, signed feeds, hash-chained auditing and a runnable test suite, weakened by self-authored evaluation, an unexplained 174-versus-68 test claim, undisclosed heavy AI assistance, and a live demo that resists independent inspection.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 89.85,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 81.5,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 67,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791302965735
+ }
+}

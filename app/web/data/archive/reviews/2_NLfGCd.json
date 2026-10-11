@@ -1,0 +1,251 @@
+{
+ "submission": {
+  "id": "2_NLfGCd",
+  "title": "Decentralized Ad-Space Auctions (DASA)",
+  "team": "ad::team",
+  "task": "superteam",
+  "result": "3rd place",
+  "repo": "ttarnawski/hackyeah-solana",
+  "created_at": 1791232685907,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791234595648,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 350,
+   "at": 1791232685911,
+   "message": "Queued"
+  },
+  {
+   "seq": 383,
+   "at": 1791233200586,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 384,
+   "at": 1791233202306,
+   "message": "Found 4,572 source lines, 15 test cases and 9 commits"
+  },
+  {
+   "seq": 385,
+   "at": 1791233202308,
+   "message": "Read 0 docs and 0 decks, opened 2 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 386,
+   "at": 1791233202314,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 387,
+   "at": 1791233357209,
+   "message": "Member A scored 75"
+  },
+  {
+   "seq": 388,
+   "at": 1791233357211,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 389,
+   "at": 1791233357214,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 421,
+   "at": 1791233948196,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 422,
+   "at": 1791233948201,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 446,
+   "at": 1791233995791,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 447,
+   "at": 1791233995794,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 474,
+   "at": 1791234451888,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 475,
+   "at": 1791234451893,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 555,
+   "at": 1791236132330,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 556,
+   "at": 1791236290901,
+   "message": "Member B scored 62"
+  },
+  {
+   "seq": 557,
+   "at": 1791236290904,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 558,
+   "at": 1791236331306,
+   "message": "Member C scored 64.5"
+  },
+  {
+   "seq": 559,
+   "at": 1791236331310,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 560,
+   "at": 1791236462044,
+   "message": "Done: 68.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "2_NLfGCd",
+  "repo": "ttarnawski/hackyeah-solana",
+  "project": "Decentralized Ad-Space Auctions (DASA)",
+  "team": "ad::team",
+  "task": "superteam",
+  "result": "3rd place",
+  "task_fit": "yes: the trust-removing money flow (escrowed bids, atomic outbid refunds, permissionless supplier payouts) lives entirely in the on-chain Anchor program, the backend is reduced to health and RPC-status endpoints and holds no keys or funds, and the target users (ad-space suppliers and advertisers) are named.",
+  "scores": [
+   {
+    "criterion": "Relevance",
+    "weight": 30,
+    "score": 7,
+    "why": "The financial transaction is genuinely intermediary-free: bids move into a vault PDA, displaced bidders are refunded in the same transaction, and any wallet can trigger the supplier payout. Residual trust points, the admin KYB gate and ad display that is not enforced on-chain, support the median of 7 over A's 9.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & functionality",
+    "weight": 25,
+    "score": 6,
+    "why": "The full flow is implemented in the Rust program, exercised by 15 integration tests and wired into a React client, but the pack contains no confirmed devnet transaction or program account to back the form's claim of a working devnet contract, and an Anchor.toml cluster setting is not deployment proof. The demo video link does load publicly with the file page visible, so the login-wall claims of A and B are not supported by the check, though the video's content still cannot be confirmed from the pack.",
+    "spread": 4,
+    "members": {
+     "A": 7,
+     "B": 3,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Idea & problem",
+    "weight": 20,
+    "score": 8,
+    "why": "The deck and form quantify the ad-tech problem (intermediary tax, Net-30 and Net-90 terms, single point of failure), name two user groups, and answer where the intermediary goes. The one gap is that only the money leg is trustless, since whether the winning ad is shown is not verified on-chain.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Implementation potential",
+    "weight": 15,
+    "score": 7,
+    "why": "The program shows careful design: stored PDA bumps, a separate realloc-able metadata account, custom errors for every failure mode, buyout overage refunds, and clock-based lazy settlement. C's 5 is too low; the permanent admin and the missing timeout refund are real deployability concerns, but they sit on top of a sound core.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Originality",
+    "weight": 10,
+    "score": 6,
+    "why": "Escrowed auctions are a canonical Solana pattern, so the core is familiar, but recurring lazy-settled cycles, atomic outbid refunds, buyout closure, and a documented permission map lift it above tutorial level.",
+    "spread": 2,
+    "members": {
+     "A": 6,
+     "B": 7,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 68.5,
+  "build_reality": 7,
+  "source_loc": 4572,
+  "has_tests": true,
+  "tests": {
+   "files": 7,
+   "cases": 15
+  },
+  "live_demo": "https://api.devnet.solana.com (HTTP 200); https://drive.google.com/file/d/1IcOIKGImrwPpmfrLaAP68jXLXfz2DtFe/view?usp=drive_link (HTTP 200)",
+  "built_during_event": "yes: 9 commits by 1 author, 2026-10-03 16:46 to 2026-10-04 08:58 UTC",
+  "strengths": [
+   "Bid funds sit in a vault PDA, outbid bidders are refunded in the same transaction by CPI, and any wallet can trigger the supplier payout, so no party can trap the money.",
+   "Edge cases are handled in code: cycles settle lazily from clock timestamps with no background service, and a vanished supplier can still be paid through a permissionless claim.",
+   "Fifteen integration tests match the trust claims, and the README documents an actor-by-actor permission table including what the admin cannot do.",
+   "The backend is deliberately reduced to health and RPC-status endpoints and holds no keys or funds, keeping the trust boundary clean."
+  ],
+  "weaknesses": [
+   "No confirmed devnet transaction signature, explorer link, or program-account evidence appears anywhere in the pack despite the form claiming a functioning devnet contract; the README defaults to Localnet and Surfpool, so proof of a deployed public-chain contract is missing.",
+   "Ad display is not enforced on-chain and there is no timeout refund for bidders if the supplier never delivers, so only the money leg is trustless.",
+   "The admin can revoke KYB after bids are escrowed, there is no admin-transfer instruction, and the upgrade authority can replace the program after deploy, softening the claim that nothing can change.",
+   "The pack contains no screenshots or captured app text, so the working demo rests on the video alone."
+  ],
+  "red_flags": [
+   "The form asserts a functioning smart contract on Solana devnet, but the only devnet artifact in the pack is the public RPC endpoint status page, with no transaction or program evidence behind the claim."
+  ],
+  "verdict": "A carefully engineered, genuinely non-custodial on-chain auction escrow with real tests and honest permission documentation, held back by the absence of any confirmed public-chain transaction and by an ad-display promise that stays off-chain.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 75,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 62,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 64.5,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791236462041
+ }
+}

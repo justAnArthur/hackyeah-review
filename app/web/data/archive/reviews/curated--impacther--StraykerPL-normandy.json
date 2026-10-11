@@ -1,0 +1,156 @@
+{
+ "submission": {
+  "id": "curated--impacther--StraykerPL-normandy",
+  "title": "TechBestie",
+  "team": "Team Normandy",
+  "task": "impacther",
+  "result": "Not disclosed",
+  "repo": "StraykerPL/normandy",
+  "created_at": 1791226633845,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633849,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 66,
+   "at": 1791226633855,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--impacther--StraykerPL-normandy",
+  "repo": "StraykerPL/normandy",
+  "project": "TechBestie",
+  "team": "Team Normandy",
+  "task": "impacther",
+  "result": "Not disclosed",
+  "task_fit": "yes: the product explicitly targets girls' underrepresentation in technology education, a listed ImpactHer area, through women student role models and doubt-based matching, and all three members agree the fit is genuine.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 5,
+    "why": "The doubt taxonomy (Will I fit in? Am I good enough? costs and scholarships) shows real insight into why girls hesitate toward tech. But the survey-rank-story-chat mechanism is familiar, and the pack holds no research, statistics, or target-group voice to evidence the need, so the idea lands mid-scale rather than high.",
+    "spread": 2,
+    "members": {
+     "A": 6,
+     "B": 5,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 6.5,
+    "why": "The women-specific need is explicit in function, not just naming: all mentors are women students, copy addresses girls directly, and matching runs on girls' doubts. The evidence supports the moderate view over B's 8, because the matching machinery itself is gender-neutral, unused English 'Stem Together' components sit in the code, and the bundled Polish content carries most of the specificity.",
+    "spread": 2,
+    "members": {
+     "A": 6.5,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 5.5,
+    "why": "Reachability for the target group is strong: a free, Polish-language, mobile-first PWA live at HTTP 200 with offline support and careful accessibility. But there is no real mentor to talk to, survey answers are lost on reload, and no measurable-impact plan exists anywhere in the pack.",
+    "spread": 2,
+    "members": {
+     "A": 6,
+     "B": 5.5,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7.5,
+    "why": "Screenshots and roughly 1,600 lines of BEM CSS corroborate a polished, calm, consistent design with light and dark themes, illustrations, and serious ARIA and focus work. C's caveats about placeholder imagery and only 5 of 20 screenshots verified stand, but the weight of evidence supports the higher median.",
+    "spread": 1.5,
+    "members": {
+     "A": 7.5,
+     "B": 8,
+     "C": 6.5
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 5,
+    "why": "The built loop runs end to end (welcome, 4-step survey, ranked recommendations, stories, chat preview) with clean architecture and race-guarded async. Here B's 7 is the outlier: the code itself discloses that messages are never delivered, only three fictional mentors exist, and there are zero tests, which supports the lower view A and C share.",
+    "spread": 4,
+    "members": {
+     "A": 5,
+     "B": 7,
+     "C": 3
+    }
+   }
+  ],
+  "weighted_total": 59,
+  "build_reality": 7,
+  "source_loc": 3469,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://straykerpl.github.io/normandy/ (HTTP 200)",
+  "built_during_event": "yes: 7 commits by 1 author, 2026-10-03 22:26 to 2026-10-04 08:28 UTC",
+  "strengths": [
+   "All 7 commits fall inside the event window with none before or after the deadline, and the demo is live at HTTP 200.",
+   "Genuinely accessible, mobile-first PWA engineering: offline service worker, memory fallback for storage, light and dark themes, careful ARIA and focus handling.",
+   "Polished, consistent visual design, the strongest dimension across all three members, backed by gradient onboarding, pastel story cards, and tidy BEM CSS.",
+   "The women-specific purpose is real in function: female student mentors, doubt-based matching on belonging and confidence, and copy addressed to girls, not a gender-neutral app with a women's label."
+  ],
+  "weaknesses": [
+   "Required deliverables are missing: no deck was provided and the submission form is almost entirely blank, so the pack carries no problem statement, goal, or impact measurement.",
+   "The need is asserted by design choices but never evidenced: no research, statistics, or the target group's own words anywhere in the pack.",
+   "The core helping loop is a disclosed mock: messages are never delivered, only three fictional mentors are bundled, and survey answers vanish on reload.",
+   "Zero automated tests (0 test files, 0 cases) and no backend, with validation limited to manual lint and build checks."
+  ],
+  "red_flags": [
+   "Impact is claimed (helping girls explore technology studies) with nothing measured and no feedback loop to show effectiveness."
+  ],
+  "verdict": "A polished, honestly disclosed, accessible PWA whose women-specific purpose is real in content but rests on an asserted need, a mocked conversation core, and a submission pack missing its deck and impact plan.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 63,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 65,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 48,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791224854004
+ }
+}

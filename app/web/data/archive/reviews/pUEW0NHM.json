@@ -1,0 +1,253 @@
+{
+ "submission": {
+  "id": "pUEW0NHM",
+  "title": "Tessera",
+  "team": "TSP",
+  "task": "ai",
+  "result": "Not a finalist",
+  "repo": "TegesSzmegesProxy/TesseraScore",
+  "created_at": 1791229431913,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791234595648,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 210,
+   "at": 1791229431922,
+   "message": "Queued"
+  },
+  {
+   "seq": 339,
+   "at": 1791232404691,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 340,
+   "at": 1791232437989,
+   "message": "Found 58,715 source lines, 116 test cases and 1 commits"
+  },
+  {
+   "seq": 341,
+   "at": 1791232437992,
+   "message": "Read 22 docs and 0 decks, opened 1 demo pages and described 3 screenshots"
+  },
+  {
+   "seq": 342,
+   "at": 1791232437999,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 343,
+   "at": 1791232604857,
+   "message": "Member A scored 74"
+  },
+  {
+   "seq": 344,
+   "at": 1791232604860,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 345,
+   "at": 1791232604866,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 409,
+   "at": 1791233930195,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 410,
+   "at": 1791233930200,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 434,
+   "at": 1791233977787,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 435,
+   "at": 1791233977790,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 462,
+   "at": 1791234433887,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 463,
+   "at": 1791234433890,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 500,
+   "at": 1791234761096,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 502,
+   "at": 1791234925269,
+   "message": "Member B scored 65.5"
+  },
+  {
+   "seq": 503,
+   "at": 1791234925271,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 505,
+   "at": 1791234950971,
+   "message": "Member C scored 54"
+  },
+  {
+   "seq": 506,
+   "at": 1791234950975,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 507,
+   "at": 1791235023091,
+   "message": "Done: 64.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "pUEW0NHM",
+  "repo": "TegesSzmegesProxy/TesseraScore",
+  "project": "Tessera",
+  "team": "TSP",
+  "task": "ai",
+  "result": "Not a finalist",
+  "task_fit": "yes: AI is central to the design, with agentic repository analysis generating per-endpoint policies, a JEV classifier judging requests at runtime, and real SDK dependencies plus pipeline code to back it up; the weak evidence that the AI path ever ran affects the scores, not the category membership.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 6.5,
+    "why": "The deterministic-first design with sampled AI calls, EWMA-adaptive thresholds, a coverage gate and a rule that an error is never reported as SAFE goes well beyond a prompt wrapper. Commercial AI-informed WAFs already exist, which keeps a strong idea above average rather than exceptional, and Member A's 8 is generous against that prior art.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 6.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 7,
+    "why": "AI fills the exact gap the product claims, and removing the model calls leaves only a generic signature proxy. The runtime evidence is thin though, since no logs or artifacts show the model path executing and the demo simulates it, which supports the median between A's 8 and C's 5; missing committed API keys are not themselves evidence, as keys are never committed.",
+    "spread": 3,
+    "members": {
+     "A": 8,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 6,
+    "why": "The target user and use case are concrete, and control is well designed with separate approval and activation, editable policy and budget ceilings. Real deployment spans Redis, Ed25519 keys, a GitHub App and Auth0, and the path visible to the jury is a simulation.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 6,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7,
+    "why": "The landing page and docs are polished, with a real component library and professional tooling visible in the code. The only screenshots actually described are static pixel-art hero images rather than real UI captures, so the rendered dashboard is unverifiable, which caps the score below B's 7.5.",
+    "spread": 2.5,
+    "members": {
+     "A": 7,
+     "B": 7.5,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 5,
+    "why": "Roughly 58,700 LOC, 116 test cases and a working-looking Fastify ingress path with normalizer, runner and orchestrator exceed typical hackathon scope. Against that, the event-dated plan admits the proxy-dashboard wiring was still a plan on local mocks, the backend has no automated tests by its own docs, and the demo is scripted.",
+    "spread": 2,
+    "members": {
+     "A": 6,
+     "B": 5,
+     "C": 4
+    }
+   }
+  ],
+  "weighted_total": 64.5,
+  "build_reality": 5,
+  "source_loc": 58715,
+  "has_tests": true,
+  "tests": {
+   "files": 20,
+   "cases": 116
+  },
+  "live_demo": "https://nodejs.org (HTTP 307); https://tessera.akowalcze.uk/ (HTTP 200)",
+  "built_during_event": "unclear: 1 commits by 1 author, 2026-10-05 19:41 to 2026-10-05 19:41 UTC, so the history is squashed",
+  "strengths": [
+   "Deterministic-first architecture that samples AI calls with explicit bounds, adapts thresholds via EWMA, and never reports an error as SAFE.",
+   "Control and verification built into the lifecycle: separate approval and activation, an AI read manifest, redaction and budget ceilings, with JEV context treated as data rather than instructions.",
+   "Unusually broad real implementation: proxy ingress and policy verification, a sandboxed repo host with tree-sitter and guarded analysis tools, a NestJS control plane, docs, landing and CLI.",
+   "Honest limitation statements in the docs, and a polished landing page with an interactive trace-a-request walkthrough."
+  ],
+  "weaknesses": [
+   "The AI path is never demonstrated running: no logs, eval outputs or run artifacts show JEV classification or AI policy generation on real inputs, and the hosted demo is a client-side simulation with hard-coded attack probabilities.",
+   "The event-dated integration plan states the proxy-dashboard wiring, bundle pulling, runtime config and JEV credentials were still planned or on local mocks, and the backend has no automated tests by its own documentation.",
+   "The submission form contains no explicit disclosure of AI tool use, even though an AGENTS.md agent guide in the dashboard points to AI-assisted development.",
+   "Deployment complexity is high for the stated target user of teams without security staff, and the repo ships with no root README and a placeholder description."
+  ],
+  "red_flags": [
+   "The entire repository was pushed as one squashed commit on 5 October, after the 4 October deadline, with zero during-event commits.",
+   "The deck advertises a live demo, but the demo is a scripted JavaScript simulation of the AI path rather than a running system.",
+   "A real-looking dashboard login with an email and password was pasted in plain text into the submission form, undermining the security narrative."
+  ],
+  "verdict": "An exceptionally engineered AI-native security proxy with a best-in-class human-control story, held back by a post-deadline single-commit push and an AI path that is simulated rather than shown running.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 74,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 65.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 54,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791235023087
+ }
+}

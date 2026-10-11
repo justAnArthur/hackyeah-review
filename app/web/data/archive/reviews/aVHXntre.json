@@ -1,0 +1,209 @@
+{
+ "submission": {
+  "id": "aVHXntre",
+  "title": "niezapominajka: depozyt dowodów",
+  "team": "MeowDevs",
+  "task": "impacther",
+  "result": "Not a finalist",
+  "repo": "Soczek95/MeowDevsHackYeah",
+  "created_at": 1791234817548,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791234817553,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 501,
+   "at": 1791234817556,
+   "message": "Queued"
+  },
+  {
+   "seq": 573,
+   "at": 1791236666380,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 574,
+   "at": 1791236668437,
+   "message": "Found 4,028 source lines, 0 test cases and 60 commits"
+  },
+  {
+   "seq": 575,
+   "at": 1791236668439,
+   "message": "Read 0 docs and 0 decks, opened 1 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 576,
+   "at": 1791236668445,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 577,
+   "at": 1791236787992,
+   "message": "Member A scored 80"
+  },
+  {
+   "seq": 578,
+   "at": 1791236787994,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 579,
+   "at": 1791236851483,
+   "message": "Member B scored 75.5"
+  },
+  {
+   "seq": 580,
+   "at": 1791236851485,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 581,
+   "at": 1791236864961,
+   "message": "Member C scored 72"
+  },
+  {
+   "seq": 582,
+   "at": 1791236864964,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 583,
+   "at": 1791236962231,
+   "message": "Done: 75.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "aVHXntre",
+  "repo": "Soczek95/MeowDevsHackYeah",
+  "project": "niezapominajka: depozyt dowodów",
+  "team": "MeowDevs",
+  "task": "impacther",
+  "result": "Not a finalist",
+  "task_fit": "yes: the product serves survivors of sexual violence, a harm that disproportionately affects women, and the need is explicit in the product's function (evidence clock, hospital sample flow, victim-controlled police release), not just its name",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 8.5,
+    "why": "The team names a specific, cited gap (GHB gone from blood in about 8 hours, traces within 72, 94.1 percent of assaults unreported) and adapts Scotland's deposit model rather than inventing one. The hash-chained, Ed25519-signed ledger with a demo tamper endpoint is the genuine technical contribution; the median sits between A's credit for framing and C's reserve.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 8.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "Strip the name and every feature still only makes sense for this need, and women's support organizations are cited in the product itself. All three members pass the strip-the-naming test, so 9 with B's 9.5 as the generous outlier.",
+    "spread": 0.5,
+    "members": {
+     "A": 9,
+     "B": 9.5,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 5.5,
+    "why": "Discreet key-only access, quick exit on every screen and honest legal-limits disclosure are strong, but the police-release button is not wired to any handler and the hospital finder returns fictional hospitals while ignoring real GPS. The median lands on B's reading: the concept is usable, the core helping loop is not.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 5.5,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7.5,
+    "why": "The victim interface is calm and trauma-informed, with dedicated styling and dignity-preserving Polish copy, while the hospital panel is utilitarian and visually inconsistent. Only one screenshot exists and it was never described, so polish is inferred from code and deck rather than seen.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 6,
+    "why": "The case-to-storage core loop is genuinely implemented across three apps in about 4,000 lines, with 59 of 60 commits inside the event window and none after the deadline. Headline features are mock or missing, there are zero tests, and verification accepts any state transition.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 5,
+     "C": 6
+    }
+   }
+  ],
+  "weighted_total": 75.5,
+  "build_reality": 7,
+  "source_loc": 4028,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://drive.google.com/drive/folders/12UbTh38Mmdk-rvOi6YiFCHOLPk2XJa_q?usp=sharing (HTTP 200)",
+  "built_during_event": "partly: 1 commit before the event; 60 commits by 4 authors, 2026-10-03 08:04 to 2026-10-04 08:25 UTC",
+  "strengths": [
+   "Evidence-backed problem framing with real citations (Feminoteka, policja.pl, the Scottish model) and a concrete pilot plan for 2 to 3 hospitals",
+   "A genuinely working tamper-evident ledger: SHA-256 chained entries with Ed25519 staff signatures, a verify endpoint and a demo tamper endpoint that shows detection",
+   "Victim-centered privacy and safety design: no accounts or medical data, key-only case access, quick-exit on every screen, trauma-informed copy and honest disclosure of legal limits",
+   "A real weekend build: 59 of 60 commits by 4 authors inside the event window, nothing after the deadline, delivering three working apps and a live demo folder"
+  ],
+  "weaknesses": [
+   "The survivor's police-release button, the product's headline payoff, has no handler in the victim dashboard even though the backend implements it; A and B inspected the code and their view is better supported than C's claim that the loop works end to end",
+   "Nearest-hospital lookup is mocked with a random pick from seven fictional hospitals and discards real GPS, and the Leaflet map shown on the architecture slide appears in no package manifest",
+   "Zero automated tests (0 files, 0 cases), and verification shortcuts remain, such as a transition check that accepts any state change",
+   "AI use is disclosed only generically (brainstorming and text editing) without stating how much of the roughly 4,000 lines of code AI produced, so C's concern is better supported than A's clean 'disclosed'; slide-advertised features like anonymous signals exist only as an empty table"
+  ],
+  "red_flags": [],
+  "verdict": "A well-researched, category-perfect and largely genuinely built prototype for a real gap in Polish post-assault care, held back by an unwired police-release button, mocked hospital data, generic AI disclosure and zero tests.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 80,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 75.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 72,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791236962229
+ }
+}

@@ -1,0 +1,157 @@
+{
+ "submission": {
+  "id": "curated--impacther--Spiace-Wydry-Czeladniczka",
+  "title": "Czeladniczka",
+  "team": "Śpiące Wydry",
+  "task": "impacther",
+  "result": "Not disclosed",
+  "repo": "Spiace-Wydry/Czeladniczka",
+  "created_at": 1791226633905,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633907,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 72,
+   "at": 1791226633911,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--impacther--Spiace-Wydry-Czeladniczka",
+  "repo": "Spiace-Wydry/Czeladniczka",
+  "project": "Czeladniczka",
+  "team": "Śpiące Wydry",
+  "task": "impacther",
+  "result": "Not disclosed",
+  "task_fit": "no: the project is a gender-neutral craft-apprenticeship matching platform whose only tie to ImpactHer is the feminine Polish word in its name; no women-specific need, feature, evidence, or impact plan appears in the form, README, code, or demo.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 2,
+    "why": "A two-sided craft-apprenticeship marketplace with sensible domain details (exam goal, distance filters, learning forms), but the pattern is familiar and no need disproportionately affecting women is identified or evidenced. The blank problem-statement field supports the lower reading shared by B and C over A's 4.",
+    "spread": 2,
+    "members": {
+     "A": 4,
+     "B": 2,
+     "C": 2
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 1.5,
+    "why": "Nothing in the product only makes sense for women; the sole tie is the feminine name, and the submission names no women-specific need or impact plan. The evidence better supports the near-zero view of A and B than C's 3, since a name is not a category connection, and the missed category requirement is listed among the weaknesses.",
+    "spread": 3,
+    "members": {
+     "A": 1.5,
+     "B": 0,
+     "C": 3
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 4,
+    "why": "The app works end to end on a live demo with a mobile-first Polish UI and demo accounts, so it is usable as a generic product. But it serves no identified group under this task's theme, and with no deck, a largely blank form, and no impact plan, the median lands between A's generous 6 and B's strict 3.",
+    "spread": 3,
+    "members": {
+     "A": 6,
+     "B": 3,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7,
+    "why": "The code shows deliberate, cohesive craft: a hand-drawn SVG hero, consistent color tokens, the Zilla Slab and Manrope pairing, 44px touch targets, and aria labels. C's 5 is the outlier against two 7s, though zero screenshots leave the rendered result unverified.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 6.5,
+    "why": "The full loop is deployed: auth, haversine search RPCs, a request status machine, reviews gated by accepted apprenticeships in RLS, migrations, and rich seed data. Zero tests, no deck, and one post-deadline commit keep it below B's 8.",
+    "spread": 2,
+    "members": {
+     "A": 6.5,
+     "B": 8,
+     "C": 6
+    }
+   }
+  ],
+  "weighted_total": 37.5,
+  "build_reality": 8,
+  "source_loc": 1945,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://czeladniczka.vercel.app (HTTP 200)",
+  "built_during_event": "yes: 28 commits by 2 authors, 2026-10-03 15:36 to 2026-10-04 09:12 UTC",
+  "strengths": [
+   "A genuinely working two-sided marketplace, live at czeladniczka.vercel.app (HTTP 200): Supabase auth, distance-filtered search RPCs, a request and invite lifecycle, and reviews gated by accepted apprenticeships in database policy.",
+   "Careful data layer: migrations with check constraints, RLS on every table, column-level grants, a separate hardening migration, and realistic seed data including review history.",
+   "Polished mobile-first Polish UI with accessibility attention (44px targets, aria labels) and a README with demo accounts so judges can run it.",
+   "A real weekend build: 27 of 28 commits during the event by 2 authors, about 1,945 lines of source across 33 files."
+  ],
+  "weaknesses": [
+   "Misses the task's core requirement: no women-specific need, feature, evidence, or measurable-impact plan exists anywhere in the submission; stripped of its feminine name the product is entirely gender-neutral.",
+   "Missing deliverables: no deck, no screenshots, and the submission form's problem and goal fields are essentially empty, so there is no problem statement or impact case.",
+   "Zero tests (0 files, 0 cases) despite a database-heavy design with policies and RPCs that need them.",
+   "No validation that the matching helps anyone: no target group, no impact metrics, and no sign of user research."
+  ],
+  "red_flags": [
+   "May not be built for this task: the project is a gender-neutral craft-apprenticeship matching platform whose only tie to ImpactHer is the feminine Polish word in its name; no women-specific need, feature, evidence, or impact plan appears in the form, README, code, or demo.",
+   "One commit landed after the Sunday 11:00 deadline (minor, but a measured fact)."
+  ],
+  "verdict": "A well-engineered, deployed apprenticeship marketplace that fails the ImpactHer brief, since nothing beyond a feminine name addresses a challenge disproportionately affecting women, and the submission arrives without a deck, tests, or a stated problem.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 47.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 34,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 36,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791225625091
+ }
+}

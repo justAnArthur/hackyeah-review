@@ -1,0 +1,213 @@
+{
+ "submission": {
+  "id": "EF8VhS1a",
+  "title": "Smart City Go",
+  "team": "Spryciaki",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "repo": "SmartCityPW/HackYeah2026",
+  "created_at": 1791240010373,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791240010381,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 641,
+   "at": 1791240010384,
+   "message": "Queued"
+  },
+  {
+   "seq": 657,
+   "at": 1791240416459,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 658,
+   "at": 1791240458475,
+   "message": "Found 21,990 source lines, 492 test cases and 47 commits"
+  },
+  {
+   "seq": 659,
+   "at": 1791240458477,
+   "message": "Read 3 docs and 2 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 660,
+   "at": 1791240458524,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 661,
+   "at": 1791240585335,
+   "message": "Member A scored 78"
+  },
+  {
+   "seq": 662,
+   "at": 1791240585336,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 663,
+   "at": 1791240654458,
+   "message": "Member B scored 72"
+  },
+  {
+   "seq": 664,
+   "at": 1791240654460,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 665,
+   "at": 1791240667599,
+   "message": "Member C scored 72"
+  },
+  {
+   "seq": 666,
+   "at": 1791240667601,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 667,
+   "at": 1791240761536,
+   "message": "Done: 74 / 100"
+  }
+ ],
+ "review": {
+  "id": "EF8VhS1a",
+  "repo": "SmartCityPW/HackYeah2026",
+  "project": "Smart City Go",
+  "team": "Spryciaki",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "task_fit": "yes: a day-to-day municipal participation tool for residents, NGOs and city staff covering consultations, problem reporting, surveys and events, squarely inside the Smart City brief and not a reframed defence or emergency tool; the missing crisis-response dimension C noted is not required by the brief and is not held against it",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "Turning youth disengagement into a game with server-verified 50 m geofenced voting, staked creatures and reward-paid surveys is a creative mechanic design. But the Pokemon Go pattern itself is not new, as B and C note, and the loop back into real city processes is unproven, which supports the median over A's 8.",
+    "spread": 1.5,
+    "members": {
+     "A": 8,
+     "B": 6.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8.5,
+    "why": "It is built for everyday municipal reality: consultations, pothole-style reporting, NGO initiatives, district events and an admin moderation panel, mapped over OSM tiles with Krakow demo seeds. All three members agree on this and the evidence backs them.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 8.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "Each of the three roles gets clear value, guest onboarding is light and the PWA works on phones. The demo could not be exercised live, photo upload is missing, and parental consent and privacy handling for the 12-17 target group are absent, which supports A's caution alongside B and C's 7.",
+    "spread": 0.5,
+    "members": {
+     "A": 6.5,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7.5,
+    "why": "A coherent 3D map experience with a committed five-color palette, role-specific navigation and documented contrast work. Some deck imagery uses placeholder data and the 3D model licenses are unfilled, which caps it below A's 8.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 7,
+    "why": "Real engineering depth: 39 of 41 OpenAPI operations, 492 measured test cases, server-enforced geofencing and layered moderation. But the headline battle mechanic exists only as a frontend mock, photo upload returns 501, and all data is seeded.",
+    "spread": 0.5,
+    "members": {
+     "A": 7,
+     "B": 6.5,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 74,
+  "build_reality": 8,
+  "source_loc": 21990,
+  "has_tests": true,
+  "tests": {
+   "files": 61,
+   "cases": 492
+  },
+  "live_demo": "https://bryant-geometry-resistance-sensitive.trycloudflare.com/ (skipped (not a public https URL))",
+  "built_during_event": "partly: 1 commit before the event; 47 commits by 4 authors, 2026-10-03 08:49 to 2026-10-04 08:05 UTC",
+  "strengths": [
+   "Core game rules are enforced server-side (50 m geofence with accuracy and plausibility checks, one vote per user, staking and exp returns in one transaction) and verified by an automated API walkthrough",
+   "Genuinely full stack: Django REST with PostgreSQL, an Angular PWA with MapLibre 3D, an OpenAPI contract with 39 of 41 operations implemented, migrations and Docker Compose, covered by 492 measured test cases in 61 files",
+   "Layered moderation with a rules file covering obfuscated profanity and prompt-injection strings, Gemini as a second layer, logged verdicts and fail-closed behavior on AI outage",
+   "Three real roles with working panels, and unusually honest documentation that openly lists what is mocked or missing"
+  ],
+  "weaknesses": [
+   "The battle-versus-city-problems mechanic, presented as a core feature in the deck, has no backend implementation and is only a frontend mock returning 501, so a promised mechanic is simulated",
+   "Photo upload returns 501 and there is no privacy policy or parental-consent flow despite targeting 12-17 year olds, both self-acknowledged by the team",
+   "No real urban data integration: pins, votes and events come from demo seeds, and the value to a city depends on an adoption pipeline the materials do not demonstrate",
+   "The demo ran on an ephemeral Cloudflare tunnel that was skipped at review time, so no judge could exercise the product live"
+  ],
+  "red_flags": [
+   "The README claims 301 backend plus 281 frontend tests (582) while the measurement counted 492 cases, a mild overclaim or at least inconsistent counting that B and C repeated without noticing",
+   "The deck presents the battle mechanic as a working feature without disclosing that its backend is unimplemented",
+   "ASSETS.md leaves every 3D model license marked to be filled despite a declared attribution-only, no-AI-graphics asset policy"
+  ],
+  "verdict": "An unusually well-engineered and honest prototype that gamifies civic participation with server-verified mechanics, held back by a mocked headline battle feature, missing consent and photo handling, seeded demo data and a demo no judge could exercise live.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 78,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 72,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 72,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791240761532
+ }
+}

@@ -1,0 +1,221 @@
+{
+ "submission": {
+  "id": "oeWduKwj",
+  "title": "Wypadowo",
+  "team": "Stowarzyszenie Wspierające Cyfryzację",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "repo": "SWCyfryzacje/hackyeah2026",
+  "created_at": 1791235649683,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791238320016,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 538,
+   "at": 1791235649691,
+   "message": "Queued"
+  },
+  {
+   "seq": 590,
+   "at": 1791237115311,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 591,
+   "at": 1791237119982,
+   "message": "Found 12,591 source lines, 0 test cases and 97 commits"
+  },
+  {
+   "seq": 592,
+   "at": 1791237119984,
+   "message": "Read 3 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 593,
+   "at": 1791237119994,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 609,
+   "at": 1791238320020,
+   "message": "Picked up again: the server that was running this review stopped"
+  },
+  {
+   "seq": 610,
+   "at": 1791238320036,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 611,
+   "at": 1791238421142,
+   "message": "Member A scored 68"
+  },
+  {
+   "seq": 612,
+   "at": 1791238421144,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 613,
+   "at": 1791238513449,
+   "message": "Member B scored 88.5"
+  },
+  {
+   "seq": 614,
+   "at": 1791238513452,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 615,
+   "at": 1791238529414,
+   "message": "Member C scored 56"
+  },
+  {
+   "seq": 616,
+   "at": 1791238529418,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 618,
+   "at": 1791238589585,
+   "message": "Done: 69 / 100"
+  }
+ ],
+ "review": {
+  "id": "oeWduKwj",
+  "repo": "SWCyfryzacje/hackyeah2026",
+  "project": "Wypadowo",
+  "team": "Stowarzyszenie Wspierające Cyfryzację",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "task_fit": "yes: a day-to-day walking and social-connection tool for Krakow residents and tourists built on open city data, addressing mobility and quality of life including social isolation, which matches the open Smart City brief; the evidence supports A and B's reading over C's narrower city-staff-only test",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 6.5,
+    "why": "The loop generator is real algorithmic work, scoring ellipse candidates on road reuse and enclosed area, with cultural events injectable as route stops. The mood-adaptive, weather- and traffic-aware planning that B credits exists only in the deck, so the implemented innovation earns a mid score.",
+    "spread": 3,
+    "members": {
+     "A": 6.5,
+     "B": 8,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8,
+    "why": "It is genuinely a city tool rather than a reframed product: walking loops, recreation and monument layers and Krakow cultural events target everyday urban life. C's demand for a city-operations angle is not in the brief, so A and B's view of open city data serving residents is better supported.",
+    "spread": 4.5,
+    "members": {
+     "A": 8,
+     "B": 9.5,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 6.5,
+    "why": "Named users are served by real pipelines, with an installable Android APK and test-login instructions. But weather, live traffic and mood matching are absent from the code, and with no demo checks and no described screenshots, day-to-day usability rests on code alone, which undercuts B's 9.",
+    "spread": 3,
+    "members": {
+     "A": 6.5,
+     "B": 9,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 6,
+    "why": "The code shows real design effort, including a hand-tuned light map style and consistent card components, but all 7 screenshots went undescribed, so B's polished-and-verified view cannot be confirmed. The score reflects code-inferred quality plus a mixed Polish and English UI.",
+    "spread": 3.5,
+    "members": {
+     "A": 5.5,
+     "B": 9,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 8.5,
+    "why": "12,591 SLOC with 97 commits all inside the event window, real OSRM routing, RLS with security-definer RPCs, realtime with polling fallbacks, cron jobs and a reported 173-check RLS suite. The Krakow events scraper is not visible in the repo and measured unit test cases are zero, keeping it below the top.",
+    "spread": 2.5,
+    "members": {
+     "A": 8.5,
+     "B": 9.5,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 69,
+  "build_reality": 7.5,
+  "source_loc": 12591,
+  "has_tests": true,
+  "tests": {
+   "files": 1,
+   "cases": 0
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 97 commits by 2 authors, 2026-10-03 09:39 to 2026-10-04 08:49 UTC",
+  "strengths": [
+   "Core capability is computed, not simulated: OSRM routing plus a custom loop generator scored on road reuse and enclosed area, with along-route recreation and events queries in the database.",
+   "Real urban data pipelines: a rate-limited LocationIQ/OSM tile sweep on pg_cron fills recreation areas, and a Krakow events table is wired into routes.",
+   "Unusually disciplined backend for a hackathon: RLS on new tables, security-definer RPCs, last-position-only location deleted on finish, a consent dialog and a reported 173-check RLS test script.",
+   "A real deliverable: an installable Android APK, 12,591 SLOC and 97 commits all falling inside the event window."
+  ],
+  "weaknesses": [
+   "The deck presents weather with AI, live-traffic awareness, mood and interests matchmaking, photo-verified reviews and smart notifications as features, but no matching code appears in the repo.",
+   "The krakow.pl events scraper is not visible in the submitted source, only the events table and cron references, so the headline data feed is partly unevidenced.",
+   "None of the 7 screenshots are described and there are no demo checks, so usability and visual quality rest on code alone, and the UI mixes Polish and English screens.",
+   "The social layer is thinner than pitched, with joining open to everyone and no matchmaking in the code, and measured unit test cases are zero."
+  ],
+  "red_flags": [
+   "The deck presents weather, live traffic and AI features as current capabilities although no such code is in the repo."
+  ],
+  "verdict": "A genuinely working, well-engineered Krakow walking companion with real routing, real open-data pipelines and careful privacy design, whose deck promises weather, traffic and matchmaking features the code does not deliver.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 68,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 88.5,
+     "agreement": 0.5,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 56,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791238589581
+ }
+}

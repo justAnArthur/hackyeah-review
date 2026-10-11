@@ -1,0 +1,291 @@
+{
+ "submission": {
+  "id": "scWKONOF",
+  "title": "NoBarriers",
+  "team": "BBX",
+  "task": "krakow",
+  "result": "Finalist",
+  "repo": "mjble/bbx-hackyeah-2026",
+  "created_at": 1791282002926,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791282802908,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 1253,
+   "at": 1791282002931,
+   "message": "Queued"
+  },
+  {
+   "seq": 1257,
+   "at": 1791282071704,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1258,
+   "at": 1791282073816,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1261,
+   "at": 1791282143362,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1262,
+   "at": 1791282145048,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1265,
+   "at": 1791282215223,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1266,
+   "at": 1791282216824,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1269,
+   "at": 1791282286886,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1270,
+   "at": 1791282288495,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1273,
+   "at": 1791282358611,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1274,
+   "at": 1791282360684,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1277,
+   "at": 1791282430416,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1278,
+   "at": 1791282432002,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1281,
+   "at": 1791282502284,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1282,
+   "at": 1791282504566,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1285,
+   "at": 1791282573911,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1286,
+   "at": 1791282580153,
+   "message": "Found 27,260 source lines, 0 test cases and 72 commits"
+  },
+  {
+   "seq": 1287,
+   "at": 1791282580155,
+   "message": "Read 10 docs and 1 decks, opened 1 demo pages and described 1 screenshots"
+  },
+  {
+   "seq": 1288,
+   "at": 1791282580161,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 1289,
+   "at": 1791282757022,
+   "message": "Member A scored 76.5"
+  },
+  {
+   "seq": 1290,
+   "at": 1791282757024,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1291,
+   "at": 1791282772911,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: JSON error injected into SSE stream); trying again in 30 s"
+  },
+  {
+   "seq": 1294,
+   "at": 1791282804699,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1295,
+   "at": 1791282879550,
+   "message": "Member B scored 77"
+  },
+  {
+   "seq": 1296,
+   "at": 1791282879552,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 1297,
+   "at": 1791282931201,
+   "message": "Member C scored 70.5"
+  },
+  {
+   "seq": 1298,
+   "at": 1791282931204,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 1299,
+   "at": 1791283034510,
+   "message": "Done: 75 / 100"
+  }
+ ],
+ "review": {
+  "id": "scWKONOF",
+  "repo": "mjble/bbx-hackyeah-2026",
+  "project": "NoBarriers",
+  "team": "BBX",
+  "task": "krakow",
+  "result": "Finalist",
+  "task_fit": "yes: the project is the requested Krakow accessibility tool, with per-person need profiles, detailed barrier data, per-datum source and reliability, and explicit handling of conflicting, incomplete and source-down cases.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 9,
+    "why": "Profiles for wheelchair users, pram pushers and seniors change the verdict per person, missing data stays unknown rather than accessible, and conflicts show every version with no winner. The behaviour is verified in real code, which supports the two 9s over member C's 8.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 7,
+    "why": "The live demo responds and the accessibility effort is real, but the required video is missing, no test files were measured, and known WCAG gaps remain, such as the obscured Mapbox attribution on mobile. The median 7 sits between A's generous 8 and C's stricter 6.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 7,
+    "why": "Each datum carries source, date and a five-state confidence, demo data is flagged, and real OSM ingestion exists in the code. Krakow city open data is only planned and disruptions come from sample fixtures, and C's claim that the demo likely runs in mock mode cannot be verified from the evidence, so the council sides with the members who confirmed real ingestion in code.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 8,
+    "why": "Ingestion sits behind adapters with a CityConfig entry and a written runbook, so adding a city is mostly a configuration task. The single-city operation and missing city switcher, noted independently by A and C, justify the median 8 below B's 9.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 6,
+    "why": "Three revenue streams and a low hosting cost are outlined but no concrete prices or revenue projections appear anywhere. The median 6 fits: A's 5 understates the defined streams while C's 7 is generous for rough estimates.",
+    "spread": 2,
+    "members": {
+     "A": 5,
+     "B": 6,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 75,
+  "build_reality": 7,
+  "source_loc": 27260,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://hackyeah.thatsnotliam.xyz (HTTP 200)",
+  "built_during_event": "yes: 72 commits by 8 authors, 2026-10-03 09:30 to 2026-10-04 08:37 UTC",
+  "strengths": [
+   "The cardinal rule is enforced in real code: no data yields score zero, unknown surface stretches are reported with their length, and conflicting values keep all versions with no winner picked.",
+   "Per-datum provenance with source, date, five-state confidence and source trust weights, plus flagged demo data and a sources endpoint exposing licence and freshness.",
+   "Real OSM ingestion for the Krakow area through Postpass and PostGIS with attribution, cleanly separated from the presentation layer.",
+   "Unusual honesty, including a WCAG known-gaps table, demo badges, a roadmap listing its own unfinished items, and all 72 commits inside the event window with AI assistance disclosed."
+  ],
+  "weaknesses": [
+   "The required video deliverable of up to 3 minutes is missing from the submission.",
+   "Krakow city open data from MSIP and dane.gov.pl is not ingested; closures and disruptions come from labelled sample files.",
+   "Zero test files were measured despite documented test plans, and the manual screen-reader test was never executed.",
+   "The business model offers no concrete pricing or revenue numbers, and the app serves only one city with no city switcher in the UI."
+  ],
+  "red_flags": [
+   "The submission is missing a required deliverable, the video, which breaks the task's submission requirements."
+  ],
+  "verdict": "A technically deep and unusually honest prototype that enforces the central rule of never showing missing data as accessible, held back by the missing video deliverable, absent city open-data integration, zero tests and an unpriced business model.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 76.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 77,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 70.5,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791283034508
+ }
+}

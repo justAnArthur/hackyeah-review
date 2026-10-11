@@ -1,0 +1,201 @@
+{
+ "submission": {
+  "id": "Fav70Vl5",
+  "title": "Splot - Małopolski Hub Innowacji Społecznych (HubMi)",
+  "team": "Flip & Flap",
+  "task": "hubmi",
+  "result": "Not a finalist",
+  "repo": "daenyall/Hubmi",
+  "created_at": 1791228585046,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791228585050,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 160,
+   "at": 1791228585052,
+   "message": "Queued"
+  },
+  {
+   "seq": 203,
+   "at": 1791229403851,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 204,
+   "at": 1791229405977,
+   "message": "Found 19,516 source lines, 321 test cases and 104 commits"
+  },
+  {
+   "seq": 205,
+   "at": 1791229405979,
+   "message": "Read 7 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 206,
+   "at": 1791229405987,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 216,
+   "at": 1791229553881,
+   "message": "Member A scored 77"
+  },
+  {
+   "seq": 217,
+   "at": 1791229553883,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 218,
+   "at": 1791229617114,
+   "message": "Member B scored 80"
+  },
+  {
+   "seq": 219,
+   "at": 1791229617116,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 220,
+   "at": 1791229643863,
+   "message": "Member C scored 81.2"
+  },
+  {
+   "seq": 221,
+   "at": 1791229643868,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 222,
+   "at": 1791229713555,
+   "message": "Done: 79.2 / 100"
+  }
+ ],
+ "review": {
+  "id": "Fav70Vl5",
+  "repo": "daenyall/Hubmi",
+  "project": "Splot - Małopolski Hub Innowacji Społecznych (HubMi)",
+  "team": "Flip & Flap",
+  "task": "hubmi",
+  "result": "Not a finalist",
+  "task_fit": "yes: the project was built specifically for the HubMI/ROPS Kraków task — all seven modules in backend and UI, Polish throughout, regional ROPS data — with no pivot or reuse from another challenge.",
+  "scores": [
+   {
+    "criterion": "Challenge fulfilment",
+    "weight": 40,
+    "score": 8.8,
+    "why": "All seven modules exist in both backend and UI and the mandatory matchmaking is real: Gemini embeddings with pgvector, verified in E2E tests, not a hardcoded list. The median reflects a real but unverifiable-live product: the public demo returns HTTP 402 and some features sit behind disabled flags, which supports staying below B's 9.5.",
+    "spread": 1.5,
+    "members": {
+     "A": 8,
+     "B": 9.5,
+     "C": 8.8
+    }
+   },
+   {
+    "criterion": "Implementation potential",
+    "weight": 20,
+    "score": 8,
+    "why": "The stack is genuinely deployable — FastAPI, Supabase with RLS and role-based auth, 12 migrations, TCO estimate, deployment guide and 321 tests. Stage-3 docs record real auth weaknesses (client-supplied X-Admin-Role header, JWT decoded without signature verification) and no live environment proves the later fixes, which supports B's lower reading over A's 8.5.",
+    "spread": 1,
+    "members": {
+     "A": 8.5,
+     "B": 7.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Accessibility & intuitiveness",
+    "weight": 20,
+    "score": 9,
+    "why": "Unusually strong, evidence-backed WCAG 2.1 AA work: axe-core 0 violations, contrast raised from 2.35:1 to 5.04:1, keyboard paths, ARIA, 375px and 200% zoom without horizontal scroll, all in clear Polish. It is not a full conformity audit, as the team itself notes; C's 8 is lower than this evidence warrants.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Bonus (UI, materials, MVP quality)",
+    "weight": 20,
+    "score": 5,
+    "why": "MVP quality and codebase are high (19,516 LOC, 321 tests, clean shadcn/ui design), but the measured evidence shows zero screenshots, no deck and no video, so the materials half of this criterion collapses. C's 7 is not supported by the evidence; A and B's reading is correct.",
+    "spread": 2.5,
+    "members": {
+     "A": 5,
+     "B": 4.5,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 79.2,
+  "build_reality": 8,
+  "source_loc": 19516,
+  "has_tests": true,
+  "tests": {
+   "files": 34,
+   "cases": 321
+  },
+  "live_demo": "https://splotapp.vercel.app (HTTP 402)",
+  "built_during_event": "yes: 104 commits by 2 authors, 2026-10-03 12:48 to 2026-10-04 07:30 UTC",
+  "strengths": [
+   "All seven HubMI modules are implemented in both backend endpoints and UI screens, mapped explicitly in the README and fully in Polish.",
+   "The mandatory matchmaking is genuine: Gemini 1536D embeddings with pgvector, lexical boost, entropy-based gibberish filtering and why_relevant explanations, verified end-to-end against live Supabase.",
+   "321 test cases in 34 files, with verification docs that honestly separate real Supabase/Gemini integration from mocked tests and record the team's own failures.",
+   "Security and accessibility practice beyond hackathon norm: RLS isolation tested across author accounts, server-assigned roles, rate limiting, and measured, documented accessibility fixes."
+  ],
+  "weaknesses": [
+   "The mandatory demo link is dead for judges: splotapp.vercel.app returns HTTP 402 behind Vercel protection, so only local setup demonstrates the product.",
+   "Required deliverables are missing: no MP4 video, no PDF deck, no UX/UI mockups and zero screenshots anywhere in the evidence.",
+   "Stage-3 docs record backend auth weaknesses — a client-chosen X-Admin-Role header and JWT decoded without signature verification; later docs claim fixes but nothing publicly reachable confirms them.",
+   "Several features are gated behind environment flags disabled by default pending an integration contract, and live behaviour rests mainly on the team's own verification reports."
+  ],
+  "red_flags": [
+   "Deployment was never publicly reachable during the event (dead trycloudflare tunnel, onrender 404, then the Vercel login wall) even though a working demo link is mandatory.",
+   "Heavy AI-agent-assisted development is evident from AGENTS.md and CLAUDE.md in the repo, but AI tool use is not disclosed on the form as the rules require.",
+   "The form claims full WCAG 2.1 AA compliance while the team's own docs correctly state that axe scans are not a conformity declaration — an overstated claim relative to the evidence."
+  ],
+  "verdict": "An exceptionally engineered, near-complete seven-module HubMI prototype with real Gemini/pgvector matchmaking and best-in-class accessibility practice, undone at review by a dead demo link and the absence of the required video, deck and mockups that would let the jury see it work.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 77,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 80,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 81.2,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791229713550
+ }
+}

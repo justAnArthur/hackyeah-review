@@ -1,0 +1,223 @@
+{
+ "submission": {
+  "id": "8ci-Dun0",
+  "title": "Resque",
+  "team": "KaczkiRatowniczki",
+  "task": "defence",
+  "result": "Not a finalist",
+  "repo": "leeree1/Resque",
+  "created_at": 1791238552602,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791240131220,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 617,
+   "at": 1791238552615,
+   "message": "Queued"
+  },
+  {
+   "seq": 630,
+   "at": 1791238761070,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 631,
+   "at": 1791238782146,
+   "message": "Found 5,332 source lines, 2 test cases and 31 commits"
+  },
+  {
+   "seq": 632,
+   "at": 1791238782148,
+   "message": "Read 0 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 633,
+   "at": 1791238782152,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 647,
+   "at": 1791240131227,
+   "message": "Picked up again: the server that was running this review stopped"
+  },
+  {
+   "seq": 648,
+   "at": 1791240131236,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 650,
+   "at": 1791240255582,
+   "message": "Member A scored 63"
+  },
+  {
+   "seq": 651,
+   "at": 1791240255584,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 652,
+   "at": 1791240333577,
+   "message": "Member B scored 76"
+  },
+  {
+   "seq": 653,
+   "at": 1791240333578,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 654,
+   "at": 1791240359387,
+   "message": "Member C scored 53"
+  },
+  {
+   "seq": 655,
+   "at": 1791240359390,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 656,
+   "at": 1791240415641,
+   "message": "Done: 63 / 100"
+  }
+ ],
+ "review": {
+  "id": "8ci-Dun0",
+  "repo": "leeree1/Resque",
+  "project": "Resque",
+  "team": "KaczkiRatowniczki",
+  "task": "defence",
+  "result": "Not a finalist",
+  "task_fit": "yes: an offline Bluetooth mesh SOS app for communication during network blackouts is squarely civil-defence resilience and matches the task's degraded-scenario brief; all three members agree on fit.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 6,
+    "why": "The gap is real and concretely reasoned, with thoughtful touches like per-field data minimization, stealth mode, QR fallback and a CPR metronome. But offline mesh messengers already exist (Bridgefy, Briar, Meshtastic) and the claimed multi-hop relay is not delivered, so novelty stays moderate.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8,
+    "why": "Unanimous fit: communication when infrastructure fails, with buffering, ACKs and a first-aid module, and no off-category filler in the repo. The median reflects strong fit tempered only by the unproven degraded scenario.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 5,
+    "why": "One-tap SOS with alarm, strobe and honest error states is usable under stress, but members split 7 to 3 here. The evidence supports the skeptical side: the relay never re-broadcasts, the gateway button deletes local data instead of syncing, adoption bootstrapping is unaddressed, and no demo proves the app ran on hardware.",
+    "spread": 4,
+    "members": {
+     "A": 5,
+     "B": 7,
+     "C": 3
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7,
+    "why": "Code and deck show a coherent dark tactical theme with glanceable status colors, pulse animations, honest disabled states and a clean four-tab layout. But all 35 screenshots are undescribed and the deck is image-only, so polish is inferred rather than verified.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 5,
+    "why": "There is 5.3k LOC of real Dart with a genuine Nearby Connections path, permissions, dedupe, ACKs and offline storage. But the multi-hop relay is absent from the code, the cloud leg is a simulate button, and only 2 trivial tests exist, landing the median mid-scale.",
+    "spread": 4,
+    "members": {
+     "A": 5,
+     "B": 7,
+     "C": 3
+    }
+   }
+  ],
+  "weighted_total": 63,
+  "build_reality": 6,
+  "source_loc": 5332,
+  "has_tests": true,
+  "tests": {
+   "files": 2,
+   "cases": 2
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 31 commits by 5 authors, 2026-10-03 12:40 to 2026-10-04 06:22 UTC",
+  "strengths": [
+   "Real Google Nearby Connections integration (advertising, discovery, connection, payloads) with permission requests and error-code handling, not a stub.",
+   "Offline-first architecture: packet buffering in local storage, TTL'd flush design, and GPS failures falling back to defaults with clear status text.",
+   "Degraded-mode extras suited to crisis use: stealth mode, torch strobe, alarm audio, QR sharing, and searchable offline first-aid protocols.",
+   "All 31 commits by 5 authors inside the event window, with a coherent crisis UI across the SOS, Radar, Sztab and Apteczka tabs."
+  ],
+  "weaknesses": [
+   "The headline multi-hop mesh is not in the code: onPacketReceivedFromPeer stores, increments hopCount and ACKs but never re-broadcasts, so each node reaches only direct peers; the shared code-level reading of A and C is better supported than B's claim of working relay.",
+   "The internet gateway is a mocked integration: the 'simulate connection' button and flushToCentralServer clear local storage without ever calling FirebaseSyncService, so the central-sync claim is unimplemented.",
+   "No demo, video or runtime evidence verifies the mesh ever ran on hardware, and the 35 screenshots are undescribed, so the required working degraded-scenario demonstration is effectively missing.",
+   "The README is the untouched Flutter template so nobody outside the team can build it, only 2 trivial test cases exist, and the hardcoded packet id '1842' on the broadcast screen would collide with the app's own dedupe on any repeat SOS."
+  ],
+  "red_flags": [
+   "Every receiving phone auto-replies with an ACK signed 'RATOWNIK_PSP' stating the report was accepted, faking official responder confirmation in a life-safety app.",
+   "The Firebase Realtime Database is documented in-code as publicly readable and carries victim GPS locations, with API keys and google-services.json committed to the repo.",
+   "The gateway 'simulation' silently deletes local packets instead of uploading them, which in real use would destroy undelivered SOS data."
+  ],
+  "verdict": "A well-themed, largely real one-hop offline SOS app whose Nearby plumbing and offline-first design genuinely exist in code, but the multi-hop mesh and central-sync claims are unimplemented, no demo evidence proves it ran, and safety hygiene around fake responder ACKs and exposed victim data falls short of a life-safety pitch.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 63,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 76,
+     "agreement": 0.6,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 53,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791240415638
+ }
+}

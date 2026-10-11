@@ -1,0 +1,214 @@
+{
+ "submission": {
+  "id": "curated--sport--x2oreo-Celia-ai",
+  "title": "Celia.ai",
+  "team": "DoubleOreo",
+  "task": "sport",
+  "result": "Not disclosed",
+  "repo": "x2oreo/Celia.ai",
+  "created_at": 1791226633869,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791229440820,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 68,
+   "at": 1791226633876,
+   "message": "Imported from a council v8 comparison run"
+  },
+  {
+   "seq": 215,
+   "at": 1791229440823,
+   "message": "Queued"
+  },
+  {
+   "seq": 223,
+   "at": 1791229715952,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 224,
+   "at": 1791229754625,
+   "message": "Found 67,964 source lines, 594 test cases and 389 commits"
+  },
+  {
+   "seq": 225,
+   "at": 1791229754628,
+   "message": "Read 6 docs and 2 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 226,
+   "at": 1791229754633,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 227,
+   "at": 1791229911013,
+   "message": "Member A scored 77.5"
+  },
+  {
+   "seq": 228,
+   "at": 1791229911015,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 230,
+   "at": 1791230014208,
+   "message": "Member B scored 78"
+  },
+  {
+   "seq": 231,
+   "at": 1791230014211,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 232,
+   "at": 1791230032833,
+   "message": "Member C scored 67"
+  },
+  {
+   "seq": 233,
+   "at": 1791230032835,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 234,
+   "at": 1791230084013,
+   "message": "Done: 76.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "curated--sport--x2oreo-Celia-ai",
+  "repo": "x2oreo/Celia.ai",
+  "project": "Celia.ai",
+  "team": "DoubleOreo",
+  "task": "sport",
+  "result": "Not disclosed",
+  "task_fit": "yes: medicine, genotype and heart data drive concrete decisions (drug verdicts, interaction warnings, SOS escalation, doctor briefs), which places it squarely in physical health and access to care, even though sport is absent and mental wellbeing is minimal.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7.5,
+    "why": "The deterministic engine decides and the LLM only explains, with validated model output and offline fallback, which is a real answer to the hardcoded-tip pattern. The core idea of a medicine checker for a cardiac condition is not new, so the median lands at 7.5: novelty lies in the safety architecture and integration.",
+    "spread": 2,
+    "members": {
+     "A": 7.5,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 7.5,
+    "why": "Physical health and access to care are deeply served and health data demonstrably drives decisions in code. The brief asks to holistically combine sport and mental wellbeing too, and the project has no sport tracking and only a minimal feeling diary, which caps the score.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7.5,
+    "why": "It serves a real patient population with an offline-first safety core, consent flows, honest simulated-data labels and not-a-medical-device disclaimers. HarmonyOS-only support, a narrow condition and several built-but-unverified hardware features keep it at 7.5.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7.5,
+    "why": "A documented design system with a consistent red-and-white light and dark theme across verdict, SOS and check-in screens, backed by 183 screenshots. Only 5 screenshots were described and they are design mockups rather than verified emulator captures, so visual quality is second-hand evidence.",
+    "spread": 1.5,
+    "members": {
+     "A": 7.5,
+     "B": 7.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 9,
+    "why": "Unanimous 9: phone, watch and backend apps plus web viewers, 67,964 source LOC, 594 tests in 78 files, 388 commits during the event, 11 deployed edge functions verified live and a released .hap. Simulated heart data and dry-run integrations are labelled but remain gaps.",
+    "spread": 0,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 9
+    }
+   }
+  ],
+  "weighted_total": 76.5,
+  "build_reality": 8.5,
+  "source_loc": 67964,
+  "has_tests": true,
+  "tests": {
+   "files": 78,
+   "cases": 594
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 389 commits by 3 authors, 2026-10-03 09:48 to 2026-10-04 09:00 UTC",
+  "strengths": [
+   "Deterministic safety core in real code: curated drug verdicts with safer alternatives, additive-QT and CYP interaction checks, SOS countdown escalation and doctor-visit briefs, with the LLM only explaining and its output validated with safe fallback.",
+   "Exceptional engineering volume and hygiene: 594 tests, 388 commits during the event by 3 authors, a deployed Supabase backend with live verification checks, a documented regression pass and a released .hap.",
+   "Real data and privacy work: about 68k Polish medicine packs from the public URPL register, on-device OCR and barcode scanning, RLS tests, and AES-GCM encrypted revocable share links with a privacy ledger.",
+   "Honest disclosure throughout: simulated heart data labelled as such, not-a-medical-device framing, AI workflow documentation, and no prompt-injection attempts in untrusted content."
+  ],
+  "weaknesses": [
+   "Missed requirements of the brief: no sport or exercise component at all and only a minimal feeling diary for mental wellbeing, where the task asks to holistically combine all four strands.",
+   "The pitch deck was not provided and the submission form's problem and instructions fields are empty, so round-one reviewers see little beyond the repo; no demo was independently verified (demo_checks is empty).",
+   "Hardware-dependent features remain unverified: the app has never been installed on a real phone or watch, heart data is simulated, and NFC, Live View, real SMS and Celia intent routing are built but unverified or dry-run.",
+   "HarmonyOS-only (API 20+) and a single narrow condition (Long QT syndrome) limit the reachable audience."
+  ],
+  "red_flags": [],
+  "verdict": "An unusually complete and honest heart-safety companion whose deterministic decision engine is demonstrably real in code, scoring 7.5 across the board and 9 on completeness, held back by the absent sport and mental wellbeing strands, the missing deck and unverified hardware features.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 77.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 78,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 67,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791230084009
+ }
+}

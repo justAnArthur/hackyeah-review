@@ -1,0 +1,229 @@
+{
+ "submission": {
+  "id": "curated--huawei--x2oreo-Celia-ai",
+  "title": "Celia.ai",
+  "team": "Double Oreo",
+  "task": "huawei",
+  "result": "Not disclosed",
+  "repo": "x2oreo/Celia.ai",
+  "created_at": 1791226633879,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791229440758,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 69,
+   "at": 1791226633885,
+   "message": "Imported from a council v8 comparison run"
+  },
+  {
+   "seq": 214,
+   "at": 1791229440761,
+   "message": "Queued"
+  },
+  {
+   "seq": 235,
+   "at": 1791230085079,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 236,
+   "at": 1791230142275,
+   "message": "Found 67,964 source lines, 594 test cases and 389 commits"
+  },
+  {
+   "seq": 237,
+   "at": 1791230142277,
+   "message": "Read 6 docs and 2 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 238,
+   "at": 1791230142284,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 239,
+   "at": 1791230275552,
+   "message": "Member A scored 79"
+  },
+  {
+   "seq": 240,
+   "at": 1791230275555,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 241,
+   "at": 1791230317169,
+   "message": "Member B scored 80"
+  },
+  {
+   "seq": 242,
+   "at": 1791230317172,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 243,
+   "at": 1791230334998,
+   "message": "Member C scored 71"
+  },
+  {
+   "seq": 244,
+   "at": 1791230335000,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 245,
+   "at": 1791230407658,
+   "message": "Done: 80 / 100"
+  }
+ ],
+ "review": {
+  "id": "curated--huawei--x2oreo-Celia-ai",
+  "repo": "x2oreo/Celia.ai",
+  "project": "Celia.ai",
+  "team": "Double Oreo",
+  "task": "huawei",
+  "result": "Not disclosed",
+  "task_fit": "yes: a native ArkTS/ArkUI HarmonyOS phone and wearable app with an agent-first, human-centric heart-safety angle, matching the Huawei brief's Human-Centric Technology and Intelligent Experiences themes.",
+  "scores": [
+   {
+    "criterion": "Originality",
+    "weight": 20,
+    "score": 8,
+    "why": "The inversion where deterministic curated data decides and the LLM only explains is non-obvious, and the HarmonyOS-native combination of barcode checks, watch vitals, emergency card and intents is not a port of an existing app. C's 7 fairly notes that medicine-check apps exist, but the evidence supports the members who found the device-level design fresh.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Demonstrated usefulness",
+    "weight": 20,
+    "score": 8,
+    "why": "The use case maps to concrete patient moments: barcode checks against about 68k Polish packs, a 13-language emergency card, an SOS chain and an offline safety core. C's 6 overweights the narrow condition scope, which this human-centric brief explicitly rewards, so the median 8 stands.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Technical execution",
+    "weight": 20,
+    "score": 8,
+    "why": "Measured facts corroborate the claims: 594 test cases across phone, watch and backend, 388 in-event commits by 3 authors, real error handling and honest status labelling. C's 7 rests on tests fixed during the event and count discrepancies, but the measured count is 594 and in-event fixes are normal iteration.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Platform capabilities",
+    "weight": 20,
+    "score": 9,
+    "why": "About 20 OHOS kits in real use beyond a webview, including Intents Kit, Form Kit, Live View, Scan and Vision, NFC and a standalone wearable app that would not run unchanged on another OS. A's 8 penalises unverified headline features, but that is a verification gap counted under demo quality, not a missing capability, so B and C's 9 is better supported.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Demo quality",
+    "weight": 10,
+    "score": 6,
+    "why": "No demo check was verified, the linked video is absent from the repo file tree, and a Remotion project in the repo can produce the footage programmatically, so real emulator recording cannot be confirmed. The described screenshots do appear to be real app captures, which supports 6 over A's more skeptical 5.",
+    "spread": 1,
+    "members": {
+     "A": 5,
+     "B": 6,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Reproducibility & transparency",
+    "weight": 10,
+    "score": 8,
+    "why": "Pinned tool versions, env and test scripts, a prebuilt unsigned .hap with SHA-256 checksums, a per-feature verification table and the required AI disclosure docs. The gaps are macOS-first bash scripts, the Supabase dependency and no signed install on a real device, which justify the middle of A's 9 and C's 7.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 80,
+  "build_reality": 8,
+  "source_loc": 67964,
+  "has_tests": true,
+  "tests": {
+   "files": 78,
+   "cases": 594
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 389 commits by 3 authors, 2026-10-03 09:48 to 2026-10-04 09:00 UTC",
+  "strengths": [
+   "Genuinely native ArkTS/ArkUI codebase of about 47k ArkTS lines within 68k measured source LOC, with a separate wearable app and roughly 20 platform kits in real use",
+   "Deterministic safety architecture: verdicts come from curated data, the LLM only explains, and every model output is validated with typed offline fallbacks",
+   "594 test cases across phone, watch and backend, a strict build, and no committed secrets thanks to a pre-commit hook that rejects signing material",
+   "Strong reproducibility and transparency: pinned versions, run and emulator scripts, a prebuilt .hap with checksums, a per-feature verification table and disclosed AI workflow docs"
+  ],
+  "weaknesses": [
+   "No presentation deck was submitted, a missed deliverable confirmed by the measured pack, and the submission form's problem and status fields were left essentially empty",
+   "The demo video linked in the README is not in the repo, no demo check was verified, and a Remotion pipeline in the repo means part of the video could be programmatic animation rather than emulator footage",
+   "Several headline features (Celia intent routing, NFC write, Push Kit, Live View, Wear Engine) are built but unverified, no signed build was installed on a real device, and emulator heart data is simulated",
+   "The phone-watch link is a bespoke Supabase cloud relay rather than a distributed HarmonyOS capability, and the build and launch scripts assume macOS bash"
+  ],
+  "red_flags": [
+   "The demo video cannot be verified as a real emulator recording and the repo contains a Remotion project able to generate it; screeners should confirm before treating it as live footage",
+   "One of the 389 commits landed after the 4 October deadline; minor and likely docs-only"
+  ],
+  "verdict": "An unusually deep, honest and reproducible native HarmonyOS entry with a strong deterministic safety core and real platform breadth, held back by a missing deck, an unverifiable demo video and headline features that are built but never shown working on real hardware.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 79,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 80,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 71,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791230407640
+ }
+}

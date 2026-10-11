@@ -1,0 +1,2956 @@
+{
+ "huawei|Akshaz7/capsules-harmonyos": {
+  "id": "curated--huawei--Akshaz7-capsules-harmonyos",
+  "task": "huawei",
+  "repo": "Akshaz7/capsules-harmonyos",
+  "title": "Harmoniser",
+  "team": "Pride of the UK v2",
+  "uploaded_at": 1791239833301,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--huawei--Akshaz7-capsules-harmonyos",
+   "repo": "Akshaz7/capsules-harmonyos",
+   "project": "Harmoniser",
+   "team": "Pride of the UK v2",
+   "task": "huawei",
+   "result": "Not disclosed",
+   "task_fit": "yes: a native ArkTS/ArkUI HarmonyOS app (API 20+) built entirely during the event that turns plain-language requests into native mini-apps, leads with Intelligent Experiences, and includes the required AI workflow and AI integration docs.",
+   "scores": [
+    {
+     "criterion": "Originality",
+     "weight": 20,
+     "score": 7,
+     "why": "All members agree the capsule idea is genuinely novel: plain-language requests become schema-validated JSON mini-apps with a per-permission consent gatekeeper and on-device-first AI routing. The median follows B and C over A, because with no demo and no deck the novelty rests on code and docs rather than a shown working product.",
+     "spread": 2,
+     "members": {
+      "A": 9,
+      "B": 7,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Demonstrated usefulness",
+     "weight": 20,
+     "score": 6,
+     "why": "Real everyday use cases are implemented and a judge-reported failure was diagnosed and fixed, but the cloud path needs a user-supplied API key, the on-device path needs a separate 480 MB model push, and no run is verifiable in the evidence. B's middle position fits best: C's 5 undersells the offline rule parser that delivers many capsules in code, and A's 7 ignores how narrow the submitted experience is.",
+     "spread": 2,
+     "members": {
+      "A": 7,
+      "B": 6,
+      "C": 5
+     }
+    },
+    {
+     "criterion": "Technical execution",
+     "weight": 20,
+     "score": 7.5,
+     "why": "The engineering is substantial and real: about 45,000 source lines, 420 tests in 56 files, 366 commits during the event, a strict validator, a hand-written safe expression parser instead of eval, and a Node-API C++ engine port. The score is held back because the team's own audit lists claim/code gaps and features marked built but never verified.",
+     "spread": 1,
+     "members": {
+      "A": 8,
+      "B": 7.5,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Platform capabilities",
+     "weight": 20,
+     "score": 8,
+     "why": "Usage goes far beyond a webview: Calendar, Notification, Form Kit widgets, Scan, Vision OCR, Sensor, Network and Preferences kits plus the self-ported Cactus inference engine. The median credits that breadth while accepting B's caveats that the .so is arm64-only and the model weights are not bundled, so the on-device path is unverified on an x86 emulator.",
+     "spread": 1.5,
+     "members": {
+      "A": 9,
+      "B": 7.5,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Demo quality",
+     "weight": 10,
+     "score": 2,
+     "why": "No recorded demo exists anywhere: the team's own compliance audit records it as missing, the 15 screenshots resolve to placeholders and sample eval images rather than the app running, and the only checkable demo link points to esbuild.github.io. The members differ only in wording, not substance, on this total absence.",
+     "spread": 1,
+     "members": {
+      "A": 2,
+      "B": 1,
+      "C": 2
+     }
+    },
+    {
+     "criterion": "Reproducibility & transparency",
+     "weight": 10,
+     "score": 6,
+     "why": "Transparency is excellent: AI_WORKFLOW.md, AI integration docs, a compliance audit that names its own gaps, third-party attribution with hashes, and exact test commands. Reproduction fails though, because there is no final signed .hap, the model must be pushed separately, the form's setup field is blank, 8 commits were unpushed at check time, and no deck exists.",
+     "spread": 1,
+     "members": {
+      "A": 7,
+      "B": 6,
+      "C": 6
+     }
+    }
+   ],
+   "weighted_total": 65,
+   "build_reality": 7,
+   "source_loc": 45201,
+   "has_tests": true,
+   "tests": {
+    "files": 56,
+    "cases": 420
+   },
+   "live_demo": "https://esbuild.github.io/ (HTTP 200)",
+   "built_during_event": "yes: 366 commits by 3 authors, 2026-10-03 12:59 to 2026-10-04 08:09 UTC",
+   "strengths": [
+    "Genuinely original concept: plain-language requests become schema-validated JSON capsules rendered natively, with per-permission consent, block logging and on-device-first AI routing.",
+    "Deeply native HarmonyOS build using Calendar, Notification, Form, Scan, Vision, Sensor, Network and Preferences kits plus a self-ported Cactus inference engine through Node-API, far beyond a webview.",
+    "Strong engineering hygiene: about 45,000 source lines, 420 test cases in 56 files, a hand-written safe expression parser, and no committed secrets.",
+    "Outstanding AI and process transparency: AI_WORKFLOW.md, AI integration docs, third-party attribution with hashes, and a compliance audit that names its own gaps."
+   ],
+   "weaknesses": [
+    "Required recorded demo is missing; the team's own compliance audit records this, and no screenshot or link in the pack shows the app actually running.",
+    "Required working .hap is not published; only an unsigned pre-release that is many features behind, and the on-device path needs a separate 480 MB model push plus an arm64-only library an x86 emulator cannot load.",
+    "Pitch deck is not provided, so the concept cannot be judged as presented.",
+    "Advertised capability exceeds the code: vibration is offered in the UI and README with no implementing action, and several features marked built were never verified on emulator or device."
+   ],
+   "red_flags": [
+    "The team's own audit documents a claim/code mismatch: vibration is advertised in the UI and README but no capsule action implements it.",
+    "Features marked built, such as reminders firing with the app closed and shake counting, were never verified on emulator or device.",
+    "The only checkable demo link in the submission resolves to esbuild.github.io, an unrelated website, so no demonstration of the app is verifiable.",
+    "In Smart mode the live marketplace search sends request text to the cloud without a consent notice, a privacy gap the team's own research flagged and fixed only for on-device mode."
+   ],
+   "verdict": "A technically exceptional and genuinely original native HarmonyOS entry whose strong engineering and broad platform use are undercut by missing required deliverables, above all the recorded demo and the final .hap, leaving its core claims unverifiable as submitted.",
+   "council": {
+    "version": 9,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 75,
+      "agreement": 0.7,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 63,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 62,
+      "agreement": 0.9,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791240129286
+  }
+ },
+ "goldman|damianlech/HackYeah26": {
+  "id": "curated--goldman--damianlech-HackYeah26",
+  "task": "goldman",
+  "repo": "damianlech/HackYeah26",
+  "title": "Clearance",
+  "team": "Visdomers",
+  "uploaded_at": 1791226634010,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--goldman--damianlech-HackYeah26",
+   "repo": "damianlech/HackYeah26",
+   "project": "Clearance",
+   "team": "Visdomers",
+   "task": "goldman",
+   "result": "Not disclosed",
+   "task_fit": "yes: the submission is this task's product, a gateway and TLS-intercepting proxy enforcing a central hot-reloaded policy with deterministic controls, budgets, audit reporting and a test suite; only the semantic half is simulated.",
+   "scores": [
+    {
+     "criterion": "Robustness/guardrails",
+     "weight": 30,
+     "score": 5,
+     "why": "The deterministic half is real and deep: auth, model allowlist, checksum-validated PII redaction, a signature feed with self-test vectors, budgets and fail-closed behaviour under hot reload. The semantic half is a keyword-and-weight simulation and the authority-over-detection guarantees exist only in design docs, so the hybrid requirement is half met and the median of 5 is fair.",
+     "spread": 2,
+     "members": {
+      "A": 6.5,
+      "B": 4.5,
+      "C": 5
+     }
+    },
+    {
+     "criterion": "Architecture & performance",
+     "weight": 20,
+     "score": 7,
+     "why": "Two real in-path enforcement points exist in code, including a 3-layer proxy that terminates TLS, applies policy and re-encrypts with a virtual-to-real key swap, backed by committed latency benchmark results. Member C's claim that the performance numbers are placeholders in a deck is not supported, since no deck exists and two members independently saw measured results, so the higher median of 7 stands.",
+     "spread": 2.5,
+     "members": {
+      "A": 7.5,
+      "B": 7,
+      "C": 5
+     }
+    },
+    {
+     "criterion": "Security reporting",
+     "weight": 20,
+     "score": 4,
+     "why": "Audit JSONL with trace IDs and a generator producing separate management and security tables from real log data are genuine. The dashboard deliverable is a static mockup not wired to the gateway, there is no live metrics endpoint and no tamper-evident log chaining, and the required deck is missing, so 4 is deserved.",
+     "spread": 2,
+     "members": {
+      "A": 6,
+      "B": 4,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Test suite",
+     "weight": 15,
+     "score": 6,
+     "why": "The 46 measured cases boot the real gateway, guard service and mock LLM as processes and include genuine negative cases such as prompt injection, budget exhaustion, guard outage and rejected policy edits. The README overstates this as 76 tests plus 120 browser checks, which the measured count does not support.",
+     "spread": 2,
+     "members": {
+      "A": 8,
+      "B": 6,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Implementability & scalability",
+     "weight": 15,
+     "score": 5,
+     "why": "One-command runs, pinned dependencies, three strictness profiles and prefix routing that can point at local models are real. Budgets are in-memory per process with check-then-charge, there are no Docker or Kubernetes artifacts and the two prototypes were never unified; Member C's claim that the build has not started is contradicted by roughly 11k lines of working prototype code that all members reviewed.",
+     "spread": 2.5,
+     "members": {
+      "A": 7,
+      "B": 4.5,
+      "C": 5
+     }
+    }
+   ],
+   "weighted_total": 53.5,
+   "build_reality": 5.5,
+   "source_loc": 11382,
+   "has_tests": true,
+   "tests": {
+    "files": 4,
+    "cases": 46
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "yes: 37 commits by 2 authors, 2026-10-03 11:09 to 2026-10-04 08:15 UTC",
+   "strengths": [
+    "Real enforcement code in the traffic path: a working OpenAI-compatible gateway plus a 3-layer TLS-intercepting proxy with certificate verification and virtual-to-real key swap.",
+    "Policy hot reload with last-known-good rejection of broken edits, plus a signature feed carrying per-rule positive and negative self-test vectors.",
+    "PII redaction with checksum validators for PESEL, IBAN and Luhn rather than plain regex matching.",
+    "Tests boot the actual stack as processes and cover real negative cases, with committed latency benchmarks comparing deterministic and guard-path enforcement."
+   ],
+   "weaknesses": [
+    "The required 10-slide deck was not provided and the submission form is essentially blank, leaving the repo to carry the review alone.",
+    "The semantic controls are keyword-and-weight simulators rather than model calls, so the hybrid deterministic plus semantic requirement is only half implemented.",
+    "The dashboard is a static mockup with seeded data, not a UI wired to the running gateway, and no live metrics endpoint exists.",
+    "Scalability is docs-only: in-memory budgets, no Docker or Kubernetes artifacts, and two prototypes that were never unified into one product."
+   ],
+   "red_flags": [
+    "The README claims 76 automated tests plus 120 browser checks while 46 test cases were measured, and claims Visdom integration with no Visdom code in the repo.",
+    "Keyword-matching simulators are labelled as AI-based guardrails.",
+    "Mockup dashboard pages are presented as screenshots of the product."
+   ],
+   "verdict": "A genuinely engineered control layer with real gateway and proxy enforcement, hot-reloaded policy and stack-booting tests, undermined by a simulated semantic half, a mockup dashboard, README overclaims and a missing required deck.",
+   "council": {
+    "version": 9,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 69,
+      "agreement": 0.7,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 51.25,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 49.5,
+      "agreement": 0.6,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791231432526
+  }
+ },
+ "goldman|00200200/HackYeah2026": {
+  "id": "curated--goldman--00200200-HackYeah2026",
+  "task": "goldman",
+  "repo": "00200200/HackYeah2026",
+  "title": "Control",
+  "team": "Under Controllers",
+  "uploaded_at": 1791226634004,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--goldman--00200200-HackYeah2026",
+   "repo": "00200200/HackYeah2026",
+   "project": "Control",
+   "team": "Under Controllers",
+   "task": "goldman",
+   "result": "Not disclosed",
+   "task_fit": "yes: a real gateway enforcing one central policy.yaml over agent-to-model (/v1/chat/completions, OpenAI SDK compatible) and agent-to-MCP (/mcp/) traffic, with deterministic plus semantic controls, budgets, a signed audit log and metrics, exactly the AI Control Layer task.",
+   "scores": [
+    {
+     "criterion": "Robustness/guardrails",
+     "weight": 30,
+     "score": 8.5,
+     "why": "Deterministic detectors plus a real Ollama judge with structured risk scoring and fail-closed behaviour blocked 20 of 20 semantic attacks and redacted all four authored personal-data cases in the committed live run. The median sits below B's 9 because of one documented false block, PII detectors that miss names and postal addresses, and evidence limited to the team's own 48 authored cases rather than a held-out set.",
+     "spread": 2,
+     "members": {
+      "A": 8.5,
+      "B": 9,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Architecture & performance",
+     "weight": 20,
+     "score": 8,
+     "why": "The gateway is verifiably in the request path for chat and MCP traffic, with hot policy reload that keeps the last valid snapshot and a measured 8.7 ms median overhead without AI checks. The AI judge adds about 4.83 s median and the single-process SQLite design has no streaming, which caps the score at A's 8 rather than B's 8.5.",
+     "spread": 1.5,
+     "members": {
+      "A": 8,
+      "B": 8.5,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Security reporting",
+     "weight": 20,
+     "score": 9,
+     "why": "All members confirm the SHA-256 chained, Ed25519 signed audit log with rule IDs and policy hash but no raw prompts, plus JSONL export, a signed checkpoint, an offline verifier, a live dashboard and Prometheus metrics. A and B's 9 stands because C's deductions, such as no GPU measurement or dollar-cost tracking, are extras the brief does not ask for.",
+     "spread": 2,
+     "members": {
+      "A": 9,
+      "B": 9,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Test suite",
+     "weight": 15,
+     "score": 8,
+     "why": "The pack shows 23 test files with 193 measured cases, 8 Rego tests in a real OPA container and a 48-case live evaluation with expected outcomes, all runnable offline via make check. B and C repeat the team's claim of 494 pytest cases, but the measurement supports A's more careful 8, and the live cases are authored rather than held-out.",
+     "spread": 1,
+     "members": {
+      "A": 8,
+      "B": 9,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Implementability & scalability",
+     "weight": 15,
+     "score": 7,
+     "why": "Ollama is first-class with a documented activation flow, the YAML policy and make targets are clear, and a 130-dependency licence inventory is unusually thorough. The median stays at 7 because the Postgres scale-out is described but not built, there are no monetary caps or per-minute rate limits, and the full stack was validated only on Apple-silicon macOS with the Docker Ollama path untested.",
+     "spread": 1,
+     "members": {
+      "A": 7,
+      "B": 8,
+      "C": 7
+     }
+    }
+   ],
+   "weighted_total": 82,
+   "build_reality": 9,
+   "source_loc": 11368,
+   "has_tests": true,
+   "tests": {
+    "files": 23,
+    "cases": 193
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "yes: 20 commits by 2 authors, 2026-10-03 10:30 to 2026-10-04 08:29 UTC",
+   "strengths": [
+    "One genuine pipeline in front of both model and MCP traffic, with signed warrants, delegation that only narrows, cascading revocation, and hot policy reload that keeps the last valid snapshot on invalid edits.",
+    "The semantic control is a real local Ollama model call with structured risk scoring, budget charging and fail-closed behaviour on timeout or malformed output, not a keyword list, and the committed live run blocked 20 of 20 semantic attacks.",
+    "Tamper-evident SHA-256 chained, Ed25519 signed audit log with JSONL export, a signed off-server checkpoint and an offline verifier, plus a dashboard wired to live gateway data rather than a mockup.",
+    "Honest evidence discipline: a documented false block kept in the expected results, candid limits sections throughout the docs, and tests runnable offline without API keys."
+   ],
+   "weaknesses": [
+    "The AI judge adds a median of about 4.83 seconds per request, which the team itself notes makes the full guard path unsuitable for high-volume traffic.",
+    "Single-process SQLite with in-process locks; the Postgres multi-node path is described but not built, there is no streaming, and full-stack validation covers only Apple-silicon macOS with the Docker Ollama path untested.",
+    "MCP support is limited to tools/call and the downstream MCP tools are mocks rather than real integrations.",
+    "Submission requirements were missed: the form's problem, solution and instructions fields are largely empty, the pitch deck was not provided through the form and exists only in the repo, and no live demo was captured."
+   ],
+   "red_flags": [
+    "The deck claims 494 pytest cases while the measurement counts 193 test functions across 23 files; probably parametrization, but the claim is unverified in the evidence pack."
+   ],
+   "verdict": "An unusually complete and honest control layer whose real hybrid guardrails and tamper-evident reporting are held back by judge latency, single-process scaling, mocked MCP tools and an incomplete submission form.",
+   "council": {
+    "version": 9,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 82,
+      "agreement": 1,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 87.5,
+      "agreement": 0.7,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 71.5,
+      "agreement": 0.7,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791273502578
+  }
+ },
+ "krakow|Moscuuu/will-to-wheel": {
+  "id": "curated--krakow--Moscuuu-will-to-wheel",
+  "task": "krakow",
+  "repo": "Moscuuu/will-to-wheel",
+  "title": "Will to Wheel",
+  "team": "WSP",
+  "uploaded_at": 1791226633988,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--krakow--Moscuuu-will-to-wheel",
+   "repo": "Moscuuu/will-to-wheel",
+   "project": "Will to Wheel",
+   "team": "WSP",
+   "task": "krakow",
+   "result": "Not disclosed",
+   "task_fit": "yes: a working Kraków accessibility passport for wheelchair and pram users with per-attribute barrier data, per-datum provenance and profile-dependent verdicts, which is squarely the partner's brief.",
+   "scores": [
+    {
+     "criterion": "Relation & usability",
+     "weight": 25,
+     "score": 8.8,
+     "why": "Verdicts are computed per profile from real dimensions (door width, threshold tolerance, toilet needs) across four states, and missing data renders as 'Brak danych' or 'Nie można potwierdzić', never as accessible. Real accessibility controls (text sizing, high contrast, skip link, keyboard and screen-reader support) are present, but the map has no explicit text alternative.",
+     "spread": 1,
+     "members": {
+      "A": 9,
+      "B": 8.8,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Prototype quality",
+     "weight": 20,
+     "score": 8.5,
+     "why": "The live HTTP 200 demo matches the code, with map search, evidence passport, community reports, owner claims, admin moderation and an AI audit wizard with a manual fallback, plus the required conflicting, unreviewed and source-failure cases and 266 tests with Playwright axe. Points are lost because the referenced 2:49 walkthrough video cannot be verified in the submission.",
+     "spread": 2,
+     "members": {
+      "A": 9,
+      "B": 8.5,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Data reliability",
+     "weight": 15,
+     "score": 8,
+     "why": "Every datum carries source, method, observedAt and note, with source weights, time decay and conflict handling implemented in domain code, and the OSM Overpass and ZTP GTFS ingestion is real with attribution. The deployed demo runs on clearly labelled seed data, coverage is one central Kraków bbox, and no city MSIP or dane.gov.pl feed is actually consumed.",
+     "spread": 0,
+     "members": {
+      "A": 8,
+      "B": 8,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Scalability",
+     "weight": 20,
+     "score": 8,
+     "why": "Ingestion is cleanly separated from presentation through a Repo interface with memory and Supabase backends and admin-triggered, logged runs. The Kraków bbox and attribute mapping are code constants, so adding a city needs code edits rather than configuration.",
+     "spread": 1.5,
+     "members": {
+      "A": 8,
+      "B": 8.5,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Business model",
+     "weight": 20,
+     "score": 5,
+     "why": "Four plausible segments are named (free venues, premium chains, B2G city licences, booking-platform API), but no PLN pricing, cost or revenue figure appears anywhere in the deck, README or form, which the criterion explicitly requires.",
+     "spread": 1,
+     "members": {
+      "A": 5,
+      "B": 4,
+      "C": 5
+     }
+    }
+   ],
+   "weighted_total": 77,
+   "build_reality": 9,
+   "source_loc": 11747,
+   "has_tests": true,
+   "tests": {
+    "files": 42,
+    "cases": 266
+   },
+   "live_demo": "https://will-to-wheel.vercel.app (HTTP 200)",
+   "built_during_event": "yes: 73 commits by 2 authors, 2026-10-03 11:42 to 2026-10-04 07:52 UTC",
+   "strengths": [
+    "Per-attribute provenance (source, method, date, photo, note) with source weights, time decay and conflict handling is implemented in domain code, not just promised.",
+    "Missing or stale data can never produce a 'fits' verdict; it renders as 'Brak danych' or 'Nie można potwierdzić', verified in fitCheck and computeVerdict.",
+    "Real open-data ingestion (OSM Overpass with attribution and failover, ZTP Kraków GTFS stops) with sample data clearly labelled 'Przykładowe dane' and AI use disclosed.",
+    "Serious WCAG 2.2 AA effort (skip link, text sizing, high contrast, aria-live, axe in e2e) and all required demo cases (conflict, unreviewed venue, simulated source failure) present in seed data."
+   ],
+   "weaknesses": [
+    "Business model has no numbers: no PLN pricing, cost or revenue figures anywhere, which the reviewing guide explicitly requires.",
+    "The required 2:49 walkthrough video is referenced but cannot be verified in the submission pack, and the submission form fields are largely empty.",
+    "The deployed demo runs on labelled seed data, coverage is one central Kraków bbox, and no city MSIP or dane.gov.pl feed is actually consumed.",
+    "New-city onboarding requires code edits (hardcoded bbox and tag mapping) rather than pure configuration."
+   ],
+   "red_flags": [
+    "A required video deliverable is referenced in the README but no video file or link exists in the submission, so it cannot be verified."
+   ],
+   "verdict": "An unusually complete, honest and well-engineered accessibility passport that meets nearly every hard requirement of the brief, held back by an unpriced business model, narrow seed-data coverage and an unverifiable video deliverable.",
+   "council": {
+    "version": 9,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 78.5,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 76,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 70,
+      "agreement": 0.7,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791228236846
+  }
+ },
+ "krakow|Mateuszl28/Krak-w-bez-barier": {
+  "id": "curated--krakow--Mateuszl28-Krak-w-bez-barier",
+  "task": "krakow",
+  "repo": "Mateuszl28/Krak-w-bez-barier",
+  "title": "Dostępnik",
+  "team": "PL{Byte_Bandits}",
+  "uploaded_at": 1791226633982,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--krakow--Mateuszl28-Krak-w-bez-barier",
+   "repo": "Mateuszl28/Krak-w-bez-barier",
+   "project": "Dostępnik",
+   "team": "PL{Byte_Bandits}",
+   "task": "krakow",
+   "result": "Not disclosed",
+   "task_fit": "yes: a Kraków accessibility checker for wheelchair users and parents with prams that implements the task's core asks - per-attribute barrier data with source, date and reliability, missing data never shown as accessible, conflict and source-outage cases, open-data ingestion separated from presentation, and a proven path to new cities.",
+   "scores": [
+    {
+     "criterion": "Relation & usability",
+     "weight": 25,
+     "score": 8.5,
+     "why": "Profile-based, per-requirement assessment with missing data rendered as unknown or incomplete rather than accessible, all demonstrated live in Polish with English support. On the split, the evidence supports A and B: C's 7 double-counts the missing deliverables, which the council charges to prototype quality.",
+     "spread": 2,
+     "members": {
+      "A": 8.5,
+      "B": 9,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Prototype quality",
+     "weight": 20,
+     "score": 6,
+     "why": "The live demo is broad and the required conflict case (krk-wc-11) and outage simulation (?awaria=osm) exist as demoable objects, but two mandatory deliverables are absent and only 15 tests in one file cover the logic. On the main disagreement the evidence supports B and C over A's 8: the deck is measured as not provided and no video file exists, which caps the score at 6.",
+     "spread": 2,
+     "members": {
+      "A": 8,
+      "B": 6,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Data reliability",
+     "weight": 15,
+     "score": 8.5,
+     "why": "Every fact carries source, date and reference link; confirmed, conflicting, stale and unverified statuses are computed and surfaced; the data is real open data (OSM, ZTP ArcGIS, MSIP) with attribution and an honest coverage report. Members differ by half a point at most, so the median is a consensus.",
+     "spread": 1,
+     "members": {
+      "A": 9,
+      "B": 8.5,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Scalability",
+     "weight": 20,
+     "score": 8.5,
+     "why": "Ingestion is fully separated from presentation and Warsaw was added as data configuration, proving the add-a-city path in practice. A's caveat is correct and keeps this below B's 9: a new city's municipal feeds still need an adapter, and report storage persists to /tmp.",
+     "spread": 1,
+     "members": {
+      "A": 8.5,
+      "B": 9,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Business model",
+     "weight": 20,
+     "score": 6,
+     "why": "Costs are priced with numbers and the paying side is named (venues, booking platforms and cities, with users free), but no revenue figures, tiers or projections exist. With members spread from 5.5 to 7, the evidence best supports C's middle view: a direction without numbers.",
+     "spread": 1.5,
+     "members": {
+      "A": 5.5,
+      "B": 7,
+      "C": 6
+     }
+    }
+   ],
+   "weighted_total": 75,
+   "build_reality": 8,
+   "source_loc": 9197,
+   "has_tests": true,
+   "tests": {
+    "files": 1,
+    "cases": 15
+   },
+   "live_demo": "https://krak-w-bez-barier.vercel.app (HTTP 200)",
+   "built_during_event": "yes: 24 commits by 2 authors, 2026-10-03 17:23 to 2026-10-05 10:27 UTC",
+   "strengths": [
+    "Per-datum provenance (source, date, link) with confirmed, conflict, stale and unverified statuses implemented in code and UI, not just claimed.",
+    "Missing data is never rendered as accessible: a three-state verdict in assess.ts, with unknown route segments counted and dashed separately.",
+    "Real open data (OSM Overpass, ZTP ArcGIS, MSIP) with licenses and attribution, ingested by scripts fully separated from the presentation layer.",
+    "The add-a-city path is proven, not claimed: Warsaw (7258 places) exists as data configuration with city selection in app and API."
+   ],
+   "weaknesses": [
+    "Required PDF deck (max 10 slides) is not provided; no deck exists in the repo or the submission.",
+    "Required demo video (max 3 min) is missing; only a script at docs/scenariusz-wideo.md exists.",
+    "Business model names who pays and prices the costs, but gives no revenue figures, price tiers or market assumptions.",
+    "Only 15 test cases in one file, all on assessment logic; WCAG 2.2 AA is self-claimed without test evidence, and user reports persist to /tmp on Vercel."
+   ],
+   "red_flags": [
+    "Two commits landed after the deadline (last commit 2026-10-05), so the reviewed state may differ from the state judged live.",
+    "Both mandatory pitch deliverables are absent and the submission form is largely blank, so the entire pitch rests on the README."
+   ],
+   "verdict": "A technically deep, honest prototype that implements the task's core rule of provenance-tracked data where gaps never show as accessible and proves scalability with Warsaw, but missing mandatory deliverables, two post-deadline commits, and a business model without numbers keep it below finalist level.",
+   "council": {
+    "version": 9,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 78.75,
+      "agreement": 0.7,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 79.25,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 69.5,
+      "agreement": 0.8,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791227883386
+  }
+ },
+ "superteam|corki1337/FairOdds": {
+  "id": "curated--superteam--corki1337-FairOdds",
+  "task": "superteam",
+  "repo": "corki1337/FairOdds",
+  "title": "FairOdds",
+  "team": "FairOdds",
+  "uploaded_at": 1791226633936,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--superteam--corki1337-FairOdds",
+   "repo": "corki1337/FairOdds",
+   "project": "FairOdds",
+   "team": "FairOdds",
+   "task": "superteam",
+   "result": "Not disclosed",
+   "task_fit": "yes: an on-chain pari-mutuel bookmaker on Solana devnet where the bookmaker's three powers are each replaced by code - stakes sit in a vault whose authority is the market PDA, odds derive from the pool split, and verdicts come from a pinned Switchboard feed with permissionless lock, resolve, claim and refund - with no backend in the settlement path.",
+   "scores": [
+    {
+     "criterion": "Relevance",
+     "weight": 30,
+     "score": 9,
+     "why": "The trust-replacing logic genuinely lives on-chain, the target user is named explicitly, and the settlement path has no operator. The retained upgrade authority is the only deduction from a near-perfect fit.",
+     "spread": 0.5,
+     "members": {
+      "A": 8.5,
+      "B": 9,
+      "C": 9
+     }
+    },
+    {
+     "criterion": "Completeness & functionality",
+     "weight": 25,
+     "score": 6.5,
+     "why": "The full cycle exists in real Anchor code and all 10 measured test cases pass, but two required deliverables are missing (no public video of at most 3 minutes, only a narration script; no PDF deck, only an unexported slides.html), the form is near empty, and the claimed devnet payout cannot be verified from the pack.",
+     "spread": 1,
+     "members": {
+      "A": 6.5,
+      "B": 7,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Idea & problem",
+     "weight": 20,
+     "score": 8,
+     "why": "The problem is concrete and named, each bookmaker power is mapped to an on-chain rule, and the why-not-a-database question is answered directly. The yield-instead-of-vig model adds a coherent revenue story.",
+     "spread": 0,
+     "members": {
+      "A": 8,
+      "B": 8,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Implementation potential",
+     "weight": 15,
+     "score": 7,
+     "why": "The program design is unusually careful - versioned PDA seeds, an exhaustive error taxonomy, deadline and refund liveness, and a tested invariant that payouts never exceed the pool - but yield_park is a self-written mock, the oracle rests on a single data source, and upgrade authority is not frozen.",
+     "spread": 1,
+     "members": {
+      "A": 7,
+      "B": 7,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Originality",
+     "weight": 10,
+     "score": 6.5,
+     "why": "The feed-lock PDA, feed-hash pinning and the yield CPI sit well beyond a tutorial escrow, but on-chain pari-mutuel betting is a known pattern, so the novelty is architectural rather than in the domain.",
+     "spread": 1,
+     "members": {
+      "A": 7,
+      "B": 6.5,
+      "C": 6
+     }
+    }
+   ],
+   "weighted_total": 76.25,
+   "build_reality": 8,
+   "source_loc": 6869,
+   "has_tests": true,
+   "tests": {
+    "files": 2,
+    "cases": 10
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "yes: 3 commits by 2 authors, 2026-10-03 20:56 to 2026-10-04 04:45 UTC",
+   "strengths": [
+    "Custody is unambiguously on-chain: bets sit in a vault whose authority is the market PDA, and claim and refund transfers need only that PDA signature.",
+    "Oracle trust is minimized and verifiable: each market pins one Switchboard PullFeed by hash and hands its authority to a feed-lock PDA that no instruction ever signs for, with freshness and unanimity checks on resolve.",
+    "Liveness is engineered in: permissionless lock and resolve, a resolve deadline followed by cancel_expired with full refunds, draw refunds, and claims with no time limit.",
+    "Judge-facing documentation is thorough and honest, pre-answering where the intermediary disappears and stating limitations plainly, backed by 10 passing tests including a payout-sum invariant."
+   ],
+   "weaknesses": [
+    "The required public video of at most 3 minutes is missing; only a narration script (docs/NARRACJA.md) exists and no video link appears in the evidence.",
+    "The required PDF deck is missing: the deck field is not provided and the repo's PDFs are the task rules and an architecture spec, not the team's slides; only slides.html with a print-by-hand instruction exists.",
+    "Upgrade authority remains with the deployer wallet; the freeze script was written but not run, so the author can still replace the deployed program.",
+    "yield_park is a self-written mock with simulated APR rather than a real DeFi integration, and the claimed devnet smoke payout is not evidenced in the pack (empty demo checks, no screenshots, near-empty form)."
+   ],
+   "red_flags": [
+    "The README claims a confirmed devnet smoke market and a 400 USDC payout with explorer links, but the measured demo checks are empty, there are no screenshots, and HANDOFF.md states there was no devnet deploy and no commits, so the deployment claims rest on contradictory and unverifiable evidence.",
+    "aichain.pdf in the repo is an architecture specification for exactly the program built, formatted as an AI-authored handoff document, while the near-empty submission form discloses no use of AI tools."
+   ],
+   "verdict": "A technically strong and honestly documented trustless bookmaker that genuinely removes the intermediary in code, but the missing video and PDF deliverables, the unverifiable devnet claims and the mocked yield layer keep it below the top tier.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 75.25,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 77.5,
+      "agreement": 0.8,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 73,
+      "agreement": 0.7,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791226334331
+  }
+ },
+ "huawei|carrotly-technologies-2026/SafeMesh": {
+  "id": "curated--huawei--carrotly-technologies-2026-SafeMesh",
+  "task": "huawei",
+  "repo": "carrotly-technologies-2026/SafeMesh",
+  "title": "SafeMesh",
+  "team": "Carrotly",
+  "uploaded_at": 1791226633925,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--huawei--carrotly-technologies-2026-SafeMesh",
+   "repo": "carrotly-technologies-2026/SafeMesh",
+   "project": "SafeMesh",
+   "team": "Carrotly",
+   "task": "huawei",
+   "result": "Not disclosed",
+   "task_fit": "yes: a native ArkTS/ArkUI HarmonyOS app, minimum API 20 declared, with a public repo, released HAP, demo video, architecture docs and AI_WORKFLOW.md all present",
+   "scores": [
+    {
+     "criterion": "Originality",
+     "weight": 20,
+     "score": 7,
+     "why": "Per-hop ECDSA P-256 verification with store-and-forward and a bundled offline protective-point map is a distinctive combination built around NearLink. Mesh alerting itself exists and the signed-relay pattern alone is not new, so the score sits above average but not top.",
+     "spread": 0.5,
+     "members": {
+      "A": 7.5,
+      "B": 7,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Demonstrated usefulness",
+     "weight": 20,
+     "score": 7,
+     "why": "The offline map, verified inbox and relay demonstrably work across three emulator apps and fit a real civilian problem with a bilingual UI. The headline phone-to-phone promise is only shown through a labelled WebSocket hub and the issuer is exercise-only, so field usefulness is not yet proven.",
+     "spread": 0.5,
+     "members": {
+      "A": 6.5,
+      "B": 7,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Technical execution",
+     "weight": 20,
+     "score": 8.5,
+     "why": "Clean MVVM ArkTS with 177 passing host tests that run the real transpiled source, zero ArkTS and lint errors on both source sets, bounded parsing and correct lifecycle handling. No secrets or keystores are committed.",
+     "spread": 1,
+     "members": {
+      "A": 8.5,
+      "B": 8,
+      "C": 9
+     }
+    },
+    {
+     "criterion": "Platform capabilities",
+     "weight": 20,
+     "score": 9,
+     "why": "Genuine deep use of OHOS kits: a NearLink adapter with capability gating and MTU framing, Crypto Architecture Kit verification, Network, Location, ArkData, Accessibility, Localization and Sensor kits, plus a second Oniro product built from the same codebase. The only cap is that the radio path itself is emulator-mocked.",
+     "spread": 0.5,
+     "members": {
+      "A": 8.5,
+      "B": 9,
+      "C": 9
+     }
+    },
+    {
+     "criterion": "Demo quality",
+     "weight": 10,
+     "score": 8,
+     "why": "A 2 min 58 s narrated, captioned recording of three synchronized API 24 emulator apps with stand-ins and speed-ups clearly labelled, backed by a 68-screenshot gallery. The pack could not independently verify the video, but the committed evidence is consistent with it.",
+     "spread": 1,
+     "members": {
+      "A": 8,
+      "B": 8,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Reproducibility & transparency",
+     "weight": 10,
+     "score": 9,
+     "why": "One-command checks with documented expected output, Windows and Linux/Oniro instructions, a released HAP with SHA-256, fresh-clone build evidence and an unusually candid AI_WORKFLOW.md. A stranger could plausibly rebuild, with the caveat of a specific DevEco setup.",
+     "spread": 1,
+     "members": {
+      "A": 9,
+      "B": 8,
+      "C": 9
+     }
+    }
+   ],
+   "weighted_total": 80,
+   "build_reality": 8,
+   "source_loc": 16168,
+   "has_tests": true,
+   "tests": {
+    "files": 16,
+    "cases": 177
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "yes: 41 commits by 2 authors, 2026-10-03 16:07 to 2026-10-04 08:57 UTC",
+   "strengths": [
+    "Per-hop ECDSA P-256 signature verification with store-and-forward, ACKs and forged, expired and duplicate rejection, all covered by tests",
+    "Broad, real platform use: a NearLink adapter with capability gating, on-device crypto, and many OHOS kits, plus a second Oniro product from the same source",
+    "Exceptional transparency and reproducibility: every simulated piece labelled, a physical-device runbook, one-command checks, a SHA-256 HAP release and detailed AI disclosure",
+    "A convincing synchronized three-emulator demo showing publish, two relay hops, forged-copy rejection and offline map search"
+   ],
+   "weaknesses": [
+    "NearLink radio delivery has never been demonstrated on physical hardware; all relay evidence runs through a labelled laptop WebSocket hub on emulators",
+    "The issuer is a local exercise signing service, not a real authority, and every alert is a drill, so trust in a real warning chain is unproven",
+    "No background relaying until an API 26 continuous-task mode, which limits the phone-to-phone-when-the-network-is-down promise",
+    "The submission form fields are largely empty, so the deck, video and HAP are discoverable only from the repo and releases"
+   ],
+   "red_flags": [],
+   "verdict": "An exceptionally well-engineered, honest and reproducible native HarmonyOS prototype whose per-hop-signed mesh alerting genuinely works across three emulators, held below the top tier only because the NearLink radio path has never been proven on real hardware.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 79,
+      "agreement": 0.8,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 78,
+      "agreement": 1,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 80,
+      "agreement": 0.9,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791225913969
+  }
+ },
+ "krakow|AdamStajek/Jakobiany-HackYeah": {
+  "id": "curated--krakow--AdamStajek-Jakobiany-HackYeah",
+  "task": "krakow",
+  "repo": "AdamStajek/Jakobiany-HackYeah",
+  "title": "Swoją Drogą",
+  "team": "Jakobiany",
+  "uploaded_at": 1791226633914,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--krakow--AdamStajek-Jakobiany-HackYeah",
+   "repo": "AdamStajek/Jakobiany-HackYeah",
+   "project": "Swoją Drogą",
+   "team": "Jakobiany",
+   "task": "krakow",
+   "result": "Not disclosed",
+   "task_fit": "yes: a Kraków accessibility assessor with per-attribute barrier facts, needs-based profiles that change the verdict, and OSM/MSIP/ZDMK/ZTP open data, squarely matching the partner brief.",
+   "scores": [
+    {
+     "criterion": "Relation & usability",
+     "weight": 25,
+     "score": 8.5,
+     "why": "Individual constraint profiles drive a per-person verdict, missing data renders as uncertain rather than accessible, and PL/EN interfaces with text alternatives and a tested WCAG 2.2 AA program are in place. The score reflects strong design verified only through screenshots, since no live demo was available to reviewers.",
+     "spread": 1,
+     "members": {
+      "A": 8.5,
+      "B": 8.5,
+      "C": 7.5
+     }
+    },
+    {
+     "criterion": "Prototype quality",
+     "weight": 20,
+     "score": 7,
+     "why": "A full stack is implemented with real OSM routing on the city pedestrian graph, transit data, moderation, 146 test cases and an axe/Playwright accessibility suite, which the evidence supports over the claim that routing itself is only synthetic. The median is held back because no live demo, video or demo checks verified it runs, and two members independently noted endpoints documented or returning 501.",
+     "spread": 1.5,
+     "members": {
+      "A": 8.5,
+      "B": 7,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Data reliability",
+     "weight": 15,
+     "score": 8.5,
+     "why": "Every attribute is a fact with source, license, dates, status and unconfirmed reasons, conflicts collapse to explicit states, and coverage is reported honestly (585 of 7,314 places with a wheelchair value, zero with all five fields). Real integrations carry attribution; the main gap is that OSM facts remain unverified by design.",
+     "spread": 0.5,
+     "members": {
+      "A": 8.5,
+      "B": 8.5,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Scalability",
+     "weight": 20,
+     "score": 7,
+     "why": "Ingestion is separated from presentation and the OSM pipeline is boundary-parameterized, so the catalogue and graph transfer to a new city via configuration. The ZDMK, MSIP and ZTP scrapers hardcode Kraków URLs and parsing, so the mobility, roadworks and parking layers need new code per city, and no guide for adding a city exists.",
+     "spread": 1,
+     "members": {
+      "A": 7.5,
+      "B": 6.5,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Business model",
+     "weight": 20,
+     "score": 3,
+     "why": "No pricing, unit costs, hosting or revenue reasoning anywhere, only mentions of future features, while the task required a priced model with figures. The required PDF deck and video are also missing and the submission form is mostly blank, so this deliverable-heavy criterion is largely unmet.",
+     "spread": 2,
+     "members": {
+      "A": 3,
+      "B": 1,
+      "C": 3
+     }
+    }
+   ],
+   "weighted_total": 68,
+   "build_reality": 8,
+   "source_loc": 30960,
+   "has_tests": true,
+   "tests": {
+    "files": 37,
+    "cases": 146
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "partly: 2 commits before the event; 104 commits by 3 authors, 2026-10-02 14:08 to 2026-10-04 07:43 UTC",
+   "strengths": [
+    "Per-attribute facts with provenance, dates, evidence rows and explicit missing or conflicting states, with gaps rendering as uncertain rather than accessible",
+    "Brutally honest coverage reporting (8 percent wheelchair coverage, zero places with all five fields) instead of inflated claims",
+    "Real city-scale profile-aware routing on the full OSM pedestrian graph, with a CI axe and Playwright WCAG 2.2 AA suite and keyboard support",
+    "Clean ingestion and presentation separation with atomic database publication and reproducible one-command updates"
+   ],
+   "weaknesses": [
+    "No business model with numbers: no pricing, costs, revenue or who-pays analysis, and the task required a priced model with figures",
+    "Required deliverables missing: no PDF deck of up to 10 slides and no video of up to 3 minutes, and the submission form is mostly blank",
+    "Kraków-specific scrapers (ZDMK, MSIP, ZTP) are hardcoded, so a new city needs code changes beyond data configuration, with no guide for adding a city",
+    "No live demo URL, video or demo checks, so the running system could not be verified, and several endpoints are documented as possibly returning 501"
+   ],
+   "red_flags": [
+    "Synthetic demo facts carry status confirmed with confidence 100, mitigated by an explicit synthetic-scenario source and an on-screen warning",
+    "Weather and roadworks are ingested and displayed but do not yet influence routing cost"
+   ],
+   "verdict": "An unusually honest, deeply engineered and well-tested accessibility prototype that nails data reliability and usability, let down by the absent business case and the missing required deck and video.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 72,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 63,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 64.75,
+      "agreement": 0.7,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791225712633
+  }
+ },
+ "impacther|Spiace-Wydry/Czeladniczka": {
+  "id": "curated--impacther--Spiace-Wydry-Czeladniczka",
+  "task": "impacther",
+  "repo": "Spiace-Wydry/Czeladniczka",
+  "title": "Czeladniczka",
+  "team": "Śpiące Wydry",
+  "uploaded_at": 1791226633905,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--impacther--Spiace-Wydry-Czeladniczka",
+   "repo": "Spiace-Wydry/Czeladniczka",
+   "project": "Czeladniczka",
+   "team": "Śpiące Wydry",
+   "task": "impacther",
+   "result": "Not disclosed",
+   "task_fit": "no: the project is a gender-neutral craft-apprenticeship matching platform whose only tie to ImpactHer is the feminine Polish word in its name; no women-specific need, feature, evidence, or impact plan appears in the form, README, code, or demo.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 2,
+     "why": "A two-sided craft-apprenticeship marketplace with sensible domain details (exam goal, distance filters, learning forms), but the pattern is familiar and no need disproportionately affecting women is identified or evidenced. The blank problem-statement field supports the lower reading shared by B and C over A's 4.",
+     "spread": 2,
+     "members": {
+      "A": 4,
+      "B": 2,
+      "C": 2
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 1.5,
+     "why": "Nothing in the product only makes sense for women; the sole tie is the feminine name, and the submission names no women-specific need or impact plan. The evidence better supports the near-zero view of A and B than C's 3, since a name is not a category connection, and the missed category requirement is listed among the weaknesses.",
+     "spread": 3,
+     "members": {
+      "A": 1.5,
+      "B": 0,
+      "C": 3
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 4,
+     "why": "The app works end to end on a live demo with a mobile-first Polish UI and demo accounts, so it is usable as a generic product. But it serves no identified group under this task's theme, and with no deck, a largely blank form, and no impact plan, the median lands between A's generous 6 and B's strict 3.",
+     "spread": 3,
+     "members": {
+      "A": 6,
+      "B": 3,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 7,
+     "why": "The code shows deliberate, cohesive craft: a hand-drawn SVG hero, consistent color tokens, the Zilla Slab and Manrope pairing, 44px touch targets, and aria labels. C's 5 is the outlier against two 7s, though zero screenshots leave the rendered result unverified.",
+     "spread": 2,
+     "members": {
+      "A": 7,
+      "B": 7,
+      "C": 5
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 6.5,
+     "why": "The full loop is deployed: auth, haversine search RPCs, a request status machine, reviews gated by accepted apprenticeships in RLS, migrations, and rich seed data. Zero tests, no deck, and one post-deadline commit keep it below B's 8.",
+     "spread": 2,
+     "members": {
+      "A": 6.5,
+      "B": 8,
+      "C": 6
+     }
+    }
+   ],
+   "weighted_total": 37.5,
+   "build_reality": 8,
+   "source_loc": 1945,
+   "has_tests": false,
+   "tests": {
+    "files": 0,
+    "cases": 0
+   },
+   "live_demo": "https://czeladniczka.vercel.app (HTTP 200)",
+   "built_during_event": "yes: 28 commits by 2 authors, 2026-10-03 15:36 to 2026-10-04 09:12 UTC",
+   "strengths": [
+    "A genuinely working two-sided marketplace, live at czeladniczka.vercel.app (HTTP 200): Supabase auth, distance-filtered search RPCs, a request and invite lifecycle, and reviews gated by accepted apprenticeships in database policy.",
+    "Careful data layer: migrations with check constraints, RLS on every table, column-level grants, a separate hardening migration, and realistic seed data including review history.",
+    "Polished mobile-first Polish UI with accessibility attention (44px targets, aria labels) and a README with demo accounts so judges can run it.",
+    "A real weekend build: 27 of 28 commits during the event by 2 authors, about 1,945 lines of source across 33 files."
+   ],
+   "weaknesses": [
+    "Misses the task's core requirement: no women-specific need, feature, evidence, or measurable-impact plan exists anywhere in the submission; stripped of its feminine name the product is entirely gender-neutral.",
+    "Missing deliverables: no deck, no screenshots, and the submission form's problem and goal fields are essentially empty, so there is no problem statement or impact case.",
+    "Zero tests (0 files, 0 cases) despite a database-heavy design with policies and RPCs that need them.",
+    "No validation that the matching helps anyone: no target group, no impact metrics, and no sign of user research."
+   ],
+   "red_flags": [
+    "May not be built for this task: the project is a gender-neutral craft-apprenticeship matching platform whose only tie to ImpactHer is the feminine Polish word in its name; no women-specific need, feature, evidence, or impact plan appears in the form, README, code, or demo.",
+    "One commit landed after the Sunday 11:00 deadline (minor, but a measured fact)."
+   ],
+   "verdict": "A well-engineered, deployed apprenticeship marketplace that fails the ImpactHer brief, since nothing beyond a feminine name addresses a challenge disproportionately affecting women, and the submission arrives without a deck, tests, or a stated problem.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 47.5,
+      "agreement": 0.8,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 34,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 36,
+      "agreement": 0.7,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791225625091
+  }
+ },
+ "smartcity|Moscuuu/will-to-wheel": {
+  "id": "curated--smartcity--Moscuuu-will-to-wheel",
+  "task": "smartcity",
+  "repo": "Moscuuu/will-to-wheel",
+  "title": "Will to Wheel",
+  "team": "WSP",
+  "uploaded_at": 1791226633896,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--smartcity--Moscuuu-will-to-wheel",
+   "repo": "Moscuuu/will-to-wheel",
+   "project": "Will to Wheel",
+   "team": "WSP",
+   "task": "smartcity",
+   "result": "Not disclosed",
+   "task_fit": "yes: a day-to-day mobility and quality-of-life tool for Kraków residents, venue owners and city staff, built on open urban data (OSM, ZTP GTFS); all three members agree and nothing in the evidence points off-category",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 8,
+     "why": "The generic 'accessible' label is replaced by measured, profile-matched verdicts backed by a source-weighted, time-decaying trust model with conflict resolution and moderator arbitration. Accessibility maps and passports are not new, which keeps the median at 8 rather than higher.",
+     "spread": 0.5,
+     "members": {
+      "A": 8,
+      "B": 8,
+      "C": 7.5
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 9,
+     "why": "Squarely a resident-facing city tool with named beneficiary roles, real open-data ingest and a live deployment. All members agree on the fit, and the highest median in the table reflects it.",
+     "spread": 1,
+     "members": {
+      "A": 9,
+      "B": 9,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 8,
+     "why": "The loops are concrete and working: set a profile once, get a four-state verdict, audit a venue in five steps. Held back because the running instance shows labeled sample data only, so real-world coverage and impact are undemonstrated.",
+     "spread": 0.5,
+     "members": {
+      "A": 8,
+      "B": 8,
+      "C": 7.5
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 8,
+     "why": "Clean, consistent, accessibility-first UI where WCAG 2.2 AA is actually built in: high contrast, text-size controls, large targets, a hyperlegible font and axe checks in E2E. Some screens still show placeholder or demo content.",
+     "spread": 1.5,
+     "members": {
+      "A": 8.5,
+      "B": 8,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 9,
+     "why": "For the event window the build is exceptional: 11.7k LOC, 266 tests, Playwright plus axe E2E, real OSM and GTFS import code, dual backends, magic-link auth and an admin panel, all deployed. Member C's 7 rests on the demo-mode mock, but the integration code itself exists, so the council weighs that limit under applicability and keeps the median at 9.",
+     "spread": 2,
+     "members": {
+      "A": 9,
+      "B": 9,
+      "C": 7
+     }
+    }
+   ],
+   "weighted_total": 83,
+   "build_reality": 9,
+   "source_loc": 11747,
+   "has_tests": true,
+   "tests": {
+    "files": 42,
+    "cases": 266
+   },
+   "live_demo": "https://will-to-wheel.vercel.app (HTTP 200)",
+   "built_during_event": "yes: 73 commits by 2 authors, 2026-10-03 11:42 to 2026-10-04 07:52 UTC",
+   "strengths": [
+    "Verdicts are computed, not displayed: measured door widths, steps, thresholds and toilet dimensions are compared against the user's own chair profile with explicit clearance constants",
+    "Real open-data pipelines in code: Overpass OSM import with mirror fallback, retries and tiled queries, plus ZTP Kraków GTFS tram-stop import",
+    "Unusually mature trust model: per-source weights, time decay, conflict detection, one-voice-per-person dedup and moderator arbitration with undo",
+    "Quality discipline and honesty: 266 tests, Playwright with axe checks, a deployed live app, clearly labeled sample data and disclosed AI use with human sign-off"
+   ],
+   "weaknesses": [
+    "The live deployment runs the in-memory seeded backend with a handful of demo venues and a mock AI extractor, so the real OSM, GTFS and AI integrations exist in code but are not demonstrated on the running instance",
+    "The presentation deck was not uploaded with the submission form and exists only as a PDF committed to the repo, so a required deliverable was missed",
+    "The OSM ingest bbox covers only Kraków center; city-wide coverage and the promised new cities are asserted, not demonstrated",
+    "Value depends on cold-start adoption by venue owners and community reporters, and the free-tier and B2G plans are on paper only"
+   ],
+   "red_flags": [],
+   "verdict": "A genuinely built, honestly labeled accessibility passport with computed profile-matched verdicts and real open-data pipelines, limited mainly by a sample-data demo with mocked AI on the live instance, center-city-only coverage and a deck committed to the repo but not uploaded with the submission form.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 84,
+      "agreement": 1,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 83,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 74.5,
+      "agreement": 0.7,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791225356242
+  }
+ },
+ "hubmi|Drop-the-Base/malopolski-hub-2026": {
+  "id": "curated--hubmi--Drop-the-Base-malopolski-hub-2026",
+  "task": "hubmi",
+  "repo": "Drop-the-Base/malopolski-hub-2026",
+  "title": "Małopolski Hub Innowacji Społecznych",
+  "team": "DropTheBase;",
+  "uploaded_at": 1791226633887,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--hubmi--Drop-the-Base-malopolski-hub-2026",
+   "repo": "Drop-the-Base/malopolski-hub-2026",
+   "project": "Małopolski Hub Innowacji Społecznych",
+   "team": "DropTheBase;",
+   "task": "hubmi",
+   "result": "Not disclosed",
+   "task_fit": "yes: all three members agree and the repo confirms it. This is a Polish-language prototype built squarely for the HubMI/ROPS Kraków challenge, with all seven modules coded on both backend and frontend and all 68 commits made during the event.",
+   "scores": [
+    {
+     "criterion": "Challenge fulfilment",
+     "weight": 40,
+     "score": 7.5,
+     "why": "All seven modules plus extras exist as real routes, views and tests, and matchmaking is a genuine TF-IDF pipeline with a relevance threshold, no-match state, PII masking and per-match justifications. The median reflects that the team's own QA caught matchmaking returning HTTP 500 with weak scoring mid-event, and the fixes are self-documented with no verifiable live demo, which supports A over both B's confidence and C's dismissal of the committed tests.",
+     "spread": 4.5,
+     "members": {
+      "A": 7.5,
+      "B": 8.5,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Implementation potential",
+     "weight": 20,
+     "score": 7,
+     "why": "The deployment story is real: JWT admin auth, 14 ORM models, Docker Compose with seed data, an open-data REST/CSV API and a costed plan of roughly 170-200 PLN per month. It is capped by SQLite-only storage with a hand-rolled migration shim, one shared admin password with no roles or SSO, and a PII scrubber that still misses names and street addresses.",
+     "spread": 2.5,
+     "members": {
+      "A": 7,
+      "B": 7.5,
+      "C": 5
+     }
+    },
+    {
+     "criterion": "Accessibility & intuitiveness",
+     "weight": 20,
+     "score": 7,
+     "why": "Systematic WCAG 2.1 AA work is visible in code: two high-contrast modes, text scaling, ETR simple language, focus-trapped dialogs, ARIA tabs, per-page titles and a skip link. The first build failed basics per the team's own QA, the fixes were never confirmed by any audit or demo check, and residual issues remain, such as meaning conveyed by color alone on the map and a powiat dropdown listing only 12 of 22.",
+     "spread": 3,
+     "members": {
+      "A": 7,
+      "B": 7,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Bonus (UI, materials, MVP quality)",
+     "weight": 20,
+     "score": 5,
+     "why": "MVP quality is high, with 51 test cases, a thoughtful design system and a disciplined QA-then-fix cycle, but the pack contains zero screenshots and no standalone mockups. The required three-minute video and PDF deck were not submitted in required form, only in-repo markdown and HTML, which the measured facts support; B's view that a markdown pitch is acceptable is contradicted by the deck being recorded as not provided.",
+     "spread": 3.5,
+     "members": {
+      "A": 5,
+      "B": 7.5,
+      "C": 4
+     }
+    }
+   ],
+   "weighted_total": 68,
+   "build_reality": 8,
+   "source_loc": 23504,
+   "has_tests": true,
+   "tests": {
+    "files": 17,
+    "cases": 51
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "yes: 68 commits by 1 author, 2026-10-03 11:18 to 2026-10-04 06:14 UTC",
+   "strengths": [
+    "All seven modules plus extras are implemented on both backend and frontend, backed by 51 test cases in 17 files, a smoke test and seed data rather than mocks.",
+    "Matchmaking is a real pipeline: need detection, TF-IDF ranking with a threshold and no-match fallback, PII masking before the LLM, and per-match justifications covered by tests.",
+    "Accessibility engineering is unusually thorough in code, from high-contrast themes and text scaling to ETR mode, focus-trapped dialogs, ARIA patterns and a skip link.",
+    "Honest and deployable engineering process: the team committed its own critical QA report and answered it with documented fixes and regression tests, plus Docker Compose, an open-data API with CSV export and a costed infrastructure plan."
+   ],
+   "weaknesses": [
+    "Neither required deliverable was submitted in required form: no three-minute video and no PDF deck of at most 10 slides, only in-repo markdown and HTML, and no live demo link was verified.",
+    "The team's own QA report shows the mandatory matchmaking returning HTTP 500 with weak scoring, a hardcoded admin queue and exposed personal data, and all subsequent fixes are self-reported without independent verification.",
+    "Production gaps: SQLite only with a hand-written migration shim, a single shared admin password with no roles or SSO, and a PII scrubber that misses names and street addresses.",
+    "Materials and polish gaps: zero screenshots, no standalone UX mockups, a powiat dropdown covering 12 of 22 powiaty, and a nearly empty submission form whose solution summary is in English for a Polish-language task."
+   ],
+   "red_flags": [
+    "The committed QA report shows a critical mid-event state (matchmaking down, Rick Roll videos in the innovations feed, hardcoded admin queue, unauthenticated personal data) that the jury can only take on the team's word as fixed.",
+    "Inflated claims persisted: a '98% AI matchmaking' figure flagged in QA crept back into the UI, and a '100% modules done' claim sat alongside a broken mandatory module.",
+    "DEMO_MODE, on by default, pre-fills the author's identity and auto-ticks the RODO consent checkbox, undercutting the platform's own data-protection demonstration."
+   ],
+   "verdict": "A genuinely built and well-tested seven-module prototype with real matchmaking and standout accessibility work, held back by missing video and PDF deliverables, no verifiable live demo, and a mid-event defect record whose fixes rest on the team's own word.",
+   "council": {
+    "version": 9,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 68,
+      "agreement": 1,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 78,
+      "agreement": 0.7,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 42,
+      "agreement": 0.5,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791230769833
+  }
+ },
+ "huawei|x2oreo/Celia.ai": {
+  "id": "curated--huawei--x2oreo-Celia-ai",
+  "task": "huawei",
+  "repo": "x2oreo/Celia.ai",
+  "title": "Celia.ai",
+  "team": "Double Oreo",
+  "uploaded_at": 1791226633879,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--huawei--x2oreo-Celia-ai",
+   "repo": "x2oreo/Celia.ai",
+   "project": "Celia.ai",
+   "team": "Double Oreo",
+   "task": "huawei",
+   "result": "Not disclosed",
+   "task_fit": "yes: a native ArkTS/ArkUI HarmonyOS phone and wearable app with an agent-first, human-centric heart-safety angle, matching the Huawei brief's Human-Centric Technology and Intelligent Experiences themes.",
+   "scores": [
+    {
+     "criterion": "Originality",
+     "weight": 20,
+     "score": 8,
+     "why": "The inversion where deterministic curated data decides and the LLM only explains is non-obvious, and the HarmonyOS-native combination of barcode checks, watch vitals, emergency card and intents is not a port of an existing app. C's 7 fairly notes that medicine-check apps exist, but the evidence supports the members who found the device-level design fresh.",
+     "spread": 1,
+     "members": {
+      "A": 8,
+      "B": 8,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Demonstrated usefulness",
+     "weight": 20,
+     "score": 8,
+     "why": "The use case maps to concrete patient moments: barcode checks against about 68k Polish packs, a 13-language emergency card, an SOS chain and an offline safety core. C's 6 overweights the narrow condition scope, which this human-centric brief explicitly rewards, so the median 8 stands.",
+     "spread": 2,
+     "members": {
+      "A": 8,
+      "B": 8,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Technical execution",
+     "weight": 20,
+     "score": 8,
+     "why": "Measured facts corroborate the claims: 594 test cases across phone, watch and backend, 388 in-event commits by 3 authors, real error handling and honest status labelling. C's 7 rests on tests fixed during the event and count discrepancies, but the measured count is 594 and in-event fixes are normal iteration.",
+     "spread": 1.5,
+     "members": {
+      "A": 8.5,
+      "B": 8,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Platform capabilities",
+     "weight": 20,
+     "score": 9,
+     "why": "About 20 OHOS kits in real use beyond a webview, including Intents Kit, Form Kit, Live View, Scan and Vision, NFC and a standalone wearable app that would not run unchanged on another OS. A's 8 penalises unverified headline features, but that is a verification gap counted under demo quality, not a missing capability, so B and C's 9 is better supported.",
+     "spread": 1,
+     "members": {
+      "A": 8,
+      "B": 9,
+      "C": 9
+     }
+    },
+    {
+     "criterion": "Demo quality",
+     "weight": 10,
+     "score": 6,
+     "why": "No demo check was verified, the linked video is absent from the repo file tree, and a Remotion project in the repo can produce the footage programmatically, so real emulator recording cannot be confirmed. The described screenshots do appear to be real app captures, which supports 6 over A's more skeptical 5.",
+     "spread": 1,
+     "members": {
+      "A": 5,
+      "B": 6,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Reproducibility & transparency",
+     "weight": 10,
+     "score": 8,
+     "why": "Pinned tool versions, env and test scripts, a prebuilt unsigned .hap with SHA-256 checksums, a per-feature verification table and the required AI disclosure docs. The gaps are macOS-first bash scripts, the Supabase dependency and no signed install on a real device, which justify the middle of A's 9 and C's 7.",
+     "spread": 2,
+     "members": {
+      "A": 9,
+      "B": 8,
+      "C": 7
+     }
+    }
+   ],
+   "weighted_total": 80,
+   "build_reality": 8,
+   "source_loc": 67964,
+   "has_tests": true,
+   "tests": {
+    "files": 78,
+    "cases": 594
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "yes: 389 commits by 3 authors, 2026-10-03 09:48 to 2026-10-04 09:00 UTC",
+   "strengths": [
+    "Genuinely native ArkTS/ArkUI codebase of about 47k ArkTS lines within 68k measured source LOC, with a separate wearable app and roughly 20 platform kits in real use",
+    "Deterministic safety architecture: verdicts come from curated data, the LLM only explains, and every model output is validated with typed offline fallbacks",
+    "594 test cases across phone, watch and backend, a strict build, and no committed secrets thanks to a pre-commit hook that rejects signing material",
+    "Strong reproducibility and transparency: pinned versions, run and emulator scripts, a prebuilt .hap with checksums, a per-feature verification table and disclosed AI workflow docs"
+   ],
+   "weaknesses": [
+    "No presentation deck was submitted, a missed deliverable confirmed by the measured pack, and the submission form's problem and status fields were left essentially empty",
+    "The demo video linked in the README is not in the repo, no demo check was verified, and a Remotion pipeline in the repo means part of the video could be programmatic animation rather than emulator footage",
+    "Several headline features (Celia intent routing, NFC write, Push Kit, Live View, Wear Engine) are built but unverified, no signed build was installed on a real device, and emulator heart data is simulated",
+    "The phone-watch link is a bespoke Supabase cloud relay rather than a distributed HarmonyOS capability, and the build and launch scripts assume macOS bash"
+   ],
+   "red_flags": [
+    "The demo video cannot be verified as a real emulator recording and the repo contains a Remotion project able to generate it; screeners should confirm before treating it as live footage",
+    "One of the 389 commits landed after the 4 October deadline; minor and likely docs-only"
+   ],
+   "verdict": "An unusually deep, honest and reproducible native HarmonyOS entry with a strong deterministic safety core and real platform breadth, held back by a missing deck, an unverifiable demo video and headline features that are built but never shown working on real hardware.",
+   "council": {
+    "version": 9,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 79,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 80,
+      "agreement": 1,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 71,
+      "agreement": 0.6,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791230407640
+  }
+ },
+ "sport|x2oreo/Celia.ai": {
+  "id": "curated--sport--x2oreo-Celia-ai",
+  "task": "sport",
+  "repo": "x2oreo/Celia.ai",
+  "title": "Celia.ai",
+  "team": "DoubleOreo",
+  "uploaded_at": 1791226633869,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--sport--x2oreo-Celia-ai",
+   "repo": "x2oreo/Celia.ai",
+   "project": "Celia.ai",
+   "team": "DoubleOreo",
+   "task": "sport",
+   "result": "Not disclosed",
+   "task_fit": "yes: medicine, genotype and heart data drive concrete decisions (drug verdicts, interaction warnings, SOS escalation, doctor briefs), which places it squarely in physical health and access to care, even though sport is absent and mental wellbeing is minimal.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 7.5,
+     "why": "The deterministic engine decides and the LLM only explains, with validated model output and offline fallback, which is a real answer to the hardcoded-tip pattern. The core idea of a medicine checker for a cardiac condition is not new, so the median lands at 7.5: novelty lies in the safety architecture and integration.",
+     "spread": 2,
+     "members": {
+      "A": 7.5,
+      "B": 8,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 7.5,
+     "why": "Physical health and access to care are deeply served and health data demonstrably drives decisions in code. The brief asks to holistically combine sport and mental wellbeing too, and the project has no sport tracking and only a minimal feeling diary, which caps the score.",
+     "spread": 1,
+     "members": {
+      "A": 8,
+      "B": 7.5,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 7.5,
+     "why": "It serves a real patient population with an offline-first safety core, consent flows, honest simulated-data labels and not-a-medical-device disclaimers. HarmonyOS-only support, a narrow condition and several built-but-unverified hardware features keep it at 7.5.",
+     "spread": 0.5,
+     "members": {
+      "A": 7.5,
+      "B": 7.5,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 7.5,
+     "why": "A documented design system with a consistent red-and-white light and dark theme across verdict, SOS and check-in screens, backed by 183 screenshots. Only 5 screenshots were described and they are design mockups rather than verified emulator captures, so visual quality is second-hand evidence.",
+     "spread": 1.5,
+     "members": {
+      "A": 7.5,
+      "B": 7.5,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 9,
+     "why": "Unanimous 9: phone, watch and backend apps plus web viewers, 67,964 source LOC, 594 tests in 78 files, 388 commits during the event, 11 deployed edge functions verified live and a released .hap. Simulated heart data and dry-run integrations are labelled but remain gaps.",
+     "spread": 0,
+     "members": {
+      "A": 9,
+      "B": 9,
+      "C": 9
+     }
+    }
+   ],
+   "weighted_total": 76.5,
+   "build_reality": 8.5,
+   "source_loc": 67964,
+   "has_tests": true,
+   "tests": {
+    "files": 78,
+    "cases": 594
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "yes: 389 commits by 3 authors, 2026-10-03 09:48 to 2026-10-04 09:00 UTC",
+   "strengths": [
+    "Deterministic safety core in real code: curated drug verdicts with safer alternatives, additive-QT and CYP interaction checks, SOS countdown escalation and doctor-visit briefs, with the LLM only explaining and its output validated with safe fallback.",
+    "Exceptional engineering volume and hygiene: 594 tests, 388 commits during the event by 3 authors, a deployed Supabase backend with live verification checks, a documented regression pass and a released .hap.",
+    "Real data and privacy work: about 68k Polish medicine packs from the public URPL register, on-device OCR and barcode scanning, RLS tests, and AES-GCM encrypted revocable share links with a privacy ledger.",
+    "Honest disclosure throughout: simulated heart data labelled as such, not-a-medical-device framing, AI workflow documentation, and no prompt-injection attempts in untrusted content."
+   ],
+   "weaknesses": [
+    "Missed requirements of the brief: no sport or exercise component at all and only a minimal feeling diary for mental wellbeing, where the task asks to holistically combine all four strands.",
+    "The pitch deck was not provided and the submission form's problem and instructions fields are empty, so round-one reviewers see little beyond the repo; no demo was independently verified (demo_checks is empty).",
+    "Hardware-dependent features remain unverified: the app has never been installed on a real phone or watch, heart data is simulated, and NFC, Live View, real SMS and Celia intent routing are built but unverified or dry-run.",
+    "HarmonyOS-only (API 20+) and a single narrow condition (Long QT syndrome) limit the reachable audience."
+   ],
+   "red_flags": [],
+   "verdict": "An unusually complete and honest heart-safety companion whose deterministic decision engine is demonstrably real in code, scoring 7.5 across the board and 9 on completeness, held back by the absent sport and mental wellbeing strands, the missing deck and unverified hardware features.",
+   "council": {
+    "version": 9,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 77.5,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 78,
+      "agreement": 0.8,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 67,
+      "agreement": 0.6,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791230084009
+  }
+ },
+ "impacther|Mikformatycy/sejf-place": {
+  "id": "curated--impacther--Mikformatycy-sejf-place",
+  "task": "impacther",
+  "repo": "Mikformatycy/sejf-place",
+  "title": "Sejf",
+  "team": "Mikformatycy",
+  "uploaded_at": 1791226633858,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--impacther--Mikformatycy-sejf-place",
+   "repo": "Mikformatycy/sejf-place",
+   "project": "Sejf",
+   "team": "Mikformatycy",
+   "task": "impacther",
+   "result": "Not disclosed",
+   "task_fit": "yes: a covert, encrypted evidence vault for people documenting domestic and economic abuse, a harm that disproportionately affects women, with every feature built around that need and the Polish legal framework (UPPD, Niebieska Karta) rather than a rebranded generic app.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 8.3,
+     "why": "A decoy cover app with an action key, append-only SHA-256 chain, RFC 3161 timestamps and a browser verifier goes well beyond a common hidden-photo vault and is anchored in a documented threat model and source-verified legal research. The covert-vault concept itself is not new, which keeps it just below the top.",
+     "spread": 1,
+     "members": {
+      "A": 8.3,
+      "B": 9,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 9.2,
+     "why": "The women-specific need is explicit in function, not branding: entry categories taken from the Niebieska Karta NK-A form, economic-violence amounts, verified help lines and law hints tied to UPPD art. 2. Stripping the branding leaves nothing generic.",
+     "spread": 0.5,
+     "members": {
+      "A": 9.2,
+      "B": 9.5,
+      "C": 9
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 7.5,
+     "why": "The safety thinking is strong for the affected group: quick exit and shake, auto-lock, FLAG_SECURE, encrypted drafts, no telemetry, and an impact plan whose metrics are already computed in code. It loses points for the incomplete submission pack, an icon disguise that needs a native build and carries store-policy risk, and the lack of a pilot partner.",
+     "spread": 1,
+     "members": {
+      "A": 7.5,
+      "B": 8,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 8,
+     "why": "The code shows a disciplined, accessible, safety-conscious design system: icon-only entry rows, color-coded violence types, light and dark themes, screen-reader labels. But only 1 of 224 screenshots was described and no deck was given, so the polished look one member inferred from the screenshot count is not actually verifiable; the evidence supports the thinner-visual-proof view.",
+     "spread": 0.5,
+     "members": {
+      "A": 7.5,
+      "B": 8,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 8.5,
+     "why": "The whole loop exists as real, tested code rather than mocks: AES-256-GCM vault, hand-written RFC 3161 client against FreeTSA, CMS-signed verifiable ZIP, PDF report and 89 test cases. The heavy implementation evidence supports the higher scores over the lowest one, but the promised deck was not delivered, no runtime demo check was performed, and the AI proxy, qualified TSA and sound-button covers remain next steps.",
+     "spread": 2,
+     "members": {
+      "A": 8.5,
+      "B": 9,
+      "C": 7
+     }
+    }
+   ],
+   "weighted_total": 82.8,
+   "build_reality": 8.5,
+   "source_loc": 11487,
+   "has_tests": true,
+   "tests": {
+    "files": 17,
+    "cases": 89
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "yes: 11 commits by 1 author, 2026-10-03 18:21 to 2026-10-04 06:33 UTC",
+   "strengths": [
+    "Source-verified Polish legal research (UPPD, Niebieska Karta NK-A, verified help lines) is baked into product function, with honest statements of what a timestamp does and does not prove.",
+    "A real cryptographic integrity pipeline, not mocked: AES-256-GCM, append-only hash chain, RFC 3161 client, CMS verification and a browser verifier that works without the app.",
+    "Threat-model-driven safety UX: cover app with action key, quick exit, shake and auto-lock, FLAG_SECURE, no telemetry, and a documented residual-risk table that states the stalkerware limitation plainly.",
+    "89 test cases across crypto, chain, timestamps, reports, legal rules and the verifier, plus a measurable impact plan with metrics already computed in code."
+   ],
+   "weaknesses": [
+    "Submission deliverables incomplete: no presentation deck was provided and the presentation form fields are empty, a missed official requirement that the team's own handover doc still lists as open.",
+    "Evidence of the running product is thin: only 1 of 224 screenshots was described and no live demo check was performed, so design and behavior rest on code and tests alone.",
+    "The Gemini API key ships inside the app build while the server proxy meant to hide it is only an unwired sketch, and launcher-icon switching needs a native build with acknowledged store-policy risk.",
+    "Impact measurement depends on a pilot partner that is not yet secured, and advertised features such as qualified TSA timestamps and sound-button covers remain next steps."
+   ],
+   "red_flags": [
+    "A live Gemini API key is embedded in the demo build and demo mode disables screenshot blocking; both are disclosed but must be reverted before any real use.",
+    "On iOS the cover always shows the system name Pocket plus a dialog on icon change, which could reveal the app to an abuser.",
+    "A single committer made all 11 commits within the event window with disclosed heavy AI-tool use; the disclosure keeps it compliant, but the team's independent mastery of the code is unverified."
+   ],
+   "verdict": "An unusually deep, legally grounded and honestly scoped evidence vault for women facing domestic and economic abuse, with real tested cryptography, held back by a missed deck, thin visual and runtime proof, and an unhardened AI-key flow.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 81.8,
+      "agreement": 1,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 87,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 79,
+      "agreement": 0.7,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791224876987
+  }
+ },
+ "impacther|StraykerPL/normandy": {
+  "id": "curated--impacther--StraykerPL-normandy",
+  "task": "impacther",
+  "repo": "StraykerPL/normandy",
+  "title": "TechBestie",
+  "team": "Team Normandy",
+  "uploaded_at": 1791226633845,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--impacther--StraykerPL-normandy",
+   "repo": "StraykerPL/normandy",
+   "project": "TechBestie",
+   "team": "Team Normandy",
+   "task": "impacther",
+   "result": "Not disclosed",
+   "task_fit": "yes: the product explicitly targets girls' underrepresentation in technology education, a listed ImpactHer area, through women student role models and doubt-based matching, and all three members agree the fit is genuine.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 5,
+     "why": "The doubt taxonomy (Will I fit in? Am I good enough? costs and scholarships) shows real insight into why girls hesitate toward tech. But the survey-rank-story-chat mechanism is familiar, and the pack holds no research, statistics, or target-group voice to evidence the need, so the idea lands mid-scale rather than high.",
+     "spread": 2,
+     "members": {
+      "A": 6,
+      "B": 5,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 6.5,
+     "why": "The women-specific need is explicit in function, not just naming: all mentors are women students, copy addresses girls directly, and matching runs on girls' doubts. The evidence supports the moderate view over B's 8, because the matching machinery itself is gender-neutral, unused English 'Stem Together' components sit in the code, and the bundled Polish content carries most of the specificity.",
+     "spread": 2,
+     "members": {
+      "A": 6.5,
+      "B": 8,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 5.5,
+     "why": "Reachability for the target group is strong: a free, Polish-language, mobile-first PWA live at HTTP 200 with offline support and careful accessibility. But there is no real mentor to talk to, survey answers are lost on reload, and no measurable-impact plan exists anywhere in the pack.",
+     "spread": 2,
+     "members": {
+      "A": 6,
+      "B": 5.5,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 7.5,
+     "why": "Screenshots and roughly 1,600 lines of BEM CSS corroborate a polished, calm, consistent design with light and dark themes, illustrations, and serious ARIA and focus work. C's caveats about placeholder imagery and only 5 of 20 screenshots verified stand, but the weight of evidence supports the higher median.",
+     "spread": 1.5,
+     "members": {
+      "A": 7.5,
+      "B": 8,
+      "C": 6.5
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 5,
+     "why": "The built loop runs end to end (welcome, 4-step survey, ranked recommendations, stories, chat preview) with clean architecture and race-guarded async. Here B's 7 is the outlier: the code itself discloses that messages are never delivered, only three fictional mentors exist, and there are zero tests, which supports the lower view A and C share.",
+     "spread": 4,
+     "members": {
+      "A": 5,
+      "B": 7,
+      "C": 3
+     }
+    }
+   ],
+   "weighted_total": 59,
+   "build_reality": 7,
+   "source_loc": 3469,
+   "has_tests": false,
+   "tests": {
+    "files": 0,
+    "cases": 0
+   },
+   "live_demo": "https://straykerpl.github.io/normandy/ (HTTP 200)",
+   "built_during_event": "yes: 7 commits by 1 author, 2026-10-03 22:26 to 2026-10-04 08:28 UTC",
+   "strengths": [
+    "All 7 commits fall inside the event window with none before or after the deadline, and the demo is live at HTTP 200.",
+    "Genuinely accessible, mobile-first PWA engineering: offline service worker, memory fallback for storage, light and dark themes, careful ARIA and focus handling.",
+    "Polished, consistent visual design, the strongest dimension across all three members, backed by gradient onboarding, pastel story cards, and tidy BEM CSS.",
+    "The women-specific purpose is real in function: female student mentors, doubt-based matching on belonging and confidence, and copy addressed to girls, not a gender-neutral app with a women's label."
+   ],
+   "weaknesses": [
+    "Required deliverables are missing: no deck was provided and the submission form is almost entirely blank, so the pack carries no problem statement, goal, or impact measurement.",
+    "The need is asserted by design choices but never evidenced: no research, statistics, or the target group's own words anywhere in the pack.",
+    "The core helping loop is a disclosed mock: messages are never delivered, only three fictional mentors are bundled, and survey answers vanish on reload.",
+    "Zero automated tests (0 test files, 0 cases) and no backend, with validation limited to manual lint and build checks."
+   ],
+   "red_flags": [
+    "Impact is claimed (helping girls explore technology studies) with nothing measured and no feedback loop to show effectiveness."
+   ],
+   "verdict": "A polished, honestly disclosed, accessible PWA whose women-specific purpose is real in content but rests on an asserted need, a mocked conversation core, and a submission pack missing its deck and impact plan.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 63,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 65,
+      "agreement": 0.7,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 48,
+      "agreement": 0.6,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791224854004
+  }
+ },
+ "smartcity|DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026": {
+  "id": "curated--smartcity--DmitryZherebtsov-HackYeah-Defence-Drone-03-04-10-2026",
+  "task": "smartcity",
+  "repo": "DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026",
+  "title": "GROUND ZERO",
+  "team": "GROUND ZERO",
+  "uploaded_at": 1791226633835,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--smartcity--DmitryZherebtsov-HackYeah-Defence-Drone-03-04-10-2026",
+   "repo": "DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026",
+   "project": "GROUND ZERO",
+   "team": "GROUND ZERO",
+   "task": "smartcity",
+   "result": "Not disclosed",
+   "task_fit": "yes: flood crisis response for city emergency services and municipal coordinators over a real Kraków scenario falls under the brief's explicit crisis-response clause, and the repo's origin in another track does not disqualify it, though it enters the category from its edge.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 7,
+     "why": "The code shows real depth in a full decision chain: time-balanced sector planning, flight feasibility math, and flood-margin and criticality scoring rather than a dashboard. Drone SAR coordination is a known concept and the sensing layer is simulated, which C notes but overweights given the open disclosure; the evidence supports A and B's read.",
+     "spread": 2.5,
+     "members": {
+      "A": 7.5,
+      "B": 7,
+      "C": 5
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 6.5,
+     "why": "Crisis coordination for PSP, OSP, WOPR, and samorząd users over real Kraków data is in scope, so C's disqualification on the repo's defence-track origin is not supported. But the tool serves only episodic emergencies with no resident-facing or day-to-day city function, so A's middle view fits the evidence better than B's 9.",
+     "spread": 5,
+     "members": {
+      "A": 6.5,
+      "B": 9,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 7,
+     "why": "Roles, workflow, and outputs mirror real operations and are named precisely, from prioritized recommendations to GPS pins and reports. The submitted demo returned HTTP 503 during judging and the drone layer is simulation, so live usability could not be verified, which caps the score at the shared A and B level.",
+     "spread": 3,
+     "members": {
+      "A": 7,
+      "B": 7,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 7,
+     "why": "All three members agree on a consistent dark-themed operational UI with Leaflet maps, overlays, a camera view with map PiP, and structured panels, and 25 committed screenshots back this up. Fine detail such as legends and contrast could not be verified with the demo down.",
+     "spread": 0.5,
+     "members": {
+      "A": 7.5,
+      "B": 7,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 7,
+     "why": "17,387 source LOC implement a real end-to-end pipeline: Overpass fetch with retries and a fallback server, live weather, role permissions, Excel and PDF reports, Swagger, and PWA, with the simulation openly disclosed. Zero measured test files despite documentation claiming automated tests, a dead demo, and no deck with the entry keep this at the median rather than A's 8.",
+     "spread": 5,
+     "members": {
+      "A": 8,
+      "B": 7,
+      "C": 3
+     }
+    }
+   ],
+   "weighted_total": 69,
+   "build_reality": 7.5,
+   "source_loc": 17387,
+   "has_tests": false,
+   "tests": {
+    "files": 0,
+    "cases": 0
+   },
+   "live_demo": "https://drone-app-pdzf.onrender.com (HTTP 503)",
+   "built_during_event": "unclear: 1 commits by 1 author, 2026-10-04 08:07 to 2026-10-04 08:07 UTC, so the history is squashed",
+   "strengths": [
+    "Real urban data pipelines in code: OSM Overpass waterways and 5404 buildings with retry and fallback server, Open-Meteo weather, Esri satellite imagery.",
+    "A computed core rather than mocked screens: time-balanced fan-out sectoring, flight feasibility coefficients, victim flood-margin and criticality math, and routing around No-Fly zones.",
+    "A full operational lifecycle across roles: planning, Zero Zone checklist, live multi-role tasks, and post-action reports with Excel export.",
+    "Honest disclosure of what is simulated, and a polished dark-themed operational UI documented in 25 committed screenshots."
+   ],
+   "weaknesses": [
+    "The live demo at the submitted URL returned HTTP 503 during judging, so the running system could not be verified.",
+    "Zero test files and zero test cases despite README and documentation claiming automated tests, a claim-code mismatch.",
+    "The core finding-people capability is a probabilistic simulation with scripted victims; no real drones, cameras, or demonstrated perception.",
+    "Submission deliverables were thin: no deck provided with the entry, only a documentation PDF in the repo, and the problem statement field left blank."
+   ],
+   "red_flags": [
+    "The submitted demo URL returned HTTP 503 during the judges' evidence check.",
+    "Documentation and README claim backend tests exist, but the measured repository contains none, a claim-code mismatch."
+   ],
+   "verdict": "A deep and honestly disclosed flood-search-and-rescue coordination system that qualifies under Smart City's crisis-response scope with real urban data and computed planning, but is judged on repo evidence alone since its demo was down, its claimed tests are absent, and its sensing is simulation.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 72.5,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 74,
+      "agreement": 0.7,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 48,
+      "agreement": 0.4,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791224324090
+  }
+ },
+ "sport|kristin-lina-todorova/ViviOR_HackYeah26": {
+  "id": "curated--sport--kristin-lina-todorova-ViviOR-HackYeah26",
+  "task": "sport",
+  "repo": "kristin-lina-todorova/ViviOR_HackYeah26",
+  "title": "ViviOR",
+  "team": "Kristin-Lina Todorova",
+  "uploaded_at": 1791226633824,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--sport--kristin-lina-todorova-ViviOR-HackYeah26",
+   "repo": "kristin-lina-todorova/ViviOR_HackYeah26",
+   "project": "ViviOR",
+   "team": "Kristin-Lina Todorova",
+   "task": "sport",
+   "result": "Not disclosed",
+   "task_fit": "no: it is a surgical training simulator, which is healthcare-adjacent, but it touches none of the task's core. There is no sport, physical health, mental wellbeing or access-to-care angle, and no real health data drives a decision; the scores are trainee performance and the vitals are simulated.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 7,
+     "why": "A first-person virtual OR with physically simulated, cuttable tissue along Langer's lines and 17 scored Lichtenstein steps with an explained per-step debrief is ambitious and genuinely strong. C's 5 under-credits the idea itself; the discounts for existing surgical VR simulators and the missed task core are already taken elsewhere.",
+     "spread": 2,
+     "members": {
+      "A": 7,
+      "B": 7,
+      "C": 5
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 3,
+     "why": "The council sides with C's middle view: the project is genuinely healthcare through surgical training and patient safety, but it serves none of sport, mental wellbeing or access to care, and no personal health data becomes a recommendation or plan. A's 5 over-credits that indirect link; B's 1 ignores the legitimate medical-education ground.",
+     "spread": 4,
+     "members": {
+      "A": 5,
+      "B": 1,
+      "C": 3
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 6,
+     "why": "Browser delivery with no headset, a demo account, resume support and conservative clinical content make it genuinely usable for trainees. Usability stays unproven: mouse-driven surgery, a reported 38 MB WebGL download, no educator validation, and an empty how-to-open field.",
+     "spread": 1,
+     "members": {
+      "A": 6,
+      "B": 5,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 6,
+     "why": "The code shows real craft: a brand book with palette and fonts, HUD styles derived from it, a hyperlegible fallback and an ECG animation on the vitals monitor. But only 1 of 4 screenshots is described and it is a logo, so the running interface could not be verified.",
+     "spread": 1,
+     "members": {
+      "A": 6,
+      "B": 6,
+      "C": 5
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 6.5,
+     "why": "7,924 lines of coherent Unity C# with a validated procedure engine, error penalties, an exam pass mark, a postMessage web bridge and a deployed build justify the high median. Zero tests, the missing deck and the doc-to-repo mismatch hold it back; B's 5 over-weights the unverified runtime.",
+     "spread": 2,
+     "members": {
+      "A": 6.5,
+      "B": 5,
+      "C": 7
+     }
+    }
+   ],
+   "weighted_total": 57.5,
+   "build_reality": 6,
+   "source_loc": 7924,
+   "has_tests": false,
+   "tests": {
+    "files": 0,
+    "cases": 0
+   },
+   "live_demo": "https://viviorhackyeah26-website.vercel.app (HTTP 200)",
+   "built_during_event": "yes: 4 commits by 1 author, 2026-10-04 04:09 to 2026-10-04 08:10 UTC",
+   "strengths": [
+    "Substantial, coherent C# implementing the claimed subsystems: XPBD tissue with cutting and gaping, a rope solver for the spermatic cord, procedural textures, vitals reacting to blood loss, equipment and team.",
+    "A real decision output: every step is validated, errors are explained and penalised, exam mode logs silently with an 80 pass mark, and results are posted to the website over a documented protocol.",
+    "A Unity WebGL build is actually deployed on Vercel with a demo account and a scripted demo, so delivery is real even though runtime behaviour is unverified.",
+    "Clinical and licensing discipline: WHO time-out checklist, correct Lichtenstein anatomy and mesh margins, and a full third-party asset licence table."
+   ],
+   "weaknesses": [
+    "No deck, the required round-one deliverable, and an almost empty submission form, so a reviewer sees little beyond the README.",
+    "Missed task requirement: AI tool use is nowhere disclosed in the pack, while a repo doc reads as an AI agent task brief.",
+    "Weak category fit: no sport, mental wellbeing or access-to-care angle, and no real health data driving a plan; the scores are trainee performance and the vitals are simulation.",
+    "Zero tests and no visual evidence of the running simulator: only 1 of 4 screenshots is described and it is a logo, and the demo check confirms only an HTTP 200 page title."
+   ],
+   "red_flags": [
+    "May not be built for this task: it is a surgical training simulator, which is healthcare-adjacent, but it touches none of the task's core. There is no sport, physical health, mental wellbeing or access-to-care angle, and no real health data drives a decision; the scores are trainee performance and the vitals are simulated.",
+    "The web-integration doc is written as an AI agent task brief and describes a Three.js simulator with 11 steps while the submitted repo is Unity with 17; with 7,924 LOC from one author in four commits over roughly four hours and no AI-use disclosure, the work appears to be undisclosed AI assistance."
+   ],
+   "verdict": "A technically impressive and plausibly working virtual operating room that misses the Sport & Healthcare core of health data driving decisions and arrives without the required deck, visual proof of the running product, or AI-use disclosure.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 61.5,
+      "agreement": 0.8,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 50,
+      "agreement": 0.7,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 50,
+      "agreement": 0.8,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791223887791
+  }
+ },
+ "defence|Mikformatycy/SafeWall": {
+  "id": "curated--defence--Mikformatycy-SafeWall",
+  "task": "defence",
+  "repo": "Mikformatycy/SafeWall",
+  "title": "SafeWall",
+  "team": "Mikformatycy",
+  "uploaded_at": 1791226633814,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--defence--Mikformatycy-SafeWall",
+   "repo": "Mikformatycy/SafeWall",
+   "project": "SafeWall",
+   "team": "Mikformatycy",
+   "task": "defence",
+   "result": "Not disclosed",
+   "task_fit": "yes: a privacy gateway that silences a phone's radios and routes it over its own LTE with planned Tor is prevention-focused security work for journalists and activists, squarely matching the Defence brief, though only the groundwork is implemented.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 6,
+     "why": "A concrete threat model (radio tracking, telemetry domains) aimed at a real gap for journalists, with unusually honest limits. Pocket Tor routers are a known category and every differentiating feature is listed in the team's own docs as planned or untested, so a 6 rewards strong reasoning over delivered novelty.",
+     "spread": 0.5,
+     "members": {
+      "A": 6,
+      "B": 6.5,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 8,
+     "why": "Unambiguously security and resilience work: preventing radio-based exposure and traffic identification for civil-society users. The score sits below the top because the resilience half, operation in a degraded scenario, is described only as future acceptance criteria and never demonstrated.",
+     "spread": 0.5,
+     "members": {
+      "A": 8,
+      "B": 8.5,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 4,
+     "why": "The intended flow of one cable and a glance at a panel is right, but the LTE link measured about 1.4 kB/s with unresolved timeouts, the dashboard runs on demo data, and operation needs root Linux rigs and SSH over USB. Member B's 2.5 is defensible given the broken data path, but the evidence and the team's own honest documentation support the median view that the concept is right while nothing is field-usable today.",
+     "spread": 1.5,
+     "members": {
+      "A": 4,
+      "B": 2.5,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 7,
+     "why": "Coherent craft: a full brand system with scripted logo exports, a generated 8-slide deck, Blender CAD renders of the powerbank-like enclosure, and a clean CSP-hardened dashboard with offline preview. The score reflects real polish that rests on renders and simulated statuses rather than verified live views, which supports the median over Member C's 6.",
+     "spread": 1,
+     "members": {
+      "A": 7,
+      "B": 7,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 3,
+     "why": "The router base is real and tested (nftables isolation, DHCP/DNS, 28 test cases including a namespace suite), but the defining security features are absent from code: no torrc, no Tor redirect rules, no fail-closed kill-switch, no DNS filter, and the API returns 503. Member B's 1 is too harsh given the tested router base and Member A's 4 slightly overcredits unimplemented claims; Member C's claim that DNS filtering is present in the repo is contradicted by STATUS.md and the other two reviews, so the median of 3 stands.",
+     "spread": 3,
+     "members": {
+      "A": 4,
+      "B": 1,
+      "C": 3
+     }
+    }
+   ],
+   "weighted_total": 59,
+   "build_reality": 3,
+   "source_loc": 9559,
+   "has_tests": true,
+   "tests": {
+    "files": 6,
+    "cases": 28
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "unclear: 2 commits by 1 author, 2026-10-03 17:43 to 2026-10-04 08:40 UTC, so the history is squashed",
+   "strengths": [
+    "Genuine hardware prototype (Raspberry Pi 4 with PiTalk EG25-G modem) and tested router plumbing: nftables segment isolation, DHCP/DNS, WAN detection, USB admin isolation, and 28 test cases including a network-namespace router suite.",
+    "Exceptional epistemic honesty: STATUS.md, README and the draft consistently separate verified results from plans and label the dashboard as demo-only.",
+    "Clear, realistic threat model for journalists under radio surveillance that states what the device does not protect against.",
+    "Strong reproducible design pipeline: vector brand identity with scripted exports, a generated jury deck, and CAD concept renders of a discreet powerbank enclosure."
+   ],
+   "weaknesses": [
+    "The core security claims are not in code: no torrc or Tor redirect rules, no fail-closed kill-switch, no DNS filter, and the committed config still implements the earlier direct NAT to the modem.",
+    "The LTE data path was broken at submission (about 1.4 kB/s with unresolved timeouts on Pi, Mac and reportedly Windows), so the device has no usable connectivity.",
+    "The dashboard runs on simulated data while its real API endpoint returns 503 DATA_SOURCE_NOT_CONFIGURED, and no live demo was verified (demo checks empty).",
+    "The task's required degraded-scenario demonstration was never shown, existing only as planned acceptance criteria, and the submission form was largely empty with no reachable hosted demo or working video link."
+   ],
+   "red_flags": [
+    "mock-check-tor is a static green Tor Check page built for presentations: disclosed as a mock, but designed to visually assert a security state the repo cannot reproduce.",
+    "The positive Tor Check rests on a user-confirmed recording whose demo segment was cut and sped up 1.35x, and the presentation's video link points to a placeholder youtube.com URL rather than the promised film.",
+    "Simulated dashboard data is presented alongside security claims while the device has no working protection path."
+   ],
+   "verdict": "An honestly documented and well-designed privacy-gateway concept with a genuinely engineered router base, but the features that define it as a defence tool (Tor routing, fail-closed protection, DNS filtering, live panel) exist only as plans, mocks and a recording.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 60,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 56.5,
+      "agreement": 0.8,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 57,
+      "agreement": 0.8,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791223457450
+  }
+ },
+ "smartcity|portugalskie-armatki-sniezne/eHackYeah2026": {
+  "id": "curated--smartcity--portugalskie-armatki-sniezne-eHackYeah2026",
+  "task": "smartcity",
+  "repo": "portugalskie-armatki-sniezne/eHackYeah2026",
+  "title": "pomożeMy",
+  "team": "Portugalskie Armatki Śnieżne",
+  "uploaded_at": 1791226633807,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--smartcity--portugalskie-armatki-sniezne-eHackYeah2026",
+   "repo": "portugalskie-armatki-sniezne/eHackYeah2026",
+   "project": "pomożeMy",
+   "team": "Portugalskie Armatki Śnieżne",
+   "task": "smartcity",
+   "result": "Not disclosed",
+   "task_fit": "yes: a resident-to-city civic reporting platform that routes reports and initiatives to real Polish municipal institutions using GUGiK ULDK and UUG data, TERYT codes and the ROPS catalog, squarely a day-to-day public services and quality-of-life tool.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 7,
+     "why": "Members converge: routing each report to the competent institution via AI classification plus nearest-seat geospatial matching, clustering duplicates into master cases, and hybrid vector search over the ROPS innovations catalog is genuine urban-process insight. The civic-reporting concept itself is not novel, and measured routing accuracy is only about 81 percent on synthetic data.",
+     "spread": 0.5,
+     "members": {
+      "A": 7.5,
+      "B": 7,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 9,
+     "why": "All three agree the project is deeply municipal, with real GUGiK ULDK and UUG integration, TERYT codes and the ROPS catalog serving both residents and office staff, and no reframing from another domain. The evidence of real Polish public-data plumbing supports the 9 over C's lone 8.",
+     "spread": 1,
+     "members": {
+      "A": 9,
+      "B": 9,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 7,
+     "why": "A public deployment with a demo account, bilingual UI and onboarding tour is usable today. But the service is locked to Małopolskie with Krakow mock data, about one in five reports would be misrouted at the measured accuracy, and no real email reaches an office.",
+     "spread": 1,
+     "members": {
+      "A": 7,
+      "B": 7,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 8,
+     "why": "Unanimous: a polished custom-styled MapLibre map with clustered status-colored pins, 3D buildings, accessibility handling and full Polish-English switching. The described screenshots cover teasers and mock photos, so the rendered live UI is only evidenced through the code.",
+     "spread": 0,
+     "members": {
+      "A": 8,
+      "B": 8,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 9,
+     "why": "The measured facts side with A and B over C's 6: 28,740 SLOC across services, 306 tests in 38 files, 14 migrations, CI with in-build classifier checks, and a readiness-gated public deploy are real implemented value. The mocked mail loop, CPU-only model and missing deck are true gaps but do not outweigh a tested, deployed stack.",
+     "spread": 3,
+     "members": {
+      "A": 9,
+      "B": 9,
+      "C": 6
+     }
+    }
+   ],
+   "weighted_total": 78,
+   "build_reality": 9,
+   "source_loc": 28740,
+   "has_tests": true,
+   "tests": {
+    "files": 38,
+    "cases": 306
+   },
+   "live_demo": "none found in the form or README",
+   "built_during_event": "partly: 1 commit before the event; 127 commits by 7 authors, 2026-10-03 08:23 to 2026-10-04 08:56 UTC",
+   "strengths": [
+    "Real data pipelines in code: GUGiK ULDK for municipality and county assignment, UUG geocoding of institution seats with EPSG:2180 conversion, and the ROPS social-innovations catalog with hybrid pgvector and Polish stemming search.",
+    "The core capability is computed, not simulated: master-report clustering with a calibrated match ratio, PostGIS nearest-seat routing, and local AI classification and translation models with defined fallbacks.",
+    "Production engineering: 306 tests, 14 migrations, CI that validates the Polish classifier inside the Docker build, queued workers with idempotency keys and leases, and a readiness-gated public deployment with a demo account.",
+    "Rare honesty: a measured 80.8 percent classification evaluation with named confusions and explicit caveats, wrapped in an accessible bilingual UI with an interactive onboarding tour."
+   ],
+   "weaknesses": [
+    "The presentation deck was not submitted and the submission form fields are mostly empty, so a required narrative deliverable is missing.",
+    "Notification to institutions is forced to a single test address or mock SMTP, so the loop to real offices is never demonstrated end to end; A and C's reading is better supported than B's claim of a fully working Gmail relay.",
+    "Routing accuracy is 80.8 percent on synthetic fixtures only, and matching is by nearest geocoded seat rather than verified competence, so roughly one in five reports would be misrouted in real use.",
+    "Scope is locked to the Małopolskie region with Krakow mock data, and reliance on external services (GUGiK, Google Gemini, Gmail SMTP) creates availability and cost risk."
+   ],
+   "red_flags": [],
+   "verdict": "An unusually deep, honestly evaluated and publicly deployed municipal reporting platform whose remaining gaps are the missing deck, a notification loop that stops at a test inbox, roughly 81 percent routing accuracy on synthetic data, and a single-region scope.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 79.5,
+      "agreement": 1,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 78,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 71,
+      "agreement": 0.6,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791223413502
+  }
+ },
+ "sport|uteg-labs/just-mate": {
+  "id": "curated--sport--uteg-labs-just-mate",
+  "task": "sport",
+  "repo": "uteg-labs/just-mate",
+  "title": "JustMate",
+  "team": "uteg-labs",
+  "uploaded_at": 1791226633798,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--sport--uteg-labs-just-mate",
+   "repo": "uteg-labs/just-mate",
+   "project": "JustMate",
+   "team": "uteg-labs",
+   "task": "sport",
+   "result": "Not disclosed",
+   "task_fit": "no: the app deliberately collects no health or mood data and makes no health-driven decision, which misses the task's core requirement of health data driving recommendations; loneliness and walking touch the theme's edges but not its center.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 7,
+     "why": "The faceless, mutual-accept, on-foot meeting mechanic with a bearing-only compass and a no-chat rule is a genuinely novel assembly. The innovation sits in social and privacy design rather than the health-data domain the task centers, so it lands at a solid 7.",
+     "spread": 3,
+     "members": {
+      "A": 8.5,
+      "B": 5.5,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 6,
+     "why": "Loneliness as a health risk and walking as physical activity touch the theme, and 16 of 44 activities are sport or outdoors. But no health data drives any recommendation, alert, or plan, and two of three members read that as the task's core requirement, which the evidence supports.",
+     "spread": 3.5,
+     "members": {
+      "A": 8,
+      "B": 4.5,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 6,
+     "why": "Consent, safety, and vanish flows are unusually well designed and the two-phone demo works. But usefulness hinges on unsolved two-sided density, the demo runs on scripted positions, the app needs a dev-client build rather than standard Expo Go, and with no push a cancelled plan can strand a user.",
+     "spread": 1,
+     "members": {
+      "A": 7,
+      "B": 6,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 8,
+     "why": "All members agree this is the strongest dimension: a calm, consistent map-first interface backed by a full token, motion, and accessibility system. The members differ only on degree, not substance.",
+     "spread": 2,
+     "members": {
+      "A": 9,
+      "B": 8,
+      "C": 7
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 6,
+     "why": "The build is real and large: 206 test cases, WebSocket matching and compass relay, an ONNX scorer wired in with a rules fallback, and 262 of 264 commits during the event. Key features remain demo-only, the model is trained on synthetic labels, and the health-data decision layer is absent.",
+     "spread": 4,
+     "members": {
+      "A": 9,
+      "B": 6,
+      "C": 5
+     }
+    }
+   ],
+   "weighted_total": 67,
+   "build_reality": 7,
+   "source_loc": 42324,
+   "has_tests": true,
+   "tests": {
+    "files": 17,
+    "cases": 206
+   },
+   "live_demo": "https://just-mate-site.vercel.app (HTTP 200)",
+   "built_during_event": "partly: 2 commits before the event; 264 commits by 7 authors, 2026-10-03 08:49 to 2026-10-04 08:36 UTC",
+   "strengths": [
+    "Real decision logic end to end: a plans engine proposes a halfway venue inside shared free time, mutual accept gates the compass, and the matching loop runs under automated tests on a fake clock.",
+    "Privacy engineering in code, not copy: a bearing relay with ten-degree coarsening and distance buckets, plus anti-triangulation and spoofing tests.",
+    "Unusual honesty: a real-versus-canned table, open admission of synthetic training data, disclosed AI use, and no injection content found.",
+    "A calm, consistent design system with tokens, motion, and accessibility rules, plus complete judging materials and zero commits after the deadline."
+   ],
+   "weaknesses": [
+    "No health data is collected or used for any decision; the health-data decision layer at the core of the Sport & Healthcare task is missing, by deliberate design.",
+    "The demo leans on scripted positions and canned ghost users, and the mobile app requires a dev-client build rather than standard Expo Go.",
+    "ML matching is trained only on synthetic labels, scores just the Now flow while plans fall back to rules, and nothing is validated against real meetings.",
+    "Value depends on unsolved two-sided city density, and with no push notifications a cancelled plan can leave someone walking to an empty table."
+   ],
+   "red_flags": [
+    "May not be built for this task: the app deliberately collects no health or mood data and makes no health-driven decision, which misses the task's core requirement of health data driving recommendations; loneliness and walking touch the theme's edges but not its center."
+   ],
+   "verdict": "A well-engineered, honest, beautifully designed social product that treats loneliness with walking and mutual meetings, but its deliberate refusal to touch health data leaves the core of the Sport & Healthcare task unmet.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 82.5,
+      "agreement": 0.5,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 59.5,
+      "agreement": 0.8,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 64,
+      "agreement": 0.9,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791222954228
+  }
+ },
+ "defence|RodrigoGaluppo/HackYeah2026-LayerOne": {
+  "id": "curated--defence--RodrigoGaluppo-HackYeah2026-LayerOne",
+  "task": "defence",
+  "repo": "RodrigoGaluppo/HackYeah2026-LayerOne",
+  "title": "LayerOne",
+  "team": "LayerOne",
+  "uploaded_at": 1791226633790,
+  "status": "done",
+  "position": 0,
+  "review": {
+   "id": "curated--defence--RodrigoGaluppo-HackYeah2026-LayerOne",
+   "repo": "RodrigoGaluppo/HackYeah2026-LayerOne",
+   "project": "LayerOne",
+   "team": "LayerOne",
+   "task": "defence",
+   "result": "Not disclosed",
+   "task_fit": "yes: an external electrical-signature detector with signed alerts over an independent LoRa path directly serves the Defence theme of early detection and out-of-band reporting when the production network is hostile; C's 'partial' reflects the unproven demo, which the scores already capture rather than the fit itself.",
+   "scores": [
+    {
+     "criterion": "Idea & Innovation",
+     "weight": 30,
+     "score": 7,
+     "why": "Watching a device's electrical signature externally and reporting over an independent radio channel addresses a real gap, but power-signature intrusion detection is a known research direction and the demonstrated anomaly is a benign keypad-triggered workload, so the median between B's 8 and C's 6 fits.",
+     "spread": 2,
+     "members": {
+      "A": 7,
+      "B": 8,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Relation to Category",
+     "weight": 20,
+     "score": 8,
+     "why": "Squarely defence work: detection, authenticated alerting, evidence preservation, and an out-of-band channel, with honest MVP scoping rather than security theatre. B's 9.5 overstates a fit that the somewhat vague problem statement slightly dilutes, so 8 stands.",
+     "spread": 1.5,
+     "members": {
+      "A": 8,
+      "B": 9.5,
+      "C": 8
+     }
+    },
+    {
+     "criterion": "Practical Applicability / Usability",
+     "weight": 20,
+     "score": 5,
+     "why": "Deployment needs three Raspberry Pis, a Hantek scope, LoRa radios, and sigrok-cli, with hardcoded personal paths, and the operator dashboard is not demonstrated anywhere. All three members converge low for the same reasons.",
+     "spread": 1,
+     "members": {
+      "A": 5,
+      "B": 5,
+      "C": 4
+     }
+    },
+    {
+     "criterion": "Design (visual/UI)",
+     "weight": 20,
+     "score": 6,
+     "why": "The landing page is polished and accessible, with keyboard-navigable tabs and honest illustrative-data labelling, but the two screenshots are marketing assets and the operational dashboard UI is not evidenced. Every member lands on the same middle score.",
+     "spread": 0,
+     "members": {
+      "A": 6,
+      "B": 6,
+      "C": 6
+     }
+    },
+    {
+     "criterion": "Completeness & Implementation Value",
+     "weight": 10,
+     "score": 7,
+     "why": "All three members confirm the crypto chain and CUSUM detector are implemented in real code rather than stubbed, which supports the A and B score of 7 over C's 5; zero tests and no committed run log keep it from going higher.",
+     "spread": 2,
+     "members": {
+      "A": 7,
+      "B": 7,
+      "C": 5
+     }
+    }
+   ],
+   "weighted_total": 66,
+   "build_reality": 7,
+   "source_loc": 1874,
+   "has_tests": false,
+   "tests": {
+    "files": 0,
+    "cases": 0
+   },
+   "live_demo": "https://rodrigogaluppo.github.io/HackYeah2026-LayerOne/ (HTTP 200)",
+   "built_during_event": "yes: 3 commits by 1 author, 2026-10-04 01:41 to 2026-10-04 08:34 UTC",
+   "strengths": [
+    "The full cryptographic chain (Ed25519 signing, X25519+HKDF daily keys, ChaCha20-Poly1305 with the header as AAD, database-enforced replay guard) is implemented in real code, not mocked.",
+    "Detection runs on live physical measurements through sigrok-cli with a median/MAD baseline and a two-sided CUSUM with vote-window false-positive suppression and rearm logic.",
+    "The README is an honest engineering document with a coherent threat model: the radio path is treated as hostile and anomalies are scoped as reasons to investigate, not proof of malware.",
+    "All three commits fall inside the event window with none before or after, and the public landing page is live."
+   ],
+   "weaknesses": [
+    "Required deliverables are missing: no deck was submitted and the form's problem, progress, and how-to-open fields are blank.",
+    "The operational dashboard is never evidenced: the two screenshots are marketing assets and the working dashboard sits on a private LAN address, so no degraded-scenario usability demo exists.",
+    "Zero test files and zero test cases for a system whose core value is cryptographic and statistical correctness.",
+    "Deployment depends on specific hardware and the setup scripts hardcode personal paths such as /home/russo, limiting portability."
+   ],
+   "red_flags": [
+    "Runtime databases, logs, and CSV captures are excluded from the repo, so no committed artifact shows the detector or the verification gate ever fired in a real run.",
+    "The only jury-visible demo is a static marketing page; the working system is unreachable outside a private LAN."
+   ],
+   "verdict": "A technically genuine event-built entry whose crypto and detection code is real, but missing deliverables, zero tests, and an unreachable operational dashboard leave the end-to-end system unverified.",
+   "council": {
+    "version": 8,
+    "judge": "claude:glm-5.3",
+    "judge_ok": true,
+    "members": [
+     {
+      "letter": "A",
+      "model": "claude:glm-5.3-flash",
+      "ok": true,
+      "total": 66,
+      "agreement": 1,
+      "error": null
+     },
+     {
+      "letter": "B",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "ok": true,
+      "total": 72,
+      "agreement": 0.9,
+      "error": null
+     },
+     {
+      "letter": "C",
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "ok": true,
+      "total": 59,
+      "agreement": 0.7,
+      "error": null
+     }
+    ]
+   },
+   "created_at": 1791222465233
+  }
+ }
+}
