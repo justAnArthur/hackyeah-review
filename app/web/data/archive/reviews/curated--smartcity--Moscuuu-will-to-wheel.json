@@ -1,0 +1,154 @@
+{
+ "submission": {
+  "id": "curated--smartcity--Moscuuu-will-to-wheel",
+  "title": "Will to Wheel",
+  "team": "WSP",
+  "task": "smartcity",
+  "result": "Not disclosed",
+  "repo": "Moscuuu/will-to-wheel",
+  "created_at": 1791226633896,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633899,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 71,
+   "at": 1791226633903,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--smartcity--Moscuuu-will-to-wheel",
+  "repo": "Moscuuu/will-to-wheel",
+  "project": "Will to Wheel",
+  "team": "WSP",
+  "task": "smartcity",
+  "result": "Not disclosed",
+  "task_fit": "yes: a day-to-day mobility and quality-of-life tool for Kraków residents, venue owners and city staff, built on open urban data (OSM, ZTP GTFS); all three members agree and nothing in the evidence points off-category",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 8,
+    "why": "The generic 'accessible' label is replaced by measured, profile-matched verdicts backed by a source-weighted, time-decaying trust model with conflict resolution and moderator arbitration. Accessibility maps and passports are not new, which keeps the median at 8 rather than higher.",
+    "spread": 0.5,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7.5
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "Squarely a resident-facing city tool with named beneficiary roles, real open-data ingest and a live deployment. All members agree on the fit, and the highest median in the table reflects it.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 8,
+    "why": "The loops are concrete and working: set a profile once, get a four-state verdict, audit a venue in five steps. Held back because the running instance shows labeled sample data only, so real-world coverage and impact are undemonstrated.",
+    "spread": 0.5,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7.5
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "Clean, consistent, accessibility-first UI where WCAG 2.2 AA is actually built in: high contrast, text-size controls, large targets, a hyperlegible font and axe checks in E2E. Some screens still show placeholder or demo content.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 9,
+    "why": "For the event window the build is exceptional: 11.7k LOC, 266 tests, Playwright plus axe E2E, real OSM and GTFS import code, dual backends, magic-link auth and an admin panel, all deployed. Member C's 7 rests on the demo-mode mock, but the integration code itself exists, so the council weighs that limit under applicability and keeps the median at 9.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 83,
+  "build_reality": 9,
+  "source_loc": 11747,
+  "has_tests": true,
+  "tests": {
+   "files": 42,
+   "cases": 266
+  },
+  "live_demo": "https://will-to-wheel.vercel.app (HTTP 200)",
+  "built_during_event": "yes: 73 commits by 2 authors, 2026-10-03 11:42 to 2026-10-04 07:52 UTC",
+  "strengths": [
+   "Verdicts are computed, not displayed: measured door widths, steps, thresholds and toilet dimensions are compared against the user's own chair profile with explicit clearance constants",
+   "Real open-data pipelines in code: Overpass OSM import with mirror fallback, retries and tiled queries, plus ZTP Kraków GTFS tram-stop import",
+   "Unusually mature trust model: per-source weights, time decay, conflict detection, one-voice-per-person dedup and moderator arbitration with undo",
+   "Quality discipline and honesty: 266 tests, Playwright with axe checks, a deployed live app, clearly labeled sample data and disclosed AI use with human sign-off"
+  ],
+  "weaknesses": [
+   "The live deployment runs the in-memory seeded backend with a handful of demo venues and a mock AI extractor, so the real OSM, GTFS and AI integrations exist in code but are not demonstrated on the running instance",
+   "The presentation deck was not uploaded with the submission form and exists only as a PDF committed to the repo, so a required deliverable was missed",
+   "The OSM ingest bbox covers only Kraków center; city-wide coverage and the promised new cities are asserted, not demonstrated",
+   "Value depends on cold-start adoption by venue owners and community reporters, and the free-tier and B2G plans are on paper only"
+  ],
+  "red_flags": [],
+  "verdict": "A genuinely built, honestly labeled accessibility passport with computed profile-matched verdicts and real open-data pipelines, limited mainly by a sample-data demo with mocked AI on the live instance, center-city-only coverage and a deck committed to the repo but not uploaded with the submission form.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 84,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 83,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 74.5,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791225356242
+ }
+}

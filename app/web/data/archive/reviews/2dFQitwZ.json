@@ -1,0 +1,249 @@
+{
+ "submission": {
+  "id": "2dFQitwZ",
+  "title": "Krakopolis",
+  "team": "Koder",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "repo": "koderhack/krakopolis",
+  "created_at": 1791230013970,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791234595648,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 229,
+   "at": 1791230013978,
+   "message": "Queued"
+  },
+  {
+   "seq": 346,
+   "at": 1791232606503,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 347,
+   "at": 1791232658751,
+   "message": "Found 14,726 source lines, 0 test cases and 30 commits"
+  },
+  {
+   "seq": 348,
+   "at": 1791232658753,
+   "message": "Read 2 docs and 2 decks, opened 1 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 349,
+   "at": 1791232658760,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 351,
+   "at": 1791232762283,
+   "message": "Member A scored 71"
+  },
+  {
+   "seq": 352,
+   "at": 1791232762286,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 353,
+   "at": 1791232762292,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 411,
+   "at": 1791233933195,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 412,
+   "at": 1791233933199,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 436,
+   "at": 1791233980790,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 437,
+   "at": 1791233980794,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 464,
+   "at": 1791234436888,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 465,
+   "at": 1791234436892,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 511,
+   "at": 1791235031161,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 512,
+   "at": 1791235087624,
+   "message": "Member B scored 77"
+  },
+  {
+   "seq": 513,
+   "at": 1791235087626,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 514,
+   "at": 1791235105752,
+   "message": "Member C scored 79"
+  },
+  {
+   "seq": 515,
+   "at": 1791235105755,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 516,
+   "at": 1791235186255,
+   "message": "Done: 77 / 100"
+  }
+ ],
+ "review": {
+  "id": "2dFQitwZ",
+  "repo": "koderhack/krakopolis",
+  "project": "Krakopolis",
+  "team": "Koder",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "task_fit": "yes: a what-if planning sandbox for Kraków built on real OSM, ZTP GTFS and GTFS-RT and Open-Meteo data, covering mobility, urban data, public services and crisis scenarios squarely within the Smart City brief",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 8,
+    "why": "A real consequence engine (BPR travel times, Dijkstra routing, incremental traffic assignment) running on the actual OSM road graph, plus a rare OBSERVED/PREDICTED/SIMULATED honesty layer, earns 8. A's 7 is defensible since the underlying what-if concept and heuristic formulas are not new, but the computed insight and honesty layer support the median.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8,
+    "why": "Directly municipal: ZTP transit feeds, OSM streets, traffic and access analysis, and fire or flood modeled as road-closing events that shift metrics. C's 9 is generous because it is a decision-exploration sandbox rather than an operational city tool, so the median 8 stands.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "The live demo gives named users preview-confirm consequence reports, search, undo/redo and version compare, but outputs are uncalibrated heuristics the team itself admits can be inflated, coverage is one district and there is no scenario export. A's 6 is harsh given the working deployed demo; the evidence supports the median 7.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7.5,
+    "why": "The 3D city is the native UI with day/night lighting keyed to local time, DEM terrain, an OSM minimap with camera cone, color-coded HUD metrics and a data-origin legend. Polish-only labels and some generic-looking placeholder metrics keep it at 7.5 rather than C's 8.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 7.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 8,
+    "why": "A real end-to-end pipeline across 14,726 lines: Overpass and GTFS ingest, a hand-written protobuf decoder polling GTFS-RT, CORS proxying, IndexedDB versioning, 30 commits all within event hours and a live deploy. C's 7 dings the client-only architecture, but the measured pipeline and deploy support the median 8 despite zero tests.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 77,
+  "build_reality": 8,
+  "source_loc": 14726,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://krakopolis.pages.dev/ (HTTP 200)",
+  "built_during_event": "yes: 30 commits by 2 authors, 2026-10-03 09:17 to 2026-10-04 07:52 UTC",
+  "strengths": [
+   "Real data end to end: Overpass OSM bake, ZTP GTFS shapes mapped onto the road graph, live GTFS-RT vehicle positions via a custom ~180-line protobuf decoder, and Open-Meteo weather.",
+   "The core capability is computed, not displayed: BPR travel-time costs, Dijkstra path trees, incremental traffic assignment after closures, disaster spread, and IndexedDB version history with compare and restore.",
+   "Exceptional data honesty: every number tagged OBSERVED/PREDICTED/SIMULATED, with a DATA_SOURCES.md that documents what Kraków does not publish instead of faking it.",
+   "Built and shipped during the event: 30 commits by 2 authors all within event hours, a live demo returning HTTP 200, and a 10-slide English deck with screenshots and presenter notes."
+  ],
+  "weaknesses": [
+   "Zero automated tests (0 files, 0 cases) across 14,726 lines of code, so simulation correctness rests on manual demo runs.",
+   "Coverage is one ~1.9 x 1.6 km downtown district, and the client-side single-user sandbox with no scenario export or collaboration is unproven at city scale.",
+   "Consequence outputs are uncalibrated heuristics with arbitrary catalog values and no ground-truth validation; the team itself flags the affected-residents estimate as potentially inflated, which limits credibility for real planning decisions.",
+   "No LICENSE file despite an MIT claim in the materials, and the Polish-only UI labels limit accessibility for an international jury even though the deck is English."
+  ],
+  "red_flags": [],
+  "verdict": "A strong, honest Kraków decision sandbox with real feeds, a working traffic and disaster engine and a live deploy, held back by zero tests, single-district coverage and uncalibrated heuristic outputs.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 71,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 77,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 79,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791235186252
+ }
+}

@@ -1,0 +1,212 @@
+{
+ "submission": {
+  "id": "SQpVlwA0",
+  "title": "UczciwaCena",
+  "team": "Last Minute",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "repo": "LastMinuteGameStudio/smieciarka.pl",
+  "created_at": 1791241363782,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791241363785,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 696,
+   "at": 1791241363788,
+   "message": "Queued"
+  },
+  {
+   "seq": 767,
+   "at": 1791243291404,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 768,
+   "at": 1791243293015,
+   "message": "Found 6,089 source lines, 5 test cases and 40 commits"
+  },
+  {
+   "seq": 769,
+   "at": 1791243293018,
+   "message": "Read 2 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 770,
+   "at": 1791243293023,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 771,
+   "at": 1791243380009,
+   "message": "Member A scored 56"
+  },
+  {
+   "seq": 772,
+   "at": 1791243380011,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 773,
+   "at": 1791243446448,
+   "message": "Member B scored 50"
+  },
+  {
+   "seq": 774,
+   "at": 1791243446450,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 775,
+   "at": 1791243462735,
+   "message": "Member C scored 55"
+  },
+  {
+   "seq": 776,
+   "at": 1791243462739,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 777,
+   "at": 1791243539766,
+   "message": "Done: 56 / 100"
+  }
+ ],
+ "review": {
+  "id": "SQpVlwA0",
+  "repo": "LastMinuteGameStudio/smieciarka.pl",
+  "project": "UczciwaCena",
+  "team": "Last Minute",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "task_fit": "yes: it is a working day-to-day resident tool that cuts landfill waste by rescuing items left at trash sheds, which sits on the quality-of-life side of the Smart City theme, but with no municipal data or city-service integration the fit is partial rather than strong.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 6,
+    "why": "A real urban habit (posts about trash-shed finds scrolling away) is served by a working pipeline where vision captioning feeds embeddings and a calibrated reranker with measured thresholds. The free-exchange concept itself is not new, so the novelty is in the matching, not the idea.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 5,
+    "why": "Waste reduction is a genuine resident pain, but the evidence confirms there is no municipal data feed, no city-staff role and no mobility, energy or crisis dimension anywhere in the code. The smart-city link rests on quality-of-life framing alone, which supports the middle reading over both the strict no-fit and the strong-fit view.",
+    "spread": 4,
+    "members": {
+     "A": 5,
+     "B": 3,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 6,
+    "why": "The end-to-end flow works (post, semantic search, photo upload, notifications), browsing needs no login, and the README ships an APK, seed data and a one-command start. Alerts require login, the free tier allows one watch filter, OTP is a fixed mock, and notifications only arrive by polling.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 6,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 5,
+    "why": "The Flutter theme code is coherent (Material 3 palette, Rubik typography, styled navigation), but no deck was provided and 0 of 42 screenshots were described, so visual quality cannot be verified from the evidence.",
+    "spread": 1,
+    "members": {
+     "A": 5,
+     "B": 5,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 6,
+    "why": "About 6,100 lines across a real FastAPI backend with pgvector, migrations, S3 storage, EXIF stripping, JWT auth and reranker matching, plus a Flutter client, in 40 event commits. This is offset by only 5 test cases, no vector or geospatial indexes, and synchronous AI calls in request handlers.",
+    "spread": 2,
+    "members": {
+     "A": 6,
+     "B": 7,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 56,
+  "build_reality": 7,
+  "source_loc": 6089,
+  "has_tests": true,
+  "tests": {
+   "files": 3,
+   "cases": 5
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 40 commits by 2 authors, 2026-10-03 15:57 to 2026-10-05 12:54 UTC",
+  "strengths": [
+   "Real, measured AI pipeline: Jina embeddings and reranker, Gemini vision captioning and query expansion wired into the listing and filter paths, with documented thresholds.",
+   "Privacy engineering beyond the demo norm: EXIF stripped by re-encoding and public coordinates rounded to about 100 m.",
+   "Honest internal docs (stan-obecny.md) that separate the target spec from what actually works.",
+   "Practical demo path: release APK, seeded Warsaw listings and a one-command start script."
+  ],
+  "weaknesses": [
+   "No municipal or urban data source and no city-staff role anywhere in the code, so the smart-city case rests on framing and the platform depends entirely on its own user-generated listings, a two-sided cold start.",
+   "The core alert promise is weak at scale: notifications are poll-only with no push, and OTP is a hardcoded 123456 mock with no real SMS gateway.",
+   "Missed deliverables: no presentation deck and a submission form left essentially unfilled, so with 0 of 42 screenshots described the UI cannot be judged and the README is the only pitch.",
+   "Sparse tests (5 cases), no PostGIS, Redis or Celery, and no integration with the real Facebook group posts the project itself names as the problem."
+  ],
+  "red_flags": [
+   "One commit landed after the deadline (1 of 40; the other 39 were during the event, so this is minor).",
+   "No demo check in the evidence pack verified the README's hosted-backend and APK claims."
+  ],
+  "verdict": "A genuinely engineered and honestly documented zero-waste resident tool with real semantic matching and privacy care, whose smart-city claim rests on quality-of-life framing alone, with no urban data integration, poll-only alerts, a mocked OTP and a missing deck and submission form.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 56,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 50,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 55,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791243539763
+ }
+}

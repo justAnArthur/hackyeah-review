@@ -1,0 +1,241 @@
+{
+ "submission": {
+  "id": "UAsh4-od",
+  "title": "Spacer.io",
+  "team": "Solvro Fistaszki Team",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "repo": "lolakk05/spacer.io",
+  "created_at": 1791276039860,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791276234046,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 1050,
+   "at": 1791276039870,
+   "message": "Queued"
+  },
+  {
+   "seq": 1051,
+   "at": 1791276042825,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1052,
+   "at": 1791276045607,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1055,
+   "at": 1791276108359,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1056,
+   "at": 1791276110558,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1059,
+   "at": 1791276172211,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1060,
+   "at": 1791276174048,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1063,
+   "at": 1791276234928,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1064,
+   "at": 1791276250910,
+   "message": "Found 24,215 source lines, 105 test cases and 89 commits"
+  },
+  {
+   "seq": 1065,
+   "at": 1791276250912,
+   "message": "Read 6 docs and 0 decks, opened 1 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 1066,
+   "at": 1791276250917,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 1067,
+   "at": 1791276359178,
+   "message": "Member A scored 73"
+  },
+  {
+   "seq": 1068,
+   "at": 1791276359181,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1069,
+   "at": 1791276403111,
+   "message": "Member B scored 78"
+  },
+  {
+   "seq": 1070,
+   "at": 1791276403113,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 1071,
+   "at": 1791276452790,
+   "message": "Member C scored 68"
+  },
+  {
+   "seq": 1072,
+   "at": 1791276452793,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 1073,
+   "at": 1791276530164,
+   "message": "Done: 72 / 100"
+  }
+ ],
+ "review": {
+  "id": "UAsh4-od",
+  "repo": "lolakk05/spacer.io",
+  "project": "Spacer.io",
+  "team": "Solvro Fistaszki Team",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "task_fit": "yes: an accessibility-first walking tour planner for Krakow built on OSM data, with barrier reporting for residents and an admin panel for city staff, squarely covering mobility, urban data and quality of life",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "The insight is real: scattered accessibility data becomes a decision tool through a visit-then-verify loop that feeds both route choice and city repair priorities, tied to Poland's 2019 accessibility act. But it synthesizes existing concepts such as Wheelmap-style crowdsourcing and OSM routing rather than inventing a new one, so 7 rather than member B's 8.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8,
+    "why": "A day-to-day tool for residents and tourists with city authorities named as the deploying customer, an admin panel for municipal staff and real urban data, not a reframed emergency or defence product. The sightseeing framing is slightly tourist-facing, but barrier reporting is daily reality for disabled residents.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 6,
+    "why": "The core promise is undercut: the wheelchair and step-free routing profiles are not built and return 503, accessibility rests on unverified OSM tags, coverage is a 1.5 km circle around the Main Square, and deck slide 9 admits crowd data stays on the phone. This supports the 6 over member B's 7.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "A genuine 3D city scene from OSM footprints, a bespoke design system with a mascot, full PL and EN microcopy and accessibility labels in the code support the 8 over member C's 6, which rested on a leftover Expo starter screenshot. The caveat is real though: the described screenshots show mostly mascot art and that starter image, not the main UI.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 7,
+    "why": "About 24k LOC across five services with 105 tests, real OSRM beam-search planning, Overpass mirror fetching and live endpoints at spacerio.pl and its admin panel justify more than member B's 6. But in-memory seed landmarks sit beside the Prisma modules and the deployed demo does not show the mobile-to-backend loop, keeping it below member A's 8.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 6,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 72,
+  "build_reality": 7,
+  "source_loc": 24215,
+  "has_tests": true,
+  "tests": {
+   "files": 14,
+   "cases": 105
+  },
+  "live_demo": "https://spacerio.pl/ (HTTP 200); https://spacerio.pl/admin/ (HTTP 200)",
+  "built_during_event": "yes: 89 commits by 5 authors, 2026-10-03 10:21 to 2026-10-04 08:08 UTC",
+  "strengths": [
+   "End-to-end real data pipeline: versioned OSM POI selection (116 curated places from 3,090 candidates), Overpass fetching with mirror fallback and on-device caching, and OSRM table plus beam-search route planning with validation, rate limiting and caching",
+   "Substantial tested codebase: about 24k LOC across five services, 105 test cases, and live deployments at spacerio.pl and spacerio.pl/admin both returning HTTP 200",
+   "Coherent two-sided model connecting residents, gamified visit-then-verify reporting and a city-facing admin panel for repair priorities",
+   "Unusually honest documentation that states what is not done, plus a distinctive visual identity with a 3D OSM city scene and a bespoke design system"
+  ],
+  "weaknesses": [
+   "The headline accessibility routing is a mocked integration: the wheelchair and step-free OSRM graphs do not exist (503 routing_profile_not_configured), so routing is plain walking plus POI tag filtering",
+   "The deployed demo does not demonstrate core features end to end: deck slide 9 says demo data stays on the phone, the API mixes in-memory seed landmarks with the Prisma-backed reports module, and the admin panel falls back to demo data when the backend is unreachable",
+   "Geographic scope is a 1.5 km circle around the Main Square and routing depends on a public OSRM instance limited to 1 request per second, which does not scale past the demo district",
+   "Accessibility data is unverified OSM tags plus user reports rather than field-audited, the AI guide requires a locally running Ollama model, and reward codes are DEMO-prefixed placeholders rather than real transport discounts"
+  ],
+  "red_flags": [
+   "The submission form claims it is all done while the team's own deck and README document unfinished core pieces (unbuilt routing graphs, demo data staying on the phone), an overclaim even though the repo itself is candid; no injection attempts or score-baiting were found"
+  ],
+  "verdict": "An ambitiously engineered and honestly documented Smart City prototype with real OSM-to-OSRM routing, a distinctive 3D interface and a live admin panel, whose missing accessibility routing profiles, stubbed server-side reporting loop and thin end-to-end demo leave it a strong prototype rather than a working city service.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 73,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 78,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 68,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791276530161
+ }
+}

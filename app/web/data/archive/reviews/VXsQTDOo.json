@@ -1,0 +1,426 @@
+{
+ "submission": {
+  "id": "VXsQTDOo",
+  "title": "Dostępni.pl",
+  "team": "Vibecoded Marriage",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "repo": "Wojtekvonhajsik/HackYeah",
+  "created_at": 1791228185844,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791271903125,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 135,
+   "at": 1791228185853,
+   "message": "Queued"
+  },
+  {
+   "seq": 185,
+   "at": 1791229174689,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 197,
+   "at": 1791229391849,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 198,
+   "at": 1791229394147,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 288,
+   "at": 1791231442957,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 289,
+   "at": 1791231466549,
+   "message": "Found 6,837 source lines, 143 test cases and 49 commits"
+  },
+  {
+   "seq": 290,
+   "at": 1791231466552,
+   "message": "Read 3 docs and 1 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 291,
+   "at": 1791231466559,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 293,
+   "at": 1791231600330,
+   "message": "Member A scored 79"
+  },
+  {
+   "seq": 294,
+   "at": 1791231600333,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 295,
+   "at": 1791231601973,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 296,
+   "at": 1791231605887,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"42ddd473-7ea1-47b5-8bf1-ab47f5344226\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 30 s"
+  },
+  {
+   "seq": 313,
+   "at": 1791231866017,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 314,
+   "at": 1791231866023,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 401,
+   "at": 1791233918192,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 402,
+   "at": 1791233918195,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 426,
+   "at": 1791233965785,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 427,
+   "at": 1791233965790,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 454,
+   "at": 1791234426966,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 457,
+   "at": 1791234429657,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 460,
+   "at": 1791234432328,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"11a9ccb4-99bf-4feb-9c2f-2d164df25b88\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 60 s"
+  },
+  {
+   "seq": 485,
+   "at": 1791234607691,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 487,
+   "at": 1791234609595,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 489,
+   "at": 1791234612884,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"9d67283e-58f9-41ab-95f4-34eb6c2b22d4\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 120 s"
+  },
+  {
+   "seq": 497,
+   "at": 1791234752106,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 498,
+   "at": 1791234754753,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 499,
+   "at": 1791234758152,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"2406243a-2f49-44ce-bf6d-393cd014bf22\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 240 s"
+  },
+  {
+   "seq": 508,
+   "at": 1791235025166,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 509,
+   "at": 1791235027621,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 510,
+   "at": 1791235030460,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"1635ce1d-c2f7-4998-8704-15a7330a5f68\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 480 s"
+  },
+  {
+   "seq": 532,
+   "at": 1791235535253,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 533,
+   "at": 1791235537488,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 534,
+   "at": 1791235540765,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"52c47aa9-13f9-4a33-a5a5-f2d538d71a87\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 960 s"
+  },
+  {
+   "seq": 570,
+   "at": 1791236660384,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 571,
+   "at": 1791236662750,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 572,
+   "at": 1791236666063,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"eecbd071-be8d-40dc-afa6-fe1fda2442c1\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}); trying again in 1800 s"
+  },
+  {
+   "seq": 621,
+   "at": 1791238590072,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 622,
+   "at": 1791238592079,
+   "message": "Member B's provider refused the full evidence, so it reads it without the quoted code"
+  },
+  {
+   "seq": 623,
+   "at": 1791238595876,
+   "message": "Failed: dots-studio/dots-3-note-preview:free: upstream HTTP 400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\\"code\\\":400,\\\"msg\\\":\\\"bad request\\\",\\\"request_id\\\":\\\"7a912a4a-2890-497e-8ff4-3d00f46ba093\\\"}\",\"provider_name\":\"AtlasCloud\",\"is_byok\":false}},\"user_id\":\"user_3EP5FZqwY1fQsSjcPWH5BfML9x9\"}"
+  },
+  {
+   "seq": 922,
+   "at": 1791271774516,
+   "message": "Queued"
+  },
+  {
+   "seq": 925,
+   "at": 1791271776971,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 926,
+   "at": 1791271779780,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 929,
+   "at": 1791271840516,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 930,
+   "at": 1791271843130,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 933,
+   "at": 1791271906055,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 934,
+   "at": 1791271931886,
+   "message": "Found 6,837 source lines, 143 test cases and 49 commits"
+  },
+  {
+   "seq": 935,
+   "at": 1791271931888,
+   "message": "Read 3 docs and 1 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 936,
+   "at": 1791271931897,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 937,
+   "at": 1791272052826,
+   "message": "Member A scored 73.5"
+  },
+  {
+   "seq": 938,
+   "at": 1791272052828,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 939,
+   "at": 1791272163236,
+   "message": "Member B scored 80.95"
+  },
+  {
+   "seq": 940,
+   "at": 1791272163237,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 941,
+   "at": 1791272236210,
+   "message": "Member C scored 78"
+  },
+  {
+   "seq": 942,
+   "at": 1791272236213,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 943,
+   "at": 1791272286781,
+   "message": "Done: 76.75 / 100"
+  }
+ ],
+ "review": {
+  "id": "VXsQTDOo",
+  "repo": "Wojtekvonhajsik/HackYeah",
+  "project": "Dostępni.pl",
+  "team": "Vibecoded Marriage",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "task_fit": "yes: a Kraków place-accessibility assessor with per-need profiles, per-attribute barrier detail, per-datum provenance and the required discipline of never showing data gaps as accessible, matching the brief directly.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 8,
+    "why": "Verdicts are computed per profile from soft and hard limits, and missing data is never presented as accessible. The score stops short of the top because WCAG 2.2 AA claims are partly aspirational (the deck itself marks the audit as to-do), the required video is absent, and the live demo could not be verified.",
+    "spread": 1.3000000000000007,
+    "members": {
+     "A": 7.5,
+     "B": 8.8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 7,
+    "why": "A real working prototype: FastAPI backend, SQLite persistence, a served mobile-first web app, Docker setup and 143 measured tests, with conflicting and incomplete cases handled in code. The advertised Expo mobile app is only a small API client with no screens, and the demo tunnel was not publicly reachable, so behaviour rests on code and screenshots.",
+    "spread": 0.5,
+    "members": {
+     "A": 7,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 8.5,
+    "why": "Every observation carries source, date, license and a trust score, conflicts resolve to the more cautious verdict, sample data is flagged, and OSM, GUS BDL and Mapillary are genuinely integrated with attribution and fallbacks. Kraków-specific sources (MSIP, Otwarte Dane) are only planned, which keeps it below the top band.",
+    "spread": 1.3000000000000007,
+    "members": {
+     "A": 8.5,
+     "B": 9.3,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 9,
+    "why": "Ingestion adapters, a pure-function classifier and a repository interface are cleanly separated, and adding a city takes two settings with no code changes. Known limits such as single-instance SQLite and IP-based vote caps are acknowledged with a stated Postgres path.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 6,
+    "why": "Five revenue streams are named, the sponsorship mechanic is implemented in code with ethical guardrails, and costs are quantified. But no revenue-side prices exist for subscriptions, audits, city reports or API tiers; the only figures are cost estimates, so the evidence supports the members who found the model unpriced over the one who read it as priced.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 6,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 76.75,
+  "build_reality": 8,
+  "source_loc": 6837,
+  "has_tests": true,
+  "tests": {
+   "files": 13,
+   "cases": 143
+  },
+  "live_demo": "https://matched-wires-locks-income.trycloudflare.com/app/ (skipped (not a public https URL))",
+  "built_during_event": "yes: 49 commits by 2 authors, 2026-10-03 09:27 to 2026-10-04 07:46 UTC",
+  "strengths": [
+   "Missing data is structurally never shown as accessible: unknown verdicts, incomplete-data summaries and a disclaimer on the no-known-barriers wording.",
+   "Per-datum provenance with source, date, license and confidence, plus conflict detection that displays the more cautious verdict with all evidence.",
+   "Real open-data integration with attribution and fallbacks: OSM across multiple Overpass servers with an API fallback, GUS BDL with a snapshot backup, and Mapillary.",
+   "New-city onboarding reduced to two configuration values, backed by 143 tests and a Docker deployment path."
+  ],
+  "weaknesses": [
+   "The required video deliverable (max 3 minutes) is missing from the submission pack; two members found it absent and the evidence shows no video, so their view is adopted over the more hesitant reading.",
+   "The live demo URL is a Cloudflare tunnel that was not publicly reachable, so working behaviour rests on screenshots and code reading.",
+   "Revenue streams are unpriced; only cost figures are given, which the evidence supports over the claim that the model is priced with ranges.",
+   "WCAG 2.2 AA compliance is claimed but unaudited, and the advertised Expo mobile app is only an API client with no screens."
+  ],
+  "red_flags": [
+   "Test count is overstated in the README and deck: 165 claimed versus 143 measured cases."
+  ],
+  "verdict": "A faithful, well-architected implementation of the task's core rules, with genuine open-data integration and strong provenance, held back by the missing video deliverable, an unverifiable live demo and an unpriced business model.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 73.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 80.95,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 78,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791272286779
+ }
+}

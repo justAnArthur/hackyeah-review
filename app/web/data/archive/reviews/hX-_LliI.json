@@ -1,0 +1,252 @@
+{
+ "submission": {
+  "id": "hX-_LliI",
+  "title": "DriveMate",
+  "team": "MichaelDev",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "repo": "indieedevsh-ui/DriveMatee",
+  "created_at": 1791297266059,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791297545618,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 1686,
+   "at": 1791297266067,
+   "message": "Queued"
+  },
+  {
+   "seq": 1687,
+   "at": 1791297266485,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1688,
+   "at": 1791297269092,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1691,
+   "at": 1791297329698,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1692,
+   "at": 1791297331780,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1695,
+   "at": 1791297392496,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1696,
+   "at": 1791297394895,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1699,
+   "at": 1791297483147,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1700,
+   "at": 1791297485621,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1703,
+   "at": 1791297554916,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1704,
+   "at": 1791297576886,
+   "message": "Found 13,501 source lines, 0 test cases and 9 commits"
+  },
+  {
+   "seq": 1705,
+   "at": 1791297576888,
+   "message": "Read 2 docs and 2 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 1706,
+   "at": 1791297576892,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 1707,
+   "at": 1791297672990,
+   "message": "Member A scored 55"
+  },
+  {
+   "seq": 1708,
+   "at": 1791297672992,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1709,
+   "at": 1791297725942,
+   "message": "Member B scored 49.5"
+  },
+  {
+   "seq": 1710,
+   "at": 1791297725945,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 1711,
+   "at": 1791297758701,
+   "message": "Member C scored 34"
+  },
+  {
+   "seq": 1712,
+   "at": 1791297758703,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 1713,
+   "at": 1791297858191,
+   "message": "Done: 48 / 100"
+  }
+ ],
+ "review": {
+  "id": "hX-_LliI",
+  "repo": "indieedevsh-ui/DriveMatee",
+  "project": "DriveMate",
+  "team": "MichaelDev",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "task_fit": "no: a personal consumer in-car assistant for individual drivers, not a day-to-day city tool; the only municipal touchpoint is street-name narration built on GUGiK data, and no city feed, city-staff role or city-level decision is served.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 5,
+    "why": "The voice-to-real-actions insight and the street-history narration over GUGiK PRG, TERYT, OSM and Wikipedia are genuinely thoughtful, but the core concept converges with CarPlay and Siri and the differentiating AI layer is unproven. Member C's 3 underrates it; the evidence supports the middle view shared by A and B.",
+    "spread": 2.5,
+    "members": {
+     "A": 5,
+     "B": 5.5,
+     "C": 3
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 2,
+    "why": "Two of three members score 2 and the evidence backs them: navigation, parking and fuel come from Apple Maps search, and the one real urban data call feeds street trivia rather than city operations. Even A's own notes concede a single municipal touchpoint, so A's 5 is the unsupported outlier.",
+    "spread": 3,
+    "members": {
+     "A": 5,
+     "B": 2,
+     "C": 2
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 5,
+    "why": "There is a clear user and a genuinely useful one-screen driving scenario with safety-minded details, but nothing verifies it runs: demo checks are empty, the team admits the AI is incomplete, and it requires an iOS 27 physical iPhone.",
+    "spread": 1,
+    "members": {
+     "A": 5,
+     "B": 5,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 6.5,
+    "why": "Eighteen screenshots and a 20-slide deck show a distinctive, consistent liquid-glass cockpit, though the running-app shots reveal placeholder map data, so the built UI trails the concept. C's 5 is the outlier against A and B.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 6.5,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 6,
+    "why": "About 13.5k lines of real Swift across 26 services with live MapKit routing, GUGiK and Polish speech integrations, but zero tests and no runtime evidence. A and B's reading matches the measured codebase; C's 3 rests on an unproven suspicion of undisclosed AI-generated code.",
+    "spread": 3,
+    "members": {
+     "A": 6,
+     "B": 6,
+     "C": 3
+    }
+   }
+  ],
+  "weighted_total": 48,
+  "build_reality": 7,
+  "source_loc": 13501,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "partly: 1 commit before the event; 9 commits by 1 author, 2026-10-03 08:59 to 2026-10-04 08:02 UTC",
+  "strengths": [
+   "Substantial real code, about 13.5k Swift lines across 26 services: MapKit routing with turn-by-turn guidance, a Polish speech pipeline with wake-word training, and camera capture.",
+   "Genuine open urban-data integration in PolishStreetKnowledgeService: GUGiK PRG OGC API, TERYT codes, Nominatim OSM and Wikipedia.",
+   "A distinctive, consistent liquid-glass landscape design carried across 18 screenshots and a 20-slide deck.",
+   "Safety-first UX discipline: overspeed voice warnings, music ducking, and honest refusals instead of invented answers."
+  ],
+  "weaknesses": [
+   "It is a consumer driver app, not a Smart City tool: no city feed, no city-staff user, and the only municipal data is used for street narration.",
+   "No runtime proof of the core promise: demo checks are empty, there is no video, and there are zero test files and zero test cases.",
+   "The required presentation was not provided with the submission; the deck exists only inside the repo.",
+   "The team admits the AI functions are incomplete, and the AI path depends on specific hardware such as an iOS 27 physical iPhone and Apple Intelligence."
+  ],
+  "red_flags": [
+   "May not be built for this task: a personal consumer in-car assistant for individual drivers, not a day-to-day city tool; the only municipal touchpoint is street-name narration built on GUGiK data, and no city feed, city-staff role or city-level decision is served.",
+   "The submission itself declares 'Not a finalist' and admits the AI functions are not fully complete, so the headline voice-AI claims go beyond what the evidence or the team's own statements support."
+  ],
+  "verdict": "A seriously built and well-designed Polish in-car assistant with real code and real urban-data touches, but as submitted it is a personal consumer driving app rather than a Smart City tool, its core voice-AI promise is unverifiable from the evidence, and the required presentation was not delivered with the entry.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 55,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 49.5,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 34,
+     "agreement": 0.5,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791297858189
+ }
+}

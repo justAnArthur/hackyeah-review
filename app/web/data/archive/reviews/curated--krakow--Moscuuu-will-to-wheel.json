@@ -1,0 +1,211 @@
+{
+ "submission": {
+  "id": "curated--krakow--Moscuuu-will-to-wheel",
+  "title": "Will to Wheel",
+  "team": "WSP",
+  "task": "krakow",
+  "result": "Not disclosed",
+  "repo": "Moscuuu/will-to-wheel",
+  "created_at": 1791226633988,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633990,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 81,
+   "at": 1791226633992,
+   "message": "Queued"
+  },
+  {
+   "seq": 124,
+   "at": 1791227887095,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 125,
+   "at": 1791227921349,
+   "message": "Found 11,747 source lines, 266 test cases and 73 commits"
+  },
+  {
+   "seq": 126,
+   "at": 1791227921351,
+   "message": "Read 0 docs and 1 decks, opened 1 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 127,
+   "at": 1791227921356,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 128,
+   "at": 1791228032958,
+   "message": "Member A scored 78.5"
+  },
+  {
+   "seq": 129,
+   "at": 1791228032960,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 130,
+   "at": 1791228113510,
+   "message": "Member B scored 76"
+  },
+  {
+   "seq": 131,
+   "at": 1791228113515,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 132,
+   "at": 1791228129486,
+   "message": "Member C scored 70"
+  },
+  {
+   "seq": 133,
+   "at": 1791228129489,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 136,
+   "at": 1791228236850,
+   "message": "Done: 77 / 100"
+  }
+ ],
+ "review": {
+  "id": "curated--krakow--Moscuuu-will-to-wheel",
+  "repo": "Moscuuu/will-to-wheel",
+  "project": "Will to Wheel",
+  "team": "WSP",
+  "task": "krakow",
+  "result": "Not disclosed",
+  "task_fit": "yes: a working Kraków accessibility passport for wheelchair and pram users with per-attribute barrier data, per-datum provenance and profile-dependent verdicts, which is squarely the partner's brief.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 8.8,
+    "why": "Verdicts are computed per profile from real dimensions (door width, threshold tolerance, toilet needs) across four states, and missing data renders as 'Brak danych' or 'Nie można potwierdzić', never as accessible. Real accessibility controls (text sizing, high contrast, skip link, keyboard and screen-reader support) are present, but the map has no explicit text alternative.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 8.8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 8.5,
+    "why": "The live HTTP 200 demo matches the code, with map search, evidence passport, community reports, owner claims, admin moderation and an AI audit wizard with a manual fallback, plus the required conflicting, unreviewed and source-failure cases and 266 tests with Playwright axe. Points are lost because the referenced 2:49 walkthrough video cannot be verified in the submission.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 8.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 8,
+    "why": "Every datum carries source, method, observedAt and note, with source weights, time decay and conflict handling implemented in domain code, and the OSM Overpass and ZTP GTFS ingestion is real with attribution. The deployed demo runs on clearly labelled seed data, coverage is one central Kraków bbox, and no city MSIP or dane.gov.pl feed is actually consumed.",
+    "spread": 0,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 8,
+    "why": "Ingestion is cleanly separated from presentation through a Repo interface with memory and Supabase backends and admin-triggered, logged runs. The Kraków bbox and attribute mapping are code constants, so adding a city needs code edits rather than configuration.",
+    "spread": 1.5,
+    "members": {
+     "A": 8,
+     "B": 8.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 5,
+    "why": "Four plausible segments are named (free venues, premium chains, B2G city licences, booking-platform API), but no PLN pricing, cost or revenue figure appears anywhere in the deck, README or form, which the criterion explicitly requires.",
+    "spread": 1,
+    "members": {
+     "A": 5,
+     "B": 4,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 77,
+  "build_reality": 9,
+  "source_loc": 11747,
+  "has_tests": true,
+  "tests": {
+   "files": 42,
+   "cases": 266
+  },
+  "live_demo": "https://will-to-wheel.vercel.app (HTTP 200)",
+  "built_during_event": "yes: 73 commits by 2 authors, 2026-10-03 11:42 to 2026-10-04 07:52 UTC",
+  "strengths": [
+   "Per-attribute provenance (source, method, date, photo, note) with source weights, time decay and conflict handling is implemented in domain code, not just promised.",
+   "Missing or stale data can never produce a 'fits' verdict; it renders as 'Brak danych' or 'Nie można potwierdzić', verified in fitCheck and computeVerdict.",
+   "Real open-data ingestion (OSM Overpass with attribution and failover, ZTP Kraków GTFS stops) with sample data clearly labelled 'Przykładowe dane' and AI use disclosed.",
+   "Serious WCAG 2.2 AA effort (skip link, text sizing, high contrast, aria-live, axe in e2e) and all required demo cases (conflict, unreviewed venue, simulated source failure) present in seed data."
+  ],
+  "weaknesses": [
+   "Business model has no numbers: no PLN pricing, cost or revenue figures anywhere, which the reviewing guide explicitly requires.",
+   "The required 2:49 walkthrough video is referenced but cannot be verified in the submission pack, and the submission form fields are largely empty.",
+   "The deployed demo runs on labelled seed data, coverage is one central Kraków bbox, and no city MSIP or dane.gov.pl feed is actually consumed.",
+   "New-city onboarding requires code edits (hardcoded bbox and tag mapping) rather than pure configuration."
+  ],
+  "red_flags": [
+   "A required video deliverable is referenced in the README but no video file or link exists in the submission, so it cannot be verified."
+  ],
+  "verdict": "An unusually complete, honest and well-engineered accessibility passport that meets nearly every hard requirement of the brief, held back by an unpriced business model, narrow seed-data coverage and an unverifiable video deliverable.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 78.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 76,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 70,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791228236846
+ }
+}

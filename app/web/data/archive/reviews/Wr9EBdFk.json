@@ -1,0 +1,222 @@
+{
+ "submission": {
+  "id": "Wr9EBdFk",
+  "title": "Bez RÓŻnicy.",
+  "team": "SO BAM!",
+  "task": "impacther",
+  "result": "Not a finalist",
+  "repo": "Alaliszon121/HackYeah2026",
+  "created_at": 1791234928323,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791238590045,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 504,
+   "at": 1791234928334,
+   "message": "Queued"
+  },
+  {
+   "seq": 584,
+   "at": 1791236963413,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 585,
+   "at": 1791236966566,
+   "message": "Found 3,416 source lines, 0 test cases and 77 commits"
+  },
+  {
+   "seq": 586,
+   "at": 1791236966568,
+   "message": "Read 0 docs and 1 decks, opened 2 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 587,
+   "at": 1791236966574,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 588,
+   "at": 1791237091730,
+   "message": "Member A scored 59"
+  },
+  {
+   "seq": 589,
+   "at": 1791237091733,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 595,
+   "at": 1791237141654,
+   "message": "Member B scored 67"
+  },
+  {
+   "seq": 596,
+   "at": 1791237141657,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 600,
+   "at": 1791237162970,
+   "message": "Member C scored 57"
+  },
+  {
+   "seq": 601,
+   "at": 1791237162973,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 619,
+   "at": 1791238590049,
+   "message": "Picked up again: the server that was running this review stopped"
+  },
+  {
+   "seq": 624,
+   "at": 1791238596060,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 625,
+   "at": 1791238652995,
+   "message": "Done: 60 / 100"
+  }
+ ],
+ "review": {
+  "id": "Wr9EBdFk",
+  "repo": "Alaliszon121/HackYeah2026",
+  "project": "Bez RÓŻnicy.",
+  "team": "SO BAM!",
+  "task": "impacther",
+  "result": "Not a finalist",
+  "task_fit": "yes: the pink tax is a documented, women-specific economic disadvantage and the game addresses it structurally through its mechanics, though as an awareness tool rather than a measurable remedy; C's stricter 'partial' reading is already captured in the practical-applicability score, not as a fit failure.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 6,
+    "why": "The problem is well evidenced with a cited Marketing Science 2023 study and the team's own price collection at a real mall. The guessing-game format is a decent but not novel serious-game device, and the team openly disclaims solving the problem.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 7,
+    "why": "Gendered pricing is baked into the mechanics, with comparison pairs required to be one pink and one regular product from the same group, so it is not a rebranded generic tool. It settles at 7 rather than B's 9 because the game delivers awareness to a general audience rather than women-specific utility.",
+    "spread": 2.5,
+    "members": {
+     "A": 6.5,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 5,
+    "why": "A free released build is verified on itch.io, but it is Windows-only with a 152 MB download. No measurable-impact plan exists anywhere: the deck's impact chain has no target metric, baseline, or evaluation method.",
+    "spread": 1,
+    "members": {
+     "A": 5,
+     "B": 5,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 5.5,
+    "why": "No screenshots or described visuals are in the pack, so design quality cannot be verified directly. Indirect signals such as team-made 3D models, camera work, and a coherent receipt metaphor suggest moderate, likely above-average polish.",
+    "spread": 1,
+    "members": {
+     "A": 5.5,
+     "B": 5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 7,
+    "why": "The full game loop ships in about 3,400 SLOC of C# across three modes plus run generation, shelving, camera flow, and receipt history, with a released build. C's 5 is the outlier; the verified working build supports the middle, offset by zero automated tests and a stubbed end cutscene that merely reloads scene 1.",
+    "spread": 3,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 60,
+  "build_reality": 7.5,
+  "source_loc": 3416,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://viwien.itch.io/bez-roznicy (HTTP 200); https://www.canva.com/design/DAHW-sbwDHQ/oQLlq6TIQEbv4ZxJXRfiSQ/edit?utm_content=DAHW-sbwDHQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton (HTTP 200)",
+  "built_during_event": "partly: 2 commits before the event; 77 commits by 5 authors, 2026-10-03 05:01 to 2026-10-05 21:10 UTC",
+  "strengths": [
+   "Need is evidenced with a cited academic study and the team's own primary price data collected at a real mall, not assumed from naming.",
+   "The pink-tax theme is structural in the code: comparison pairs must be one pink and one regular product from the same group.",
+   "A complete, defensively written game loop for all three modes plus generation, shelving, camera flow, and receipt history, with a released build verified on itch.io.",
+   "Honest framing that neither overclaims impact nor hides the research nuance that comparable-formulation price gaps nearly vanish."
+  ],
+  "weaknesses": [
+   "The task's requirement for practical, measurable impact is missed: the goal is stated as awareness only, with no target metric, baseline, or evaluation method anywhere in the pack.",
+   "Windows-only 152 MB desktop download, with web and mobile deferred, limits reach to the affected group.",
+   "Zero automated tests and a stubbed end-cutscene trigger that merely loads scene 1.",
+   "No screenshots or described visuals, so design claims rest entirely on indirect evidence."
+  ],
+  "red_flags": [
+   "Seven commits landed after the deadline, the last on Oct 5 at 21:10 UTC, past even the open-task 23:00 rule.",
+   "The repository was intentionally thinned of assets, so the submitted code state cannot be fully matched against the released build."
+  ],
+  "verdict": "A well-researched, honestly scoped, and competently built awareness game on a genuinely women-relevant pricing issue, held back by the missing measurable-impact requirement, a Windows-only form factor, and unverified design quality.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 59,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 67,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 57,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791238652992
+ }
+}

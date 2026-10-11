@@ -1,0 +1,281 @@
+{
+ "submission": {
+  "id": "FqNMFSY2",
+  "title": "AccessKRK",
+  "team": "Pioneer Collective",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "repo": "Hackyeah2026/CRACOW_WITHOUT_BARRIERS",
+  "created_at": 1791263663432,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791264498653,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 815,
+   "at": 1791263663437,
+   "message": "Queued"
+  },
+  {
+   "seq": 816,
+   "at": 1791263663476,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 817,
+   "at": 1791263666561,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 818,
+   "at": 1791263729485,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 819,
+   "at": 1791263732333,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 820,
+   "at": 1791263792512,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 821,
+   "at": 1791263794934,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 822,
+   "at": 1791263855531,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 823,
+   "at": 1791263858161,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 824,
+   "at": 1791263918555,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 825,
+   "at": 1791263933052,
+   "message": "Found 12,544 source lines, 0 test cases and 30 commits"
+  },
+  {
+   "seq": 826,
+   "at": 1791263933054,
+   "message": "Read 6 docs and 1 decks, opened 1 demo pages and described 1 screenshots"
+  },
+  {
+   "seq": 827,
+   "at": 1791263933059,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 828,
+   "at": 1791264130830,
+   "message": "Member A scored 64.25"
+  },
+  {
+   "seq": 829,
+   "at": 1791264130832,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 830,
+   "at": 1791264252147,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: JSON error injected into SSE stream); trying again in 30 s"
+  },
+  {
+   "seq": 831,
+   "at": 1791264284666,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 832,
+   "at": 1791264300287,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: JSON error injected into SSE stream); trying again in 60 s"
+  },
+  {
+   "seq": 833,
+   "at": 1791264362690,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 834,
+   "at": 1791264378656,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: JSON error injected into SSE stream); trying again in 120 s"
+  },
+  {
+   "seq": 835,
+   "at": 1791264500739,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 836,
+   "at": 1791264595561,
+   "message": "Member B scored 67.75"
+  },
+  {
+   "seq": 837,
+   "at": 1791264595563,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 838,
+   "at": 1791264629153,
+   "message": "Member C scored 64"
+  },
+  {
+   "seq": 839,
+   "at": 1791264629155,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 840,
+   "at": 1791264721944,
+   "message": "Done: 65.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "FqNMFSY2",
+  "repo": "Hackyeah2026/CRACOW_WITHOUT_BARRIERS",
+  "project": "AccessKRK",
+  "team": "Pioneer Collective",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "task_fit": "yes: the submission is this task's product — a personalized accessibility assessor for Krakow places and routes with per-attribute barrier data, source and date on every feature, and a hard rule that missing data is never shown as accessible.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 7,
+    "why": "The design fits the brief tightly: 11 combinable profiles, per-profile verdicts with reasons, and 'brak danych' instead of a false 'accessible'. The median reflects that no running demo or UI screenshot exists and the WCAG 2.2 AA claims rest on README text alone, which supports A's caution over B's 8.5 for interface features that were never shown.",
+    "spread": 2,
+    "members": {
+     "A": 6.5,
+     "B": 8.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 7,
+    "why": "12,544 lines in a clean layered architecture with real routing depth and 30 commits from 4 authors, all during the event. The score sits at 7 because nothing in the pack shows the app running, and the measured test count is 0 even though two members report a 23-file xUnit suite in the tree.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 8,
+    "why": "Provenance is enforced at the type level with source, checked-on date, and demo flag; stale Overpass data older than 2 days is rejected and user reports stay pending until verified. B's 9 understates the limits, since only OSM and GTFS are wired in, reliability is binary, and conflicting sources are resolved by silent precedence; C's 7 understates the rigor that is demonstrably there.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 8,
+    "why": "Ingestion is genuinely separate from presentation: a Tools importer writes per-city static JSON behind a CityImports registry, so adding a city is a config change, and Docker hosting with CI smoke tests and rollback supports operations. The remaining couplings are Polish-only labels, Krakow-specific overrides, and a partner API still 'in preparation'.",
+    "spread": 1.5,
+    "members": {
+     "A": 8,
+     "B": 8.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 3,
+    "why": "Monetizable seeds exist — paid business accounts with QR certificates, an official city dashboard, a partner API — but nothing is priced: no PLN figures, no hosting costs, no who-pays narrative, and the deck that would carry it is missing. The median of 3 rejects B's 1, which ignores the described model, and C's 5, which is generous given the task explicitly requires numbers.",
+    "spread": 4,
+    "members": {
+     "A": 3,
+     "B": 1,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 65.5,
+  "build_reality": 8,
+  "source_loc": 12544,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://dotnet.microsoft.com/download/dotnet/10.0 (HTTP 302); https://openrouteservice.org/dev/#/signup (HTTP 200)",
+  "built_during_event": "yes: 30 commits by 4 authors, 2026-10-03 09:45 to 2026-10-04 07:03 UTC",
+  "strengths": [
+   "Provenance at the type level: every feature carries source, checked-on date, and demo flag, and an unknown amenity yields 'no data', never 'accessible'.",
+   "Real open data at scale: 28,971 OSM places in 18 categories plus the full ZTP Krakow GTFS (218 lines, 3,474 stops), with an importer that refuses stale snapshots.",
+   "Genuine separation of ingestion from presentation, with per-city imports, Docker hosting, CI smoke tests, and automatic rollback.",
+   "Personalization with reasons and privacy by design: 11 combinable profiles with adjustable parameters produce different verdicts with named data gaps, and the profile stays on-device with only three routing parameters sent."
+  ],
+  "weaknesses": [
+   "The mandatory Polish PDF deck (max 10 slides) and demo video (max 3 minutes) are missing from the evidence pack; the only PDF in the repo is the team's own requirements summary.",
+   "No verifiable running demo or UI evidence: no live URL was captured, the demo checks only reached the .NET download and ORS signup pages, and the one described screenshot is a venue photo, so the WCAG 2.2 AA claims are unverified.",
+   "The business model is directional, not priced: no PLN amounts, hosting costs, or revenue logic anywhere, which fails the task's explicit requirement for numbers.",
+   "Test coverage is unverified: measured facts record 0 test files and 0 cases even though members report a 23-file xUnit suite in the tree, and no test run was demonstrated; only OSM and GTFS are integrated, with MSIP and city open data left on the plan list."
+  ],
+  "red_flags": [
+   "Both mandatory presentation deliverables, the PDF deck and the demo video, are absent — a submission-completeness failure that all three members independently confirm."
+  ],
+  "verdict": "An unusually deep and honest-data accessibility prototype with strong provenance and real scalability, undercut as a HackYeah submission by missing mandatory deck and video deliverables, no verifiable demo, and an entirely unpriced business model.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 64.25,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 67.75,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 64,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791264721942
+ }
+}

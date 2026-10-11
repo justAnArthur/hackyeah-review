@@ -1,0 +1,211 @@
+{
+ "submission": {
+  "id": "uD8Yem4b",
+  "title": "PlanSafe",
+  "team": "Pioneer Collective",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "repo": "Hackyeah2026/PlanSafe",
+  "created_at": 1791269216193,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791269216196,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 846,
+   "at": 1791269216198,
+   "message": "Queued"
+  },
+  {
+   "seq": 850,
+   "at": 1791269290449,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 851,
+   "at": 1791269294805,
+   "message": "Found 43,286 source lines, 57 test cases and 135 commits"
+  },
+  {
+   "seq": 852,
+   "at": 1791269294806,
+   "message": "Read 0 docs and 0 decks, opened 1 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 853,
+   "at": 1791269294811,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 854,
+   "at": 1791269378369,
+   "message": "Member A scored 76"
+  },
+  {
+   "seq": 855,
+   "at": 1791269378371,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 856,
+   "at": 1791269416260,
+   "message": "Member B scored 83"
+  },
+  {
+   "seq": 857,
+   "at": 1791269416262,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 858,
+   "at": 1791269477331,
+   "message": "Member C scored 66"
+  },
+  {
+   "seq": 859,
+   "at": 1791269477333,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 860,
+   "at": 1791269529377,
+   "message": "Done: 76 / 100"
+  }
+ ],
+ "review": {
+  "id": "uD8Yem4b",
+  "repo": "Hackyeah2026/PlanSafe",
+  "project": "PlanSafe",
+  "team": "Pioneer Collective",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "task_fit": "yes: civilian evacuation planning and resident shelter assignment is crisis response for city services, which the Smart City brief explicitly lists; all three members agree and the evidence confirms it.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 8,
+    "why": "The insight that plans fail on congestion is real: GUS census population estimates drive a physics-based crowd simulation that exposes bottlenecks, and the planner-to-resident loop with occupancy-aware shelter assignment closes the decision cycle. Evacuation simulation is a known research idea executed excellently rather than a new concept, which supports the median of 8.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8,
+    "why": "Named city users on both sides, crisis-management staff and residents, built on municipal data (OSM buildings and streets, GUS NSP 2021). Crisis response is explicitly in the brief, which supports a higher score than C's 7, but evacuation preparedness is periodic rather than day-to-day city work, which supports less than B's 9.",
+    "spread": 2,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "Coordinators draw zones, compare scenario branches and publish via QR; residents get GPS or map-picked shelter assignment with extensive fallbacks and PL/EN strings. No coordinator authentication, in-memory server state, and no validation with real planners keep this at 7.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 6.5,
+    "why": "The code shows deliberate visual craft (speed-colored agents, interpolated heatmaps, legend keys, light and dark themes, bilingual UI), but 6 screenshots exist and none are described, so polish is inferred from code rather than seen. The evidence supports A and C's caution over B's 8, which was based on code while claiming no screenshots existed.",
+    "spread": 2,
+    "members": {
+     "A": 6.5,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 9,
+    "why": "The measured facts support A and B's 9 over C's 7: a full pipeline in 43k LOC with vendored Krakow data, CPU and GPU engines with parity tests, a publish/assign/check-in API, QR generation, CI, deploy automation, and a live demo answering HTTP 200. Minor deductions for the empty Worker stub and singleton session state.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 76,
+  "build_reality": 9,
+  "source_loc": 43286,
+  "has_tests": true,
+  "tests": {
+   "files": 58,
+   "cases": 57
+  },
+  "live_demo": "https://plansafe.mikrus.dev/ (HTTP 200)",
+  "built_during_event": "yes: 135 commits by 3 authors, 2026-10-03 09:14 to 2026-10-04 08:56 UTC",
+  "strengths": [
+   "The core capability is genuinely computed: a real crowd-physics engine in C# and WebGPU compute shaders with spatial hashing, density-speed relations, and potential-field routing, not a mocked animation.",
+   "Real urban data in code: vendored Krakow OSM raster, GUS 2021 census extraction, and services wired to them.",
+   "Unusual engineering rigor for a hackathon: 58 test files including CPU-GPU parity tests and Playwright browser specs, CI scripts, deploy automation, and a live hosted demo, with all 135 commits inside the event window.",
+   "Closed two-sided loop: publish a plan, QR link, resident assignment weighted by distance and occupancy, and check-in updates occupancy for later assignees."
+  ],
+  "weaknesses": [
+   "Simulation accuracy is unvalidated against drills or real exercise data; the team itself lists calibration as still to verify.",
+   "No coordinator authentication and no persistent backend store; server state is an in-memory singleton and the tool is locked to Krakow, limiting multi-operator and multi-city use.",
+   "The deck claims 139 .NET tests while the measured count is 57 cases, and the live page renders only a Loading shell statically, so end-to-end behavior rests on code and test evidence.",
+   "Screenshots were uploaded but none were described, leaving visual design unverified from the pack."
+  ],
+  "red_flags": [
+   "Test-count overstatement in the deck (139 claimed vs 57 measured cases) is the only claim-evidence gap found; there were no injection attempts and no commits before the event or after the deadline."
+  ],
+  "verdict": "A thoroughly engineered, data-grounded evacuation planning tool whose simulation and resident-assignment loop are real and testable, let down by unproven field accuracy, missing authentication and persistence, and visual polish that could not be verified from the pack.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 76,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 83,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 66,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791269529375
+ }
+}

@@ -1,0 +1,157 @@
+{
+ "submission": {
+  "id": "curated--smartcity--DmitryZherebtsov-HackYeah-Defence-Drone-03-04-10-2026",
+  "title": "GROUND ZERO",
+  "team": "GROUND ZERO",
+  "task": "smartcity",
+  "result": "Not disclosed",
+  "repo": "DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026",
+  "created_at": 1791226633835,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633837,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 65,
+   "at": 1791226633842,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--smartcity--DmitryZherebtsov-HackYeah-Defence-Drone-03-04-10-2026",
+  "repo": "DmitryZherebtsov/HackYeah-Defence-Drone-03-04-10-2026",
+  "project": "GROUND ZERO",
+  "team": "GROUND ZERO",
+  "task": "smartcity",
+  "result": "Not disclosed",
+  "task_fit": "yes: flood crisis response for city emergency services and municipal coordinators over a real Kraków scenario falls under the brief's explicit crisis-response clause, and the repo's origin in another track does not disqualify it, though it enters the category from its edge.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "The code shows real depth in a full decision chain: time-balanced sector planning, flight feasibility math, and flood-margin and criticality scoring rather than a dashboard. Drone SAR coordination is a known concept and the sensing layer is simulated, which C notes but overweights given the open disclosure; the evidence supports A and B's read.",
+    "spread": 2.5,
+    "members": {
+     "A": 7.5,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 6.5,
+    "why": "Crisis coordination for PSP, OSP, WOPR, and samorząd users over real Kraków data is in scope, so C's disqualification on the repo's defence-track origin is not supported. But the tool serves only episodic emergencies with no resident-facing or day-to-day city function, so A's middle view fits the evidence better than B's 9.",
+    "spread": 5,
+    "members": {
+     "A": 6.5,
+     "B": 9,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "Roles, workflow, and outputs mirror real operations and are named precisely, from prioritized recommendations to GPS pins and reports. The submitted demo returned HTTP 503 during judging and the drone layer is simulation, so live usability could not be verified, which caps the score at the shared A and B level.",
+    "spread": 3,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7,
+    "why": "All three members agree on a consistent dark-themed operational UI with Leaflet maps, overlays, a camera view with map PiP, and structured panels, and 25 committed screenshots back this up. Fine detail such as legends and contrast could not be verified with the demo down.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 7,
+    "why": "17,387 source LOC implement a real end-to-end pipeline: Overpass fetch with retries and a fallback server, live weather, role permissions, Excel and PDF reports, Swagger, and PWA, with the simulation openly disclosed. Zero measured test files despite documentation claiming automated tests, a dead demo, and no deck with the entry keep this at the median rather than A's 8.",
+    "spread": 5,
+    "members": {
+     "A": 8,
+     "B": 7,
+     "C": 3
+    }
+   }
+  ],
+  "weighted_total": 69,
+  "build_reality": 7.5,
+  "source_loc": 17387,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://drone-app-pdzf.onrender.com (HTTP 503)",
+  "built_during_event": "unclear: 1 commits by 1 author, 2026-10-04 08:07 to 2026-10-04 08:07 UTC, so the history is squashed",
+  "strengths": [
+   "Real urban data pipelines in code: OSM Overpass waterways and 5404 buildings with retry and fallback server, Open-Meteo weather, Esri satellite imagery.",
+   "A computed core rather than mocked screens: time-balanced fan-out sectoring, flight feasibility coefficients, victim flood-margin and criticality math, and routing around No-Fly zones.",
+   "A full operational lifecycle across roles: planning, Zero Zone checklist, live multi-role tasks, and post-action reports with Excel export.",
+   "Honest disclosure of what is simulated, and a polished dark-themed operational UI documented in 25 committed screenshots."
+  ],
+  "weaknesses": [
+   "The live demo at the submitted URL returned HTTP 503 during judging, so the running system could not be verified.",
+   "Zero test files and zero test cases despite README and documentation claiming automated tests, a claim-code mismatch.",
+   "The core finding-people capability is a probabilistic simulation with scripted victims; no real drones, cameras, or demonstrated perception.",
+   "Submission deliverables were thin: no deck provided with the entry, only a documentation PDF in the repo, and the problem statement field left blank."
+  ],
+  "red_flags": [
+   "The submitted demo URL returned HTTP 503 during the judges' evidence check.",
+   "Documentation and README claim backend tests exist, but the measured repository contains none, a claim-code mismatch."
+  ],
+  "verdict": "A deep and honestly disclosed flood-search-and-rescue coordination system that qualifies under Smart City's crisis-response scope with real urban data and computed planning, but is judged on repo evidence alone since its demo was down, its claimed tests are absent, and its sensing is simulation.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 72.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 74,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 48,
+     "agreement": 0.4,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791224324090
+ }
+}

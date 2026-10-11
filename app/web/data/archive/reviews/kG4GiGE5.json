@@ -1,0 +1,272 @@
+{
+ "submission": {
+  "id": "kG4GiGE5",
+  "title": "Offload",
+  "team": "Offload Team",
+  "task": "sport",
+  "result": "Not a finalist",
+  "repo": "denyss4/offload",
+  "created_at": 1791228576442,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791235955293,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 159,
+   "at": 1791228576449,
+   "message": "Queued"
+  },
+  {
+   "seq": 201,
+   "at": 1791229397848,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 202,
+   "at": 1791229403132,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 315,
+   "at": 1791231869014,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 316,
+   "at": 1791231962807,
+   "message": "Found 15,987 source lines, 72 test cases and 54 commits"
+  },
+  {
+   "seq": 317,
+   "at": 1791231962810,
+   "message": "Read 6 docs and 2 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 318,
+   "at": 1791231962818,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 319,
+   "at": 1791232162145,
+   "message": "Member A scored 73.5"
+  },
+  {
+   "seq": 320,
+   "at": 1791232162147,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 321,
+   "at": 1791232162152,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 405,
+   "at": 1791233924192,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 406,
+   "at": 1791233924196,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 430,
+   "at": 1791233971788,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 431,
+   "at": 1791233971793,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 458,
+   "at": 1791234430887,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 459,
+   "at": 1791234430891,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 490,
+   "at": 1791234613691,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 493,
+   "at": 1791234691185,
+   "message": "Member B scored 61"
+  },
+  {
+   "seq": 494,
+   "at": 1791234691187,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 495,
+   "at": 1791234731667,
+   "message": "Member C scored 66"
+  },
+  {
+   "seq": 496,
+   "at": 1791234731670,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 550,
+   "at": 1791235955301,
+   "message": "Picked up again: the server that was running this review stopped"
+  },
+  {
+   "seq": 553,
+   "at": 1791236027312,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 554,
+   "at": 1791236130107,
+   "message": "Done: 66.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "kG4GiGE5",
+  "repo": "denyss4/offload",
+  "project": "Offload",
+  "team": "Offload Team",
+  "task": "sport",
+  "result": "Not a finalist",
+  "task_fit": "yes: it combines sport (training plans and load) with mental wellbeing (stress check-ins, venting) and physical health (energy), and the tested matrix turns that input into a concrete plan plus consent-gated calendar changes rather than a monitoring dashboard; access to care stays thin and all health input is self-reported.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 6,
+    "why": "The consent-first bridge from how you feel to an approved calendar change is a genuine wedge. But the delivered core is a simple four-branch energy and stress matrix and the pitched conversational loop is only partly built, so the innovation is real but moderate, which the evidence supports over both the loftier and the harsher readings.",
+    "spread": 1.5,
+    "members": {
+     "A": 7,
+     "B": 5.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 7,
+    "why": "Sport and mental wellbeing genuinely drive the tested matrix, so the council sides with the higher scores over the view that the fit is shallow. The fit is still capped because health input is entirely self-reported, the HRV, sleep and resting heart rate fields are never populated, and access to care is only support contacts and a 112 card.",
+    "spread": 3,
+    "members": {
+     "A": 8,
+     "B": 5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 6,
+    "why": "Account-free setup, one-tap check-ins, bilingual UI, consent screens and disclaimers show real usability care. But nothing is verified on a device, calendar writes need a development build, the LLM path needs external credentials, and no live demo was checked, so everyday use is limited to the local rules path.",
+    "spread": 0.5,
+    "members": {
+     "A": 6.5,
+     "B": 6,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "The token-based dark Lichen theme has documented WCAG contrast, colour-vision-deficiency simulations, and glyph plus label so meaning never rests on colour alone. All three members agree here and differ by only half a point.",
+    "spread": 0.5,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 6.5,
+    "why": "Roughly 16k lines of source and 72 tests cover the decision matrix, scheduler and calendar adapters, backed by unusually honest limits documentation. But the LLM is stubbed, OAuth and encrypted storage are unverified on any device, and the repo bundles a second app and a starter scaffold, blurring what this entry actually is.",
+    "spread": 0.5,
+    "members": {
+     "A": 6.5,
+     "B": 6.5,
+     "C": 6
+    }
+   }
+  ],
+  "weighted_total": 66.5,
+  "build_reality": 7,
+  "source_loc": 15987,
+  "has_tests": true,
+  "tests": {
+   "files": 14,
+   "cases": 72
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "partly: 32 commits before the event; 54 commits by 1 author, 2026-09-30 14:50 to 2026-10-04 07:11 UTC",
+  "strengths": [
+   "A tested decision engine: a safety-ordered matrix in the backend produces a concrete plan and per-change calendar proposals with reasons, approval, audit and undo.",
+   "A consent-first architecture: correctable stress labels, explicit external-AI disclosure, the LLM kept off the write path, account-free setup and encrypted local state.",
+   "Exceptional design rigor: generated WCAG contrast tables, colour-vision-deficiency simulations, and plans marked by glyph and label so colour is never the only carrier of meaning.",
+   "Honest documentation: gaps and critique logs, a demo script that forbids overclaiming, and unverified integrations flagged rather than hidden."
+  ],
+  "weaknesses": [
+   "The pitched AI interaction is not delivered: the Lumen chat runs on local rules or is stubbed without credentials, and voice venting is blocked in the app configuration, so the headline feature promised in the form and deck is missing.",
+   "Key integrations are mocked or unverified: there is no live demo evidence at all, calendar writes and Google OAuth need an untested native build, encrypted storage is unverified, and no health data is ever collected.",
+   "The submission is inconsistent about what it is: the repo bundles the Form readiness planner, an unrelated Expo starter and the Offload MVP, and the committed demo runbook rehearses the older Form app rather than the pitched product.",
+   "The healthcare side is shallow: energy and stress chips feed the matrix while biometric fields stay null, and access to care is limited to support contacts and an emergency number."
+  ],
+  "red_flags": [
+   "The submission overclaims: the form and deck promise voice venting and a full Lumen chat, but voice input is blocked in the app configuration and the LLM gateway lacks the credentials and signing key it needs, so the headline interaction cannot run as claimed.",
+   "The committed demo runbook rehearses the older Form app, whose own notes say the demo build has no chat and that presenters should say it is coming, contradicting the pitched product."
+  ],
+  "verdict": "A consent-first, wellbeing-aware planner with a genuinely tested decision matrix and standout accessible design, whose pitched AI loop is mostly stubbed, whose integrations are unverified, and whose own pack cannot decide which app it is showing.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 73.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 61,
+     "agreement": 0.6,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 66,
+     "agreement": 0.9,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791236130104
+ }
+}

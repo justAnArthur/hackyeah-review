@@ -1,0 +1,369 @@
+{
+ "submission": {
+  "id": "ckC2NTKy",
+  "title": "Quard",
+  "team": "Quard",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "repo": "oynozan/quard",
+  "created_at": 1791280431150,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791281592629,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 1178,
+   "at": 1791280431155,
+   "message": "Queued"
+  },
+  {
+   "seq": 1179,
+   "at": 1791280431377,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1180,
+   "at": 1791280436152,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1183,
+   "at": 1791280496774,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1184,
+   "at": 1791280500550,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1187,
+   "at": 1791280568500,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1188,
+   "at": 1791280571950,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1191,
+   "at": 1791280640061,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1192,
+   "at": 1791280643292,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1195,
+   "at": 1791280711455,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1196,
+   "at": 1791280715292,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1199,
+   "at": 1791280783219,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1200,
+   "at": 1791280786616,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1203,
+   "at": 1791280854821,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1204,
+   "at": 1791280858251,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1207,
+   "at": 1791280926365,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1208,
+   "at": 1791280929846,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1211,
+   "at": 1791280998109,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1212,
+   "at": 1791281001607,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1215,
+   "at": 1791281069923,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1216,
+   "at": 1791281073368,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1219,
+   "at": 1791281141466,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1220,
+   "at": 1791281144828,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1223,
+   "at": 1791281242656,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1224,
+   "at": 1791281246095,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1227,
+   "at": 1791281314089,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1228,
+   "at": 1791281317460,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1231,
+   "at": 1791281385630,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1232,
+   "at": 1791281388829,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1235,
+   "at": 1791281457285,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1236,
+   "at": 1791281460657,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1239,
+   "at": 1791281528901,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1240,
+   "at": 1791281532632,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1243,
+   "at": 1791281600467,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1244,
+   "at": 1791281635241,
+   "message": "Found 109,194 source lines, 4180 test cases and 495 commits"
+  },
+  {
+   "seq": 1245,
+   "at": 1791281635243,
+   "message": "Read 13 docs and 0 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 1246,
+   "at": 1791281635248,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 1247,
+   "at": 1791281775449,
+   "message": "Member A scored 81"
+  },
+  {
+   "seq": 1248,
+   "at": 1791281775451,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1249,
+   "at": 1791281866960,
+   "message": "Member B scored 91.75"
+  },
+  {
+   "seq": 1250,
+   "at": 1791281866962,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 1251,
+   "at": 1791281894062,
+   "message": "Member C scored 68"
+  },
+  {
+   "seq": 1252,
+   "at": 1791281894064,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 1254,
+   "at": 1791282058418,
+   "message": "Done: 81 / 100"
+  }
+ ],
+ "review": {
+  "id": "ckC2NTKy",
+  "repo": "oynozan/quard",
+  "project": "Quard",
+  "team": "Quard",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "task_fit": "yes: Quard is an SDK control layer that sits in the path of agent-to-model and agent-to-tool traffic with deterministic and semantic guards, origin tracing, budgets, approvals and a live dashboard, which matches the AI Control Layer brief even though v1 is OpenAI-only.",
+  "scores": [
+   {
+    "criterion": "Robustness/guardrails",
+    "weight": 30,
+    "score": 9,
+    "why": "The hybrid is real: deterministic guards for secret stripping, keyed-hash PII redaction, IBAN checksums and invisible characters, value tracing that keeps untrusted labels across agent handoffs, and a genuine semantic model path in the Jev detector with AI fallback and a review queue. C's 7 is the outlier and names no defect the others missed, since C's own text confirms the controls are real, so the median stays high with a point off because signature coverage skips the code-execution, deserialization and model-repo classes the task names.",
+    "spread": 2.5,
+    "members": {
+     "A": 9,
+     "B": 9.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Architecture & performance",
+    "weight": 20,
+    "score": 8,
+    "why": "The SDK genuinely sits in the path, wrapping model and tool calls in-process before they run, on a clean split of webhook ingest, a WebSocket control service, a worker and a Postgres-backed dashboard. It holds at 8 because hot reload amounts to a live control link with no config watcher or editable rules view in evidence, and no latency numbers beyond per-check timing prints are shown.",
+    "spread": 3,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Security reporting",
+    "weight": 20,
+    "score": 7,
+    "why": "Every model call, guard decision and approval is stored as a queryable event with rule and reason, incidents trace the path from entry point to damage with replay proof, and the dashboard runs on real data. On the disputed audit-log deliverable the evidence supports B and C, who independently find the logs exportable through the event store and search, over A's absence claim, but the median holds at 7 because that export path is indirect and the pack contains no demo checks to verify reporting at runtime.",
+    "spread": 2.5,
+    "members": {
+     "A": 7,
+     "B": 9.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Test suite",
+    "weight": 15,
+    "score": 9,
+    "why": "The measured suite is huge and real: 4,180 cases in 826 files, about one test file per source file, runnable with pnpm test, including negative cases for injection signatures and blocked payments. It lands just below the top because the claimed full coverage is unverified, the claimed count of 4,500 runs slightly ahead of the measured 4,180, and no individual negative case was read in the pack.",
+    "spread": 1.5,
+    "members": {
+     "A": 9,
+     "B": 9.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Implementability & scalability",
+    "weight": 15,
+    "score": 7,
+    "why": "Deployment is a single Docker Compose with health checks and migrations, an npm-published SDK, JSON policy files and pluggable guards with x402 payment caps. The median settles at 7 because the task's local-model expectation is missed: v1 is OpenAI-only, and the base-URL hook B credits is indirect and, as B itself concedes, may be limited by the OpenAI Responses API dependency.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 6
+    }
+   }
+  ],
+  "weighted_total": 81,
+  "build_reality": 9,
+  "source_loc": 109194,
+  "has_tests": true,
+  "tests": {
+   "files": 826,
+   "cases": 4180
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 495 commits by 2 authors, 2026-10-03 10:31 to 2026-10-04 08:54 UTC",
+  "strengths": [
+   "Origin and value tracing keeps untrusted labels on values across agents, tools and shared memory, a sophisticated taint model that powers precise root-cause analysis.",
+   "Deterministic controls are real code, including secret stripping, keyed-hash PII redaction with masks, IBAN checksum validation and invisible-character scanning, backed by thorough budget governance and fleet-wide quarantine of repeated dangerous values.",
+   "Semantic detection runs a real model path with chunk labeling, AI fallback and a human review queue, and incidents can be replayed with and without suspect content to prove causation.",
+   "A measured 4,180-case test suite across 826 files and a dashboard wired to an extensive Postgres query layer rather than mock data."
+  ],
+  "weaknesses": [
+   "No local-model or Ollama support although the task expects it; v1 is OpenAI-only and the base-URL hook is at best indirect.",
+   "Policy hot reload is claimed but not evidenced: rules live in code, the dashboard rules tab is read-only and no config watcher appears, only a live control link.",
+   "The pack contains no demo checks, so runtime behavior, latency, hot reload and the npm publication claim rest on code and form alone.",
+   "Signature coverage targets injected instructions and bad domains, not the code-execution, unsafe deserialization and model-repo supply-chain classes the task names."
+  ],
+  "red_flags": [],
+  "verdict": "A genuinely deep and well-tested agent control layer whose evidence matches its claims, losing points for the local-model support the task expects but does not get, an unevidenced policy hot reload and a pack with no demo checks.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 81,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 91.75,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 68,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791282058416
+ }
+}

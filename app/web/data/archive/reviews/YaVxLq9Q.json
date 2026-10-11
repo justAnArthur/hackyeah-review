@@ -1,0 +1,214 @@
+{
+ "submission": {
+  "id": "YaVxLq9Q",
+  "title": "Bezpieczna Aura",
+  "team": "MakeNoMistakes",
+  "task": "defence",
+  "result": "Not a finalist",
+  "repo": "Bartekkur1/MakeNoMistakesTeam",
+  "created_at": 1791228185339,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791229141813,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 134,
+   "at": 1791228185349,
+   "message": "Queued"
+  },
+  {
+   "seq": 164,
+   "at": 1791228748244,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 165,
+   "at": 1791228785780,
+   "message": "Found 24,737 source lines, 575 test cases and 320 commits"
+  },
+  {
+   "seq": 166,
+   "at": 1791228785783,
+   "message": "Read 7 docs and 2 decks, opened 1 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 167,
+   "at": 1791228785788,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 168,
+   "at": 1791228892373,
+   "message": "Member A scored 81.5"
+  },
+  {
+   "seq": 169,
+   "at": 1791228892377,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 170,
+   "at": 1791228976087,
+   "message": "Member B scored 82.5"
+  },
+  {
+   "seq": 171,
+   "at": 1791228976089,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 172,
+   "at": 1791228996120,
+   "message": "Member C scored 59"
+  },
+  {
+   "seq": 173,
+   "at": 1791228996124,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 178,
+   "at": 1791229042679,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 184,
+   "at": 1791229174252,
+   "message": "Done: 78.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "YaVxLq9Q",
+  "repo": "Bartekkur1/MakeNoMistakesTeam",
+  "project": "Bezpieczna Aura",
+  "team": "MakeNoMistakes",
+  "task": "defence",
+  "result": "Not a finalist",
+  "task_fit": "yes: teaching children to spot scam messages and routing cases from child to parent to teacher to CERT and Dyżurnet is prevention, earlier detection and consequence reduction, squarely inside the Defence brief's message verification and easier security procedures directions. The brief's degraded conditions emphasis is met more in design than in demonstration, which the council treats as a deduction rather than disqualification.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7.5,
+    "why": "A real, well researched gap, the Roblox scam wave with cited NASK and CERT data, tackled with a fresh combination: one brainrot mascot spanning a training mission, a live check widget and a privacy preserving escalation chain. The team itself admits security games for children exist, so the novelty is the combination rather than the category, which caps the score.",
+    "spread": 2.5,
+    "members": {
+     "A": 7.5,
+     "B": 8.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8.5,
+    "why": "It maps directly onto the brief's message verification and security procedure directions, with a full escalation path to CERT, Roblox and Dyżurnet and grounding in the Kamilka Act school obligation. The degraded conditions emphasis is handled in design, an offline capable widget and a teacher pack that needs no computers, but never demonstrated, so it stops short of the top.",
+    "spread": 4,
+    "members": {
+     "A": 9,
+     "B": 8.5,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7.5,
+    "why": "The widget is usable at the moment of incident, the printable three lesson teacher pack runs without computers, and the schools obligation gives a real adoption driver. The full parent flow needs local Supabase credentials and a manually loaded unpacked extension, so it is not zero setup for a judge.",
+    "spread": 2.5,
+    "members": {
+     "A": 8.5,
+     "B": 7.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "A coherent token system derived from the mascot, colour coded severity, glanceable statuses and accessibility handled in code with dialog roles, focus management and aria busy. Only 5 of 29 screenshots are described, so visual polish is only partially evidenced.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 8,
+    "why": "The core claims exist in code: heuristic detection, role scoped report workflow APIs with concurrency handling, a secret headered idempotent Roblox ingest endpoint, 575 tests, a buildable extension zip and a live deployment. Demo grade authentication and a Roblox mission that cannot be verified from the pack keep it below the highest score.",
+    "spread": 4,
+    "members": {
+     "A": 8,
+     "B": 9,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 78.5,
+  "build_reality": 8,
+  "source_loc": 24737,
+  "has_tests": true,
+  "tests": {
+   "files": 58,
+   "cases": 575
+  },
+  "live_demo": "https://bezpieczna-aura.pl (HTTP 200)",
+  "built_during_event": "partly: 1 commit before the event; 320 commits by 4 authors, 2026-10-03 08:53 to 2026-10-04 08:47 UTC",
+  "strengths": [
+   "The escalation pipeline is implemented end to end, not mocked: extension submit to parent panel to teacher escalation to state transitions, backed by validated API routes, database migrations and a secret headered idempotent Roblox ingest endpoint.",
+   "Detection is honest and privacy first: local rule based hints in check.js surface signals and never declare a message safe, and nothing leaves the device without the child's explicit send.",
+   "Evidence hygiene is exceptional: 575 tests across 58 files, cited sources behind every statistic, and an open admission that efficacy is unmeasured plus a controlled pilot plan.",
+   "It is deployed and packaged: a live site at bezpieczna-aura.pl, an auto built extension zip, and a classroom ready offline teacher pack grounded in the Kamilka Act obligation on schools."
+  ],
+  "weaknesses": [
+   "The brief's degraded conditions emphasis is designed for but not demonstrated: the live URL serves only the static landing page and no outage, stale data or resource scarcity scenario is shown, even though offline send states are reconciled in sw.js.",
+   "Verification takes local setup: tracing an alert end to end needs local Supabase credentials and a manually loaded unpacked extension, and the Roblox mission needs Roblox Studio, with no recorded gameplay or video in the evidence pack despite being described in the form and deck.",
+   "Detection is narrow Polish keyword and regex matching that will miss most real world phrasing, and authentication is demo grade with one shared 0000 code and hardcoded accounts.",
+   "Heavy AI assisted development is evident throughout the repo, in agentic plan files, session handoff notes and MCP setup, but the submission form does not explicitly disclose AI tool use."
+  ],
+  "red_flags": [],
+  "verdict": "A genuinely built, tested and deployed child safety platform whose honest privacy first design and complete escalation pipeline earn its place in Defence, tempered by an undemonstrated degraded scenario, narrow Polish only detection, demo grade authentication and an undisclosed AI assisted workflow.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 81.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 82.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 59,
+     "agreement": 0.4,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791229174250
+ }
+}

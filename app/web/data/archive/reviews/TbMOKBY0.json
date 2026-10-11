@@ -1,0 +1,222 @@
+{
+ "submission": {
+  "id": "TbMOKBY0",
+  "title": "good gateway, bad gateway",
+  "team": "wiz.dev",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "repo": "blatalia/wiz-dev-hackyeah-2026",
+  "created_at": 1791289888709,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791290229229,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 1487,
+   "at": 1791289888720,
+   "message": "Queued"
+  },
+  {
+   "seq": 1495,
+   "at": 1791290021238,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1496,
+   "at": 1791290023446,
+   "message": "Found 6,131 source lines, 65 test cases and 117 commits"
+  },
+  {
+   "seq": 1497,
+   "at": 1791290023450,
+   "message": "Read 0 docs and 1 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 1498,
+   "at": 1791290023457,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 1499,
+   "at": 1791290184954,
+   "message": "Member A scored 65.75"
+  },
+  {
+   "seq": 1500,
+   "at": 1791290184957,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1501,
+   "at": 1791290199233,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: empty reply); trying again in 30 s"
+  },
+  {
+   "seq": 1504,
+   "at": 1791290231622,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1505,
+   "at": 1791290298488,
+   "message": "Member B scored 70"
+  },
+  {
+   "seq": 1506,
+   "at": 1791290298490,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 1507,
+   "at": 1791290320091,
+   "message": "Member C scored 60.5"
+  },
+  {
+   "seq": 1508,
+   "at": 1791290320095,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 1509,
+   "at": 1791290402139,
+   "message": "Done: 65.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "TbMOKBY0",
+  "repo": "blatalia/wiz-dev-hackyeah-2026",
+  "project": "good gateway, bad gateway",
+  "team": "wiz.dev",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "task_fit": "yes: the submission is a working agent gateway that intercepts chat traffic, enforces central policy on tools and PII before the model, and ships a config dashboard, audit events and tests, which is squarely the AI Control Layer task.",
+  "scores": [
+   {
+    "criterion": "Robustness/guardrails",
+    "weight": 30,
+    "score": 6,
+    "why": "Deterministic controls are real: PII anonymization, SQL-injection scanning, per-user tool access and budgets, and the LLM input and output judge exists in code, supporting A and C over B's claim that it is deck-only. Injection and secret detection are admitted future work, only two injection test strings exist with zero recorded hits, and user identity is client-asserted.",
+    "spread": 0.5,
+    "members": {
+     "A": 6.5,
+     "B": 6,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Architecture & performance",
+    "weight": 20,
+    "score": 7,
+    "why": "The FastAPI gateway is genuinely in the request path, with config hot reload via a background poller and per-stage latency, token and cost telemetry. No performance benchmarks are provided, only the OpenAI SDK is supported, and client-asserted identity weakens the enforcement chain.",
+    "spread": 1.5,
+    "members": {
+     "A": 7,
+     "B": 7.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Security reporting",
+    "weight": 20,
+    "score": 7,
+    "why": "Events are richly structured with decision, reason codes, classification scores, security scan findings, latency, cost and config version, shown in a live dashboard with filters and stats, which justifies a strong but not top score. Export is limited to copying a single event's JSON, as A and C observed against B's broader claim, and a seed SQL file for gateway events means dashboard data may be partly seeded.",
+    "spread": 2,
+    "members": {
+     "A": 6,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Test suite",
+    "weight": 15,
+    "score": 7,
+    "why": "65 measured cases across 8 files cover guardrails, tool limits, token usage, user attribution and PII, plus a judge-facing validation suite with a documented run script. Negative-case depth is not fully verifiable from the samples and injection coverage is thin.",
+    "spread": 1.5,
+    "members": {
+     "A": 7.5,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Implementability & scalability",
+    "weight": 15,
+    "score": 6,
+    "why": "Dockerized modular services with per-user config overrides and clean default-and-override semantics make it reproducible. The stack is bound to AWS DynamoDB, config is split between YAML and DynamoDB, and there is no Ollama or local-model support, which the task details expect.",
+    "spread": 2,
+    "members": {
+     "A": 6,
+     "B": 7,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 65.5,
+  "build_reality": 7,
+  "source_loc": 6131,
+  "has_tests": true,
+  "tests": {
+   "files": 8,
+   "cases": 65
+  },
+  "live_demo": "https://drive.google.com/drive/u/0/mobile/folders/1qWCfIIJXCKa4hqww507PJw390qKYKjDH?usp=sharing (HTTP 302)",
+  "built_during_event": "partly: 1 commit before the event; 117 commits by 5 authors, 2026-10-03 08:48 to 2026-10-04 08:56 UTC",
+  "strengths": [
+   "Central policy is wired end to end: the dashboard patches a config store that the gateway hot-reloads without restart, including per-user tool toggles.",
+   "A real hybrid control set: deterministic PII and SQL-injection handling plus an LLM input and output judge with an enforced JSON output format.",
+   "A strong audit event schema with decision, reason codes, classification scores, scan findings, latency by stage, cost and config version, rendered in a polished live dashboard.",
+   "65 automated tests across 8 files plus a separate validation suite with a documented run script for judges."
+  ],
+  "weaknesses": [
+   "Missed task requirement: no Ollama or local-model support anywhere in the code, OpenAI SDK only.",
+   "Identity is client-asserted: /chat trusts a user_email from the request body with no authentication, so tool permissions and audit attribution can be bypassed, and demo credentials are hardcoded in the README.",
+   "Prompt-injection and secret or token detection are only future extension, with two static test strings, no recorded hits and no externally fed attack signatures.",
+   "Audit export is limited to copying a single event's JSON with no bulk format, and there is no monetary budget cutoff despite cost tracking existing."
+  ],
+  "red_flags": [
+   "The demo link is a Google Drive redirect (HTTP 302) with no runnable service and zero screenshots, so the live system could not be verified by the jury.",
+   "A seed SQL file for gateway events combined with an unverifiable gateway-to-event-store write path means dashboard activity may be partly demo-seeded data."
+  ],
+  "verdict": "A genuinely built and well-tested control layer with real policy hot reload and a strong audit dashboard, held back by unauthenticated user identity, thin injection coverage and the missing local-model support the task expects.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 65.75,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 70,
+     "agreement": 0.6,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 60.5,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791290402136
+ }
+}

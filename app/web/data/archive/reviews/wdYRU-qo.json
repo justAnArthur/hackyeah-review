@@ -1,0 +1,213 @@
+{
+ "submission": {
+  "id": "wdYRU-qo",
+  "title": "Smok Przewodnik",
+  "team": "Anita Bath",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "repo": "Anita-Bath/smok-przewodnik",
+  "created_at": 1791241364497,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791241364504,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 697,
+   "at": 1791241364510,
+   "message": "Queued"
+  },
+  {
+   "seq": 778,
+   "at": 1791243540438,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 779,
+   "at": 1791243552114,
+   "message": "Found 30,170 source lines, 0 test cases and 79 commits"
+  },
+  {
+   "seq": 780,
+   "at": 1791243552116,
+   "message": "Read 1 docs and 0 decks, opened 0 demo pages and described 1 screenshots"
+  },
+  {
+   "seq": 781,
+   "at": 1791243552121,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 782,
+   "at": 1791243682948,
+   "message": "Member A scored 43"
+  },
+  {
+   "seq": 783,
+   "at": 1791243682951,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 784,
+   "at": 1791243741167,
+   "message": "Member B scored 55"
+  },
+  {
+   "seq": 785,
+   "at": 1791243741170,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 786,
+   "at": 1791243754799,
+   "message": "Member C scored 44.5"
+  },
+  {
+   "seq": 787,
+   "at": 1791243754803,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 788,
+   "at": 1791243860421,
+   "message": "Done: 45.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "wdYRU-qo",
+  "repo": "Anita-Bath/smok-przewodnik",
+  "project": "Smok Przewodnik",
+  "team": "Anita Bath",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "task_fit": "yes: a personalized accessibility map and barrier-aware navigation for Kraków with wheelchair, stroller, blind, deaf and senior profiles directly addresses this task, though it spans five groups instead of one scoped group. The missing deliverables lower the scores, not the fit, so C's 'partial' is not supported and A's and B's view stands.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 6,
+    "why": "The per-person constraint model (allowed, prefer_avoid, must_avoid, five presets, guest mode) genuinely changes the verdict per user, but the demo chain is broken: no PDF, no video, form unfilled, no live demo, and routes initially drawn from a simulated Bezier fallback. B's 9 is an outlier its own reasoning undercuts, and the evidence supports the more critical view of A and C.",
+    "spread": 4,
+    "members": {
+     "A": 5,
+     "B": 9,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 6,
+    "why": "The build is real and large, about 30k LOC across a .NET Clean Architecture backend (PostGIS, Supabase auth, Valhalla, SignalR) and an Expo app, with 79 commits by 5 authors during the event. It loses points because the required conflicting, incomplete and source-down case is nowhere demonstrated, 44 test files measure zero test cases, the only described screenshot is the stock Expo starter, and the Leaflet WebView map has no text alternative.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 6,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 3,
+    "why": "The model plans for provenance (confidenceState including disputed, fact statuses, one sample venue labelled unverified), but delivered data is largely invented: wheelchairAccess derived by hashing entity ids, street-surface notes hardcoded as facts, and synthetic results setting hasStepFreeAccess true while stating 'Brak zweryfikowanych danych'. The evidence supports A's and B's 3 over C's lenient 5, and no Kraków open-data ingestion is visible.",
+    "spread": 2,
+    "members": {
+     "A": 3,
+     "B": 3,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 7,
+    "why": "Clean Architecture with separated infrastructure, PostGIS and a Valhalla engine configured via tile URLs makes a multi-city setup plausible at the architecture level. The frontend is Kraków-hardcoded, no add-a-city path is documented, and no ingestion pipeline feeds the API, which caps the score near the middle.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 0,
+    "why": "No business model, pricing or numbers appear anywhere in the README, docs or code, and the submission form and deck that would normally carry it are missing. All three members independently scored it 0.",
+    "spread": 0,
+    "members": {
+     "A": 0,
+     "B": 0,
+     "C": 0
+    }
+   }
+  ],
+  "weighted_total": 45.5,
+  "build_reality": 6,
+  "source_loc": 30170,
+  "has_tests": true,
+  "tests": {
+   "files": 44,
+   "cases": 0
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 79 commits by 5 authors, 2026-10-03 09:35 to 2026-10-04 08:18 UTC",
+  "strengths": [
+   "Substantial genuine build: about 30k LOC, 79 commits by 5 authors all inside the event window, spanning a .NET 10 Clean Architecture API and an Expo/TypeScript mobile app.",
+   "Per-person constraint levels (must_avoid, prefer_avoid) with five presets and a no-login guest mode make the route verdict depend on the user's profile rather than one green icon.",
+   "Serious accessibility craft in the UI: Polish accessibility roles and labels, high-contrast and dark themes, font scaling, large touch targets and voice guidance.",
+   "Provenance-aware data design (confidenceState with disputed, fact statuses to_check and missing) with the sample venue explicitly labelled unverified demonstration data."
+  ],
+  "weaknesses": [
+   "Missed requirements: no PDF deck, no video, unfilled submission form and no live demo, so the mandatory conflicting, incomplete and source-down case cannot be verified.",
+   "Displayed accessibility data is largely fabricated: wheelchair access assigned by hashing place ids, route and street-surface claims hardcoded in the client, and no per-datum source or date.",
+   "No Kraków open-data integration (MSIP, WFS, dane.gov.pl) and no ingestion pipeline feeding the API.",
+   "No business model anywhere in the submission."
+  ],
+  "red_flags": [
+   "Unverified or missing data renders as accessible: synthetic results set hasStepFreeAccess true while stating 'no verified data', and hash-derived wheelchairAccess is shown as place data, the cardinal sin for this task.",
+   "Routes come from a simulated Bezier fallback that asserts 'zero stairs' with 98 percent confidence regardless of reality.",
+   "44 test files measure zero test cases and the only described screenshot is the unmodified Expo starter screen, weakening evidence of what actually runs."
+  ],
+  "verdict": "An impressively engineered codebase with the right per-profile concept, but largely fabricated accessibility data, missing mandatory deliverables and no business model leave the partner-critical requirements unmet.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 43,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 55,
+     "agreement": 0.6,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 44.5,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791243860417
+ }
+}

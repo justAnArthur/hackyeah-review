@@ -1,93 +1,17 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link2 } from "lucide-react"
 import { Bar, Fact, Layout, List, PageHeader, Panel, ResultBadge } from "@/components/layout"
 import { Badge } from "@/components/ui/badge"
-import { Banner, BannerDescription, BannerTitle } from "@/components/ui/banner"
+import { Banner, BannerTitle } from "@/components/ui/banner"
 import { Button } from "@/components/ui/button"
-import { ThinkingStep, ThinkingStepDetails, ThinkingSteps, ThinkingStepsContent, ThinkingStepsHeader } from "@/components/ui/thinking-steps"
 import { Tooltip } from "@/components/ui/tooltip"
 import { GH, fmt, reviewId, taskFit, testsLabel } from "@/lib/site"
 import type { CouncilReview, TaskOption } from "@/lib/types"
 
-type Event = { seq: number; at: number; message: string }
-
+// the archive's answer to /api/reviews/:id, baked into the page by the build
 type Status = {
-  submission: { id: string; title: string; team: string; task: string; result: string; repo: string; superseded: boolean; source: "form" | "curated" }
-  job: { status: string; step: string; position: number; next_run_at: number; error: string | null }
-  events: Event[]
+  submission: { id: string; title: string; team: string; task: string; result: string; repo: string; source: "form" | "curated" }
   review: CouncilReview | null
-}
-
-type StepState = "complete" | "active" | "pending"
-
-const ENDED = ["done", "failed", "cancelled"]
-
-function time(ms: number) {
-  return new Date(ms).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-}
-
-function steps(s: Status, size: number) {
-  const order = ["queued", "evidence", "council", "done"]
-  const at = order.indexOf(s.job.step === "failed" ? "council" : s.job.step)
-  const members = s.events.filter(e => /^Member [A-H] (scored|gave|is unavailable)/.test(e.message))
-  const judging = s.events.some(e => e.message.startsWith("The judge"))
-  const done = s.job.status === "done"
-  const state = (i: number): StepState => (at > i || done ? "complete" : at === i ? "active" : "pending")
-  return {
-    members,
-    list: [
-      { icon: "clock", label: s.job.position > 1 ? `In the queue, #${s.job.position}` : "In the queue", state: state(0) },
-      { icon: "search", label: "Collecting evidence from the repo and deck", state: state(1) },
-      { icon: "users", label: `The council scores the project · ${Math.min(members.length, size)} of ${size}`, state: judging || done ? "complete" : state(2) },
-      { icon: "brain", label: "The judge writes the review", state: done ? "complete" : judging ? "active" : "pending" },
-    ] as const,
-  }
-}
-
-const Progress = ({ s, size }: { s: Status; size: number }) => {
-  const { list, members } = steps(s, size)
-  const visible = list.filter(x => x.state !== "pending")
-  return (
-    <Panel>
-      <ThinkingSteps className="w-full">
-        <ThinkingStepsHeader>{s.job.status === "failed" ? "Review stopped" : "Reviewing"}</ThinkingStepsHeader>
-        <ThinkingStepsContent>
-          {list.map((x, i) => (
-            <ThinkingStep key={x.icon} icon={x.icon} label={x.label} status={x.state} isLast={i === visible.length - 1}>
-              {x.icon === "users" && members.length > 0 && <ThinkingStepDetails summary="Council so far" details={members.map(m => m.message)} />}
-            </ThinkingStep>
-          ))}
-        </ThinkingStepsContent>
-      </ThinkingSteps>
-
-      {s.job.status === "waiting_quota" && (
-        <Banner status="warning">
-          <BannerTitle>Today's free-model quota is used up</BannerTitle>
-          <BannerDescription>The review continues automatically at {time(s.job.next_run_at)}. You can close this page and come back.</BannerDescription>
-        </Banner>
-      )}
-      {s.job.status === "failed" && (
-        <Banner status="error">
-          <BannerTitle>The review stopped</BannerTitle>
-          <BannerDescription>{s.job.error}</BannerDescription>
-        </Banner>
-      )}
-      {s.job.status === "cancelled" && (
-        <Banner status="info">
-          <BannerTitle>This submission was replaced by a newer one for the same repo and task</BannerTitle>
-        </Banner>
-      )}
-
-      <ul className="grid gap-1 text-xs text-muted-foreground">
-        {s.events.slice(-8).map(e => (
-          <li key={e.seq}>
-            <time className="mr-2 text-muted-foreground/70 tabular-nums">{time(e.at)}</time>
-            {e.message}
-          </li>
-        ))}
-      </ul>
-    </Panel>
-  )
 }
 
 const Track = ({ score }: { score: CouncilReview["scores"][number] }) => (
@@ -191,27 +115,8 @@ const Result = ({ r, curated }: { r: CouncilReview; curated: boolean }) => (
   </>
 )
 
-export const ReviewPage = ({ tasks, councilSize }: { tasks: TaskOption[]; councilSize: number }) => {
-  const [s, setS] = useState<Status | null>(null)
-  const [error, setError] = useState("")
+export const ReviewPage = ({ status, tasks }: { status: Status; tasks: TaskOption[] }) => {
   const [copied, setCopied] = useState(false)
-
-  useEffect(() => {
-    const id = location.pathname.split("/").filter(Boolean)[1] ?? ""
-    let events: Event[] = []
-    const es = new EventSource(`/api/reviews/${id}/events`)
-    es.onmessage = msg => {
-      const next = JSON.parse(msg.data) as Status
-      events = [...events, ...next.events.filter(e => !events.some(x => x.seq === e.seq))]
-      setS({ ...next, events })
-      if (ENDED.includes(next.job.status)) es.close()
-    }
-    es.addEventListener("gone", () => {
-      setError("This review doesn't exist or was removed.")
-      es.close()
-    })
-    return () => es.close()
-  }, [])
 
   async function copy() {
     try {
@@ -221,20 +126,7 @@ export const ReviewPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
     } catch {}
   }
 
-  if (error || !s) {
-    return (
-      <Layout current="/r">
-        {error ? (
-          <Banner status="error">
-            <BannerTitle>{error}</BannerTitle>
-          </Banner>
-        ) : (
-          <p className="text-muted-foreground">Loading…</p>
-        )}
-      </Layout>
-    )
-  }
-
+  const s = status
   const task = tasks.find(t => t.id === s.submission.task)?.name ?? s.submission.task
   const curated = s.submission.source === "curated"
   return (
@@ -277,7 +169,13 @@ export const ReviewPage = ({ tasks, councilSize }: { tasks: TaskOption[]; counci
             )}
           </div>
         </div>
-        {s.review ? <Result r={s.review} curated={curated} /> : <Progress s={s} size={councilSize} />}
+        {s.review ? (
+          <Result r={s.review} curated={curated} />
+        ) : (
+          <Banner status="info">
+            <BannerTitle>This review never finished</BannerTitle>
+          </Banner>
+        )}
       </div>
     </Layout>
   )

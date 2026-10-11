@@ -1,0 +1,209 @@
+{
+ "submission": {
+  "id": "D0itua4s",
+  "title": "OpenWAF",
+  "team": "OpenWAF-Team",
+  "task": "defence",
+  "result": "Not a finalist",
+  "repo": "AleksanderGPL/OpenWAF",
+  "created_at": 1791241359565,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791241359571,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 686,
+   "at": 1791241359574,
+   "message": "Queued"
+  },
+  {
+   "seq": 691,
+   "at": 1791241361941,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 693,
+   "at": 1791241363576,
+   "message": "Found 16,277 source lines, 66 test cases and 37 commits"
+  },
+  {
+   "seq": 694,
+   "at": 1791241363579,
+   "message": "Read 4 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 695,
+   "at": 1791241363592,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 698,
+   "at": 1791241455245,
+   "message": "Member A scored 72"
+  },
+  {
+   "seq": 699,
+   "at": 1791241455248,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 700,
+   "at": 1791241536381,
+   "message": "Member B scored 74"
+  },
+  {
+   "seq": 701,
+   "at": 1791241536384,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 702,
+   "at": 1791241551249,
+   "message": "Member C scored 57"
+  },
+  {
+   "seq": 703,
+   "at": 1791241551252,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 704,
+   "at": 1791241615121,
+   "message": "Done: 73 / 100"
+  }
+ ],
+ "review": {
+  "id": "D0itua4s",
+  "repo": "AleksanderGPL/OpenWAF",
+  "project": "OpenWAF",
+  "team": "OpenWAF-Team",
+  "task": "defence",
+  "result": "Not a finalist",
+  "task_fit": "yes: a working reverse-proxy WAF (Coraza with OWASP CRS 4.25.0 and per-service blocking/detection/off policies) plus five anomaly detectors and a read-only AI investigation agent directly serves the brief's prevent, detect earlier and reduce consequences goals, though the required degraded-scenario demo was not delivered",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "The WAF-plus-LLM-triage combination is known, but the execution fills a real gap concretely: five named detectors with thresholds, warmup baselines and cooldowns, and an investigation agent restricted to read-only tools that must cite request IDs and mark assessments inconclusive when evidence is empty. C's 'incremental dashboard' reading understates how specific the failure modes are.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "This is unambiguously security and resilience work: CRS prevention with per-service policies, earlier detection on a 15-second cycle including an upstream-error detector for failing services, and consequence reduction through investigations and evidence snapshots that survive log pruning. The evidence supports A and B over C's 'generic monitoring tool' reading.",
+    "spread": 3,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "It deploys as a single Go binary with embedded frontend and SQLite, keeps recording detections with no AI key (chat returns 503), and tolerates GeoIP download failure, with acknowledge/resolve/dismiss workflows and SSE progress. C's impracticality claim is overstated by the evidence, though tuning multi-service policies, paranoia levels and anomaly settings is genuinely non-trivial.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 6,
+    "why": "The code promises a coherent Nuxt 4 and Tailwind interface with ECharts, EN/PL i18n and severity badges, but zero screenshots, demo captures or deck exist, so visual quality is judged from framework choices alone.",
+    "spread": 1.5,
+    "members": {
+     "A": 5,
+     "B": 6.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 8,
+    "why": "16,277 lines by 3 authors with all 37 commits inside the event window, 27 test files with 66 cases including a gated live AI test, real Coraza rule compilation, SQLite-backed detection and investigation plumbing with crash recovery, and a 6,000-log seed generator. A working prototype, not a mock.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 8
+    }
+   }
+  ],
+  "weighted_total": 73,
+  "build_reality": 8,
+  "source_loc": 16277,
+  "has_tests": true,
+  "tests": {
+   "files": 27,
+   "cases": 66
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 37 commits by 3 authors, 2026-10-03 10:35 to 2026-10-04 07:25 UTC",
+  "strengths": [
+   "Security-critical logic is genuinely implemented: Coraza 3.8.1 with OWASP CRS 4.25.0 compiled from embedded rules, hot-reloading per-service policies, and custom rule validation with regex and CIDR checks.",
+   "The detection-to-investigation pipeline is real and resilience-aware: 15-second evaluation over aggregated minute buckets, queue and claim execution with five-minute leases and crash recovery, durable SSE event IDs, and evidence snapshots that survive log pruning.",
+   "Strong LLM guardrails: read-only telemetry tools, bounded tool budgets, mandatory request-ID citation, no blocking actions exposed to the model, and inconclusive verdicts when evidence is empty.",
+   "Excellent hygiene for a 24-hour build: argon2id auth with rate limiting, trusted-proxy client-IP handling, graceful shutdown, degraded operation without an AI key, and GeoIP that keeps working when its download fails."
+  ],
+  "weaknesses": [
+   "The task-required demo of a degraded scenario (services down, incomplete information) is missing: zero demo checks were recorded, and the seed generator produces attacks and benign traffic but not upstream errors or a service-down state, so the scenario exists only in code and docs.",
+   "No deck, no screenshots and no captured demo pages, so the UI, design quality and any end-to-end incident flow cannot be verified from the pack.",
+   "The submission form was left blank, leaving the README as the only self-description.",
+   "AI assessment quality is unverifiable: it needs an external API key and no executed investigation was shown, so triage value rests on tests the jury did not see run."
+  ],
+  "red_flags": [],
+  "verdict": "A genuinely implemented WAF with real anomaly detection and a well-guarded AI investigation agent that meets the Defence brief in code, but the absent degraded-scenario demo and complete lack of visual deliverables leave its usability and design unproven.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 72,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 74,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 57,
+     "agreement": 0.5,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791241615116
+ }
+}

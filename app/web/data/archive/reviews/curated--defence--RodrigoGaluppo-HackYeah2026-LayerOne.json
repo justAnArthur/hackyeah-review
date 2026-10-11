@@ -1,0 +1,157 @@
+{
+ "submission": {
+  "id": "curated--defence--RodrigoGaluppo-HackYeah2026-LayerOne",
+  "title": "LayerOne",
+  "team": "LayerOne",
+  "task": "defence",
+  "result": "Not disclosed",
+  "repo": "RodrigoGaluppo/HackYeah2026-LayerOne",
+  "created_at": 1791226633790,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633792,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 60,
+   "at": 1791226633796,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--defence--RodrigoGaluppo-HackYeah2026-LayerOne",
+  "repo": "RodrigoGaluppo/HackYeah2026-LayerOne",
+  "project": "LayerOne",
+  "team": "LayerOne",
+  "task": "defence",
+  "result": "Not disclosed",
+  "task_fit": "yes: an external electrical-signature detector with signed alerts over an independent LoRa path directly serves the Defence theme of early detection and out-of-band reporting when the production network is hostile; C's 'partial' reflects the unproven demo, which the scores already capture rather than the fit itself.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "Watching a device's electrical signature externally and reporting over an independent radio channel addresses a real gap, but power-signature intrusion detection is a known research direction and the demonstrated anomaly is a benign keypad-triggered workload, so the median between B's 8 and C's 6 fits.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 8,
+    "why": "Squarely defence work: detection, authenticated alerting, evidence preservation, and an out-of-band channel, with honest MVP scoping rather than security theatre. B's 9.5 overstates a fit that the somewhat vague problem statement slightly dilutes, so 8 stands.",
+    "spread": 1.5,
+    "members": {
+     "A": 8,
+     "B": 9.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 5,
+    "why": "Deployment needs three Raspberry Pis, a Hantek scope, LoRa radios, and sigrok-cli, with hardcoded personal paths, and the operator dashboard is not demonstrated anywhere. All three members converge low for the same reasons.",
+    "spread": 1,
+    "members": {
+     "A": 5,
+     "B": 5,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 6,
+    "why": "The landing page is polished and accessible, with keyboard-navigable tabs and honest illustrative-data labelling, but the two screenshots are marketing assets and the operational dashboard UI is not evidenced. Every member lands on the same middle score.",
+    "spread": 0,
+    "members": {
+     "A": 6,
+     "B": 6,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 7,
+    "why": "All three members confirm the crypto chain and CUSUM detector are implemented in real code rather than stubbed, which supports the A and B score of 7 over C's 5; zero tests and no committed run log keep it from going higher.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 66,
+  "build_reality": 7,
+  "source_loc": 1874,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://rodrigogaluppo.github.io/HackYeah2026-LayerOne/ (HTTP 200)",
+  "built_during_event": "yes: 3 commits by 1 author, 2026-10-04 01:41 to 2026-10-04 08:34 UTC",
+  "strengths": [
+   "The full cryptographic chain (Ed25519 signing, X25519+HKDF daily keys, ChaCha20-Poly1305 with the header as AAD, database-enforced replay guard) is implemented in real code, not mocked.",
+   "Detection runs on live physical measurements through sigrok-cli with a median/MAD baseline and a two-sided CUSUM with vote-window false-positive suppression and rearm logic.",
+   "The README is an honest engineering document with a coherent threat model: the radio path is treated as hostile and anomalies are scoped as reasons to investigate, not proof of malware.",
+   "All three commits fall inside the event window with none before or after, and the public landing page is live."
+  ],
+  "weaknesses": [
+   "Required deliverables are missing: no deck was submitted and the form's problem, progress, and how-to-open fields are blank.",
+   "The operational dashboard is never evidenced: the two screenshots are marketing assets and the working dashboard sits on a private LAN address, so no degraded-scenario usability demo exists.",
+   "Zero test files and zero test cases for a system whose core value is cryptographic and statistical correctness.",
+   "Deployment depends on specific hardware and the setup scripts hardcode personal paths such as /home/russo, limiting portability."
+  ],
+  "red_flags": [
+   "Runtime databases, logs, and CSV captures are excluded from the repo, so no committed artifact shows the detector or the verification gate ever fired in a real run.",
+   "The only jury-visible demo is a static marketing page; the working system is unreachable outside a private LAN."
+  ],
+  "verdict": "A technically genuine event-built entry whose crypto and detection code is real, but missing deliverables, zero tests, and an unreachable operational dashboard leave the end-to-end system unverified.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 66,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 72,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 59,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791222465233
+ }
+}

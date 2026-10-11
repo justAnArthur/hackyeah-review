@@ -1,0 +1,157 @@
+{
+ "submission": {
+  "id": "curated--krakow--AdamStajek-Jakobiany-HackYeah",
+  "title": "Swoją Drogą",
+  "team": "Jakobiany",
+  "task": "krakow",
+  "result": "Not disclosed",
+  "repo": "AdamStajek/Jakobiany-HackYeah",
+  "created_at": 1791226633914,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633917,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 73,
+   "at": 1791226633922,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--krakow--AdamStajek-Jakobiany-HackYeah",
+  "repo": "AdamStajek/Jakobiany-HackYeah",
+  "project": "Swoją Drogą",
+  "team": "Jakobiany",
+  "task": "krakow",
+  "result": "Not disclosed",
+  "task_fit": "yes: a Kraków accessibility assessor with per-attribute barrier facts, needs-based profiles that change the verdict, and OSM/MSIP/ZDMK/ZTP open data, squarely matching the partner brief.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 8.5,
+    "why": "Individual constraint profiles drive a per-person verdict, missing data renders as uncertain rather than accessible, and PL/EN interfaces with text alternatives and a tested WCAG 2.2 AA program are in place. The score reflects strong design verified only through screenshots, since no live demo was available to reviewers.",
+    "spread": 1,
+    "members": {
+     "A": 8.5,
+     "B": 8.5,
+     "C": 7.5
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 7,
+    "why": "A full stack is implemented with real OSM routing on the city pedestrian graph, transit data, moderation, 146 test cases and an axe/Playwright accessibility suite, which the evidence supports over the claim that routing itself is only synthetic. The median is held back because no live demo, video or demo checks verified it runs, and two members independently noted endpoints documented or returning 501.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 8.5,
+    "why": "Every attribute is a fact with source, license, dates, status and unconfirmed reasons, conflicts collapse to explicit states, and coverage is reported honestly (585 of 7,314 places with a wheelchair value, zero with all five fields). Real integrations carry attribution; the main gap is that OSM facts remain unverified by design.",
+    "spread": 0.5,
+    "members": {
+     "A": 8.5,
+     "B": 8.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 7,
+    "why": "Ingestion is separated from presentation and the OSM pipeline is boundary-parameterized, so the catalogue and graph transfer to a new city via configuration. The ZDMK, MSIP and ZTP scrapers hardcode Kraków URLs and parsing, so the mobility, roadworks and parking layers need new code per city, and no guide for adding a city exists.",
+    "spread": 1,
+    "members": {
+     "A": 7.5,
+     "B": 6.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 3,
+    "why": "No pricing, unit costs, hosting or revenue reasoning anywhere, only mentions of future features, while the task required a priced model with figures. The required PDF deck and video are also missing and the submission form is mostly blank, so this deliverable-heavy criterion is largely unmet.",
+    "spread": 2,
+    "members": {
+     "A": 3,
+     "B": 1,
+     "C": 3
+    }
+   }
+  ],
+  "weighted_total": 68,
+  "build_reality": 8,
+  "source_loc": 30960,
+  "has_tests": true,
+  "tests": {
+   "files": 37,
+   "cases": 146
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "partly: 2 commits before the event; 104 commits by 3 authors, 2026-10-02 14:08 to 2026-10-04 07:43 UTC",
+  "strengths": [
+   "Per-attribute facts with provenance, dates, evidence rows and explicit missing or conflicting states, with gaps rendering as uncertain rather than accessible",
+   "Brutally honest coverage reporting (8 percent wheelchair coverage, zero places with all five fields) instead of inflated claims",
+   "Real city-scale profile-aware routing on the full OSM pedestrian graph, with a CI axe and Playwright WCAG 2.2 AA suite and keyboard support",
+   "Clean ingestion and presentation separation with atomic database publication and reproducible one-command updates"
+  ],
+  "weaknesses": [
+   "No business model with numbers: no pricing, costs, revenue or who-pays analysis, and the task required a priced model with figures",
+   "Required deliverables missing: no PDF deck of up to 10 slides and no video of up to 3 minutes, and the submission form is mostly blank",
+   "Kraków-specific scrapers (ZDMK, MSIP, ZTP) are hardcoded, so a new city needs code changes beyond data configuration, with no guide for adding a city",
+   "No live demo URL, video or demo checks, so the running system could not be verified, and several endpoints are documented as possibly returning 501"
+  ],
+  "red_flags": [
+   "Synthetic demo facts carry status confirmed with confidence 100, mitigated by an explicit synthetic-scenario source and an on-screen warning",
+   "Weather and roadworks are ingested and displayed but do not yet influence routing cost"
+  ],
+  "verdict": "An unusually honest, deeply engineered and well-tested accessibility prototype that nails data reliability and usability, let down by the absent business case and the missing required deck and video.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 72,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 63,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 64.75,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791225712633
+ }
+}

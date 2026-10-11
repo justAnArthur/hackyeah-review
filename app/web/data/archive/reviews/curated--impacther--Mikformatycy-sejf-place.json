@@ -1,0 +1,158 @@
+{
+ "submission": {
+  "id": "curated--impacther--Mikformatycy-sejf-place",
+  "title": "Sejf",
+  "team": "Mikformatycy",
+  "task": "impacther",
+  "result": "Not disclosed",
+  "repo": "Mikformatycy/sejf-place",
+  "created_at": 1791226633858,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633862,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 67,
+   "at": 1791226633866,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--impacther--Mikformatycy-sejf-place",
+  "repo": "Mikformatycy/sejf-place",
+  "project": "Sejf",
+  "team": "Mikformatycy",
+  "task": "impacther",
+  "result": "Not disclosed",
+  "task_fit": "yes: a covert, encrypted evidence vault for people documenting domestic and economic abuse, a harm that disproportionately affects women, with every feature built around that need and the Polish legal framework (UPPD, Niebieska Karta) rather than a rebranded generic app.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 8.3,
+    "why": "A decoy cover app with an action key, append-only SHA-256 chain, RFC 3161 timestamps and a browser verifier goes well beyond a common hidden-photo vault and is anchored in a documented threat model and source-verified legal research. The covert-vault concept itself is not new, which keeps it just below the top.",
+    "spread": 1,
+    "members": {
+     "A": 8.3,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9.2,
+    "why": "The women-specific need is explicit in function, not branding: entry categories taken from the Niebieska Karta NK-A form, economic-violence amounts, verified help lines and law hints tied to UPPD art. 2. Stripping the branding leaves nothing generic.",
+    "spread": 0.5,
+    "members": {
+     "A": 9.2,
+     "B": 9.5,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7.5,
+    "why": "The safety thinking is strong for the affected group: quick exit and shake, auto-lock, FLAG_SECURE, encrypted drafts, no telemetry, and an impact plan whose metrics are already computed in code. It loses points for the incomplete submission pack, an icon disguise that needs a native build and carries store-policy risk, and the lack of a pilot partner.",
+    "spread": 1,
+    "members": {
+     "A": 7.5,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "The code shows a disciplined, accessible, safety-conscious design system: icon-only entry rows, color-coded violence types, light and dark themes, screen-reader labels. But only 1 of 224 screenshots was described and no deck was given, so the polished look one member inferred from the screenshot count is not actually verifiable; the evidence supports the thinner-visual-proof view.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 8.5,
+    "why": "The whole loop exists as real, tested code rather than mocks: AES-256-GCM vault, hand-written RFC 3161 client against FreeTSA, CMS-signed verifiable ZIP, PDF report and 89 test cases. The heavy implementation evidence supports the higher scores over the lowest one, but the promised deck was not delivered, no runtime demo check was performed, and the AI proxy, qualified TSA and sound-button covers remain next steps.",
+    "spread": 2,
+    "members": {
+     "A": 8.5,
+     "B": 9,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 82.8,
+  "build_reality": 8.5,
+  "source_loc": 11487,
+  "has_tests": true,
+  "tests": {
+   "files": 17,
+   "cases": 89
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 11 commits by 1 author, 2026-10-03 18:21 to 2026-10-04 06:33 UTC",
+  "strengths": [
+   "Source-verified Polish legal research (UPPD, Niebieska Karta NK-A, verified help lines) is baked into product function, with honest statements of what a timestamp does and does not prove.",
+   "A real cryptographic integrity pipeline, not mocked: AES-256-GCM, append-only hash chain, RFC 3161 client, CMS verification and a browser verifier that works without the app.",
+   "Threat-model-driven safety UX: cover app with action key, quick exit, shake and auto-lock, FLAG_SECURE, no telemetry, and a documented residual-risk table that states the stalkerware limitation plainly.",
+   "89 test cases across crypto, chain, timestamps, reports, legal rules and the verifier, plus a measurable impact plan with metrics already computed in code."
+  ],
+  "weaknesses": [
+   "Submission deliverables incomplete: no presentation deck was provided and the presentation form fields are empty, a missed official requirement that the team's own handover doc still lists as open.",
+   "Evidence of the running product is thin: only 1 of 224 screenshots was described and no live demo check was performed, so design and behavior rest on code and tests alone.",
+   "The Gemini API key ships inside the app build while the server proxy meant to hide it is only an unwired sketch, and launcher-icon switching needs a native build with acknowledged store-policy risk.",
+   "Impact measurement depends on a pilot partner that is not yet secured, and advertised features such as qualified TSA timestamps and sound-button covers remain next steps."
+  ],
+  "red_flags": [
+   "A live Gemini API key is embedded in the demo build and demo mode disables screenshot blocking; both are disclosed but must be reverted before any real use.",
+   "On iOS the cover always shows the system name Pocket plus a dialog on icon change, which could reveal the app to an abuser.",
+   "A single committer made all 11 commits within the event window with disclosed heavy AI-tool use; the disclosure keeps it compliant, but the team's independent mastery of the code is unverified."
+  ],
+  "verdict": "An unusually deep, legally grounded and honestly scoped evidence vault for women facing domestic and economic abuse, with real tested cryptography, held back by a missed deck, thin visual and runtime proof, and an unhardened AI-key flow.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 81.8,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 87,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 79,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791224876987
+ }
+}

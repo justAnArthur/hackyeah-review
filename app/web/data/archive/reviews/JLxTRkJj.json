@@ -1,0 +1,221 @@
+{
+ "submission": {
+  "id": "JLxTRkJj",
+  "title": "Shady",
+  "team": "breakfast",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "repo": "undeluro/shady",
+  "created_at": 1791235763039,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791238590045,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 543,
+   "at": 1791235763054,
+   "message": "Queued"
+  },
+  {
+   "seq": 594,
+   "at": 1791237136596,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 597,
+   "at": 1791237160306,
+   "message": "Found 6,907 source lines, 106 test cases and 11 commits"
+  },
+  {
+   "seq": 598,
+   "at": 1791237160309,
+   "message": "Read 11 docs and 2 decks, opened 0 demo pages and described 3 screenshots"
+  },
+  {
+   "seq": 599,
+   "at": 1791237160320,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 602,
+   "at": 1791237255695,
+   "message": "Member A scored 81"
+  },
+  {
+   "seq": 603,
+   "at": 1791237255697,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 604,
+   "at": 1791237295126,
+   "message": "Member B scored 81"
+  },
+  {
+   "seq": 605,
+   "at": 1791237295129,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 620,
+   "at": 1791238590055,
+   "message": "Picked up again: the server that was running this review stopped"
+  },
+  {
+   "seq": 626,
+   "at": 1791238653064,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 627,
+   "at": 1791238686228,
+   "message": "Member C scored 77"
+  },
+  {
+   "seq": 628,
+   "at": 1791238686232,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 629,
+   "at": 1791238759224,
+   "message": "Done: 81 / 100"
+  }
+ ],
+ "review": {
+  "id": "JLxTRkJj",
+  "repo": "undeluro/shady",
+  "project": "Shady",
+  "team": "breakfast",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "task_fit": "yes: a day-to-day resident mobility and quality-of-life tool. Shade-aware walking routes for Krakow are computed from open city data (GUGiK building footprints, OSM paths, sun position), which sits squarely inside the Smart City brief.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 8,
+    "why": "A real urban insight, that building shadows at a chosen departure time change the best walk, is implemented as actual computation: pvlib sun position, footprint shadow projection, and penalty search on a 164k-node graph with a 25 percent detour cap. Shade-aware routing exists in prior art, so the idea is strong rather than exceptional.",
+    "spread": 0.5,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7.5
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "Everyday walking for Krakow residents and tourists, built on municipal open data (GUGiK LoD1, OSM, Nominatim) with attribution. All three members scored 9 and nothing in the evidence argues otherwise.",
+    "spread": 0,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "The user and benefit are clear and the saved demo works offline, but live planning depends on a backend that is now offline, with a 69 s startup and 21 to 60 s cross-city routes against a 10 s target. No physical-device GPS checks were completed, and that gap between demo and dependable daily use holds the score at 7.",
+    "spread": 0.5,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 6.5
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "A map-first interface with a coherent palette, exposure-coded route segments, a legend that follows the sheet, comparison cards, and real accessibility work (Reduce Motion, larger text, 44 pt targets). All three members independently gave 8 and the described screenshots support it.",
+    "spread": 0,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 9,
+    "why": "6,907 source LOC, a full data pipeline, a FastAPI backend, cross-platform Expo clients, 106 test cases with coverage gates, deployment scripts, and honest benchmarks. Member C's 7.5 leans on pending device checks, but that is a validation gap rather than missing implementation, so the measured completeness supports the higher score from A and B.",
+    "spread": 1.5,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 7.5
+    }
+   }
+  ],
+  "weighted_total": 81,
+  "build_reality": 9,
+  "source_loc": 6907,
+  "has_tests": true,
+  "tests": {
+   "files": 19,
+   "cases": 106
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 11 commits by 1 author, 2026-10-03 12:38 to 2026-10-04 16:01 UTC",
+  "strengths": [
+   "The core capability is genuinely computed, not mocked: pvlib sun position and footprint-based shadow projection drive constrained routing on a citywide 164,456-node walking graph built from real GUGiK and OSM data.",
+   "A complete pipeline from data to deployment: download and prepare scripts, FastAPI backend, Expo clients, Docker and Cloud Run scripts, and structured logging.",
+   "Strong verification effort: 106 test cases with coverage gates, reported at 98 percent of Python lines and 100 percent of critical mobile logic.",
+   "Unusual engineering honesty: the docs disclose the uncalibrated 0.5 tree-shade weight, missed latency targets, disconnected graph components, and pending device checks, and an offline saved demo keeps the product demonstrable without infrastructure."
+  ],
+  "weaknesses": [
+   "Live use is impaired: the hosted backend has been taken offline, cold start is about 69 s, and cross-city routes take 21 to 60 s against the team's own 10 s target.",
+   "No field validation: tree shade is an uncalibrated 0.5 weight heuristic rather than measured canopy transmission, physical-device GPS and gesture checks are pending, and only simulator evidence exists.",
+   "AI-assisted development is pervasive in the repository (codex default branch, AGENTS.md, agent plan files) but is not disclosed in the submission form. Member A's view is supported by the repository evidence, so the missed disclosure requirement is recorded here.",
+   "All 11 commits come from a single author and there is no user testing or other field evidence."
+  ],
+  "red_flags": [
+   "The submission claims the app is finished and works perfectly while the team's own docs report missed latency targets and pending device verification, and the hosted backend is offline with no verifiable live demo at review time. Members A and C both found this overclaim and the measured absence of demo checks supports them over member B, who reported none."
+  ],
+  "verdict": "A genuinely computed and unusually honest shade-routing tool for Krakow that earns its completeness and category scores, held back only by offline hosting, slow live routing, missing field validation, and an undisclosed AI-assisted workflow.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 81,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 81,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 77,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791238759221
+ }
+}

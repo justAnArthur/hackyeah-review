@@ -1,0 +1,249 @@
+{
+ "submission": {
+  "id": "QL5wS_0q",
+  "title": "Pulse",
+  "team": "Gucie",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "repo": "laitdsgn/Pulse",
+  "created_at": 1791230649371,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791234595648,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 253,
+   "at": 1791230649378,
+   "message": "Queued"
+  },
+  {
+   "seq": 361,
+   "at": 1791232849540,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 362,
+   "at": 1791232858862,
+   "message": "Found 93,955 source lines, 504 test cases and 81 commits"
+  },
+  {
+   "seq": 363,
+   "at": 1791232858865,
+   "message": "Read 9 docs and 0 decks, opened 0 demo pages and described 2 screenshots"
+  },
+  {
+   "seq": 364,
+   "at": 1791232858872,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 365,
+   "at": 1791232950407,
+   "message": "Member A scored 77"
+  },
+  {
+   "seq": 366,
+   "at": 1791232950409,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 367,
+   "at": 1791232950415,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 415,
+   "at": 1791233939197,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 416,
+   "at": 1791233939200,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 440,
+   "at": 1791233986790,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 441,
+   "at": 1791233986793,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 468,
+   "at": 1791234442888,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 469,
+   "at": 1791234442891,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 526,
+   "at": 1791235385219,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 527,
+   "at": 1791235448507,
+   "message": "Member B scored 81"
+  },
+  {
+   "seq": 528,
+   "at": 1791235448509,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 529,
+   "at": 1791235472824,
+   "message": "Member C scored 72"
+  },
+  {
+   "seq": 530,
+   "at": 1791235472827,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 531,
+   "at": 1791235533855,
+   "message": "Done: 77.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "QL5wS_0q",
+  "repo": "laitdsgn/Pulse",
+  "project": "Pulse",
+  "team": "Gucie",
+  "task": "smartcity",
+  "result": "Not a finalist",
+  "task_fit": "yes: a day-to-day barrier-free mobility and transit tool for residents plus a city-facing statistics dashboard, squarely inside the Smart City brief.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "All members agree the core insight is real: needs-profile routing where the shortest route is not a wheelchair-safe one, plus inventive touches like passive lift-break detection from avoidance signals. Crowdsourced accessibility mapping is an established genre, so the value is in execution, which caps the score at 7.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "Everyday resident mobility, transit and weather briefings and a municipal dashboard with CSV export, with no reframing of an out-of-domain tool. All three members confirm the fit, giving 9.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "Named users get concrete value, but the live pois, transit and questions tables are empty until an operator runs imports, push sending is a no-op and 89 of 90 catalogue cities start with an empty map. The evidence supports A's middle score of 7 over B's 8.5, which understates the cold start, and over C's 6, which under-credits the working offline Kraków demo.",
+    "spread": 2.5,
+    "members": {
+     "A": 7,
+     "B": 8.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "The code shows a disciplined accessibility-first system: Atkinson Hyperlegible, shape-coded markers, 48 dp targets, light and dark themes, larger-text mode and bilingual UI. Only 2 of 44 screenshots were described, so the rendered UI stays partly unverified, which keeps an 8 rather than higher.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 8.5,
+    "why": "Measured 93,955 lines across 458 files, 504 tests in 59 files, real integration code for ORS, Open-Meteo, Overpass and GTFS, plus an offline demo mode and a release APK. It loses ground because no demo check ran and the backend and admin repos sit outside the pack with unpopulated tables, supporting the 8.5 median.",
+    "spread": 2,
+    "members": {
+     "A": 8.5,
+     "B": 9,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 77.5,
+  "build_reality": 8,
+  "source_loc": 93955,
+  "has_tests": true,
+  "tests": {
+   "files": 59,
+   "cases": 504
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 81 commits by 6 authors, 2026-10-03 12:34 to 2026-10-04 08:25 UTC",
+  "strengths": [
+   "Computed core capability, not a mock: profile-specific barrier impact tables feeding route avoidance, warnings and time estimates, with ORS wheelchair-profile routing.",
+   "Exceptional engineering hygiene: 504 tests, offline or demo fallback for every networked feature, and an honest gap list in niedasie.md.",
+   "Real data plumbing: Open-Meteo weather and air, Overpass errand places, reverse geocoding, GTFS import and city stats endpoints.",
+   "Deep accessibility intent: blind tour mode with clock-face directions, voice hazard alerts, shape and badge markers, 48 dp targets, bilingual PL/EN delivery."
+  ],
+  "weaknesses": [
+   "Live server feeds are empty: pois, transit and nearby-questions endpoints return nothing until an operator runs imports, so the live-data claim is not demonstrated.",
+   "Push delivery is a no-op and cross-device account sync is missing, so alerts only surface while the app is open and reinstalling loses saved data.",
+   "Cold-start problem: only Kraków has bundled data, so 89 of the 90 catalogue cities start with an empty map dependent on community reports.",
+   "No demo check ran and only 2 of 44 screenshots were described, so runtime behaviour and the rendered UI are unverified from the pack."
+  ],
+  "red_flags": [],
+  "verdict": "A mature, tested and honestly documented accessibility companion whose routing and data integrations are real in code, held back by empty live feeds, an unsolved cold start outside Kraków and an unverified runtime UI.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 77,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 81,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 72,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791235533852
+ }
+}

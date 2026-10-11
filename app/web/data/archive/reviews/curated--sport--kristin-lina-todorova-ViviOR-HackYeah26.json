@@ -1,0 +1,157 @@
+{
+ "submission": {
+  "id": "curated--sport--kristin-lina-todorova-ViviOR-HackYeah26",
+  "title": "ViviOR",
+  "team": "Kristin-Lina Todorova",
+  "task": "sport",
+  "result": "Not disclosed",
+  "repo": "kristin-lina-todorova/ViviOR_HackYeah26",
+  "created_at": 1791226633824,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633826,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 64,
+   "at": 1791226633832,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--sport--kristin-lina-todorova-ViviOR-HackYeah26",
+  "repo": "kristin-lina-todorova/ViviOR_HackYeah26",
+  "project": "ViviOR",
+  "team": "Kristin-Lina Todorova",
+  "task": "sport",
+  "result": "Not disclosed",
+  "task_fit": "no: it is a surgical training simulator, which is healthcare-adjacent, but it touches none of the task's core. There is no sport, physical health, mental wellbeing or access-to-care angle, and no real health data drives a decision; the scores are trainee performance and the vitals are simulated.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "A first-person virtual OR with physically simulated, cuttable tissue along Langer's lines and 17 scored Lichtenstein steps with an explained per-step debrief is ambitious and genuinely strong. C's 5 under-credits the idea itself; the discounts for existing surgical VR simulators and the missed task core are already taken elsewhere.",
+    "spread": 2,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 3,
+    "why": "The council sides with C's middle view: the project is genuinely healthcare through surgical training and patient safety, but it serves none of sport, mental wellbeing or access to care, and no personal health data becomes a recommendation or plan. A's 5 over-credits that indirect link; B's 1 ignores the legitimate medical-education ground.",
+    "spread": 4,
+    "members": {
+     "A": 5,
+     "B": 1,
+     "C": 3
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 6,
+    "why": "Browser delivery with no headset, a demo account, resume support and conservative clinical content make it genuinely usable for trainees. Usability stays unproven: mouse-driven surgery, a reported 38 MB WebGL download, no educator validation, and an empty how-to-open field.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 6,
+    "why": "The code shows real craft: a brand book with palette and fonts, HUD styles derived from it, a hyperlegible fallback and an ECG animation on the vitals monitor. But only 1 of 4 screenshots is described and it is a logo, so the running interface could not be verified.",
+    "spread": 1,
+    "members": {
+     "A": 6,
+     "B": 6,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 6.5,
+    "why": "7,924 lines of coherent Unity C# with a validated procedure engine, error penalties, an exam pass mark, a postMessage web bridge and a deployed build justify the high median. Zero tests, the missing deck and the doc-to-repo mismatch hold it back; B's 5 over-weights the unverified runtime.",
+    "spread": 2,
+    "members": {
+     "A": 6.5,
+     "B": 5,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 57.5,
+  "build_reality": 6,
+  "source_loc": 7924,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "https://viviorhackyeah26-website.vercel.app (HTTP 200)",
+  "built_during_event": "yes: 4 commits by 1 author, 2026-10-04 04:09 to 2026-10-04 08:10 UTC",
+  "strengths": [
+   "Substantial, coherent C# implementing the claimed subsystems: XPBD tissue with cutting and gaping, a rope solver for the spermatic cord, procedural textures, vitals reacting to blood loss, equipment and team.",
+   "A real decision output: every step is validated, errors are explained and penalised, exam mode logs silently with an 80 pass mark, and results are posted to the website over a documented protocol.",
+   "A Unity WebGL build is actually deployed on Vercel with a demo account and a scripted demo, so delivery is real even though runtime behaviour is unverified.",
+   "Clinical and licensing discipline: WHO time-out checklist, correct Lichtenstein anatomy and mesh margins, and a full third-party asset licence table."
+  ],
+  "weaknesses": [
+   "No deck, the required round-one deliverable, and an almost empty submission form, so a reviewer sees little beyond the README.",
+   "Missed task requirement: AI tool use is nowhere disclosed in the pack, while a repo doc reads as an AI agent task brief.",
+   "Weak category fit: no sport, mental wellbeing or access-to-care angle, and no real health data driving a plan; the scores are trainee performance and the vitals are simulation.",
+   "Zero tests and no visual evidence of the running simulator: only 1 of 4 screenshots is described and it is a logo, and the demo check confirms only an HTTP 200 page title."
+  ],
+  "red_flags": [
+   "May not be built for this task: it is a surgical training simulator, which is healthcare-adjacent, but it touches none of the task's core. There is no sport, physical health, mental wellbeing or access-to-care angle, and no real health data drives a decision; the scores are trainee performance and the vitals are simulated.",
+   "The web-integration doc is written as an AI agent task brief and describes a Three.js simulator with 11 steps while the submitted repo is Unity with 17; with 7,924 LOC from one author in four commits over roughly four hours and no AI-use disclosure, the work appears to be undisclosed AI assistance."
+  ],
+  "verdict": "A technically impressive and plausibly working virtual operating room that misses the Sport & Healthcare core of health data driving decisions and arrives without the required deck, visual proof of the running product, or AI-use disclosure.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 61.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 50,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 50,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791223887791
+ }
+}

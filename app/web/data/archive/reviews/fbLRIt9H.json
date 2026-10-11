@@ -1,0 +1,289 @@
+{
+ "submission": {
+  "id": "fbLRIt9H",
+  "title": "CloudLookout",
+  "team": "404 Not Found Yet",
+  "task": "defence",
+  "result": "Not a finalist",
+  "repo": "dawidwojda/404-not-found-yet",
+  "created_at": 1791228363316,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791235955293,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 145,
+   "at": 1791228363328,
+   "message": "Queued"
+  },
+  {
+   "seq": 196,
+   "at": 1791229360712,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 199,
+   "at": 1791229394848,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 200,
+   "at": 1791229397252,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 207,
+   "at": 1791229422708,
+   "message": "Found 15,800 source lines, 133 test cases and 39 commits"
+  },
+  {
+   "seq": 208,
+   "at": 1791229422710,
+   "message": "Read 10 docs and 0 decks, opened 1 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 209,
+   "at": 1791229422716,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 300,
+   "at": 1791231613979,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 301,
+   "at": 1791231667217,
+   "message": "Found 15,800 source lines, 133 test cases and 39 commits"
+  },
+  {
+   "seq": 302,
+   "at": 1791231667220,
+   "message": "Read 10 docs and 0 decks, opened 1 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 303,
+   "at": 1791231667227,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 304,
+   "at": 1791231788955,
+   "message": "Member A scored 74"
+  },
+  {
+   "seq": 305,
+   "at": 1791231788957,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 306,
+   "at": 1791231859388,
+   "message": "Member B scored 83.5"
+  },
+  {
+   "seq": 307,
+   "at": 1791231859390,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 308,
+   "at": 1791231859398,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 403,
+   "at": 1791233921190,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 404,
+   "at": 1791233921193,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 428,
+   "at": 1791233968788,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 429,
+   "at": 1791233968792,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 455,
+   "at": 1791234427886,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 456,
+   "at": 1791234427890,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 488,
+   "at": 1791234610011,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 491,
+   "at": 1791234626582,
+   "message": "Member C scored 70"
+  },
+  {
+   "seq": 492,
+   "at": 1791234626585,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 549,
+   "at": 1791235955296,
+   "message": "Picked up again: the server that was running this review stopped"
+  },
+  {
+   "seq": 551,
+   "at": 1791235955317,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 552,
+   "at": 1791236027292,
+   "message": "Done: 75.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "fbLRIt9H",
+  "repo": "dawidwojda/404-not-found-yet",
+  "project": "CloudLookout",
+  "team": "404 Not Found Yet",
+  "task": "defence",
+  "result": "Not a finalist",
+  "task_fit": "yes: all three members agree and the evidence confirms it. CloudLookout is a defensive cloud security tool with real AWS exposure detection, evidence preservation, and approval-gated remediation, and its degraded-scenario handling is implemented in code, not just claimed.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "The built product is a focused cloud posture scanner with a safety-first remediation loop, an established category where Security Hub and Prowler already compete. The pitched differentiators (CodeQL, email, correlation) are roadmap rather than code, so the evidence supports the lower read: solid and well-reasoned, with the real originality sitting in evidence handling and degraded-state design rather than a new concept.",
+    "spread": 2,
+    "members": {
+     "A": 6.5,
+     "B": 8.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "Squarely defensive work: real public SSH, S3 and IAM detectors plus a consequence-reducing remediation path with manual approval, verification and audit. Degraded handling is explicitly implemented (failed scans retain last-known findings, permission errors surface as permission_missing, per-source health), which matches the brief's incomplete-information requirement. All three members confirm this and none of their reservations change it.",
+    "spread": 1.5,
+    "members": {
+     "A": 9,
+     "B": 9.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 7,
+    "why": "A live public demo with a guided operator flow, judge credentials and readable error states is real. But onboarding requires a customer-deployed Terraform connector, Cognito and IAM setup, and the deployment allowlists a single tenant, account and region, so a judge or small team cannot connect their own environment and live remediation is disabled.",
+    "spread": 1.5,
+    "members": {
+     "A": 7,
+     "B": 7.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 7,
+    "why": "A deliberate visual system is evident: semantic severity colors, keyboard navigation, reduced-motion support, and polished error and denial states. Reservations stand about crisis readability of the dense cyberpunk style, and the five described screenshots skew toward error pages, so positive-state dashboard quality rests mostly on deck and docs.",
+    "spread": 0.5,
+    "members": {
+     "A": 7,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 8.5,
+    "why": "Exceptional for 24 hours by any of the reviews: about 15,800 lines of TypeScript, 133 tests including Terraform tests, three infrastructure roots, and a deployed cross-account stack validated with concrete finding IDs. The measured facts support the higher scores here over member C's lower one; the only real gap is that live remediation was never executed against real AWS, so the flagship closed loop is proven live only through detection.",
+    "spread": 2,
+    "members": {
+     "A": 8.5,
+     "B": 9,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 75.5,
+  "build_reality": 9,
+  "source_loc": 15800,
+  "has_tests": true,
+  "tests": {
+   "files": 17,
+   "cases": 133
+  },
+  "live_demo": "https://ddi5yfgblvh7i.cloudfront.net (HTTP 200)",
+  "built_during_event": "partly: 1 commit before the event; 39 commits by 1 author, 2026-10-03 07:29 to 2026-10-04 08:10 UTC",
+  "strengths": [
+   "Real, verified cross-account AWS integration: STS AssumeRole with ExternalId, identity re-verification, paginated discovery, and a live public demo with retained SSH, S3 and IAM findings from a documented two-account validation.",
+   "Degraded-scenario engineering in the code: failed or partial scans retain last-known findings, permission errors show as permission_missing, historical observations never fake RESOLVED, and denied reads were actually tested.",
+   "Unusually deep remediation safety logic: read-only discovery role, separate approved roles, resource allowlists, expiring proposals, idempotent leases, and independent verification before marking anything resolved.",
+   "Strong engineering breadth and honest claim hygiene for a 24-hour build: 133 automated tests, Terraform as code, live remediation disabled by default, and the fixture demo clearly labeled as such."
+  ],
+  "weaknesses": [
+   "Live remediation was never executed against real AWS, so the detect-to-verified-fix loop is demonstrated only in the labeled fixture mode.",
+   "Limited conceptual novelty: the category is established and the pitched differentiators (CodeQL, email scanning, correlation) are planned, with documentation describing a broader product than the code delivers.",
+   "Onboarding is heavy for the stated small-team user: Terraform connector, Cognito and IAM setup, and a single tenant, account and region allowlist that binds the public demo to one member's account.",
+   "Described screenshots skew toward error and denial states, leaving positive-state dashboard quality and the crisis readability of the dense cyberpunk style under-evidenced."
+  ],
+  "red_flags": [],
+  "verdict": "A rigorously engineered and honestly scoped defensive cloud-exposure response prototype whose detection loop and degraded-state handling are genuinely live, held back mainly by limited conceptual novelty and a remediation loop proven only in fixture mode.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 74,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 83.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 70,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791236027288
+ }
+}

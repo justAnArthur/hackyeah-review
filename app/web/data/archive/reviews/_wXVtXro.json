@@ -1,0 +1,251 @@
+{
+ "submission": {
+  "id": "_wXVtXro",
+  "title": "W razie W",
+  "team": "W razie W",
+  "task": "defence",
+  "result": "Not a finalist",
+  "repo": "jazlik/turbo-defence",
+  "created_at": 1791230889565,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791234595648,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 265,
+   "at": 1791230889583,
+   "message": "Queued"
+  },
+  {
+   "seq": 368,
+   "at": 1791232951554,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 369,
+   "at": 1791232957439,
+   "message": "Found 11,695 source lines, 247 test cases and 151 commits"
+  },
+  {
+   "seq": 370,
+   "at": 1791232957443,
+   "message": "Read 8 docs and 0 decks, opened 1 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 371,
+   "at": 1791232957450,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 373,
+   "at": 1791233069091,
+   "message": "Member A scored 80"
+  },
+  {
+   "seq": 374,
+   "at": 1791233069093,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 375,
+   "at": 1791233069097,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 417,
+   "at": 1791233942199,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 418,
+   "at": 1791233942203,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 442,
+   "at": 1791233989789,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 443,
+   "at": 1791233989792,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 470,
+   "at": 1791234445888,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 471,
+   "at": 1791234445892,
+   "message": "Today's free-model quota is used up; continuing at 00:01 UTC"
+  },
+  {
+   "seq": 535,
+   "at": 1791235541249,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 536,
+   "at": 1791235633733,
+   "message": "Member B scored 81.5"
+  },
+  {
+   "seq": 537,
+   "at": 1791235633735,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 539,
+   "at": 1791235651009,
+   "message": "Member C scored 76"
+  },
+  {
+   "seq": 540,
+   "at": 1791235651012,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 541,
+   "at": 1791235754069,
+   "message": "Done: 80 / 100"
+  }
+ ],
+ "review": {
+  "id": "_wXVtXro",
+  "repo": "jazlik/turbo-defence",
+  "project": "W razie W",
+  "team": "W razie W",
+  "task": "defence",
+  "result": "Not a finalist",
+  "task_fit": "yes: a household preparedness and guided-evacuation offline PWA that turns official Polish crisis guidance into a personal plan and an Execution Mode, which is squarely the civil-defence resilience the Defence brief asks for under degraded network conditions.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "The gap is real and concretely argued: state tools inform but never build or execute a family plan, and the differentiators, the offline Execution Mode and derived readiness, are implemented rather than pitched. The core concept of a household preparedness planner is still conventional, with mObywatel and GdzieSieUkryc already in the field, so this is strong execution on a familiar idea rather than a breakthrough.",
+    "spread": 0.5,
+    "members": {
+     "A": 7,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 9,
+    "why": "Unanimous 9: household preparedness and guided evacuation built on the official PSP shelter dataset for exactly the degraded condition the brief demands, and nothing in the submission is off-category. Member C's aside that the work is resilience rather than security contradicts C's own score here, so the civil-defence reading stands.",
+    "spread": 0,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 8,
+    "why": "Built for the 3 a.m. incident: no accounts, data on device, one next action with voice, and degraded paths genuinely reachable in code such as routing fallback, straight-line guidance and a shelter-unavailable backup route. Member C's 7 rests on the claim that the live demo shows only normal operation, but the recorded demo check contains nothing beyond an HTTP 200 title page, so the code evidence behind 8 is better supported; the real caps are Małopolska-only coverage and live degraded flows that could not be independently verified.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "An unusually rigorous two-mode system, calm Preparation and high-contrast Execution, with semantic colour tokens, a shared type scale and explicit anti-patterns that the components actually follow. The score rests on the design system and its token usage in code because none of the 36 screenshots could be visually described, which caps it.",
+    "spread": 0,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 9,
+    "why": "The claims are in code: OSRM-to-Valhalla fallback routing then saved routes, a PMTiles region build published to R2 and held in OPFS, versioned storage with migrations, 247 tests, CI that blocks deploys, a live URL returning HTTP 200, and all 151 commits inside the event window. Member C's 7 is pulled down by single-region coverage and a non-pluggable crisis scenario, but coverage is a usability limit the app itself acknowledges rather than missing implementation.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 9,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 80,
+  "build_reality": 9,
+  "source_loc": 11695,
+  "has_tests": true,
+  "tests": {
+   "files": 23,
+   "cases": 247
+  },
+  "live_demo": "https://w-razie-w.jzogala.workers.dev/ (HTTP 200)",
+  "built_during_event": "yes: 151 commits by 7 authors, 2026-10-03 14:36 to 2026-10-04 06:37 UTC",
+  "strengths": [
+   "Degraded conditions are engineered, not staged: saved routes survive routing outages, straight-line guidance covers missing maps and unprepared targets, and the app handles a stale GPS fix or failed storage with explicit copy and fallbacks.",
+   "Real data and infrastructure: a refreshable PSP shelter snapshot, a PMTiles region build published to R2 and downloaded into OPFS, service-worker precache, and a live deployed PWA returning HTTP 200.",
+   "Rare discipline for a 24-hour event: PRD and competitive analyses, 151 commits all during the event, 247 tests across 23 files, and CI that blocks deploys without passing lint, build and smoke checks.",
+   "Crisis UX is reasoned end to end: a two-mode design system with enforced tokens, one next action at a time with voice guidance, and a shared 2000 ms hold-to-confirm state machine with resume guarded by freshness window and step id."
+  ],
+  "weaknesses": [
+   "Coverage is one region: shelters and the offline map cover Małopolska only, acknowledged in-app, so elsewhere the app degrades to straight-line pointing and manual coordinates.",
+   "The whole-family positioning is not yet in the product: the plan lives on one device and no sharing, QR or sync code appears in the evidence.",
+   "No connection to actual alert systems: entering Execution Mode is manual, with no RCB alert or official feed integration, and the crisis trigger is a hardcoded input.",
+   "AI use disclosure falls short of the rules: agent-guidance files in the repo and seven commit co-authors against five declared team members show heavy AI assistance, but it is not declared on the submission form; treating in-repo agent files as disclosure is the weaker reading, since those files instruct the tools rather than tell the organisers anything."
+  ],
+  "red_flags": [
+   "Seven commit authors against five declared team members, consistent with AI co-author identities, combined with no AI-use declaration on the submission form; worth a clarifying question at live review rather than disqualification."
+  ],
+  "verdict": "A disciplined, genuinely offline-capable civil-defence entry whose preparedness plan and Execution Mode are implemented end to end with real data, real fallbacks, tests and a live deploy, held back by single-region coverage, a single-device family layer, no alert integration and an AI-disclosure gap to clarify at live review.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 80,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 81.5,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 76,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791235754066
+ }
+}

@@ -1,0 +1,233 @@
+{
+ "submission": {
+  "id": "-3PON7GY",
+  "title": "ClearWay",
+  "team": "Senti",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "repo": "domikolo/hackyeah2026",
+  "created_at": 1791410510052,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791410639233,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 1843,
+   "at": 1791410510075,
+   "message": "Queued"
+  },
+  {
+   "seq": 1844,
+   "at": 1791410510678,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1845,
+   "at": 1791410514068,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1846,
+   "at": 1791410576676,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1847,
+   "at": 1791410579246,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 1848,
+   "at": 1791410639684,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 1849,
+   "at": 1791410663167,
+   "message": "Found 11,386 source lines, 45 test cases and 113 commits"
+  },
+  {
+   "seq": 1850,
+   "at": 1791410663172,
+   "message": "Read 10 docs and 2 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 1851,
+   "at": 1791410663185,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 1852,
+   "at": 1791410782138,
+   "message": "Member A scored 78.75"
+  },
+  {
+   "seq": 1853,
+   "at": 1791410782144,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 1854,
+   "at": 1791410882938,
+   "message": "Member B scored 71.75"
+  },
+  {
+   "seq": 1855,
+   "at": 1791410882943,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 1856,
+   "at": 1791410917654,
+   "message": "Member C scored 67.5"
+  },
+  {
+   "seq": 1857,
+   "at": 1791410917663,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 1858,
+   "at": 1791411008650,
+   "message": "Done: 71.75 / 100"
+  }
+ ],
+ "review": {
+  "id": "-3PON7GY",
+  "repo": "domikolo/hackyeah2026",
+  "project": "ClearWay",
+  "team": "Senti",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "task_fit": "yes: ClearWay is an accessibility map and walking navigation app for wheelchair, stroller and limited-mobility users built directly for the Kraków partner task; the task PDF is committed in the repo and every core feature maps to its requirements.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 7.5,
+    "why": "Four mobility profiles with per-attribute thresholds (kerbs, incline, surfaces, door widths) recolor the map and change routing per person, provenance renders in every popup, and missing data shows as grey 'Brak danych', never as accessible. The task-required WCAG 2.2 self-check of the main scenario was never executed, so accessibility rests on code-level evidence only, which caps the score.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 7,
+    "why": "The measured facts (11,386 LOC, 45 test cases, 17 screenshots, 110 commits during the event) support the members who found a real working system over the doubt that the frontend never rendered data: FastAPI with A* routing over about 5,600 footway segments, navigation with rerouting, and photo obstacle reports. But the mandatory video of at most 3 minutes is missing, and with no hosted demo and an empty demo_checks array no end-to-end run was verified.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 8,
+    "why": "Every attribute carries source, URL, date and a four-level confidence, unverified data is visibly flagged, sample data is marked is_sample, and conflicts such as the Wawel declaration-versus-OSM case surface explicitly. The open-data integration is real in code (OSM via Overpass, GUGiK lidar slopes, ZDMK parking, 25 parsed declarations), though declaration coverage is only 25 institutions and 320 places carry inferred attributes.",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 8,
+    "why": "Ingestion (fetch scripts, normalized GeoJSON with provenance, merge, REST API) is cleanly separated from a React frontend that holds no data or labels of its own, so a new city is a REGION polygon plus rerunning the documented scripts, estimated at 1-2 days, and a new source is one fetch script. Single-region SQLite and in-process Python A* are honest prototype limits with a stated PostGIS/Valhalla migration path.",
+    "spread": 0.5,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 5.5,
+    "why": "Four structured revenue streams (widget/API subscription, owner-verified profiles, data licensing, city gap dashboard) come with a priced cost base of roughly 50-100 PLN per month. The team explicitly declines to quote any revenue prices, deferring them to pilots, so the commercial side remains qualitative despite the credible structure.",
+    "spread": 1.5,
+    "members": {
+     "A": 6.5,
+     "B": 5.5,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 71.75,
+  "build_reality": 7,
+  "source_loc": 11386,
+  "has_tests": true,
+  "tests": {
+   "files": 9,
+   "cases": 45
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "partly: 3 commits before the event; 113 commits by 2 authors, 2026-10-02 22:08 to 2026-10-04 08:46 UTC",
+  "strengths": [
+   "Provenance on every datum (source, URL, date, confidence) enforced through the API, popups and place cards, with unknown never rendered as accessible.",
+   "Genuinely real open-data pipelines: OSM via Overpass, GUGiK lidar-derived sidewalk slopes, ZDMK accessible parking, and a crawler parsing 25 official accessibility declarations, with conflicts surfaced rather than hidden.",
+   "Exemplary separation of ingestion from presentation: the frontend renders entirely from API dictionaries, making a new city a documented 1-2 day configuration task.",
+   "A complete navigation loop (profiles, alerts, rerouting, obstacle TTL with confirmation voting, photo reports) backed by 45 measured test cases and 17 screenshots."
+  ],
+  "weaknesses": [
+   "The mandatory video deliverable (at most 3 minutes) is missing; the submission form field is still a placeholder.",
+   "The task-required WCAG 2.2 AA self-check of the main scenario (keyboard, screen reader, contrast) was planned but never performed; only code-level aria and text-timeline evidence exists.",
+   "The business model has cost numbers but no priced revenue streams; the team defers all pricing to future pilots.",
+   "No hosted demo and no recorded demo run (demo_checks empty), and several UI pieces such as the source-down banner and the data-info panel were still to-do."
+  ],
+  "red_flags": [
+   "Repository was private at the submission deadline, with jury access promised as a to-do and not verified.",
+   "The form claims 51 automated tests while the measurement found 45 test cases.",
+   "Repository created and 3 commits pushed before the official event start; minor scaffolding, with 110 commits during the event and none after the deadline."
+  ],
+  "verdict": "A deep, unusually data-honest accessibility prototype with real open-data pipelines, per-datum provenance and clean scalability, kept below the top band by the missing mandatory video, the unperformed WCAG self-check, unpriced revenue and no independently verifiable demo.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 78.75,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 71.75,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 67.5,
+     "agreement": 0.9,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791411008644
+ }
+}

@@ -1,0 +1,157 @@
+{
+ "submission": {
+  "id": "curated--superteam--corki1337-FairOdds",
+  "title": "FairOdds",
+  "team": "FairOdds",
+  "task": "superteam",
+  "result": "Not disclosed",
+  "repo": "corki1337/FairOdds",
+  "created_at": 1791226633936,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633938,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 75,
+   "at": 1791226633942,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--superteam--corki1337-FairOdds",
+  "repo": "corki1337/FairOdds",
+  "project": "FairOdds",
+  "team": "FairOdds",
+  "task": "superteam",
+  "result": "Not disclosed",
+  "task_fit": "yes: an on-chain pari-mutuel bookmaker on Solana devnet where the bookmaker's three powers are each replaced by code - stakes sit in a vault whose authority is the market PDA, odds derive from the pool split, and verdicts come from a pinned Switchboard feed with permissionless lock, resolve, claim and refund - with no backend in the settlement path.",
+  "scores": [
+   {
+    "criterion": "Relevance",
+    "weight": 30,
+    "score": 9,
+    "why": "The trust-replacing logic genuinely lives on-chain, the target user is named explicitly, and the settlement path has no operator. The retained upgrade authority is the only deduction from a near-perfect fit.",
+    "spread": 0.5,
+    "members": {
+     "A": 8.5,
+     "B": 9,
+     "C": 9
+    }
+   },
+   {
+    "criterion": "Completeness & functionality",
+    "weight": 25,
+    "score": 6.5,
+    "why": "The full cycle exists in real Anchor code and all 10 measured test cases pass, but two required deliverables are missing (no public video of at most 3 minutes, only a narration script; no PDF deck, only an unexported slides.html), the form is near empty, and the claimed devnet payout cannot be verified from the pack.",
+    "spread": 1,
+    "members": {
+     "A": 6.5,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Idea & problem",
+    "weight": 20,
+    "score": 8,
+    "why": "The problem is concrete and named, each bookmaker power is mapped to an on-chain rule, and the why-not-a-database question is answered directly. The yield-instead-of-vig model adds a coherent revenue story.",
+    "spread": 0,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Implementation potential",
+    "weight": 15,
+    "score": 7,
+    "why": "The program design is unusually careful - versioned PDA seeds, an exhaustive error taxonomy, deadline and refund liveness, and a tested invariant that payouts never exceed the pool - but yield_park is a self-written mock, the oracle rests on a single data source, and upgrade authority is not frozen.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Originality",
+    "weight": 10,
+    "score": 6.5,
+    "why": "The feed-lock PDA, feed-hash pinning and the yield CPI sit well beyond a tutorial escrow, but on-chain pari-mutuel betting is a known pattern, so the novelty is architectural rather than in the domain.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 6.5,
+     "C": 6
+    }
+   }
+  ],
+  "weighted_total": 76.25,
+  "build_reality": 8,
+  "source_loc": 6869,
+  "has_tests": true,
+  "tests": {
+   "files": 2,
+   "cases": 10
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 3 commits by 2 authors, 2026-10-03 20:56 to 2026-10-04 04:45 UTC",
+  "strengths": [
+   "Custody is unambiguously on-chain: bets sit in a vault whose authority is the market PDA, and claim and refund transfers need only that PDA signature.",
+   "Oracle trust is minimized and verifiable: each market pins one Switchboard PullFeed by hash and hands its authority to a feed-lock PDA that no instruction ever signs for, with freshness and unanimity checks on resolve.",
+   "Liveness is engineered in: permissionless lock and resolve, a resolve deadline followed by cancel_expired with full refunds, draw refunds, and claims with no time limit.",
+   "Judge-facing documentation is thorough and honest, pre-answering where the intermediary disappears and stating limitations plainly, backed by 10 passing tests including a payout-sum invariant."
+  ],
+  "weaknesses": [
+   "The required public video of at most 3 minutes is missing; only a narration script (docs/NARRACJA.md) exists and no video link appears in the evidence.",
+   "The required PDF deck is missing: the deck field is not provided and the repo's PDFs are the task rules and an architecture spec, not the team's slides; only slides.html with a print-by-hand instruction exists.",
+   "Upgrade authority remains with the deployer wallet; the freeze script was written but not run, so the author can still replace the deployed program.",
+   "yield_park is a self-written mock with simulated APR rather than a real DeFi integration, and the claimed devnet smoke payout is not evidenced in the pack (empty demo checks, no screenshots, near-empty form)."
+  ],
+  "red_flags": [
+   "The README claims a confirmed devnet smoke market and a 400 USDC payout with explorer links, but the measured demo checks are empty, there are no screenshots, and HANDOFF.md states there was no devnet deploy and no commits, so the deployment claims rest on contradictory and unverifiable evidence.",
+   "aichain.pdf in the repo is an architecture specification for exactly the program built, formatted as an AI-authored handoff document, while the near-empty submission form discloses no use of AI tools."
+  ],
+  "verdict": "A technically strong and honestly documented trustless bookmaker that genuinely removes the intermediary in code, but the missing video and PDF deliverables, the unverifiable devnet claims and the mocked yield layer keep it below the top tier.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 75.25,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 77.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 73,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791226334331
+ }
+}

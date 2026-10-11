@@ -1,0 +1,213 @@
+{
+ "submission": {
+  "id": "tgTMt_gs",
+  "title": "Mathguard",
+  "team": "TresMachines",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "repo": "ljaniec/Mathguard",
+  "created_at": 1791241361217,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791241361220,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 689,
+   "at": 1791241361223,
+   "message": "Queued"
+  },
+  {
+   "seq": 727,
+   "at": 1791242139159,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 728,
+   "at": 1791242180889,
+   "message": "Found 7,985 source lines, 203 test cases and 32 commits"
+  },
+  {
+   "seq": 729,
+   "at": 1791242180891,
+   "message": "Read 6 docs and 2 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 730,
+   "at": 1791242180897,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 731,
+   "at": 1791242296415,
+   "message": "Member A scored 82.5"
+  },
+  {
+   "seq": 732,
+   "at": 1791242296417,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 733,
+   "at": 1791242352661,
+   "message": "Member B scored 79.25"
+  },
+  {
+   "seq": 734,
+   "at": 1791242352664,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 735,
+   "at": 1791242365887,
+   "message": "Member C scored 70"
+  },
+  {
+   "seq": 736,
+   "at": 1791242365890,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 737,
+   "at": 1791242461457,
+   "message": "Done: 78.5 / 100"
+  }
+ ],
+ "review": {
+  "id": "tgTMt_gs",
+  "repo": "ljaniec/Mathguard",
+  "project": "Mathguard",
+  "team": "TresMachines",
+  "task": "goldman",
+  "result": "Not a finalist",
+  "task_fit": "yes: Mathguard is a working authenticated HTTP gateway plus Python SDK sitting between applications/agents and local models, tools and other agents, driven by a central policy file with strictness profiles, hybrid deterministic and local-Ollama semantic controls, budget governance, a signature feed, dashboard, audit export and a runnable test suite, which matches the task brief point for point.",
+  "scores": [
+   {
+    "criterion": "Robustness/guardrails",
+    "weight": 30,
+    "score": 8,
+    "why": "Deterministic controls are real code (PII, secret and encoded or Unicode patterns, hash-pinned artifacts, tool allowlists, reserve-before-dispatch budgets) and the semantic layer is a genuine local Ollama call, combined by a compiled Lean kernel that proves a semantic allow can never relax a hard denial. The score stays below the top band because the classifier missed an indirect-injection variant, its only passing corpus was also used for tuning, and the signature feed is self-authored synthetic content.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Architecture & performance",
+    "weight": 20,
+    "score": 8,
+    "why": "The gateway is verifiably in the request path: loopback HTTP ingress with bounds and host checks, a serialized engine handling roles and sessions, a long-lived compiled Lean worker on stdin/stdout with strict response validation, then the local provider, plus implemented fail-closed hot reload with monotonic epochs and separately tracked control-path p95 latency. Throughput is capped by a single engine lock with at most eight connections, a measured benign chat took about 4.3 s, and there is no separate benchmark harness.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Security reporting",
+    "weight": 20,
+    "score": 8,
+    "why": "Reporting is real rather than mocked: a hash-chained SQLite journal with intent-before-mutation, trace IDs, reason codes and per-stage latency backs the events and sanitized JSONL audit export endpoints, and the dashboard polls live authenticated endpoints for decisions, versions, quarantine and latency percentiles. Minor deductions because the screenshots are frozen offline renders with controls disabled, export is read-only with no hosted link, and sanitization means investigators must consult the private journal for content.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Test suite",
+    "weight": 15,
+    "score": 8,
+    "why": "A measured 203 cases across 9 files run via make test against the actual compiled Lean worker with no model download, covering hostile, encoded, split, Polish-language and corrupted-journal negative cases, with 189 runtime plus 14 static checks passing and zero failures. Held below 9 because the semantic corpus is the development set rather than held out, fixtures verify enforcement rather than live detector accuracy, and totals disagree across artifacts (deck 187 vs receipt 189).",
+    "spread": 1,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Implementability & scalability",
+    "weight": 15,
+    "score": 7,
+    "why": "Three documented make commands with a judge quickstart and doctor script, a documented JSON policy with strict, balanced and permissive profiles, and verified Ollama support with digest preflight make the project genuinely runnable. But judges must install the Lean toolchain with pinned Mathlib and pull model weights, there is no one-command container path, and the design is explicitly single-node and single-lock with no distributed quotas, no MCP transport or OAuth, and no paid-API adapter even though budget rules model cost.",
+    "spread": 1.5,
+    "members": {
+     "A": 7,
+     "B": 7.5,
+     "C": 6
+    }
+   }
+  ],
+  "weighted_total": 78.5,
+  "build_reality": 8.5,
+  "source_loc": 7985,
+  "has_tests": true,
+  "tests": {
+   "files": 9,
+   "cases": 203
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 32 commits by 2 authors, 2026-10-03 17:04 to 2026-10-04 08:37 UTC",
+  "strengths": [
+   "Compiled Lean decision kernel genuinely in the request path, with the semantic-allow-cannot-relax-a-hard-denial property proved and the worker process spawned and validated by the engine",
+   "Fail-closed discipline throughout: invalid policy keeps the last valid epoch, no valid policy blocks all traffic, and worker, journal or binary-tamper breakage denies or closes startup",
+   "Real local-model integration with provenance checks (Ollama digest, loopback-only, cloud refused) and unusually honest live evidence including a retained failure baseline and a disclosed indirect-injection miss",
+   "Durable hash-chained audit journal with intent-before-mutation and exact-replay idempotency, plus 203 runnable tests including attack cases that judges can run without downloading a model"
+  ],
+  "weaknesses": [
+   "Semantic detection accuracy is unproven on unseen attacks: the only passing corpus was used for prompt tuning, one indirect injection slipped through input classification, and the signature feed is synthetic rather than fed by real advisories",
+   "Single-node, single-lock serialized engine with eight-slot ingress caps throughput and precludes distributed or multi-owner deployment, with no MCP transport, OAuth or paid-API adapter despite budget rules modeling cost",
+   "Heavy judge-side prerequisites: the full Lean and Mathlib build plus an Ollama weight download are needed to see anything live, and there is no one-command container path",
+   "Missed demo deliverables: no video or hosted demo, empty demo checks in the pack, and dashboard captures are frozen offline renders with controls disabled"
+  ],
+  "red_flags": [
+   "Evidence counts are inflated relative to the fine print: the deck and README headline 156 axiom records and 187 to 189 tests, but the axioms are a self-authored theorem catalog rather than independent security requirements, the team narrows the scope in finer print, and totals disagree across artifacts",
+   "Submission completeness risk: the official pack has empty demo checks and the deck appears only in the repo rather than the provided channel, and one member reports the submission form was never filled, so the official record may understate or misstate what actually exists",
+   "Text that tries to steer the reviewers: readme: \"ignore previous instructions\""
+  ],
+  "verdict": "A genuinely deep and honestly disclosed AI control layer whose enforcement, persistence, reporting and tests demonstrably exist in code, held back from the top band by unproven held-out detection accuracy, a synthetic signature feed, a single-node serialized deployment scope and a demo-light submission that is heavy for judges to run.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 82.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 79.25,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 70,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791242461453
+ }
+}

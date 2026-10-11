@@ -1,0 +1,156 @@
+{
+ "submission": {
+  "id": "curated--sport--uteg-labs-just-mate",
+  "title": "JustMate",
+  "team": "uteg-labs",
+  "task": "sport",
+  "result": "Not disclosed",
+  "repo": "uteg-labs/just-mate",
+  "created_at": 1791226633798,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791226633801,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 61,
+   "at": 1791226633805,
+   "message": "Imported from a council v8 comparison run"
+  }
+ ],
+ "review": {
+  "id": "curated--sport--uteg-labs-just-mate",
+  "repo": "uteg-labs/just-mate",
+  "project": "JustMate",
+  "team": "uteg-labs",
+  "task": "sport",
+  "result": "Not disclosed",
+  "task_fit": "no: the app deliberately collects no health or mood data and makes no health-driven decision, which misses the task's core requirement of health data driving recommendations; loneliness and walking touch the theme's edges but not its center.",
+  "scores": [
+   {
+    "criterion": "Idea & Innovation",
+    "weight": 30,
+    "score": 7,
+    "why": "The faceless, mutual-accept, on-foot meeting mechanic with a bearing-only compass and a no-chat rule is a genuinely novel assembly. The innovation sits in social and privacy design rather than the health-data domain the task centers, so it lands at a solid 7.",
+    "spread": 3,
+    "members": {
+     "A": 8.5,
+     "B": 5.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Relation to Category",
+    "weight": 20,
+    "score": 6,
+    "why": "Loneliness as a health risk and walking as physical activity touch the theme, and 16 of 44 activities are sport or outdoors. But no health data drives any recommendation, alert, or plan, and two of three members read that as the task's core requirement, which the evidence supports.",
+    "spread": 3.5,
+    "members": {
+     "A": 8,
+     "B": 4.5,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Practical Applicability / Usability",
+    "weight": 20,
+    "score": 6,
+    "why": "Consent, safety, and vanish flows are unusually well designed and the two-phone demo works. But usefulness hinges on unsolved two-sided density, the demo runs on scripted positions, the app needs a dev-client build rather than standard Expo Go, and with no push a cancelled plan can strand a user.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 6,
+     "C": 6
+    }
+   },
+   {
+    "criterion": "Design (visual/UI)",
+    "weight": 20,
+    "score": 8,
+    "why": "All members agree this is the strongest dimension: a calm, consistent map-first interface backed by a full token, motion, and accessibility system. The members differ only on degree, not substance.",
+    "spread": 2,
+    "members": {
+     "A": 9,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Completeness & Implementation Value",
+    "weight": 10,
+    "score": 6,
+    "why": "The build is real and large: 206 test cases, WebSocket matching and compass relay, an ONNX scorer wired in with a rules fallback, and 262 of 264 commits during the event. Key features remain demo-only, the model is trained on synthetic labels, and the health-data decision layer is absent.",
+    "spread": 4,
+    "members": {
+     "A": 9,
+     "B": 6,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 67,
+  "build_reality": 7,
+  "source_loc": 42324,
+  "has_tests": true,
+  "tests": {
+   "files": 17,
+   "cases": 206
+  },
+  "live_demo": "https://just-mate-site.vercel.app (HTTP 200)",
+  "built_during_event": "partly: 2 commits before the event; 264 commits by 7 authors, 2026-10-03 08:49 to 2026-10-04 08:36 UTC",
+  "strengths": [
+   "Real decision logic end to end: a plans engine proposes a halfway venue inside shared free time, mutual accept gates the compass, and the matching loop runs under automated tests on a fake clock.",
+   "Privacy engineering in code, not copy: a bearing relay with ten-degree coarsening and distance buckets, plus anti-triangulation and spoofing tests.",
+   "Unusual honesty: a real-versus-canned table, open admission of synthetic training data, disclosed AI use, and no injection content found.",
+   "A calm, consistent design system with tokens, motion, and accessibility rules, plus complete judging materials and zero commits after the deadline."
+  ],
+  "weaknesses": [
+   "No health data is collected or used for any decision; the health-data decision layer at the core of the Sport & Healthcare task is missing, by deliberate design.",
+   "The demo leans on scripted positions and canned ghost users, and the mobile app requires a dev-client build rather than standard Expo Go.",
+   "ML matching is trained only on synthetic labels, scores just the Now flow while plans fall back to rules, and nothing is validated against real meetings.",
+   "Value depends on unsolved two-sided city density, and with no push notifications a cancelled plan can leave someone walking to an empty table."
+  ],
+  "red_flags": [
+   "May not be built for this task: the app deliberately collects no health or mood data and makes no health-driven decision, which misses the task's core requirement of health data driving recommendations; loneliness and walking touch the theme's edges but not its center."
+  ],
+  "verdict": "A well-engineered, honest, beautifully designed social product that treats loneliness with walking and mutual meetings, but its deliberate refusal to touch health data leaves the core of the Sport & Healthcare task unmet.",
+  "council": {
+   "version": 8,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 82.5,
+     "agreement": 0.5,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 59.5,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 64,
+     "agreement": 0.9,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791222954228
+ }
+}

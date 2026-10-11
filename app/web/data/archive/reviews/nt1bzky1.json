@@ -1,0 +1,222 @@
+{
+ "submission": {
+  "id": "nt1bzky1",
+  "title": "RouteAble",
+  "team": "Aven Ruthless Vibe Coders",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "repo": "olo-wp/hackyeah",
+  "created_at": 1791245643771,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791245952883,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 801,
+   "at": 1791245643778,
+   "message": "Queued"
+  },
+  {
+   "seq": 802,
+   "at": 1791245644016,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 803,
+   "at": 1791245645743,
+   "message": "Found 6,857 source lines, 45 test cases and 48 commits"
+  },
+  {
+   "seq": 804,
+   "at": 1791245645746,
+   "message": "Read 3 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 805,
+   "at": 1791245645752,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 806,
+   "at": 1791245805980,
+   "message": "Member A scored 71.25"
+  },
+  {
+   "seq": 807,
+   "at": 1791245805982,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 808,
+   "at": 1791245892266,
+   "message": "Member B scored 68.75"
+  },
+  {
+   "seq": 809,
+   "at": 1791245892268,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 810,
+   "at": 1791245892885,
+   "message": "A model is busy; trying again in 60 s"
+  },
+  {
+   "seq": 811,
+   "at": 1791245953131,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 812,
+   "at": 1791246004774,
+   "message": "Member C scored 62"
+  },
+  {
+   "seq": 813,
+   "at": 1791246004777,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 814,
+   "at": 1791246072919,
+   "message": "Done: 68 / 100"
+  }
+ ],
+ "review": {
+  "id": "nt1bzky1",
+  "repo": "olo-wp/hackyeah",
+  "project": "RouteAble",
+  "team": "Aven Ruthless Vibe Coders",
+  "task": "krakow",
+  "result": "Not a finalist",
+  "task_fit": "yes: a Kraków-scoped accessibility platform with per-feature barrier data, per-user preferences and per-datum provenance matches the partner brief directly, and repo, docs and deck are all built around this task.",
+  "scores": [
+   {
+    "criterion": "Relation & usability",
+    "weight": 25,
+    "score": 7.5,
+    "why": "Per-person preferences (step-free, elevator, toilet, door width, cobblestone) drive per-feature evaluation without a global verdict, and the unknown-conflicts-with-nothing rule is enforced across engine, UI and MCP. Held below 8 because the deployed UX could not be checked: the demo was skipped and none of the 9 screenshots is described.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Prototype quality",
+    "weight": 20,
+    "score": 7,
+    "why": "A real end-to-end system (FastAPI, Next.js and MCP over one shared service) with 45 tests in 8 files and the required conflict and missing-data modes implemented in code. The median reflects the unverified deployment; C's 5 is too harsh given the measured codebase of 6857 LOC and 48 event commits, so the council sides with A and B.",
+    "spread": 2.5,
+    "members": {
+     "A": 7.5,
+     "B": 7,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Data reliability",
+    "weight": 15,
+    "score": 7.5,
+    "why": "Every datum carries source, retrieved_at, confidence and verification status from the schema to the evidence UI, community answers stay append-only and separate, and OSM is live with ODbL attribution. The Kraków city source is a clearly labelled DEMO_DATA snapshot, not a live Otwarte Dane or MSIP feed, which caps the score.",
+    "spread": 1,
+    "members": {
+     "A": 7.5,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Scalability",
+    "weight": 20,
+    "score": 8,
+    "why": "Ingestion sits behind a provider registry feeding a shared AccessibilityService that REST, MCP and web consume identically, so adding a city is a new provider plus dataset. Not higher because no second city adapter or live city feed is demonstrated, only Kraków providers exist.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Business model",
+    "weight": 20,
+    "score": 4,
+    "why": "The deck names plausible payers (city licence, commercial API, EU funds, subscriptions) but gives no PLN amounts, cost breakdown or first customer, which fails the task's explicit requirement for a priced model.",
+    "spread": 1,
+    "members": {
+     "A": 4,
+     "B": 4,
+     "C": 5
+    }
+   }
+  ],
+  "weighted_total": 68,
+  "build_reality": 8,
+  "source_loc": 6857,
+  "has_tests": true,
+  "tests": {
+   "files": 8,
+   "cases": 45
+  },
+  "live_demo": "https://routable.net (skipped (not a public https URL))",
+  "built_during_event": "yes: 48 commits by 5 authors, 2026-10-03 09:06 to 2026-10-04 08:53 UTC",
+  "strengths": [
+   "Provenance is real end to end: source, date, confidence and verification status flow from the database schema through the engine to the REST and MCP responses and the evidence UI.",
+   "The hardest data-integrity rules are implemented, not mocked: unknown renders as 'brak danych' and never as accessible, conflicting sources show both sides as needing verification, and a down provider surfaces as failed while search stays usable.",
+   "Genuine live open-data integration via OSM (Nominatim and Overpass, ODbL attributed) plus an allowlist-guarded website provider, with AI-extracted facts marked and kept apart from verified data.",
+   "Clean layering for scale: provider packages behind a registry feed one shared service consumed identically by API, MCP and web, built by 5 authors with 48 commits all during the event."
+  ],
+  "weaknesses": [
+   "The business model has no pricing numbers: no PLN amounts, unit economics or hosting costs anywhere, a missed requirement the task explicitly states.",
+   "The uploaded deck appears to run about 12 slides, exceeding the at-most-10 limit; B inspected it directly and no member contradicts this.",
+   "The Kraków open-data provider ships a bundled demo snapshot labelled DEMO_DATA rather than a live city feed, and no second city adapter exists to demonstrate scaling in code.",
+   "WCAG 2.2 AA conformance, the rendered conflicting and incomplete cases and the 3-minute video length are asserted but unbacked: 0 of 9 screenshots described, no audit and no visual evidence."
+  ],
+  "red_flags": [
+   "The claimed public demo at routable.net was skipped by the checker and never verified, so hosting and end-to-end behaviour rest entirely on repo code and tests.",
+   "The README publishes an external database host IP (34.158.225.184) in setup instructions; no credentials are leaked, but it is poor operational hygiene for a public repo."
+  ],
+  "verdict": "A technically serious and unusually honest implementation of exactly what the brief asks for, with real provenance, visible conflicts and unknown states across API, UI and MCP, let down by an unpriced business model, an over-limit deck, a demo-snapshot instead of live city data and a deployment the jury could not independently verify.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 71.25,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 68.75,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 62,
+     "agreement": 0.6,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791246072917
+ }
+}

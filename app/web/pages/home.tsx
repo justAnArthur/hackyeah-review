@@ -96,12 +96,19 @@ const ScoringPanel = ({ panel }: { panel: CouncilPanel }) => (
   </Panel>
 )
 
-export const HomePage = ({ weights, panel }: { weights: Record<string, Record<string, number>>; panel: CouncilPanel }) => {
+export const HomePage = ({
+  weights,
+  panel,
+  finalists,
+  community,
+}: {
+  weights: Record<string, Record<string, number>>
+  panel: CouncilPanel
+  finalists: Record<string, ReviewEntry>
+  community: Record<string, ReviewEntry[]>
+}) => {
   const [filter, setFilter] = useState<Filter>("all")
   const [sort, setSort] = useState<Sort>("result")
-  const [finalists, setFinalists] = useState<Record<string, ReviewEntry>>({})
-  const [community, setCommunity] = useState<Record<string, ReviewEntry[]>>({})
-  const [loaded, setLoaded] = useState(false)
   const [open, setOpenState] = useState<string[]>([])
   const tasks = useMemo(() => buildTasks(weights, finalists), [weights, finalists])
 
@@ -113,26 +120,7 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
       if (["placed", "code"].includes(saved.filter)) setFilter(saved.filter)
       if (saved.sort === "score") setSort("score")
     } catch {}
-    load()
   }, [])
-
-  async function load() {
-    const get = (url: string) => fetch(url).then(r => (r.ok ? r.json() : {})).catch(() => ({}))
-    const [f, c] = await Promise.all([get("/api/finalists"), get("/api/community")])
-    setFinalists(f)
-    setCommunity(c)
-    setLoaded(true)
-  }
-
-  const entries = [...Object.values(finalists), ...Object.values(community).flat()]
-
-  // refresh while a finalist or an upload is still being reviewed
-  const busy = entries.some(e => !e.review)
-  useEffect(() => {
-    if (!busy) return
-    const timer = setInterval(load, 10_000)
-    return () => clearInterval(timer)
-  }, [busy])
 
   function save(next: { filter?: Filter; sort?: Sort }) {
     if (next.filter) setFilter(next.filter)
@@ -153,10 +141,10 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
     fromHash()
     addEventListener("hashchange", fromHash)
     return () => removeEventListener("hashchange", fromHash)
-  }, [loaded])
+  }, [])
 
   const all = tasks.flatMap(t => t.projects.filter(p => !p.ours))
-  const scored = entries.filter(e => e.review).length
+  const scored = [...Object.values(finalists), ...Object.values(community).flat()].filter(e => e.review).length
   const communityCount = Object.values(community).flat().length
 
   return (
@@ -172,8 +160,8 @@ export const HomePage = ({ weights, panel }: { weights: Record<string, Record<st
           items={[
             [tasks.length, "Tasks"],
             [all.length, "Finalists"],
-            [loaded ? scored : "–", "Projects scored"],
-            [loaded ? communityCount : "–", "Community submissions"],
+            [scored, "Projects scored"],
+            [communityCount, "Community submissions"],
           ]}
         />
         <div className="flex flex-wrap items-center justify-between gap-3">

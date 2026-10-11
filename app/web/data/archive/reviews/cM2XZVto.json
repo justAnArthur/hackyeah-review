@@ -1,0 +1,201 @@
+{
+ "submission": {
+  "id": "cM2XZVto",
+  "title": "ISKRA Małopolska",
+  "team": "ISKRA Małopolska",
+  "task": "hubmi",
+  "result": "Not a finalist",
+  "repo": "PatrykNamyslak/hackyeah-2026",
+  "created_at": 1791241363042,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791241363045,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 692,
+   "at": 1791241363048,
+   "message": "Queued"
+  },
+  {
+   "seq": 756,
+   "at": 1791243000334,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 757,
+   "at": 1791243003393,
+   "message": "Found 10,410 source lines, 17 test cases and 163 commits"
+  },
+  {
+   "seq": 758,
+   "at": 1791243003395,
+   "message": "Read 3 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 759,
+   "at": 1791243003400,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 760,
+   "at": 1791243114714,
+   "message": "Member A scored 56"
+  },
+  {
+   "seq": 761,
+   "at": 1791243114716,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 762,
+   "at": 1791243188126,
+   "message": "Member B scored 48"
+  },
+  {
+   "seq": 763,
+   "at": 1791243188128,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 764,
+   "at": 1791243213967,
+   "message": "Member C scored 51"
+  },
+  {
+   "seq": 765,
+   "at": 1791243213971,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 766,
+   "at": 1791243290529,
+   "message": "Done: 52 / 100"
+  }
+ ],
+ "review": {
+  "id": "cM2XZVto",
+  "repo": "PatrykNamyslak/hackyeah-2026",
+  "project": "ISKRA Małopolska",
+  "team": "ISKRA Małopolska",
+  "task": "hubmi",
+  "result": "Not a finalist",
+  "task_fit": "yes: built explicitly for the Małopolska Social Innovation Hub task (ISKRA Małopolska / HubMI), in Polish, with modules mapped to the brief",
+  "scores": [
+   {
+    "criterion": "Challenge fulfilment",
+    "weight": 40,
+    "score": 6.5,
+    "why": "The mandatory matchmaking works end to end, with AI matching via OpenRouter, a deterministic Polish-keyword fallback and gap logging for ROPS, and the admin panel, tester and communication modules exist in code. The knowledge store and idea creator are only partial, the innovation middleman is absent, and the required deck, video and demo link were never delivered.",
+    "spread": 1.5,
+    "members": {
+     "A": 7,
+     "B": 6.5,
+     "C": 5.5
+    }
+   },
+   {
+    "criterion": "Implementation potential",
+    "weight": 20,
+    "score": 6.5,
+    "why": "The stack is genuinely deployable: Docker Compose, Payload CMS on Postgres with migrations, role-based auth, and real OpenRouter, ROPS scraper and Resend seams. The required running and maintenance cost estimate is missing, and unauthenticated admin reset and seed endpoints that can wipe the database undercut production readiness.",
+    "spread": 1,
+    "members": {
+     "A": 6.5,
+     "B": 6.5,
+     "C": 7.5
+    }
+   },
+   {
+    "criterion": "Accessibility & intuitiveness",
+    "weight": 20,
+    "score": 3,
+    "why": "The Polish-language requirement is met in labels, messages, seed data and email templates. There is no WCAG 2.1 AA evidence, no ARIA, contrast or keyboard handling shown, the three screenshots carry no descriptions, and no demo exists to judge intuitiveness.",
+    "spread": 1,
+    "members": {
+     "A": 4,
+     "B": 3,
+     "C": 3
+    }
+   },
+   {
+    "criterion": "Bonus (UI, materials, MVP quality)",
+    "weight": 20,
+    "score": 3.5,
+    "why": "The MVP is real and reasonably polished, with custom ISKRA branding, branded admin views and 17 tests across a 10.4k SLOC codebase. Every required supporting material is absent: no deck, no video, no verified demo link, and only draw.io role-flow diagrams instead of UX/UI mockups.",
+    "spread": 2.5,
+    "members": {
+     "A": 3.5,
+     "B": 1.5,
+     "C": 4
+    }
+   }
+  ],
+  "weighted_total": 52,
+  "build_reality": 7,
+  "source_loc": 10410,
+  "has_tests": true,
+  "tests": {
+   "files": 3,
+   "cases": 17
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "partly: 7 commits before the event; 163 commits by 6 authors, 2026-09-25 16:23 to 2026-10-05 08:30 UTC",
+  "strengths": [
+   "Matchmaking is genuinely implemented: AI matching with a deterministic Polish-stopword fallback, and unmatched queries logged so ROPS can aggregate demand",
+   "Real official-data integration: a scraper of the ROPS Biblioteka Innowacji Społecznych with license detection seeds the innovation library",
+   "Substantial, disciplined codebase: about 10.4k SLOC, 163 commits from 6 authors, Payload CMS on Postgres with migrations, role-based access, 17 tests and Docker Compose deployment",
+   "Consistently Polish product: labels, error messages, seed data and email templates in the required language, plus a working tester module, chat and Resend notifications"
+  ],
+  "weaknesses": [
+   "Required deliverables missing: no deck, no video, no verified demo link, no UX/UI mockups, no running and maintenance cost estimate, and the submission form was left unfilled",
+   "Module coverage incomplete: the innovation middleman is absent, the knowledge store lacks the challenges map and educational content, the idea creator lacks a grant generator and canvases, and matchmaking returns a single best match from a catalog truncated to 35 items",
+   "No WCAG 2.1 AA evidence: no ARIA attributes, contrast checks or keyboard handling visible, and the screenshots are undescribed",
+   "Security hardening gaps: unauthenticated reset and seed endpoints expose destructive operations, and seeding creates demo accounts with password123"
+  ],
+  "red_flags": [
+   "Unauthenticated /api/admin/reset-payload and /api/seed endpoints can wipe the entire database, and the seed creates demo accounts with password123",
+   "The team left the submission form unfilled, relying on the repo and README alone",
+   "4 commits landed after the Sunday 11:00 deadline (last on Oct 5 morning) and 7 before the event window, though the bulk, 152 commits, were made during the event"
+  ],
+  "verdict": "A genuinely coded, deployable ISKRA/HubMI MVP with working matchmaking and real ROPS integration, but the submission is materially incomplete: no deck, video, demo link, mockups or cost estimate, no accessibility evidence, and the innovation middleman module is missing.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 56,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 48,
+     "agreement": 0.6,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 51,
+     "agreement": 0.8,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791243290526
+ }
+}

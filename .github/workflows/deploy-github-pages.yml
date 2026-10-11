@@ -1,0 +1,44 @@
+name: deploy-github-pages
+
+# builds the static site from the committed review snapshot and publishes it to
+# GitHub Pages; the custom domain (public/CNAME) is hackyeah-review.justadomainname.dev
+on:
+  push:
+    branches: [main]
+    paths:
+      - app/web/**
+      - scripts/**
+      - review/**
+      - .github/workflows/deploy-github-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

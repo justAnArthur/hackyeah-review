@@ -1,0 +1,201 @@
+{
+ "submission": {
+  "id": "M3R8xx0z",
+  "title": "Hubmi_Innovations",
+  "team": "JSON DeRulo",
+  "task": "hubmi",
+  "result": "Not a finalist",
+  "repo": "MasterSun8/hubmi.pl",
+  "created_at": 1791240138050,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791240138117,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 649,
+   "at": 1791240138298,
+   "message": "Queued"
+  },
+  {
+   "seq": 668,
+   "at": 1791240762363,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 669,
+   "at": 1791240801577,
+   "message": "Found 11,449 source lines, 0 test cases and 104 commits"
+  },
+  {
+   "seq": 670,
+   "at": 1791240801580,
+   "message": "Read 5 docs and 3 decks, opened 0 demo pages and described 5 screenshots"
+  },
+  {
+   "seq": 671,
+   "at": 1791240801590,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 672,
+   "at": 1791240926237,
+   "message": "Member A scored 75"
+  },
+  {
+   "seq": 673,
+   "at": 1791240926241,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 674,
+   "at": 1791240992230,
+   "message": "Member B scored 75"
+  },
+  {
+   "seq": 675,
+   "at": 1791240992234,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 676,
+   "at": 1791241010465,
+   "message": "Member C scored 70"
+  },
+  {
+   "seq": 677,
+   "at": 1791241010466,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 678,
+   "at": 1791241090774,
+   "message": "Done: 73 / 100"
+  }
+ ],
+ "review": {
+  "id": "M3R8xx0z",
+  "repo": "MasterSun8/hubmi.pl",
+  "project": "Hubmi_Innovations",
+  "team": "JSON DeRulo",
+  "task": "hubmi",
+  "result": "Not a finalist",
+  "task_fit": "yes: purpose-built for the HubMI.pl task — it scrapes the real ROPS Innovation Library (115 innovations), ships the task's own criteria PDFs, a Małopolska county map with 149 regional indicators, and all UI and materials in Polish.",
+  "scores": [
+   {
+    "criterion": "Challenge fulfilment",
+    "weight": 40,
+    "score": 7.5,
+    "why": "Matchmaking is genuinely implemented, not a hardcoded list: embeddings for 115 scraped ROPS innovations, pgvector cosine matching returning the 3 closest published solutions per submission, wired into a streaming SSE chat, with modules III and VI fully coded. Module V is admitted not started and modules II, IV and VII are partial, leaving roughly 4 full plus 2 partial modules of 7.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 7.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Implementation potential",
+    "weight": 20,
+    "score": 7,
+    "why": "A real stack a ROPS could deploy — Next.js on Postgres with pgvector, Drizzle migrations, CI with auto-deploy to a live domain — plus a token-level cost estimate of 420 to 1,670 PLN per month. No authentication anywhere including admin delete endpoints, undone contacts anonymization, and zero tests hold it back.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 7,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Accessibility & intuitiveness",
+    "weight": 20,
+    "score": 7,
+    "why": "Accessibility is engineered rather than claimed: contrast tokens fixed to WCAG ratios, a persistent A/A+/A++ text-scaling and high-contrast bar, semantic landmarks, and Polish copy throughout. No audit or keyboard and screen-reader test evidence exists, which supports the median 7 over member B's 8.",
+    "spread": 1,
+    "members": {
+     "A": 7,
+     "B": 8,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Bonus (UI, materials, MVP quality)",
+    "weight": 20,
+    "score": 7.5,
+    "why": "A coherent design system derived from the official Małopolska brand, 22 screenshots, demo videos including a 120-second cut, and a detailed cost document. The formal deck reached the jury only through the repo rather than the official upload, and its roughly 70,000 PLN per month figure contradicts the cost document's roughly 1,060 PLN per month.",
+    "spread": 1,
+    "members": {
+     "A": 8,
+     "B": 7.5,
+     "C": 7
+    }
+   }
+  ],
+  "weighted_total": 73,
+  "build_reality": 8,
+  "source_loc": 11449,
+  "has_tests": false,
+  "tests": {
+   "files": 0,
+   "cases": 0
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 104 commits by 6 authors, 2026-10-03 12:44 to 2026-10-04 14:11 UTC",
+  "strengths": [
+   "Real vector-based matchmaking: embeddings for 115 scraped ROPS innovations with bidirectional cosine matching, wired into the SSE chat, submissions and admin panel.",
+   "Deep working pipeline: AI idea card, 9-field canvas with PDF export, per-nabór AI grant application drafting, and an admin panel with AI risk scoring, a needs map of 149 indicators across 22 counties, and trend reports.",
+   "Accessibility built into the product: WCAG-fixed contrast tokens, persistent text-scaling and high-contrast controls, semantic landmarks, all in Polish.",
+   "Credible operations thinking: Drizzle migrations on Postgres with pgvector, CI with auto-deploy to a live domain, and a token-level cost estimate across three scaling scenarios."
+  ],
+  "weaknesses": [
+   "Module V (active communication with ROPS, mentors, partners) is not started, and modules II, IV and VII are partial: no public library listing, no tester ratings, and an unused implementation_recommendations table.",
+   "No authentication or data security anywhere, an open admin panel with delete endpoints, and the contacts table still needs anonymizing.",
+   "Zero tests (0 files, 0 cases); verification is typecheck, lint and manual browser checks.",
+   "The formal presentation deck was not provided through the official upload channel and exists only in the repo."
+  ],
+  "red_flags": [
+   "3 commits landed after the Sunday 11:00 deadline, the last at 14:11, though 101 of 104 commits are within the event.",
+   "The live demo could not be verified (no demo checks recorded), so running behavior rests on screenshots, video and team claims.",
+   "Cost messaging is inconsistent: the deck implies roughly 70,000 PLN per month while the cost document estimates roughly 1,060 PLN per month."
+  ],
+  "verdict": "A data-rich, honestly documented MVP whose embedding-based matchmaking and complete admin and idea-creator pipeline exceed the typical hackathon prototype, held back by a missing communication module, partial knowledge-store and tester modules, no authentication, zero tests and an unverified live demo.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 75,
+     "agreement": 0.9,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 75,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 70,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791241090771
+ }
+}

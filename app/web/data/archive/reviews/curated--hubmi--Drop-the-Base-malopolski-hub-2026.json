@@ -1,0 +1,206 @@
+{
+ "submission": {
+  "id": "curated--hubmi--Drop-the-Base-malopolski-hub-2026",
+  "title": "Małopolski Hub Innowacji Społecznych",
+  "team": "DropTheBase;",
+  "task": "hubmi",
+  "result": "Not disclosed",
+  "repo": "Drop-the-Base/malopolski-hub-2026",
+  "created_at": 1791226633887,
+  "superseded": false,
+  "source": "curated"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791229440696,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 70,
+   "at": 1791226633893,
+   "message": "Imported from a council v8 comparison run"
+  },
+  {
+   "seq": 213,
+   "at": 1791229440699,
+   "message": "Queued"
+  },
+  {
+   "seq": 246,
+   "at": 1791230409194,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 247,
+   "at": 1791230410994,
+   "message": "Found 23,504 source lines, 51 test cases and 68 commits"
+  },
+  {
+   "seq": 248,
+   "at": 1791230410996,
+   "message": "Read 6 docs and 0 decks, opened 0 demo pages and described 0 screenshots"
+  },
+  {
+   "seq": 249,
+   "at": 1791230411002,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 251,
+   "at": 1791230582453,
+   "message": "Member A scored 68"
+  },
+  {
+   "seq": 252,
+   "at": 1791230582455,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 254,
+   "at": 1791230658248,
+   "message": "Member B scored 78"
+  },
+  {
+   "seq": 255,
+   "at": 1791230658251,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 256,
+   "at": 1791230692985,
+   "message": "Member C scored 42"
+  },
+  {
+   "seq": 257,
+   "at": 1791230692988,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 258,
+   "at": 1791230769836,
+   "message": "Done: 68 / 100"
+  }
+ ],
+ "review": {
+  "id": "curated--hubmi--Drop-the-Base-malopolski-hub-2026",
+  "repo": "Drop-the-Base/malopolski-hub-2026",
+  "project": "Małopolski Hub Innowacji Społecznych",
+  "team": "DropTheBase;",
+  "task": "hubmi",
+  "result": "Not disclosed",
+  "task_fit": "yes: all three members agree and the repo confirms it. This is a Polish-language prototype built squarely for the HubMI/ROPS Kraków challenge, with all seven modules coded on both backend and frontend and all 68 commits made during the event.",
+  "scores": [
+   {
+    "criterion": "Challenge fulfilment",
+    "weight": 40,
+    "score": 7.5,
+    "why": "All seven modules plus extras exist as real routes, views and tests, and matchmaking is a genuine TF-IDF pipeline with a relevance threshold, no-match state, PII masking and per-match justifications. The median reflects that the team's own QA caught matchmaking returning HTTP 500 with weak scoring mid-event, and the fixes are self-documented with no verifiable live demo, which supports A over both B's confidence and C's dismissal of the committed tests.",
+    "spread": 4.5,
+    "members": {
+     "A": 7.5,
+     "B": 8.5,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Implementation potential",
+    "weight": 20,
+    "score": 7,
+    "why": "The deployment story is real: JWT admin auth, 14 ORM models, Docker Compose with seed data, an open-data REST/CSV API and a costed plan of roughly 170-200 PLN per month. It is capped by SQLite-only storage with a hand-rolled migration shim, one shared admin password with no roles or SSO, and a PII scrubber that still misses names and street addresses.",
+    "spread": 2.5,
+    "members": {
+     "A": 7,
+     "B": 7.5,
+     "C": 5
+    }
+   },
+   {
+    "criterion": "Accessibility & intuitiveness",
+    "weight": 20,
+    "score": 7,
+    "why": "Systematic WCAG 2.1 AA work is visible in code: two high-contrast modes, text scaling, ETR simple language, focus-trapped dialogs, ARIA tabs, per-page titles and a skip link. The first build failed basics per the team's own QA, the fixes were never confirmed by any audit or demo check, and residual issues remain, such as meaning conveyed by color alone on the map and a powiat dropdown listing only 12 of 22.",
+    "spread": 3,
+    "members": {
+     "A": 7,
+     "B": 7,
+     "C": 4
+    }
+   },
+   {
+    "criterion": "Bonus (UI, materials, MVP quality)",
+    "weight": 20,
+    "score": 5,
+    "why": "MVP quality is high, with 51 test cases, a thoughtful design system and a disciplined QA-then-fix cycle, but the pack contains zero screenshots and no standalone mockups. The required three-minute video and PDF deck were not submitted in required form, only in-repo markdown and HTML, which the measured facts support; B's view that a markdown pitch is acceptable is contradicted by the deck being recorded as not provided.",
+    "spread": 3.5,
+    "members": {
+     "A": 5,
+     "B": 7.5,
+     "C": 4
+    }
+   }
+  ],
+  "weighted_total": 68,
+  "build_reality": 8,
+  "source_loc": 23504,
+  "has_tests": true,
+  "tests": {
+   "files": 17,
+   "cases": 51
+  },
+  "live_demo": "none found in the form or README",
+  "built_during_event": "yes: 68 commits by 1 author, 2026-10-03 11:18 to 2026-10-04 06:14 UTC",
+  "strengths": [
+   "All seven modules plus extras are implemented on both backend and frontend, backed by 51 test cases in 17 files, a smoke test and seed data rather than mocks.",
+   "Matchmaking is a real pipeline: need detection, TF-IDF ranking with a threshold and no-match fallback, PII masking before the LLM, and per-match justifications covered by tests.",
+   "Accessibility engineering is unusually thorough in code, from high-contrast themes and text scaling to ETR mode, focus-trapped dialogs, ARIA patterns and a skip link.",
+   "Honest and deployable engineering process: the team committed its own critical QA report and answered it with documented fixes and regression tests, plus Docker Compose, an open-data API with CSV export and a costed infrastructure plan."
+  ],
+  "weaknesses": [
+   "Neither required deliverable was submitted in required form: no three-minute video and no PDF deck of at most 10 slides, only in-repo markdown and HTML, and no live demo link was verified.",
+   "The team's own QA report shows the mandatory matchmaking returning HTTP 500 with weak scoring, a hardcoded admin queue and exposed personal data, and all subsequent fixes are self-reported without independent verification.",
+   "Production gaps: SQLite only with a hand-written migration shim, a single shared admin password with no roles or SSO, and a PII scrubber that misses names and street addresses.",
+   "Materials and polish gaps: zero screenshots, no standalone UX mockups, a powiat dropdown covering 12 of 22 powiaty, and a nearly empty submission form whose solution summary is in English for a Polish-language task."
+  ],
+  "red_flags": [
+   "The committed QA report shows a critical mid-event state (matchmaking down, Rick Roll videos in the innovations feed, hardcoded admin queue, unauthenticated personal data) that the jury can only take on the team's word as fixed.",
+   "Inflated claims persisted: a '98% AI matchmaking' figure flagged in QA crept back into the UI, and a '100% modules done' claim sat alongside a broken mandatory module.",
+   "DEMO_MODE, on by default, pre-fills the author's identity and auto-ticks the RODO consent checkbox, undercutting the platform's own data-protection demonstration."
+  ],
+  "verdict": "A genuinely built and well-tested seven-module prototype with real matchmaking and standout accessibility work, held back by missing video and PDF deliverables, no verifiable live demo, and a mid-event defect record whose fixes rest on the team's own word.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 68,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 78,
+     "agreement": 0.7,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 42,
+     "agreement": 0.5,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791230769833
+ }
+}

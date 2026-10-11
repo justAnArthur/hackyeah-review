@@ -1,0 +1,207 @@
+{
+ "submission": {
+  "id": "FQ9cdPfE",
+  "title": "AI Konik",
+  "team": "AI Konik Dev",
+  "task": "hubmi",
+  "result": "Not a finalist",
+  "repo": "michalwilk123/aikonik",
+  "created_at": 1791269080838,
+  "superseded": false,
+  "source": "form"
+ },
+ "job": {
+  "status": "done",
+  "step": "done",
+  "position": 0,
+  "next_run_at": 1791269319490,
+  "error": null
+ },
+ "events": [
+  {
+   "seq": 841,
+   "at": 1791269080842,
+   "message": "Queued"
+  },
+  {
+   "seq": 842,
+   "at": 1791269083394,
+   "message": "Collecting evidence from the repo and deck"
+  },
+  {
+   "seq": 843,
+   "at": 1791269102823,
+   "message": "Found 21,872 source lines, 133 test cases and 46 commits"
+  },
+  {
+   "seq": 844,
+   "at": 1791269102824,
+   "message": "Read 8 docs and 3 decks, opened 2 demo pages and described 2 screenshots"
+  },
+  {
+   "seq": 845,
+   "at": 1791269102830,
+   "message": "Member A is reviewing"
+  },
+  {
+   "seq": 847,
+   "at": 1791269273259,
+   "message": "Member A scored 82"
+  },
+  {
+   "seq": 848,
+   "at": 1791269273261,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 849,
+   "at": 1791269289494,
+   "message": "Temporary problem (dots-studio/dots-3-note-preview:free: JSON error injected into SSE stream); trying again in 30 s"
+  },
+  {
+   "seq": 861,
+   "at": 1791269530538,
+   "message": "Member B is reviewing"
+  },
+  {
+   "seq": 862,
+   "at": 1791269619310,
+   "message": "Member B scored 88"
+  },
+  {
+   "seq": 863,
+   "at": 1791269619312,
+   "message": "Member C is reviewing"
+  },
+  {
+   "seq": 864,
+   "at": 1791269670788,
+   "message": "Member C scored 77"
+  },
+  {
+   "seq": 865,
+   "at": 1791269670790,
+   "message": "The judge is writing the council review"
+  },
+  {
+   "seq": 867,
+   "at": 1791269750991,
+   "message": "Done: 82 / 100"
+  }
+ ],
+ "review": {
+  "id": "FQ9cdPfE",
+  "repo": "michalwilk123/aikonik",
+  "project": "AI Konik",
+  "team": "AI Konik Dev",
+  "task": "hubmi",
+  "result": "Not a finalist",
+  "task_fit": "yes: the deck and live app are explicitly built for the HubMI task for ROPS Kraków, all 46 commits fall inside the event window with none before or after, and the demo responds with HTTP 200.",
+  "scores": [
+   {
+    "criterion": "Challenge fulfilment",
+    "weight": 40,
+    "score": 8.5,
+    "why": "All seven modules exist in code with UI, and the mandatory matchmaking genuinely retrieves cited matches from the 115-entry ROPS catalog in D1; on the dispute over documentation language, the majority view and the Polish PDFs in the repo support B and C over A's claim of English docs. The median sides with A and C against B's 9.5 because the required numeric cost estimate is missing, the tester module drafts pilot plans without tester sign-up, rating or feedback, and admin need-trend aggregation is absent.",
+    "spread": 1.5,
+    "members": {
+     "A": 8.5,
+     "B": 9.5,
+     "C": 8
+    }
+   },
+   {
+    "criterion": "Implementation potential",
+    "weight": 20,
+    "score": 7.5,
+    "why": "The build is production-minded and live: Cloudflare Workers with nine D1 migrations, Payload with role-based auth, rate limiting, idempotent submissions and CI/CD to a working demo. It loses points because the cost estimate has no numbers and there is no load or production-scale evidence.",
+    "spread": 0.5,
+    "members": {
+     "A": 7.5,
+     "B": 8,
+     "C": 7.5
+    }
+   },
+   {
+    "criterion": "Accessibility & intuitiveness",
+    "weight": 20,
+    "score": 8,
+    "why": "Accessibility work is verifiable in the code, with a keyboard-operable SVG map, aria attributes, a skip link, simple Polish copy and a stated WCAG 2.1 AA target. C's 7 is too strict given that A and B both confirmed the code-level effort, but the lack of any audit or user testing keeps this below the top.",
+    "spread": 1.5,
+    "members": {
+     "A": 8,
+     "B": 8.5,
+     "C": 7
+    }
+   },
+   {
+    "criterion": "Bonus (UI, materials, MVP quality)",
+    "weight": 20,
+    "score": 8.5,
+    "why": "Strong materials and MVP quality: 133 tests in 43 files, a 10-slide Polish deck, a video, custom illustrations and a deployed demo. Mockups are screenshots of the built app rather than design mockups, which caps the score slightly.",
+    "spread": 0.5,
+    "members": {
+     "A": 8.5,
+     "B": 8.5,
+     "C": 8
+    }
+   }
+  ],
+  "weighted_total": 82,
+  "build_reality": 9,
+  "source_loc": 21872,
+  "has_tests": true,
+  "tests": {
+   "files": 43,
+   "cases": 133
+  },
+  "live_demo": "https://aikonik.michalwilk139.workers.dev/ (HTTP 200); https://aikonik.michalwilk139.workers.dev/admin (HTTP 200)",
+  "built_during_event": "yes: 46 commits by 1 author, 2026-10-03 14:02 to 2026-10-04 08:18 UTC",
+  "strengths": [
+   "All seven required modules are implemented in code with backend and UI, not mockups",
+   "Matchmaking is real: an agent with read-only tools retrieves cited matches from the 115-innovation ROPS catalog imported into D1",
+   "Production-grade engineering: live Cloudflare Worker, D1 migrations, role-based auth, rate limiting, idempotent submissions, CI/CD and 133 tests",
+   "Polish throughout the UI, deck and video, with concrete accessibility work visible in the code"
+  ],
+  "weaknesses": [
+   "Missing the required numeric estimate of running and maintenance costs, a submission requirement all three members confirm is unmet",
+   "Innovation tester module is reinterpreted as pilot-plan drafting with no tester sign-up, rating or feedback collection",
+   "No need-trend aggregation for administrators even though chat telemetry is stored",
+   "WCAG 2.1 AA is a stated target with no audit or user-testing evidence, and mockups are app screenshots rather than design mockups"
+  ],
+  "red_flags": [],
+  "verdict": "An unusually complete and genuinely working build of all seven HubMI modules with real AI matchmaking over the ROPS catalog and production-grade deployment, held back by the missing numeric cost estimate, a reinterpreted tester module and unverified WCAG compliance.",
+  "council": {
+   "version": 9,
+   "judge": "claude:glm-5.3",
+   "judge_ok": true,
+   "members": [
+    {
+     "letter": "A",
+     "model": "claude:glm-5.3-flash",
+     "ok": true,
+     "total": 82,
+     "agreement": 1,
+     "error": null
+    },
+    {
+     "letter": "B",
+     "model": "dots-studio/dots-3-note-preview:free",
+     "ok": true,
+     "total": 88,
+     "agreement": 0.8,
+     "error": null
+    },
+    {
+     "letter": "C",
+     "model": "inclusionai/ling-3.0-flash-sante:free",
+     "ok": true,
+     "total": 77,
+     "agreement": 0.7,
+     "error": null
+    }
+   ]
+  },
+  "created_at": 1791269750989
+ }
+}
