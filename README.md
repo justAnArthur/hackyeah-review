@@ -2,9 +2,9 @@
 
 # hackyeah-review
 
-This site lists every HackYeah 2026 finalist with the public repo found for its team. Every project with public code is scored out of 100 by an AI council, against its task's official criteria and weights. Any team can send its own project through the same form and get the same review for free.
+This site lists every HackYeah 2026 finalist with the public repo found for its team. Every project with public code is scored out of 100 by an AI council, against its task's official criteria and weights. Teams could also send their own projects through the form while it was open, 4–11 October 2026; the event is over and the site now stays up as an archive.
 
-**Live site:** [hackyeah-review.justadomainname.dev](https://hackyeah-review.justadomainname.dev) · **Send your project:** [/submit](https://hackyeah-review.justadomainname.dev/submit)
+**Live site:** [hackyeah-review.justadomainname.dev](https://hackyeah-review.justadomainname.dev) · also on GitHub Pages at [justanarthur.github.io/hackyeah-review](https://justanarthur.github.io/hackyeah-review/) · the form closed on 11 October 2026
 
 If a review helped you, starring the repo helps other teams find it.
 
@@ -64,9 +64,13 @@ The prefix of each model id in `review/council.toml` picks where it runs (`app/s
 
 ## Pages
 
-- **`/`** lists every finalist and every upload, by task. Each card shows the council score, or the project's place in the queue with a live indicator. It opens to the repo links and the full review. The old `/scorecard` page redirects here.
-- **`/submit`** is the "Review my project" form, with the same fields as the HackTribe entry. Each repo gets one review per task, plus one correction when the form or the deck changed, and enters at most 3 tasks. Sending the same details again links to the existing review. Submissions are limited per network (`SUBMISSIONS_PER_HOUR`) and in total per day (`SUBMISSIONS_PER_DAY`).
-- **`/r/<id>`** shows a review in progress and then the council's result: the score per criterion with each member's score, the measured facts, and strengths, weaknesses and red flags.
+The site is fully static: the build pre-renders every page and bakes the review data in.
+
+- **`/`** lists every finalist and every upload, by task. Each card shows the finished council score and opens to the repo links and the full review. The old `/scorecard` page redirects here.
+- **`/submit`** explains that submissions are closed; the form itself is gone.
+- **`/r/<id>`** is the review, one pre-rendered page per project: the score per criterion with each member's score, the measured facts, and strengths, weaknesses and red flags.
+
+The review data is a committed snapshot in `app/web/data/archive/` (62 reviews); `scripts/archive.ts` refreshes it from a running API server.
 
 ## Run
 
@@ -100,19 +104,19 @@ The admin endpoints take `Authorization: Bearer $ADMIN_TOKEN`:
 | `POST /api/admin/curated` | Imports finished finalist reviews and queues the finalists (`{"enqueue": "all"}`) |
 | `POST /api/admin/submissions` | Adds a community submission for a team that asked for a review elsewhere, such as on Discord: `{"task", "team", "title", "repo", "result"?, "fields"?}` |
 
+The public site is static and has no API; run these against a local server (`bun run dev`, port 3000) or wherever the API server is deployed:
+
 ```bash
-curl -X POST https://hackyeah-review.justadomainname.dev/api/admin/reviews/<id>/hide -H "authorization: Bearer $ADMIN_TOKEN"
+curl -X POST http://localhost:3000/api/admin/reviews/<id>/hide -H "authorization: Bearer $ADMIN_TOKEN"
 ```
 
 `GET /api/health` shows the requests used today against the daily limit.
 
 ## Deploy
 
-Every push to `main` deploys to Dokploy through a GitHub webhook.
+Every push to `main` publishes the static site to GitHub Pages (`.github/workflows/deploy-github-pages.yml` builds `public/` with `bun run build`); the custom domain comes from the `CNAME` file the build emits.
 
-- The `Dockerfile` builds the site and runs `bun app/server/index.ts` on port 3000.
-- SQLite and uploaded decks live in a volume at `/data`.
-- The variables come from `.env.example` and are set in Dokploy.
+The API server still exists unchanged and still deploys to Dokploy through the GitHub webhook — the `Dockerfile` builds the site and runs `bun app/server/index.ts` on port 3000, with SQLite and uploaded decks in a volume at `/data` and variables set from `.env.example`. Since the DNS moved to GitHub Pages it no longer serves the domain; run it to operate the queue, refresh the archive snapshot, or host it anywhere else.
 
 ## Structure
 
@@ -123,12 +127,14 @@ Every push to `main` deploys to Dokploy through a GitHub webhook.
   - `app/web/pages/`: the results, form and review pages as React components, pre-rendered to HTML by `scripts/build.ts` and hydrated by `app/web/main.tsx`.
   - `app/web/components/ui/`: [Fluid Functionalism](https://www.fluidfunctionalism.com) components (Base UI flavor), added with the shadcn CLI and kept in the repo.
   - `app/web/data/results.ts`: finalists, results and repo matches. `app/web/lib/projects.ts` joins them with the reviews.
+  - `app/web/data/archive/`: the committed snapshot of every finished review the static site is built from.
 - **Review**
   - `review/council.toml`: the fixed panel and its version.
   - `review/rubrics/<task>.toml`: each task's brief, official criteria and weights, and task-specific checks.
   - `review/guides/<task>.md`: a reviewing guide per task, written from the official rules and details documents.
   - `review/prompts/`: the council member and judge prompts.
 - **Scripts**
+  - `scripts/archive.ts`: refreshes the static site's data snapshot from a running API server.
   - `scripts/council-check.ts`, `scripts/council-report.ts`, `scripts/council-sync.ts`: run the council locally, compare it with the earlier blind reviews, and send finished finalist reviews to the site.
   - `scripts/review.ts`: the earlier blind Claude Opus reviews in `app/web/data/scores/`, kept for research. The site no longer shows them.
 
