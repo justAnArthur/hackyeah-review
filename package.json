@@ -1,6 +1,6 @@
 {
   "name": "hackyeah-review",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "properties": {
     "gitCommitScopeRelatedNames": "site,web,server,council,queue,evidence"
   },
