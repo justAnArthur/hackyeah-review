@@ -209,6 +209,11 @@ export const HomePage = ({
           different weights, the details document is used. SiteQuest (SiteQuestTeam) was left out of HubMI: its own context file says it
           was built for the Smart City task. Repos deleted or made private since the event can&apos;t be reviewed.
         </p>
+        <p>
+          The council&apos;s top-scoring project was never the jury&apos;s winner: the jury also saw the pitch, and five winners had no
+          public repo found. <a href="/notes" className="underline decoration-border underline-offset-2 hover:text-foreground">Notes from the build</a>{" "}
+          cover the measurements, the failures and the numbers.
+        </p>
       </Footer>
     </Layout>
   )

@@ -1,5 +1,6 @@
 import { HomePage } from "./home"
 import { MentorsPage } from "./mentors"
+import { NotesPage } from "./notes"
 import { ReviewPage } from "./review"
 import { SubmitPage } from "./submit"
 
@@ -8,6 +9,7 @@ export const PAGE_COMPONENTS = {
   submit: SubmitPage,
   review: ReviewPage,
   mentors: MentorsPage,
+  notes: NotesPage,
 } as const
 
 export type PageName = keyof typeof PAGE_COMPONENTS

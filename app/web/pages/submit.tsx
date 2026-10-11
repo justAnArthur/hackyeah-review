@@ -15,7 +15,11 @@ export const SubmitPage = () => (
           See the results
         </Button>
         <span className="text-xs text-muted-foreground">
-          Every finalist with public code and every community submission keeps its council review.
+          Every finalist with public code and every community submission keeps its council review.{" "}
+          <a href="/notes" className="underline decoration-border underline-offset-2 hover:text-foreground">
+            Notes from the build
+          </a>{" "}
+          cover the measurements and the failures.
         </span>
       </div>
     </Panel>

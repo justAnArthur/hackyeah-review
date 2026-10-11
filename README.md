@@ -157,6 +157,15 @@ Versions and GitHub releases come from [just-github-actions-n-workflows](https:/
 npx -p @justanarthur/just-github-actions-n-workflows-cli just-github-actions-n-workflows update
 ```
 
+## Post-mortem
+
+The longer write-up with the numbers lives on the site: [hackyeah-review.justadomainname.dev/notes](https://hackyeah-review.justadomainname.dev/notes).
+
+- 62 reviews: 21 finalists and 41 community submissions, one identical panel for every project (9 council versions to get there).
+- Against the earlier blind reviews, the council's mean absolute gap was 5.2–6.2 points depending on the version, and its top-ranked project matched the blind reviews' top pick in every multi-project task.
+- It matched the **jury's** winner in no task — where the winner was reviewed it scored 57.5–69 while the council's top scored 66–83. The jury saw the pitch and the mentors' notes; the council read only what was public. Five winners were never reviewed: four had no public repo found, one was deleted after the event.
+- The ugly parts were the providers: a content filter that answers 400 to jailbreak-test strings (the packs deliberately contain them), quotas and busy spells (waited out, the panel never shrinks), and a first prompt-injection scan that flagged innocent projects until it was tightened.
+
 ## License
 
 [MIT](LICENSE)

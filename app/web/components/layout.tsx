@@ -2,6 +2,7 @@ import type { ReactNode } from "react"
 import { Star } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Tooltip } from "@/components/ui/tooltip"
 import { GH, ICON, REPO, REPO_IMAGE, RESULT } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -53,9 +54,14 @@ const Sitebar = ({ current }: { current: string }) => (
           Results
         </Button>
       )}
-      <Button variant={current === "/submit" ? "secondary" : "primary"} disabled title="Submissions are closed">
-        Review my project
-      </Button>
+      {/* a disabled button gets no hover events, so the span carries the tooltip */}
+      <Tooltip content="Submissions are closed: HackYeah 2026 ended and the review week is over.">
+        <span>
+          <Button variant={current === "/submit" ? "secondary" : "primary"} disabled>
+            Review my project
+          </Button>
+        </span>
+      </Tooltip>
     </div>
   </div>
 )

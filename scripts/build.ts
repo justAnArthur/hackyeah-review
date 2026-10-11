@@ -50,6 +50,14 @@ const PAGES: { name: PageName; out: string; href?: string; title: string; desc: 
     desc: "HackYeah 2026 ended and the review form is closed; the council reviews stay online as an archive.",
     props: {},
   },
+  {
+    name: "notes",
+    out: "notes.html",
+    href: "/notes",
+    title: "Notes from the review council",
+    desc: "Why this site exists, how the AI council worked, what nine versions of the panel measured, and where it disagreed with the jury.",
+    props: {},
+  },
   // one pre-rendered page per review; reviews themselves are static, so their data is baked in
   ...reviewIds.map(id => ({
     name: "review" as PageName,
